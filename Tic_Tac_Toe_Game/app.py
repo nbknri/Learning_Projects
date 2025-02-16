@@ -11,11 +11,12 @@ frame.pack(padx=20, pady=20)
 # Board value store
 board = [" "]*10
 
-computer = "X"
-human = "O"
+computer = "X" # Computer side letter
+human = "O" # Human side letter
 
+# Check win or lost
 def check_win():
-    if player == "O":
+    if player == "O": # Diplay color correctly, base of result
         color = "green"
     else:
         color = "red"
@@ -62,20 +63,24 @@ def check_win():
     else:
         return False
 
+# Draw fucntion
 def check_draw():
     if board.count(" ") <2:
         return True 
     else:
         return False
 
+# Disable Repeat click same column
 def is_available(pos):
     return True if board[pos] == " " else False
 
+# Add letter to display
 def insert(letter,pos):
-    global player
+    global player # Using correct color coding of final check result
     player = letter
-    if is_available(pos):
+    if is_available(pos): # Check colum fill or blank
         board[pos] = letter
+        # Showing result
         if check_win():
             if letter == "X":
                 result.config(text="Sorry, You are Lost !!", bg= "yellow", fg= "Red")
@@ -84,12 +89,11 @@ def insert(letter,pos):
         else:
             if check_draw():
                 result.config(text="Draw !!", bg= "yellow", fg= "blue")
-    else:
+    else: # Restart computer random selection if colum already fill
         if letter == "X":
             pos = random.randint(1, 9)
             insert(letter,pos)
-    
-    
+    # Change display after selectig colum
     clm_1.config(text = board[1])
     clm_2.config(text = board[2])
     clm_3.config(text = board[3])
@@ -99,22 +103,24 @@ def insert(letter,pos):
     clm_7.config(text = board[7])
     clm_8.config(text = board[8])
     clm_9.config(text = board[9])
-        
-def human_move(letter,pos):
-    if board[pos] == " ":
-        insert(letter,pos)
-        if not check_win():
-            computer_move(computer)
-    
 
+# Human click function
+def human_move(letter,pos):
+    if not check_win(): # Disable human click after showing result
+        if board[pos] == " ": # Disable reapte select in same colum
+            insert(letter,pos) 
+            if not check_win(): # Disable computer click after showing result
+                computer_move(computer)
+
+# Computer click function
 def computer_move(letter):
-    pos = random.randint(1, 9)
+    pos = random.randint(1, 9) # Find random colum in display
     insert(letter, pos)
 
-
+# Reset button function
 def reset_function():
     global board
-    board = [" "]*10
+    board = [" "]*10 # Create new List
     clm_1.config(text = "", bg="white", )
     clm_2.config(text = "", bg="white", )
     clm_3.config(text = "", bg="white", )
@@ -125,10 +131,9 @@ def reset_function():
     clm_8.config(text = "", bg="white", )
     clm_9.config(text = "", bg="white", )
     result.config(text="", bg="black", )  
-    computer_move(computer)
+    computer_move(computer) # Game start again frome computer side
 
-
-# Board settings
+# Display settings
 clm_1 = Button(frame, text="1", width=5, height=2, padx=6, bd=3, bg="white", font=("Times New Roman",15,"bold"), command=lambda: human_move(human, 1))
 clm_2 = Button(frame, text="2", width=5, height=2, padx=6, bd=3, bg="white", font=("Times New Roman",15,"bold"), command=lambda: human_move(human, 2))
 clm_3 = Button(frame, text="3", width=5, height=2, padx=6, bd=3, bg="white", font=("Times New Roman",15,"bold"), command=lambda: human_move(human, 3))
@@ -139,10 +144,10 @@ clm_7 = Button(frame, text="7", width=5, height=2, padx=6, bd=3, bg="white", fon
 clm_8 = Button(frame, text="8", width=5, height=2, padx=6, bd=3, bg="white", font=("Times New Roman",15,"bold"), command=lambda: human_move(human, 8))
 clm_9 = Button(frame, text="9", width=5, height=2, padx=6, bd=3, bg="white", font=("Times New Roman",15,"bold"), command=lambda: human_move(human, 9))
 
-result = Label(window, text="", padx=6, bg="black", font=("Times New Roman",15,"bold"))
-resetbtn = Button(window, text="Rest", width=10, bg="blue", fg="white", font=("Times New Roman",15,"bold"), command=reset_function)
+result = Label(window, text="", padx=6, bg="black", font=("Times New Roman",15,"bold")) # Result Display
+resetbtn = Button(window, text="Rest", width=10, bg="blue", fg="white", font=("Times New Roman",15,"bold"), command=reset_function) # Reset button
 
-# Board order settings
+# Display order settings
 clm_1.grid(row=0, column=0)
 clm_2.grid(row=0, column=1)
 clm_3.grid(row=0, column=2)
@@ -155,8 +160,7 @@ clm_9.grid(row=2, column=2)
 result.place(relx = 0.5, rely = 0.75, anchor = CENTER)
 resetbtn.place(relx = 0.5, rely = 0.90, anchor = CENTER)
 
-
+# Function starting point
 computer_move(computer)
-
 
 window.mainloop()
