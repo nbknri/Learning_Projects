@@ -69,12 +69,12 @@ def insert(letter,pos):
         board[pos] = letter
         if check_win():
             if letter == "X":
-                print("Computer Wins")
+                result.config(text="Sorry, You are Lost !!", bg= "yellow", fg= "Red")
             else:
-                print("Human Wins")
+                result.config(text="Congrats, You are Win !!", bg= "yellow", fg= "green")
         else:
             if check_draw():
-                print("Draw")
+                result.config(text="Draw !!", bg= "yellow", fg= "blue")
     else:
         if letter == "X":
             pos = random.randint(1, 9)
@@ -113,6 +113,7 @@ clm_7 = Button(Window, text="7", width=6, height=2, padx=6, bd=3, command=lambda
 clm_8 = Button(Window, text="8", width=6, height=2, padx=6, bd=3, command=lambda: human_move(human, 8))
 clm_9 = Button(Window, text="9", width=6, height=2, padx=6, bd=3, command=lambda: human_move(human, 9))
 
+result = Label(Window, text="")
 
 # Board order settings
 clm_1.grid(row=0, column=0)
@@ -124,6 +125,7 @@ clm_6.grid(row=1, column=2)
 clm_7.grid(row=2, column=0)
 clm_8.grid(row=2, column=1)
 clm_9.grid(row=2, column=2)
+result.place(relx = 0.5, rely = 0.5, anchor = CENTER)
 
 
 computer_move(computer)
