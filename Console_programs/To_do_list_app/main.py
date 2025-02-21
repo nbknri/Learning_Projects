@@ -1,12 +1,15 @@
 # Todo List App
 
+# List
 todo_list = []
 
+# Add List
 def add_list():
     item = input("Enter a Task: ")
     todo_list.append(item)
     print(f"{item} added to the todo list.\n")
 
+# Display List
 def display_list():
     print("--------------------\nTodo List:\n--------------------")
     if not todo_list:
@@ -16,6 +19,7 @@ def display_list():
             print(f"{index} - {element}")
     print()
 
+# Edit list
 def edit_list():
     display_list()
     index = input("Enter the item number you want to edit or press # to return to the main menu: ")
@@ -34,6 +38,7 @@ def edit_list():
     except ValueError:
         print("Invalid input! Please enter a number.\n")
 
+# Remove List
 def remove_list():
     display_list()
     index = input("Enter your item number to remove or Go to Main Menu please enter #: ")
@@ -51,7 +56,7 @@ def remove_list():
     except ValueError:
         print("Invalid input! Please enter a valid number.\n")
 
-# Display
+# Main Menu Display
 def main_display():
     while True:
         print("################\nTODO LIST APP\n################")
@@ -78,5 +83,6 @@ def main_display():
         else:
             print("Invalid option! Please select a valid number.\n")
 
+# Start App
 if __name__ == "__main__":
     main_display()
