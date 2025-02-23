@@ -1,3 +1,5 @@
+import sys
+import os
 from tkinter import *
 
 #main window
@@ -10,12 +12,13 @@ window.configure(bg="black", padx=5, pady=5)
 # Disable resize button in window
 window.resizable(False, False)
 
+path = getattr(sys, '_MEIPASS', os.getcwd())
 # Title of window
 window.title("Calculator")
 
 # Icon image add
 try:
-    window.iconbitmap("icon.ico")
+    window.iconbitmap(path+"/icon.ico")
 except:
     pass
 
