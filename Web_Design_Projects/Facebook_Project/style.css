@@ -1,0 +1,365 @@
+body{
+    margin: 0;
+}
+
+.main{
+    width: 100%;
+    height: 720px;
+    background: #f2f4f7;
+    margin: 0;
+}
+
+.text-Data{
+    padding-top: 176px;
+    padding-left: 269.50px;
+    margin-top: -211px;
+}
+
+.logo{
+    padding-top: 176px;
+    padding-left: 241.50px;
+}
+
+h2{
+    font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+    line-height: 32px;
+    width: 500px;
+    float: left;
+}
+
+.left{
+    padding: 112px 0 16px;
+}
+
+.right{
+    padding-bottom: -200px;
+    
+}
+
+.login-Box{
+    width: 365px;
+    height: 319px;
+    background: white;
+    float: left;
+    margin-top: -120px;
+    margin-left: 80px;
+    padding: 15px;
+    font-family: inherit;
+    border: 1px solid #dddfe2;
+    text-align: center;
+        color: #0866ff;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .1), 0px 8px 16px rgba(0, 0, 0, .1);
+    border-radius: 8px;
+}
+
+.login input[type=text] {
+    width: 100%;
+    padding: 16px ;
+    margin: 1px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 17px;
+    line-height: 16px;
+    caret-color: #0866ff;
+  }
+  
+
+  .login input[type=password] {
+    width: 100%;
+    padding: 16px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 17px;
+  }
+
+  .login button[name=login]{
+    background-color: #0866ff;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    line-height: 48px;
+    padding: 0 16px;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    margin: 6px 0;
+    cursor: pointer;
+  }
+
+  button[name=create]{
+    background-color: #42b72a;
+    border-color: #42b72a;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    line-height: 48px;
+    padding: 0 16px;
+    width: 250pcx;
+    color: white;
+    font-weight: bold;
+    margin: 6px 0;
+    cursor: pointer;
+  }
+
+  .forget a{
+    color: #0866ff;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Helvetica, Arial, sans-serif;
+    
+  }  
+
+  .forget{
+    
+    margin: 10px;
+    
+  }  
+
+.line{
+      border-bottom: 1px solid #dadde1;
+      margin: 20px 16px;
+  }
+
+  .create-text{
+    border-top: none;
+    color: #1c1e21;
+    font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    padding-top: 46px;
+  }
+
+  .create-text a{
+        color: #1c1e21;
+        text-decoration: none;
+      }
+
+ li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  unicode-bidi: isolate;
+  padding-right: 0px;
+  border-width: 0 0 0 1px;
+    display: inline-block;
+    padding-left: 8px;
+    vertical-align: top;
+  
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0px;
+      padding: 0px;
+      padding-left: 10px;
+      
+  }
+
+.footer{
+    direction: ltr;
+    font-size: 12px;
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background: white;
+    width: 100%;
+    height: 147.5px;
+    float: left;
+    color: #737373;
+    margin: 0 auto;
+    width: 980px;
+    padding-top: 30px;
+    padding-left: 260px;
+    
+    
+}
+
+.footer a{
+  text-decoration: none;
+  color: #737373;
+  
+  
+}
+
+.logo_up{
+  padding-top: 5px;
+  padding-left: 608px;
+  float: left;
+}
+
+.signup-Box{
+    width: 400px;
+    height: 560px;
+    background: white;
+    float: left;
+    margin-top: 113px;
+    margin-left: -361px;
+    padding: 15px;
+    font-family: inherit;
+    border: 1px solid #dddfe2;
+    text-align: center;
+    color: #0866ff;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .1), 0px 8px 16px rgba(0, 0, 0, .1);
+    border-radius: 8px;   
+}
+
+.firstLine_signup{
+    margin-top: -10PX;
+    font-size: 12.5px;
+    line-height: 8px;
+    text-align: center;
+    color: #1c1e21;
+    font-family: SFProDisplay-Bold, Helvetica, Arial, sans-serif;
+    margin-bottom: 0;
+    
+    
+}
+
+.secondLine_signup{
+  color: #606770;
+    font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 24px;
+    margin-bottom: 12px;
+    margin-top: -5px;
+}
+
+.signup_line{
+  border-bottom: 1px solid #dadde1;
+  margin-left: -15px;
+  width: 430px;
+  margin-right: -15px;
+  
+}
+
+.nameline {
+  margin-left: -9px;
+ 
+}
+
+.nameline input[type=text] {
+  margin-top: 15px;
+  width: 194px;
+  padding: 11px ;
+  margin-left: 8px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 16px;
+ 
+}
+
+.dbinfo{
+  color: #606770;
+    font-family: SFProText-Medium, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 20px;
+    float: left;
+   margin-top: 12px;
+   margin-bottom: -10px;
+   
+}
+
+.dbirth, select{
+ 
+  width: 125px;
+  padding: 8px ;
+  display: inline-block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 16px;
+  margin: 2.50px;
+  margin-left: 5px;
+ 
+}
+
+select{
+  border: 1px solid #ccd0d5;
+    
+}
+
+.dbline{
+  float: left;
+  margin-left: -17px;
+  
+ 
+}
+
+.genderhead{
+  color: #606770;
+    font-family: SFProText-Medium, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 20px;
+   margin-bottom: -10px;
+   float: left;
+   
+}
+
+.gender{
+  box-sizing: border-box;
+  color: #1c1e21;
+  font-family: SFProText-Medium, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 36px;
+  padding: 0px 27px 0 10px;
+  width: 100%;
+  float: left;
+  
+}
+
+.gen{
+  
+  background-color: #fff;
+    border: 1px solid #ccd0d5;
+    box-sizing: border-box;
+    display: inline-block;
+    flex: 1 0 auto;
+    font-weight: normal;
+    height: 36px;
+    margin: 8px 6px 6px;
+    padding: 0;
+    position: relative;
+    width: auto;
+    border-radius: 4px;
+   
+    
+}
+
+input[type="radio"] {
+  
+  margin-left: 35px;
+  margin-right: -15px;
+  border: initial;
+  
+}
+
+.Genline{
+  float: left;
+ margin-left: -7px;
+ margin-top: 3px;
+ 
+}
+
+
+
+
+
+
