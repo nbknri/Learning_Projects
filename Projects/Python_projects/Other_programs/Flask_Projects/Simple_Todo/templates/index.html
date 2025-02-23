@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div><h1>Wish List</h1></div>
+
+    <div id="top-div">
+        <form action="/" method="post">
+            <input type="text" id="item" name="item" class="input">
+            <input type="submit" value="Add" class="btn" name="add_Button">
+        </form>
+    </div>
+
+    <div>
+        {% if wishlist|length < 1 %}
+        <h4 id="empty_id">Add Your Wishlist</h4>
+
+        {% else %}
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Action</th>
+            </tr>
+            {% for item in wishlist %}
+            <tr>
+                <td>{{item}}</td>
+                <td id="delete">
+                    <a href="{{url_for("delete", item = item)}}" name="delete" class="btn" value="{{item}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>
