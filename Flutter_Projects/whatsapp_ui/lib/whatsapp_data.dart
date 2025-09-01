@@ -64,7 +64,7 @@ class Data {
     10: [
       'Soma Sundaran', 
       'images/man.png', 
-      'Please visit again', 
+      'Please visit again, thank you', 
       '7:30 AM',
     ],
   };
@@ -98,7 +98,14 @@ class Data {
       '55 minutes ago',
       false,
     ],
-    3: ['Dad', 'images/man.png', 0, true, true, '58 minutes ago', false],
+    3: [
+      'Dad', 'images/man.png', 
+      0, 
+      true, 
+      true, 
+      '58 minutes ago', 
+      false
+    ],
     4: [
       'Cayne Don',
       'images/flower.jpg',
@@ -139,12 +146,30 @@ class Data {
   };
   //message, who is sender
   var chatMsgs = {
-    0: ['Hey how are you', true],
-    1: ['Hey I am fine been a while', false],
-    2: ['How are you', false],
-    3: ['I\'m fine.', true],
-    4: ['What have you been upto these days!', true],
-    5: ['I have been learning flutter from youtube channels', false],
+    0: [
+      'Hey how are you', 
+      true
+    ],
+    1: [
+      'Hey I am fine been a while', 
+      false
+    ],
+    2: [
+      'How are you', 
+      false
+    ],
+    3: [
+      'I\'m fine.', 
+      true
+    ],
+    4: [
+      'What have you been upto these days!', 
+      true
+    ],
+    5: [
+      'I have been learning flutter from youtube channels', 
+      false
+    ],
   };
 
 }
