@@ -69,6 +69,57 @@ class Data {
     ],
   };
 
+  //name,profile pic,no. of divisions, space,time,last tile or not
+  var statusList = {
+    0: [
+      'Williams Anders', 
+      'images/profile1.png', 
+      3.0, 
+      4.5, 
+      '1 minute ago', 
+      false
+      ],
+    1: [
+      'Mom',
+      'images/woman.png',
+      1.0,
+      0.0,
+      '20 minutes ago',
+      false,
+    ],
+    2: [
+      'Hannah', 
+      'images/profile1.png', 
+      5.0, 2.5, 
+      '28 minutes ago', 
+      false
+      ],
+    3: [
+      'Dad', 
+      'images/man.png', 
+      2.0, 
+      3.5, 
+      '53 minutes ago', 
+      false
+      ],
+    4: [
+      'Cayne Don', 
+      'images/profile.png', 
+      4.0, 
+      3.0, 
+      'Today 04:30 pm', 
+      false
+      ],
+    5: [
+      'Abby Gale',
+      'images/girl.png',
+      1.0,
+      0.0,
+      'Today 03:30 pm',
+      false,
+    ],
+  };
+
   //name,profile pic,vid or aud call, missed call or not, incoming or outgoing, time, last value or not
   var calls = {
     0: [
@@ -144,6 +195,7 @@ class Data {
     ],
     8: ['Hannah', 'images/woman2.png', 1, false, true, 'Today 11:30 pm', true],
   };
+
   //message, who is sender
   var chatMsgs = {
     0: [

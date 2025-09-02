@@ -155,11 +155,10 @@ class WhatsappTab extends StatelessWidget {
   }
 }
 
- navigationFunction(BuildContext cntx, selectedtab, label) {
+void navigationFunction(BuildContext cntx, selectedtab, label) {
   if (selectedtab != label) {
-    return Navigator.of(cntx).pushNamed(selectedtab);
-
+    Navigator.of(cntx).pushNamed(selectedtab);
   } else {
-    return null;
+    null;
   }
 }
