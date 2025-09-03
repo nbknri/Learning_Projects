@@ -124,7 +124,7 @@ class Data {
   var calls = {
     0: [
       'William Anders',
-      'images/boy.png',
+      'images/man.png',
       0,
       false,
       false,
@@ -133,7 +133,7 @@ class Data {
     ],
     1: [
       'Mom',
-      'images/cliffside-unsplash.jpg',
+      'images/woman.png',
       0,
       false,
       true,
@@ -142,7 +142,7 @@ class Data {
     ],
     2: [
       'Hannah',
-      'images/woman2.png',
+      'images/girl.png',
       1,
       false,
       false,
@@ -150,7 +150,8 @@ class Data {
       false,
     ],
     3: [
-      'Dad', 'images/man.png', 
+      'Dad', 
+      'images/boy1.png', 
       0, 
       true, 
       true, 
@@ -159,7 +160,7 @@ class Data {
     ],
     4: [
       'Cayne Don',
-      'images/flower.jpg',
+      'images/boy.png',
       0,
       true,
       true,
@@ -168,7 +169,7 @@ class Data {
     ],
     5: [
       'Abby Gale',
-      'images/plant-unsplash.jpg',
+      'images/girl.png',
       1,
       true,
       true,
@@ -177,7 +178,7 @@ class Data {
     ],
     6: [
       'William Anders',
-      'images/boy.png',
+      'images/man.png',
       0,
       false,
       true,
@@ -186,14 +187,22 @@ class Data {
     ],
     7: [
       'William Anders',
-      'images/boy.png',
+      'images/profile.png',
       1,
       true,
       true,
       'Today 12:10 pm',
       false,
     ],
-    8: ['Hannah', 'images/woman2.png', 1, false, true, 'Today 11:30 pm', true],
+    8: [
+      'Hannah', 
+      'images/woman.png', 
+      1, 
+      false, 
+      true, 
+      'Today 11:30 pm', 
+      true
+    ],
   };
 
   //message, who is sender
