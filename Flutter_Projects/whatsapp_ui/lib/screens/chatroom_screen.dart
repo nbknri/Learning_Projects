@@ -18,6 +18,8 @@ class ChatroomScreen extends StatefulWidget {
 class _ChatroomScreenState extends State<ChatroomScreen> {
   TextEditingController textcotrol = TextEditingController();
 
+  bool currentTextValueStatus = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,6 +143,15 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                           width: MediaQuery.of(context).size.width * 0.55,
                           height: MediaQuery.of(context).size.height * 0.1,
                           child: TextField(
+                            onChanged: (textValue) {
+                              setState(() {
+                                if (textValue.trim().isNotEmpty) {
+                                  currentTextValueStatus = true;
+                                } else {
+                                  currentTextValueStatus = false;
+                                }
+                              });
+                            },
                             controller: textcotrol,
                             cursorColor: Colors.teal,
                             style: TextStyle(fontSize: 20, color: Colors.black),
@@ -160,7 +171,7 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                           size: 25,
                         ),
                         SizedBox(width: 5),
-                        textcotrol.text.isEmpty
+                        currentTextValueStatus == false
                             ? Icon(
                                 Icons.camera_alt_rounded,
                                 color: Colors.grey.shade500,
@@ -173,7 +184,7 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                   CircleAvatar(
                     backgroundColor: Color(0xff00897b),
                     radius: 23,
-                    child: textcotrol.text.isEmpty
+                    child: currentTextValueStatus == false
                         ? IconButton(
                             onPressed: () {},
                             icon: Icon(Icons.mic, color: Colors.white),
@@ -185,9 +196,7 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                                 true,
                               ];
                               textcotrol.clear();
-                              setState(() {
-                                
-                              });
+                              setState(() {});
                             },
                             icon: Icon(Icons.send_rounded, color: Colors.white),
                           ),
