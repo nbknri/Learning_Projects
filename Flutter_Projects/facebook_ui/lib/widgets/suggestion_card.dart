@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:facebook_ui/assets.dart';
 import 'package:flutter/material.dart';
 
 class SuggestionCard extends StatelessWidget {
@@ -37,7 +35,7 @@ class SuggestionCard extends StatelessWidget {
         child: Column(
           children: [
             ListTile(title: Text(name), subtitle: Text('$mutualFriend Mutual frined')),
-            Container(
+            SizedBox(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
