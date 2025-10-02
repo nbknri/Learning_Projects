@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AnswerButton extends StatefulWidget {
+class AnswerButton extends StatelessWidget {
   const AnswerButton({
     super.key,
     required this.buttonColor,
@@ -13,19 +13,14 @@ class AnswerButton extends StatefulWidget {
   final Function(bool) buttonAction;
 
   @override
-  State<AnswerButton> createState() => _AnswerButtonState();
-}
-
-class _AnswerButtonState extends State<AnswerButton> {
-  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ElevatedButton(
-        onPressed:()=> widget.buttonAction(
-          widget.buttonLabel == "ശരി" ? true: false,
+        onPressed:()=> buttonAction(
+          buttonLabel == "ശരി" ? true: false,
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: widget.buttonColor,
+          backgroundColor: buttonColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(5),
           ),
@@ -33,7 +28,7 @@ class _AnswerButtonState extends State<AnswerButton> {
           elevation: 5,
         ),
         child: Text(
-          widget.buttonLabel,
+          buttonLabel,
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,

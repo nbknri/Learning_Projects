@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 
-class QuestionsPart extends StatefulWidget {
+class QuestionsPart extends StatelessWidget {
   const QuestionsPart({super.key, required this.currentQuestion});
 
   final String currentQuestion;
 
-  @override
-  State<QuestionsPart> createState() => _QuestionsPartState();
-}
-
-class _QuestionsPartState extends State<QuestionsPart> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -22,7 +17,7 @@ class _QuestionsPartState extends State<QuestionsPart> {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
-            widget.currentQuestion,
+            currentQuestion,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white, fontSize: 30),
           ),
