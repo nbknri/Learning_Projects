@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class QuestionsPart extends StatefulWidget {
-  const QuestionsPart({super.key});
+  const QuestionsPart({super.key, required this.currentQuestion});
+
+  final String currentQuestion;
 
   @override
   State<QuestionsPart> createState() => _QuestionsPartState();
@@ -20,7 +22,7 @@ class _QuestionsPartState extends State<QuestionsPart> {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
-            "പുസ്തകങ്ങൾ കടലാസ് കൊണ്ടാണോ നിർമ്മിച്ചിരിക്കുന്നത്?",
+            widget.currentQuestion,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white, fontSize: 30),
           ),

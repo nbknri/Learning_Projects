@@ -5,12 +5,12 @@ class AnswerButton extends StatefulWidget {
     super.key,
     required this.buttonColor,
     required this.buttonLabel,
-    required this.buttonClicked,
+    required this.buttonAction,
   });
 
   final Color buttonColor;
   final String buttonLabel;
-  final Function() buttonClicked;
+  final Function(bool) buttonAction;
 
   @override
   State<AnswerButton> createState() => _AnswerButtonState();
@@ -21,7 +21,9 @@ class _AnswerButtonState extends State<AnswerButton> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ElevatedButton(
-        onPressed: widget.buttonClicked,
+        onPressed:()=> widget.buttonAction(
+          widget.buttonLabel == "ശരി" ? true: false,
+        ),
         style: ElevatedButton.styleFrom(
           backgroundColor: widget.buttonColor,
           shape: RoundedRectangleBorder(

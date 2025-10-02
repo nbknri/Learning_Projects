@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/data_list/score_list.dart';
 
 class ScorePart extends StatefulWidget {
-  const ScorePart({super.key});
+  const ScorePart({super.key, required this.scoreKeeper});
+
+  final List<Widget> scoreKeeper;
 
   @override
   State<ScorePart> createState() => _ScorePartState();
@@ -11,10 +12,6 @@ class ScorePart extends StatefulWidget {
 class _ScorePartState extends State<ScorePart> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Row(
-        children: scoreKeeper,
-        ),
-        );
+    return SizedBox(child: Row(children: widget.scoreKeeper));
   }
 }
