@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/variables/global_variables.dart';
+import 'package:bmi_calculator/widgets_and_variables/global_variables.dart';
 import 'package:flutter/material.dart';
 
 class HeightSection extends StatelessWidget {

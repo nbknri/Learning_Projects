@@ -1,10 +1,12 @@
+import 'package:bmi_calculator/screens/result_screen.dart';
 import 'package:bmi_calculator/sections/bottum_button_section.dart';
-import 'package:bmi_calculator/sections/container_card.dart';
+import 'package:bmi_calculator/widgets_and_variables/container_card_widget.dart';
 import 'package:bmi_calculator/sections/gender_section.dart';
 import 'package:bmi_calculator/sections/height_section.dart';
+import 'package:bmi_calculator/widgets_and_variables/result_funtion.dart';
 import 'package:bmi_calculator/sections/weight_and_age_section.dart';
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/variables/global_variables.dart';
+import 'package:bmi_calculator/widgets_and_variables/global_variables.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -14,6 +16,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+
   // Local variables
   Color _genderActiveColor = activeColor;
   Color _genderInactiveColor = inactiveColor;
@@ -68,8 +71,22 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-  void _bottumFuntion(bool calculateButton) {
-    if (calculateButton) {}
+  // Bottom Button Function
+  void _bottomButtonFuntion() {
+    ResultFunction results = ResultFunction(
+      height: _heightCount,
+      weight: _weightCount,
+    );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (ctxt) => ResultScreen(
+          bmiValue: results.calculateBmiValue(),
+          bmiStatus: results.getStatus(),
+          bmiInterpretation: results.getInterpretation(),
+        ),
+      ),
+    );
   }
 
   @override
@@ -89,7 +106,7 @@ class _MainScreenState extends State<MainScreen> {
                     child: ContainerCard(
                       marginRight: 4.0,
                       containerChild: GenderSection(
-                        bgColor: genderContainerColor,
+                        bgColor: genderOrResultContainerColor,
                         genderIcon: Icons.male_outlined,
                         fgColor: _genderActiveColor,
                         genderText: "MALE",
@@ -101,7 +118,7 @@ class _MainScreenState extends State<MainScreen> {
                     child: ContainerCard(
                       marginLeft: 4.0,
                       containerChild: GenderSection(
-                        bgColor: genderContainerColor,
+                        bgColor: genderOrResultContainerColor,
                         genderIcon: Icons.female,
                         genderIconAngel: 0.80,
                         fgColor: _genderInactiveColor,
@@ -133,7 +150,7 @@ class _MainScreenState extends State<MainScreen> {
                     child: ContainerCard(
                       marginRight: 4.0,
                       containerChild: WeightAndAgeSection(
-                        increaseOrDecreaseFuntion: _weightAndAgeFuntion,
+                        rounButtonFuntion: _weightAndAgeFuntion,
                         titleText: "WEIGHT",
                         countNumber: _weightCount.toString(),
                       ),
@@ -143,7 +160,7 @@ class _MainScreenState extends State<MainScreen> {
                     child: ContainerCard(
                       marginLeft: 4.0,
                       containerChild: WeightAndAgeSection(
-                        increaseOrDecreaseFuntion: _weightAndAgeFuntion,
+                        rounButtonFuntion: _weightAndAgeFuntion,
                         titleText: "AGE",
                         countNumber: _ageCount.toString(),
                       ),
@@ -156,7 +173,7 @@ class _MainScreenState extends State<MainScreen> {
             // Bottum Button UI
             BottumButtonSection(
               buttonLabel: "CALCULATE YOUR BMI",
-              buttonFunction: _bottumFuntion,
+              buttonFunction: _bottomButtonFuntion,
             ),
           ],
         ),

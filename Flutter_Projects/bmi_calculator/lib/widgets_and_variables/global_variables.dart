@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // AppBar
 final appBar = AppBar(
-  leading: Icon(Icons.menu),
+  leading: Icon(Icons.home),
   title: Text("BMI CALCULATOR", style: TextStyle(fontWeight: FontWeight.bold)),
   centerTitle: true,
 );
@@ -10,7 +10,7 @@ final appBar = AppBar(
 // UI Colors
 const mainBgColor = Color(0xFF090C22);
 const containerBgColor = Color(0xFF101427);
-const genderContainerColor = Color(0xFF1D1F33);
+const genderOrResultContainerColor = Color(0xFF1D1F33);
 const bottumButtonAndSliderThumbColor = Color(0xFFEA1556);
 const bottumButtonSize = 80.0;
 const activeColor = Colors.white;

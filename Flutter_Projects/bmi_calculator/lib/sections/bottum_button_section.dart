@@ -1,9 +1,9 @@
-import 'package:bmi_calculator/variables/global_variables.dart';
+import 'package:bmi_calculator/widgets_and_variables/global_variables.dart';
 import 'package:flutter/material.dart';
 
 class BottumButtonSection extends StatelessWidget {
   final String buttonLabel;
-  final void Function(bool) buttonFunction;
+  final void Function() buttonFunction;
 
   const BottumButtonSection({
     super.key,
@@ -19,7 +19,7 @@ class BottumButtonSection extends StatelessWidget {
       width: double.infinity,
       height: bottumButtonSize,
       child: TextButton(
-        onPressed: () => buttonLabel == "CALCULATE YOUR BMI" ? true: false,
+        onPressed: buttonFunction,
         child: Text(
           buttonLabel,
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
