@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nbk_weather/location.dart';
-import 'package:http/http.dart' as http;
+import 'package:nbk_weather/datas/error_message.dart';
+import 'package:nbk_weather/datas/fetch_current_location.dart';
+import 'package:nbk_weather/datas/global_variabls.dart';
+import 'package:nbk_weather/screens/weather_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,30 +12,36 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late double latitude;
-  late double longitude;
+  var locationJson;
 
-  void getLocation() async {
-    Location location = Location();
-    await location.getCurrentLocation();
-    latitude = location.latitude;
-    longitude = location.longitude;
-    print(latitude);
-    print(longitude);
+  @override
+  void initState() {
+    super.initState();
+    _loadLocationData();
   }
 
-  Future<void> getData() async {
-    http.Response response = await http.get(
-      Uri.parse(
-        "https://api.weatherapi.com/v1/current.json?key=b6cbe4186a0a461ba6e204235251110&q=$latitude,$longitude",
-      ),
-    );
-    if (response.statusCode == 200) {
-      var data = response.body;
-      print(data);
+  void _loadLocationData() async {
+    locationJson = await fetchCurrentLocation();
+    setState(() {});
+  }
+
+  void goToWeatherScreen() {
+    if (locationJson != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) =>
+              WeatherScreen(locationJson: locationJson),
+        ),
+      );
     } else {
-      print(response.statusCode);
+      _loadLocationData();
     }
+
+    if (errorMessage.isNotEmpty) {
+      showErrorMessage(context, errorMessage);
+    }
+    errorMessage = "";
   }
 
   @override
@@ -74,10 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 55),
             ElevatedButton(
-              onPressed: () {
-                getLocation();
-                getData();
-              },
+              onPressed: () => goToWeatherScreen(),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue.shade800,
                 padding: EdgeInsets.symmetric(
