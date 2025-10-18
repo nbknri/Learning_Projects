@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nbk_weather/datas/error_message.dart';
+import 'package:nbk_weather/widgets/custom_button.dart';
+import 'package:nbk_weather/widgets/error_message.dart';
 import 'package:nbk_weather/datas/fetch_current_location.dart';
 import 'package:nbk_weather/datas/global_variabls.dart';
 import 'package:nbk_weather/screens/weather_screen.dart';
@@ -12,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var locationJson;
+  dynamic locationJson;
 
   @override
   void initState() {
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void goToWeatherScreen() {
     if (locationJson != null) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (BuildContext context) =>
@@ -59,12 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text(
                 "Discover the Weather in Your City",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: "Poppins Bold",
-                  color: Colors.white,
-                ),
+                style: titleTextStyle,
               ),
             ),
             SizedBox(height: 25),
@@ -73,34 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text(
                 "Go to know your weather maps and redar precipitaion forecast",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: "Poppins Regular",
-                  color: Colors.grey.shade400,
-                ),
+                style: subTitleTextStyle,
               ),
             ),
             SizedBox(height: 55),
-            ElevatedButton(
-              onPressed: () => goToWeatherScreen(),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue.shade800,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 130.0,
-                  vertical: 15.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              child: Text(
-                "Get Weather",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontFamily: "Poppins Regualr",
-                  color: Colors.white,
-                ),
-              ),
+            CustomButton(
+              onPressed: goToWeatherScreen,
+              horizontalPadding: 130.0,
+              buttonText: "Get Weather",
             ),
           ],
         ),

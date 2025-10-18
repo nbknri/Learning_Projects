@@ -4,7 +4,7 @@ import 'package:nbk_weather/datas/global_variabls.dart';
 
 class NetworkManage {
   late String location;
-  late var data;
+  late dynamic data;
 
   NetworkManage({required this.location});
 

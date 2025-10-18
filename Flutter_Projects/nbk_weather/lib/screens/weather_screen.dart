@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nbk_weather/datas/fetch_current_location.dart';
 import 'package:nbk_weather/datas/global_variabls.dart';
 import 'package:nbk_weather/datas/weather_messages.dart';
+import 'package:nbk_weather/screens/search_page.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key, required this.locationJson});
@@ -13,7 +15,7 @@ class WeatherScreen extends StatefulWidget {
 
 class _WeatherScreenState extends State<WeatherScreen> {
   late String place;
-  late var temperature;
+  late dynamic temperature;
   late String conditionText;
   late String conditionIcon;
 
@@ -34,11 +36,30 @@ class _WeatherScreenState extends State<WeatherScreen> {
     weatherMessages(temperature);
   }
 
+  void _loadLocationData() async {
+    var locationJson = await fetchCurrentLocation();
+    setState(() {
+      updateUi(locationJson);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    void goToSearchPage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => SearchPage()),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(place),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () => _loadLocationData(),
+          icon: Icon(Icons.navigation_rounded),
+        ),
+        title: Text(place, style: appBarTextStyle),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
@@ -53,12 +74,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 margin: EdgeInsets.only(top: 25, bottom: 25),
                 child: Text(
                   "Today's Report",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Poppins Bold",
-                    color: Colors.white,
-                  ),
+                  style: titleTextStyle,
                 ),
               ),
               Expanded(
@@ -68,12 +84,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     Image.network(conditionIcon, scale: 0.5),
                     Text(
                       "It's $conditionText",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "Poppins Bold",
-                        color: Colors.white,
-                      ),
+                      style: titleTextStyle,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -90,11 +101,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           ),
                         ),
                         Text(
-                          "°C",
+                          "°",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 40,
-                            // fontWeight: FontWeight.w600,
                             fontFamily: "Poppins Bold",
                             color: Colors.white,
                           ),
@@ -112,11 +122,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       child: Text(
                         weatherMessage,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: "Poppins Regular",
-                          color: Colors.grey.shade400,
-                        ),
+                        style: subTitleTextStyle,
                       ),
                     ),
                   ],
@@ -127,6 +133,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => goToSearchPage(),
+        backgroundColor: Colors.blue.shade800,
+        child: Icon(Icons.search, size: 40.0),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
