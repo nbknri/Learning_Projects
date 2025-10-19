@@ -25,7 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
           Expanded(
             flex: 7,
             child: Container(
-              padding: EdgeInsets.fromLTRB(25.0, 50.0, 25.0, 25.0),
+              padding: EdgeInsets.fromLTRB(25.0, 40.0, 25.0, 25.0),
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -84,7 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                       // Password Filed section
                       TextFormField(
-                        obscureText: _isPasswordVisible ? true : false,
+                        obscureText: !_isPasswordVisible,
                         obscuringCharacter: "*",
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -122,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                       const SizedBox(height: 20),
 
-                      // Remember and Forger Section
+                      // Agree Section
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -166,17 +166,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             if (_formSignInKey.currentState!.validate() &&
                                 rememberPassword) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Processing Data")),
+                                SnackBar(content: Text("Login successfully!")),
                               );
-                            } else if (!rememberPassword) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    "Please agree to the processing of personal detail",
-                                  ),
-                                ),
-                              );
-                            }
+                            } 
                           },
                           child: Text(
                             "Sign In",
@@ -233,7 +225,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                       const SizedBox(height: 20),
 
-                      // Don't account section
+                      // Question section
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
