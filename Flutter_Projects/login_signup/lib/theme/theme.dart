@@ -38,7 +38,7 @@ ThemeData lightMode = ThemeData(
       foregroundColor: WidgetStatePropertyAll(Colors.white),
       elevation: WidgetStatePropertyAll(5.0),
       padding: WidgetStatePropertyAll(
-        const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       ),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

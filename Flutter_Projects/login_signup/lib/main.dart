@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_signup/screens/welcome_screen.dart';
+import 'package:login_signup/theme/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Login and Signup",
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple)
-      ),
+      theme: lightMode,
       home: const WelcomeScreen(),
     );
   }
