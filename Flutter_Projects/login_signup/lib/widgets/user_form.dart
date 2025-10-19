@@ -221,7 +221,7 @@ class _UserFormState extends State<UserForm> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formSignInKey.currentState!.validate()) {
-                              if (widget.isSignUpForm && _isAccept) {
+                              if (widget.isSignUpForm && !_isAccept) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
