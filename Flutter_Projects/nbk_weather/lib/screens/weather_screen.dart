@@ -85,6 +85,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     Text(
                       "It's $conditionText",
                       style: titleTextStyle,
+                      textAlign: TextAlign.center,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
