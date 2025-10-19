@@ -282,10 +282,13 @@ class _UserFormState extends State<UserForm> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Brand(Brands.facebook),
-                          Brand(Brands.twitter),
-                          Brand(Brands.google),
-                          Brand(Brands.apple_logo),
+                          for (final brand in [
+                            Brands.facebook,
+                            Brands.twitter,
+                            Brands.google,
+                            Brands.apple_logo,
+                          ])
+                            IconButton(onPressed: () {}, icon: Brand(brand)),
                         ],
                       ),
 
