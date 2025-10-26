@@ -13,10 +13,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Money Manager"),
-        centerTitle: true,
-      ),
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(title: Text("Money Manager"), centerTitle: true),
       bottomNavigationBar: const CustomBottomNavigation(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

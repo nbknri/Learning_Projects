@@ -10,15 +10,22 @@ class CustomBottomNavigation extends StatelessWidget {
       valueListenable: HomeScreen.selectedIndexNotifier,
       builder: (BuildContext context, int updatedIndex, Widget? _) {
         return BottomNavigationBar(
-        selectedItemColor: Colors.purple,
-        unselectedItemColor: Colors.grey,
-        currentIndex: updatedIndex,
-        onTap: (newIndex) => HomeScreen.selectedIndexNotifier.value = newIndex,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Transactions"),
-          BottomNavigationBarItem(icon: Icon(Icons.category), label: "Category"),
-        ],
-      );
+          selectedItemColor: Colors.purple,
+          unselectedItemColor: Colors.grey,
+          currentIndex: updatedIndex,
+          onTap: (newIndex) =>
+              HomeScreen.selectedIndexNotifier.value = newIndex,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Transactions",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.category),
+              label: "Category",
+            ),
+          ],
+        );
       },
     );
   }
