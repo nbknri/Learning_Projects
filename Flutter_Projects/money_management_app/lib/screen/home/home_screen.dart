@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_management_app/screen/category/category_add_popup.dart';
 import 'package:money_management_app/screen/category/category_screen.dart';
 import 'package:money_management_app/screen/home/widgets/custom_bottom_navigation.dart';
 import 'package:money_management_app/screen/transaction/transaction_screen.dart';
@@ -21,7 +22,15 @@ class HomeScreen extends StatelessWidget {
           if (selectedIndexNotifier.value == 0) {
             print('Add Transaction');
           } else {
-            print('Add Category');
+            showCategoryAddPopup(context);
+            // print('Add Category');
+            // final _sample = CategoryModel(
+            //   id: DateTime.now().millisecondsSinceEpoch.toString(),
+            //   name: 'Travel',
+            //   type: CategoryType.expense,
+            // );
+            // CategoryDb().insertCategory(_sample);
+            // print(_sample);
           }
         },
         child: Icon(Icons.add),
