@@ -37,17 +37,17 @@ Future<void> showCategoryAddPopup(BuildContext context) async {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                final _name = nameEditingController.text;
-                final _type = selectedCategoryNotifier.value;
-                if (_name.isEmpty) {
+                final name = nameEditingController.text;
+                final type = selectedCategoryNotifier.value;
+                if (name.isEmpty) {
                   return;
                 } else {
-                  final _category = CategoryModel(
+                  final category = CategoryModel(
                     id: DateTime.now().millisecondsSinceEpoch.toString(),
-                    name: _name,
-                    type: _type,
+                    name: name,
+                    type: type,
                   );
-                  CategoryDb().insertCategory(_category);
+                  CategoryDb().insertCategory(category);
                   Navigator.pop(ctx);
                 }
               },

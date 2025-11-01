@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:money_management_app/db/hive/hive_registrar.g.dart';
 import 'package:money_management_app/screen/home/home_screen.dart';
+import 'package:money_management_app/screen/transaction/add_transaction_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +19,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primaryColor: Colors.blue, useMaterial3: false),
+      theme: ThemeData(primaryColor: Colors.redAccent, useMaterial3: false),
       home: const HomeScreen(),
+      routes: {
+        AddTransactionScreen.routeName: (ctx) => const AddTransactionScreen(),
+      },
     );
   }
 }
