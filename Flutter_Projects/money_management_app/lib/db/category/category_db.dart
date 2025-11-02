@@ -39,27 +39,25 @@ class CategoryDb implements CategoryDbFunctions {
 
   Future<void> refreshUI() async {
     final allCategories = await getCategories();
-    incomeCategoryListListener.value.clear();
-    expenseCategoryListListener.value.clear();
+
+    final newIncomeCategoryList = <CategoryModel>[];
+    final newExpenseCategoryList = <CategoryModel>[];
+
     await Future.forEach(allCategories, (CategoryModel category) {
       if (category.type == CategoryType.income) {
-        incomeCategoryListListener.value = [
-          ...incomeCategoryListListener.value,
-          category,
-        ];
+        newIncomeCategoryList.add(category);
       } else {
-        expenseCategoryListListener.value = [
-          ...expenseCategoryListListener.value,
-          category,
-        ];
+        newExpenseCategoryList.add(category);
       }
     });
+    incomeCategoryListListener.value = newIncomeCategoryList;
+    expenseCategoryListListener.value = newExpenseCategoryList;
   }
-  
+
   @override
   Future<void> deleteCategory(String categoryId) async {
     final categoryDb = await Hive.openBox<CategoryModel>(categoryDbName);
-    categoryDb.delete(categoryId); 
+    categoryDb.delete(categoryId);
     refreshUI();
   }
 }
