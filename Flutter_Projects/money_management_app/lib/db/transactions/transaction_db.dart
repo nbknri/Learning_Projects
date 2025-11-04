@@ -40,6 +40,7 @@ class TransactionDb implements TransactionDbFunctions {
 
   Future<void> refreshUI() async {
     final allTransactions = await getTransactions();
+    allTransactions.sort((first, second) => second.date.compareTo(first.date));
     transactionListListener.value = allTransactions;
   }
 
@@ -48,7 +49,7 @@ class TransactionDb implements TransactionDbFunctions {
     final transactionDb = await Hive.openBox<TransactionModel>(
       transactionDbName,
     );
-    transactionDb.delete(transactionId);
+    await transactionDb.delete(transactionId);
     refreshUI();
   }
 }
