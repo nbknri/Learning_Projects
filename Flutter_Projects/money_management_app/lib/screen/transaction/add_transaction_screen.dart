@@ -153,7 +153,9 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
       return;
     }
 
-    if (_selectedDate == null) {}
+    if (_selectedDate == null) {
+      return;
+    }
 
     if (_selectedCategoryModel == null) {
       return;
