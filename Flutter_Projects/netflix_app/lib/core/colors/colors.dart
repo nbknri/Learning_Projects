@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
-const scaffoldColor = Colors.black;
-const textEnableColor = Colors.white;
-const textDisableColor = Colors.grey;
+const backGroundColor = Colors.black;
+const kWhiteColor = Colors.white;
+const kGreyColor = Colors.grey;
+final buttonColorBlue = Colors.blueAccent[700];
+const kBlackColor = Colors.black;

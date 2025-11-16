@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors/colors.dart';
+import 'package:netflix_app/core/colors/constants.dart';
 import 'package:netflix_app/presentation/main_page/pages/main_page_screen.dart';
 
 void main() {
@@ -14,11 +15,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: scaffoldColor,
-        textTheme: const TextTheme(
-          bodySmall: TextStyle(color: textEnableColor),
-          bodyMedium: TextStyle(color: textEnableColor),
-          bodyLarge: TextStyle(color: textEnableColor),
+        scaffoldBackgroundColor: backGroundColor,
+        textTheme: TextTheme(
+          bodySmall: TextStyle(
+            color: kWhiteColor,
+            fontFamily: googleFontFamily,
+          ),
+          bodyMedium: TextStyle(
+            color: kWhiteColor,
+            fontFamily: googleFontFamily,
+          ),
+          bodyLarge: TextStyle(
+            color: kWhiteColor,
+            fontFamily: googleFontFamily,
+          ),
         ),
       ),
       home: MainPageScreen(),
