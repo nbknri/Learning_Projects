@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/presentation/search/widgets/search_title_text.dart';
+import 'package:netflix_app/presentation/search/widgets/top_search_item.dart';
+
+class SearchIdle extends StatelessWidget {
+  const SearchIdle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SearchTitleText(title: 'Top Search',),
+        sizedBoxHight,
+        Expanded(
+          child: ListView.separated(
+            shrinkWrap: true,
+            itemBuilder: (context, index) => const TopSearchItemTile(),
+            separatorBuilder: (context, index) => sizedBoxHight,
+            itemCount: 10,
+          ),
+        ),
+      ],
+    );
+  }
+}
