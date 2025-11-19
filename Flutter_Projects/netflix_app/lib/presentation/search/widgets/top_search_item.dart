@@ -24,7 +24,7 @@ class TopSearchItemTile extends StatelessWidget {
             ),
           ),
         ),
-        sizedBoxWidth,
+        kWidth,
         Expanded(
           child: Text(
             'Title Name',

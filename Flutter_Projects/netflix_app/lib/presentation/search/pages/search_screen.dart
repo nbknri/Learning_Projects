@@ -23,7 +23,7 @@ class SearchScreen extends StatelessWidget {
                   prefixIcon: Icon(CupertinoIcons.search, color: kGreyColor),
                 ),
               ),
-              sizedBoxHight,
+              kHight,
               Expanded(
                 // child: const SearchIdle()
                 child: const SearchResult(),

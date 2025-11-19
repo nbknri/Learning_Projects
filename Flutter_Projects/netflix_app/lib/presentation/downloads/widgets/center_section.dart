@@ -28,7 +28,7 @@ class CenterSection extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 18, color: kGreyColor),
         ),
-        sizedBoxHight,
+        kHight,
         SizedBox(
           width: size.width,
           height: size.width * 0.75,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors/colors.dart';
 
-class SearchTitleText extends StatelessWidget {
+class TitleText extends StatelessWidget {
   final String title;
-  const SearchTitleText({super.key, required this.title});
+  const TitleText({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

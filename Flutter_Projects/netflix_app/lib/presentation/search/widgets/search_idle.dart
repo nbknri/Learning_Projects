@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors/constants.dart';
-import 'package:netflix_app/presentation/search/widgets/search_title_text.dart';
 import 'package:netflix_app/presentation/search/widgets/top_search_item.dart';
+import 'package:netflix_app/presentation/widgets/title_text.dart';
 
 class SearchIdle extends StatelessWidget {
   const SearchIdle({super.key});
@@ -11,13 +11,13 @@ class SearchIdle extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SearchTitleText(title: 'Top Search',),
-        sizedBoxHight,
+        TitleText(title: 'Top Search'),
+        kHight,
         Expanded(
           child: ListView.separated(
             shrinkWrap: true,
             itemBuilder: (context, index) => const TopSearchItemTile(),
-            separatorBuilder: (context, index) => sizedBoxHight,
+            separatorBuilder: (context, index) => kHight,
             itemCount: 10,
           ),
         ),

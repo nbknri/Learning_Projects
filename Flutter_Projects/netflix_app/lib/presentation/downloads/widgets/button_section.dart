@@ -33,7 +33,7 @@ class ButtonSection extends StatelessWidget {
             ),
           ),
         ),
-        sizedBoxHight,
+        kHight,
         MaterialButton(
           onPressed: () {},
           color: kWhiteColor,

@@ -17,7 +17,7 @@ class AppBarWidget extends StatelessWidget {
         IconButton(onPressed: () {}, icon: Icon(Icons.cast, size: 35)),
         SizedBox(width: 20,),
         Container(height: 27, width: 27, color: Colors.blue),
-        sizedBoxWidth,
+        kWidth,
       ],
     );
   }

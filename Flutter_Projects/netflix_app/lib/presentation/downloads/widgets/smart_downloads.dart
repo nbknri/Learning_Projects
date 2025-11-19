@@ -10,7 +10,7 @@ class SmartDownloads extends StatelessWidget {
     return Row(
       children: [
         Icon(Icons.settings, color: kWhiteColor, size: 30),
-        sizedBoxWidth,
+        kWidth,
         Text(
           'Smart Downloads',
           style: TextStyle(

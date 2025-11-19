@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors/constants.dart';
 import 'package:netflix_app/presentation/search/widgets/search_result_item.dart';
-import 'package:netflix_app/presentation/search/widgets/search_title_text.dart';
+import 'package:netflix_app/presentation/widgets/title_text.dart';
 
 class SearchResult extends StatelessWidget {
   const SearchResult({super.key});
@@ -11,8 +11,8 @@ class SearchResult extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SearchTitleText(title: 'Movie & TV'),
-        sizedBoxHight,
+        TitleText(title: 'Movie & TV'),
+        kHight,
         Expanded(
           child: GridView.count(
             shrinkWrap: true,
