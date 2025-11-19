@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors/colors.dart';
+import 'package:netflix_app/core/colors/constants.dart';
 import 'package:netflix_app/presentation/fast_laugh/widgets/video_icon_widget.dart';
 
 class VideoListItem extends StatelessWidget {
@@ -50,7 +51,7 @@ class VideoListItem extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 30,
                     backgroundImage: NetworkImage(
-                      'https://media.themoviedb.org/t/p/w276_and_h350_face/dW5U5yrIIPmMjRThR9KT2xH6nTz.jpg',
+                      avatarImage,
                       ),
                   ),
                 ),

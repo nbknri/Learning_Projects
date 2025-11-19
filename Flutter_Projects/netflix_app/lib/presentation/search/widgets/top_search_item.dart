@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors/colors.dart';
 import 'package:netflix_app/core/colors/constants.dart';
 
-final String imageUrl =
-    'https://media.themoviedb.org/t/p/w1000_and_h563_face/mcmTVTMCiU5hcWpau53ISftjaqc.jpg';
-
 class TopSearchItemTile extends StatelessWidget {
   const TopSearchItemTile({super.key});
 
@@ -19,7 +16,7 @@ class TopSearchItemTile extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(2),
             image: DecorationImage(
-              image: NetworkImage(imageUrl),
+              image: NetworkImage(lImageUrl),
               fit: BoxFit.cover,
             ),
           ),

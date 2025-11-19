@@ -4,13 +4,7 @@ import 'package:netflix_app/core/colors/constants.dart';
 import 'package:netflix_app/presentation/downloads/widgets/downloads_image_widget.dart';
 
 class CenterSection extends StatelessWidget {
-  CenterSection({super.key});
-
-  final List imageList = [
-    'https://media.themoviedb.org/t/p/w440_and_h660_face/fGodXWqJkkkbSebPIlxLSygV8GY.jpg',
-    'https://media.themoviedb.org/t/p/w440_and_h660_face/np7ZzU2rmUqqIPQ4HtfcC8JLOvS.jpg',
-    'https://media.themoviedb.org/t/p/w440_and_h660_face/kGLgaDrYWmTAdRFzGP5pBquRnhO.jpg',
-  ];
+ const CenterSection({super.key});
 
   @override
   Widget build(BuildContext context) {
