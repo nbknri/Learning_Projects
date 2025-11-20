@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors/colors.dart';
 import 'package:netflix_app/core/colors/constants.dart';
-import 'package:netflix_app/presentation/fast_laugh/widgets/video_icon_widget.dart';
+import 'package:netflix_app/presentation/widgets/icon_with_text_btn.dart';
 
 class VideoListItem extends StatelessWidget {
   const VideoListItem({super.key, required this.index});
@@ -55,13 +55,13 @@ class VideoListItem extends StatelessWidget {
                       ),
                   ),
                 ),
-                VideoIconWidget(
+                IconWithTextBtn(
                   icon: Icons.emoji_emotions,
                   title: 'LOL',
                 ),
-                VideoIconWidget(icon: Icons.add, title: 'My List'),
-                VideoIconWidget(icon: Icons.share, title: 'Share'),
-                VideoIconWidget(icon: Icons.play_arrow, title: 'Play'),
+                IconWithTextBtn(icon: Icons.add, title: 'My List'),
+                IconWithTextBtn(icon: Icons.share, title: 'Share'),
+                IconWithTextBtn(icon: Icons.play_arrow, title: 'Play'),
               ],
             ),
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/presentation/widgets/cast_and_avatar_widget.dart';
 
 class AppBarWidget extends StatelessWidget {
   final String titleText;
@@ -14,10 +14,7 @@ class AppBarWidget extends StatelessWidget {
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
         Spacer(),
-        IconButton(onPressed: () {}, icon: Icon(Icons.cast, size: 35)),
-        SizedBox(width: 20,),
-        Container(height: 27, width: 27, color: Colors.blue),
-        kWidth,
+        CastAndAvatarWidget(),
       ],
     );
   }
