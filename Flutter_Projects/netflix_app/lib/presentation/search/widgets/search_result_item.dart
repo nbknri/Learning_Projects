@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/constants.dart';
 
 class SearchResultItem extends StatelessWidget {
   const SearchResultItem({super.key});

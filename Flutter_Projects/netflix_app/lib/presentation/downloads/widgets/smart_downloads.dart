@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/colors.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/colors.dart';
+import 'package:netflix_app/core/constants.dart';
 
 class SmartDownloads extends StatelessWidget {
   const SmartDownloads({super.key});
@@ -10,7 +10,7 @@ class SmartDownloads extends StatelessWidget {
     return Row(
       children: [
         Icon(Icons.settings, color: kWhiteColor, size: 30),
-        kWidth,
+        kWidth10,
         Text(
           'Smart Downloads',
           style: TextStyle(

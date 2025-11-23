@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/colors.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/colors.dart';
+import 'package:netflix_app/core/constants.dart';
 
 class TopSearchItemTile extends StatelessWidget {
   const TopSearchItemTile({super.key});
@@ -16,12 +16,12 @@ class TopSearchItemTile extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(2),
             image: DecorationImage(
-              image: NetworkImage(lImageUrl),
+              image: NetworkImage(lrgImageUrl),
               fit: BoxFit.cover,
             ),
           ),
         ),
-        kWidth,
+        kWidth10,
         Expanded(
           child: Text(
             'Title Name',

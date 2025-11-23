@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/constants.dart';
 
 class CastAndAvatarWidget extends StatelessWidget {
   const CastAndAvatarWidget({super.key});
@@ -11,7 +11,7 @@ class CastAndAvatarWidget extends StatelessWidget {
         IconButton(onPressed: () {}, icon: Icon(Icons.cast, size: 35)),
         SizedBox(width: 20),
         Container(height: 27, width: 27, color: Colors.blue),
-        kWidth,
+        kWidth10,
       ],
     );
   }

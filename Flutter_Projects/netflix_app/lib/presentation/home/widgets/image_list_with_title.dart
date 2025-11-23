@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/home/widgets/image_card.dart';
 import 'package:netflix_app/presentation/home/widgets/number_card.dart';
 import 'package:netflix_app/presentation/widgets/title_text.dart';
@@ -26,14 +26,14 @@ class ImageListWithTitle extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: 10,
-              separatorBuilder: (ctx, index) => !isTopTen ? kWidth : SizedBox(),
+              separatorBuilder: (ctx, index) => !isTopTen ? kWidth10 : SizedBox(),
               itemBuilder: (ctx, index) => !isTopTen
                   ? ImageCard(imageUrl: imageUrl)
                   : NumberCard(imageUrl: imageUrl, index: index),
             ),
           ),
         ),
-        kHight,
+        kHight10,
       ],
     );
   }

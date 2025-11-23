@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/colors.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/colors.dart';
+import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/main_page/pages/main_page_screen.dart';
 
 void main() {
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
             fontFamily: googleFontFamily,
           ),
         ),
+        appBarTheme: const AppBarTheme(backgroundColor: kBlackColor)
       ),
       home: MainPageScreen(),
     );

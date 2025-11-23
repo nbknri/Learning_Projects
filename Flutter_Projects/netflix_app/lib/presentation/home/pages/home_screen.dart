@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/home/widgets/big_image_card.dart';
 import 'package:netflix_app/presentation/home/widgets/home_page_header.dart';
 import 'package:netflix_app/presentation/home/widgets/image_list_with_title.dart';
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                   ListView(
                     children: [
                       BigImageCard(),
-                      kHight,
+                      kHight10,
                       ImageListWithTitle(title: 'Released in Past Year'),
                       ImageListWithTitle(title: 'Trending Now'),
                       ImageListWithTitle(

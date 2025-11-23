@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/colors.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/colors.dart';
+import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/search/widgets/search_result.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -23,7 +23,7 @@ class SearchScreen extends StatelessWidget {
                   prefixIcon: Icon(CupertinoIcons.search, color: kGreyColor),
                 ),
               ),
-              kHight,
+              kHight10,
               Expanded(
                 // child: const SearchIdle()
                 child: const SearchResult(),

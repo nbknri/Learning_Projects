@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/widgets/cast_and_avatar_widget.dart';
 
 class HomePageHeader extends StatelessWidget {
@@ -25,7 +25,7 @@ class HomePageHeader extends StatelessWidget {
               CastAndAvatarWidget(),
             ],
           ),
-          kHight,
+          kHight10,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

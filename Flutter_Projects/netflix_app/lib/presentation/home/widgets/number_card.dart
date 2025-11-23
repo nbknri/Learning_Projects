@@ -1,7 +1,7 @@
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/colors.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/colors.dart';
+import 'package:netflix_app/core/constants.dart';
 
 class NumberCard extends StatelessWidget {
   final String imageUrl;

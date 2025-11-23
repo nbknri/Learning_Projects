@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/colors.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/colors.dart';
+import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/downloads/widgets/downloads_image_widget.dart';
 
 class CenterSection extends StatelessWidget {
@@ -22,7 +22,7 @@ class CenterSection extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 18, color: kGreyColor),
         ),
-        kHight,
+        kHight10,
         SizedBox(
           width: size.width,
           height: size.width * 0.75,

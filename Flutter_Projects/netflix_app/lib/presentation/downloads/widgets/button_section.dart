@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/colors.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/colors.dart';
+import 'package:netflix_app/core/constants.dart';
 
 class ButtonSection extends StatelessWidget {
   const ButtonSection({super.key});
@@ -33,7 +33,7 @@ class ButtonSection extends StatelessWidget {
             ),
           ),
         ),
-        kHight,
+        kHight10,
         MaterialButton(
           onPressed: () {},
           color: kWhiteColor,

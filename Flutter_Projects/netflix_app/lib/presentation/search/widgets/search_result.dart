@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/search/widgets/search_result_item.dart';
 import 'package:netflix_app/presentation/widgets/title_text.dart';
 
@@ -12,7 +12,7 @@ class SearchResult extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TitleText(title: 'Movie & TV'),
-        kHight,
+        kHight10,
         Expanded(
           child: GridView.count(
             shrinkWrap: true,

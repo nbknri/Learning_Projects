@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors/colors.dart';
-import 'package:netflix_app/core/colors/constants.dart';
+import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/widgets/icon_with_text_btn.dart';
+import 'package:netflix_app/presentation/widgets/sound_button_widget.dart';
 
 class VideoListItem extends StatelessWidget {
   const VideoListItem({super.key, required this.index});
@@ -21,18 +21,7 @@ class VideoListItem extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: CircleAvatar(
-                  radius: 25,
-                  backgroundColor: Colors.black.withValues(alpha: 0.50),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.volume_mute_rounded, 
-                      color: kWhiteColor, 
-                      size: 30,
-                      ),
-                  ),
-                ),
+                child: SoundButtonWidget()
               ),
             ],
           ),
