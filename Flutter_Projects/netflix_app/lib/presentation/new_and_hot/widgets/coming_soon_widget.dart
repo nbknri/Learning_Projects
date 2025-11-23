@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors.dart';
 import 'package:netflix_app/core/constants.dart';
+import 'package:netflix_app/presentation/new_and_hot/widgets/title_with_description.dart';
 import 'package:netflix_app/presentation/widgets/icon_with_text_btn.dart';
-import 'package:netflix_app/presentation/widgets/sound_button_widget.dart';
+import 'package:netflix_app/presentation/widgets/video_widget.dart';
 
 class ComingSoonWidget extends StatelessWidget {
   const ComingSoonWidget({super.key});
@@ -41,20 +42,7 @@ class ComingSoonWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //image section
-                  Stack(
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        height: 200,
-                        child: Image.network(cmsImage, fit: BoxFit.cover),
-                      ),
-                      Positioned(
-                        bottom: 10,
-                        right: 10,
-                        child: SoundButtonWidget(),
-                      ),
-                    ],
-                  ),
+                  VideoWidget(imgUrl: cmsImage,),
                   // Title section
                   Row(
                     children: [
@@ -98,11 +86,10 @@ class ComingSoonWidget extends StatelessWidget {
                   ),
                   Text('Coming on Friday', style: TextStyle(fontSize: 16)),
                   kHight10,
-                  Text('Tall Girl 2', style: kHomeTopTitleStyle),
-                  kHight10,
-                  Text(
-                    'Landing the lead in the school musical is a dream come trust for Jodi, until the pressure sends her confidence - and her relationship - into a tailspin.',
-                    style: TextStyle(color: kGreyColor, fontSize: 15),
+                  TitleWithDescription(
+                    title: 'Tall Girl 2',
+                    description:
+                        'Landing the lead in the school musical is a dream come trust for Jodi, until the pressure sends her confidence - and her relationship - into a tailspin.',
                   ),
                 ],
               ),

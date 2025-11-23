@@ -6,17 +6,15 @@ class SoundButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  CircleAvatar(
-                  radius: 25,
-                  backgroundColor: Colors.black.withValues(alpha: 0.50),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.volume_mute_rounded, 
-                      color: kWhiteColor, 
-                      size: 30,
-                      ),
-                  ),
-                );
+    return CircleAvatar(
+      radius: 20,
+      backgroundColor: Colors.black.withValues(alpha: 0.50),
+
+      child: IconButton(
+        onPressed: () {},
+        padding: EdgeInsets.zero,
+        icon: Icon(Icons.volume_off, color: kWhiteColor, size: 30),
+      ),
+    );
   }
 }

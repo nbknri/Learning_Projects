@@ -28,7 +28,7 @@ class ImageListWithTitle extends StatelessWidget {
               itemCount: 10,
               separatorBuilder: (ctx, index) => !isTopTen ? kWidth10 : SizedBox(),
               itemBuilder: (ctx, index) => !isTopTen
-                  ? ImageCard(imageUrl: imageUrl)
+                  ? ImageCard(imageUrl: topTenImage)
                   : NumberCard(imageUrl: imageUrl, index: index),
             ),
           ),

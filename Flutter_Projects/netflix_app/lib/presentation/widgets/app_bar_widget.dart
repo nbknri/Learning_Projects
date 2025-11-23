@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/widgets/cast_and_avatar_widget.dart';
 
 class AppBarWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class AppBarWidget extends StatelessWidget {
       children: [
         Text(
           titleText,
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          style: appBarTitleStyle,
         ),
         Spacer(),
         CastAndAvatarWidget(),

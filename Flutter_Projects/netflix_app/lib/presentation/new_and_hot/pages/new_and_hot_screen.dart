@@ -17,7 +17,7 @@ class NewAndHotScreen extends StatelessWidget {
           preferredSize: Size.fromHeight(100),
           child: AppBar(
             elevation: 0,
-            title: Text('New & Hot', style: boldTitleStyle),
+            title: Text('New & Hot', style: appBarTitleStyle),
             actions: [CastAndAvatarWidget()],
             bottom: TabBar(
               isScrollable: true,
