@@ -41,10 +41,7 @@ class NewAndHotScreen extends StatelessWidget {
           ),
         ),
         body: SafeArea(
-          child: TabBarView(children: [
-            ComingSoon(), 
-            EveryonesWatching(),
-            ]),
+          child: TabBarView(children: [ComingSoon(), EveryonesWatching()]),
         ),
       ),
     );

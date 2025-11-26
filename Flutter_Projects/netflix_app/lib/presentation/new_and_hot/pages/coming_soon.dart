@@ -13,8 +13,7 @@ class ComingSoon extends StatelessWidget {
         itemCount: 10,
         itemBuilder: (context, index) => ComingSoonWidget(),
         separatorBuilder: (context, index) => kHight30,
-        ),
+      ),
     );
   }
 }
-

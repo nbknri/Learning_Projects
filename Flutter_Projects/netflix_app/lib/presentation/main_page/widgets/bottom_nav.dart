@@ -37,7 +37,7 @@ class BottomNavigationWidget extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           onTap: (index) => indexChangeNotifier.value = index,
         );
-      }
+      },
     );
   }
 }

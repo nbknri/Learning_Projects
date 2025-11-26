@@ -21,7 +21,7 @@ class VideoListItem extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: SoundButtonWidget()
+                child: SoundButtonWidget(),
               ),
             ],
           ),
@@ -39,15 +39,10 @@ class VideoListItem extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: CircleAvatar(
                     radius: 30,
-                    backgroundImage: NetworkImage(
-                      avatarImage,
-                      ),
+                    backgroundImage: NetworkImage(avatarImage),
                   ),
                 ),
-                IconWithTextBtn(
-                  icon: Icons.emoji_emotions,
-                  title: 'LOL',
-                ),
+                IconWithTextBtn(icon: Icons.emoji_emotions, title: 'LOL'),
                 IconWithTextBtn(icon: Icons.add, title: 'My List'),
                 IconWithTextBtn(icon: Icons.share, title: 'Share'),
                 IconWithTextBtn(icon: Icons.play_arrow, title: 'Play'),

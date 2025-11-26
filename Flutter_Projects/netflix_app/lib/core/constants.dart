@@ -27,11 +27,11 @@ final String lrgImageUrl =
 final String avatarImage =
     'https://media.themoviedb.org/t/p/w276_and_h350_face/dW5U5yrIIPmMjRThR9KT2xH6nTz.jpg';
 
-final List imageList = [
-  'https://media.themoviedb.org/t/p/w440_and_h660_face/fGodXWqJkkkbSebPIlxLSygV8GY.jpg',
-  'https://media.themoviedb.org/t/p/w440_and_h660_face/np7ZzU2rmUqqIPQ4HtfcC8JLOvS.jpg',
-  'https://media.themoviedb.org/t/p/w440_and_h660_face/kGLgaDrYWmTAdRFzGP5pBquRnhO.jpg',
-];
+// final List imageList = [
+//   'https://media.themoviedb.org/t/p/w440_and_h660_face/fGodXWqJkkkbSebPIlxLSygV8GY.jpg',
+//   'https://media.themoviedb.org/t/p/w440_and_h660_face/np7ZzU2rmUqqIPQ4HtfcC8JLOvS.jpg',
+//   'https://media.themoviedb.org/t/p/w440_and_h660_face/kGLgaDrYWmTAdRFzGP5pBquRnhO.jpg',
+// ];
 
 final String bigImage =
     'https://www.themoviedb.org/t/p/w1280/kdR0jx7i8AmRn3UijWLb9j7osi2.jpg';
@@ -63,3 +63,5 @@ final TextStyle appBarTitleStyle = const TextStyle(
 
 //BorderRadius
 final BorderRadius kBRadius30 = BorderRadius.circular(30);
+
+const imageAppendUrl = 'https://image.tmdb.org/t/p/w500';

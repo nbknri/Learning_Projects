@@ -42,7 +42,7 @@ class ComingSoonWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //image section
-                  VideoWidget(imgUrl: cmsImage,),
+                  VideoWidget(imgUrl: cmsImage),
                   // Title section
                   Row(
                     children: [

@@ -10,10 +10,7 @@ class AppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          titleText,
-          style: appBarTitleStyle,
-        ),
+        Text(titleText, style: appBarTitleStyle),
         Spacer(),
         CastAndAvatarWidget(),
       ],

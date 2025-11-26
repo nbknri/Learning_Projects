@@ -26,7 +26,8 @@ class ImageListWithTitle extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: 10,
-              separatorBuilder: (ctx, index) => !isTopTen ? kWidth10 : SizedBox(),
+              separatorBuilder: (ctx, index) =>
+                  !isTopTen ? kWidth10 : SizedBox(),
               itemBuilder: (ctx, index) => !isTopTen
                   ? ImageCard(imageUrl: topTenImage)
                   : NumberCard(imageUrl: imageUrl, index: index),
