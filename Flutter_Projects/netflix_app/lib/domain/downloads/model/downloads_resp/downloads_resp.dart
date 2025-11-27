@@ -4,12 +4,9 @@ part 'downloads_resp.g.dart';
 
 @JsonSerializable()
 class DownloadsResp {
-
   List<DownloadsResultData>? results;
-  
-  DownloadsResp({
-    this.results,
-    });
+
+  DownloadsResp({this.results});
 
   factory DownloadsResp.fromJson(Map<String, dynamic> json) {
     return _$DownloadsRespFromJson(json);
@@ -17,7 +14,6 @@ class DownloadsResp {
 
   Map<String, dynamic> toJson() => _$DownloadsRespToJson(this);
 }
-
 
 @JsonSerializable()
 class DownloadsResultData {
@@ -32,4 +28,3 @@ class DownloadsResultData {
 
   Map<String, dynamic> toJson() => _$DownloadsResultDataToJson(this);
 }
-

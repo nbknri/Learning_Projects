@@ -3,7 +3,9 @@ import 'package:netflix_app/core/colors.dart';
 import 'package:netflix_app/core/constants.dart';
 
 class TopSearchItemTile extends StatelessWidget {
-  const TopSearchItemTile({super.key});
+  final String imgUrl;
+  final String title;
+  const TopSearchItemTile({super.key, required this.imgUrl, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class TopSearchItemTile extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(2),
             image: DecorationImage(
-              image: NetworkImage(lrgImageUrl),
+              image: NetworkImage(imgUrl),
               fit: BoxFit.cover,
             ),
           ),
@@ -24,7 +26,7 @@ class TopSearchItemTile extends StatelessWidget {
         kWidth10,
         Expanded(
           child: Text(
-            'Title Name',
+            title,
             style: TextStyle(
               color: kWhiteColor,
               fontWeight: FontWeight.bold,

@@ -75,7 +75,7 @@ class CenterSection extends StatelessWidget {
             );
           },
         ),
-        kHight10
+        kHight10,
       ],
     );
   }

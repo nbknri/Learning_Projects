@@ -5,13 +5,13 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:netflix_app/domain/core/api_end_points.dart';
 import 'package:netflix_app/domain/core/failures/main_failures.dart';
-import 'package:netflix_app/domain/downloads/downloads_service.dart';
-import 'package:netflix_app/domain/downloads/model/downloads_resp/downloads_resp.dart';
+import 'package:netflix_app/domain/search/model/search_resp/search_resp.dart';
+import 'package:netflix_app/domain/search/search_service.dart';
 
-@LazySingleton(as: DownloadsService)
-class DownloadsImpl implements DownloadsService {
+@LazySingleton(as: SearchService)
+class SearchImp implements SearchService {
   @override
-  Future<Either<MainFailures, DownloadsResp>> getDownloadsImages() async {
+  Future<Either<MainFailures, SearchResp>> getTopSearchImages() async{
     try {
       final options = BaseOptions(
         connectTimeout: const Duration(seconds: 60),
@@ -21,10 +21,9 @@ class DownloadsImpl implements DownloadsService {
               'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         },
       );
-
-      final response = await Dio(options).get(ApiEndPoints.downloads);
+      final response = await Dio(options).get(ApiEndPoints.searchIdle);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final result = DownloadsResp.fromJson(response.data);
+        final result = SearchResp.fromJson(response.data);
         return Right(result);
       } else {
         return const Left(MainFailures.serverFailure());

@@ -9,8 +9,8 @@ abstract class DownloadsState with _$DownloadsState {
   }) = _DownloadsState;
 
   factory DownloadsState.initial() => const DownloadsState(
-        downloadsResultList: [], 
-        isLoading: false, 
-        isError: false,
-        );
+    downloadsResultList: [],
+    isLoading: false,
+    isError: false,
+  );
 }

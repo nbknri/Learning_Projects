@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors.dart';
 import 'package:netflix_app/core/constants.dart';
-import 'package:netflix_app/presentation/search/widgets/search_result.dart';
+import 'package:netflix_app/presentation/search/widgets/search_idle.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -25,8 +25,8 @@ class SearchScreen extends StatelessWidget {
               ),
               kHight10,
               Expanded(
-                // child: const SearchIdle()
-                child: const SearchResult(),
+                child: const SearchIdle(),
+                // child: const SearchResult(),
               ),
             ],
           ),
