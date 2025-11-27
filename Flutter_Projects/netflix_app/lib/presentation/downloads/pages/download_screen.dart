@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_app/core/constants.dart';
 import 'package:netflix_app/presentation/downloads/widgets/button_section.dart';
 import 'package:netflix_app/presentation/downloads/widgets/center_section.dart';
 import 'package:netflix_app/presentation/downloads/widgets/smart_downloads.dart';
@@ -27,7 +28,7 @@ class DownloadScreen extends StatelessWidget {
         child: ListView.separated(
           padding: EdgeInsets.all(10),
           itemBuilder: (context, index) => _widgetsList[index],
-          separatorBuilder: (context, index) => SizedBox(height: 40),
+          separatorBuilder: (context, index) => kHight20,
           itemCount: _widgetsList.length,
         ),
       ),

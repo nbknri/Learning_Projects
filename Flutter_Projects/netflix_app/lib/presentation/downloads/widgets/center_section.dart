@@ -19,11 +19,11 @@ class CenterSection extends StatelessWidget {
         const Text(
           'Introducing Downloads for you',
           textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
-        const SizedBox(height: 20),
+        kHight20,
         const Text(
-          'We\'ll download a personalised selection of\nmovies and shows for you, so there\'s\nalways something to watch on your\ndevice',
+          'We\'ll download a personalised selection of movies and shows for you, so there\'s always something to watch on your device',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 18, color: kGreyColor),
         ),
@@ -75,7 +75,7 @@ class CenterSection extends StatelessWidget {
             );
           },
         ),
-        const SizedBox(height: 25),
+        kHight10
       ],
     );
   }

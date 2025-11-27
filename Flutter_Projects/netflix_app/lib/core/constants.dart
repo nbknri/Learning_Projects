@@ -56,7 +56,7 @@ final TextStyle kHomeTopTitleStyle = const TextStyle(
 );
 
 final TextStyle appBarTitleStyle = const TextStyle(
-  fontSize: 30,
+  fontSize: 25,
   fontWeight: FontWeight.bold,
   color: kWhiteColor,
 );

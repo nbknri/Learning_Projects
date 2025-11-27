@@ -25,7 +25,7 @@ class ButtonSection extends StatelessWidget {
                   'Setup',
                   style: TextStyle(
                     color: kWhiteColor,
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -44,7 +44,7 @@ class ButtonSection extends StatelessWidget {
               'See what you can download',
               style: TextStyle(
                 color: kBlackColor,
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),

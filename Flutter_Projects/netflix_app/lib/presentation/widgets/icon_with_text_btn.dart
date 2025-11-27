@@ -15,7 +15,7 @@ class IconWithTextBtn extends StatelessWidget {
     required this.icon,
     required this.title,
     this.iconSize = 30,
-    this.titleSize = 18,
+    this.titleSize = 16,
     this.titleColor = kWhiteColor,
   });
 
