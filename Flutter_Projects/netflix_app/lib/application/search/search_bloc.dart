@@ -15,31 +15,71 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
   SearchBloc(this._searchService) : super(SearchState.initial()) {
     on<GetTopSearchImages>((event, emit) async {
-      emit(
-        const SearchState(
-          searchResultData: [],
-          isLoading: true,
-          isError: false,
-        ),
-      );
+      if (state.searchIdle.isNotEmpty) {
+        emit(
+          SearchState(
+            searchResultData: [],
+            searchIdle: state.searchIdle,
+            isLoading: false,
+            isError: false,
+          ),
+        );
+        return;
+      }
+
       final result = await _searchService.getTopSearchImages();
-      final state = result.fold(
+      final stateResult = result.fold(
         (MainFailures l) {
           return SearchState(
             searchResultData: [],
+            searchIdle: [],
             isLoading: false,
             isError: true,
           );
         },
         (SearchResp r) {
           return SearchState(
-            searchResultData: r.results ?? [],
+            searchResultData: [],
+            searchIdle: r.results,
             isLoading: false,
             isError: false,
           );
         },
       );
-      emit(state);
+      emit(stateResult);
+    });
+
+    on<SearchMovies>((event, emit) async {
+      emit(
+        const SearchState(
+          searchResultData: [],
+          searchIdle: [],
+          isLoading: true,
+          isError: false,
+        ),
+      );
+      final result = await _searchService.searchMovies(
+        movieQuery: event.movieQuery,
+      );
+      final stateResult = result.fold(
+        (MainFailures l) {
+          return SearchState(
+            searchResultData: [],
+            searchIdle: [],
+            isLoading: false,
+            isError: true,
+          );
+        },
+        (SearchResp r) {
+          return SearchState(
+            searchResultData: r.results,
+            searchIdle: [],
+            isLoading: false,
+            isError: false,
+          );
+        },
+      );
+      emit(stateResult);
     });
   }
 }

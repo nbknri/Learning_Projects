@@ -10,9 +10,6 @@ class SearchIdle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<SearchBloc>(context).add(GetTopSearchImages());
-    });
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,23 +18,25 @@ class SearchIdle extends StatelessWidget {
         Expanded(
           child: BlocBuilder<SearchBloc, SearchState>(
             builder: (context, state) {
-              return state.isLoading || state.searchResultData.isEmpty
+              final data = state.searchIdle;
+              return state.isLoading || state.searchIdle.isEmpty
                   ? Center(child: CircularProgressIndicator())
+                  : state.isError
+                  ? Center(child: Text('Error while getting data'))
                   : ListView.separated(
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        if (state.searchResultData[index].backdropPath ==
-                            null) {
+                        if (data[index].backdropPath == null) {
                           index++;
                         }
+                        final dataIndex = data[index];
                         return TopSearchItemTile(
-                          imgUrl:
-                              '$imageAppendUrl${state.searchResultData[index].backdropPath}',
-                          title: '${state.searchResultData[index].title}',
+                          imgUrl: '$imageAppendUrl${dataIndex.backdropPath}}',
+                          title: dataIndex.title ?? 'No title provider',
                         );
                       },
                       separatorBuilder: (context, index) => kHight10,
-                      itemCount: state.searchResultData.length,
+                      itemCount: data.length,
                     );
             },
           ),

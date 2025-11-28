@@ -30,11 +30,14 @@ class CenterSection extends StatelessWidget {
         kHight10,
         BlocBuilder<DownloadsBloc, DownloadsState>(
           builder: (context, state) {
+            final data = state.downloadsResultList;
             return SizedBox(
               width: size.width,
               height: size.width * 0.75,
               child: state.isLoading || state.downloadsResultList.isEmpty
                   ? const Center(child: CircularProgressIndicator())
+                  : state.isError
+                  ? Center(child: Text('Error while getting data'))
                   : Stack(
                       alignment: Alignment.center,
                       children: [
@@ -46,7 +49,7 @@ class CenterSection extends StatelessWidget {
                         ),
                         DownloadsImageWidget(
                           imageUrl:
-                              '$imageAppendUrl${state.downloadsResultList[0].posterPath}',
+                              '$imageAppendUrl${data[0].posterPath}',
                           imageAngle: 20,
                           imageMargin: const EdgeInsets.only(
                             left: 160,
@@ -56,7 +59,7 @@ class CenterSection extends StatelessWidget {
                         ),
                         DownloadsImageWidget(
                           imageUrl:
-                              '$imageAppendUrl${state.downloadsResultList[1].posterPath}',
+                              '$imageAppendUrl${data[1].posterPath}',
                           imageAngle: -20,
                           imageMargin: const EdgeInsets.only(
                             right: 160,
@@ -66,7 +69,7 @@ class CenterSection extends StatelessWidget {
                         ),
                         DownloadsImageWidget(
                           imageUrl:
-                              '$imageAppendUrl${state.downloadsResultList[2].posterPath}',
+                              '$imageAppendUrl${data[2].posterPath}',
                           imageAngle: 0,
                           imageMargin: const EdgeInsets.only(top: 24),
                         ),

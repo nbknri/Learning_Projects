@@ -8,9 +8,11 @@ part of 'search_resp.dart';
 
 SearchResp _$SearchRespFromJson(Map<String, dynamic> json) => SearchResp(
   page: (json['page'] as num?)?.toInt(),
-  results: (json['results'] as List<dynamic>?)
-      ?.map((e) => SearchResultData.fromJson(e as Map<String, dynamic>))
-      .toList(),
+  results:
+      (json['results'] as List<dynamic>?)
+          ?.map((e) => SearchResultData.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
   totalPages: (json['total_pages'] as num?)?.toInt(),
 );
 
@@ -25,10 +27,11 @@ SearchResultData _$SearchResultDataFromJson(Map<String, dynamic> json) =>
     SearchResultData(
       backdropPath: json['backdrop_path'] as String?,
       title: json['title'] as String?,
-    );
+    )..posterPath = json['poster_path'] as String?;
 
 Map<String, dynamic> _$SearchResultDataToJson(SearchResultData instance) =>
     <String, dynamic>{
       'backdrop_path': instance.backdropPath,
       'title': instance.title,
+      'poster_path': instance.posterPath,
     };

@@ -23,7 +23,7 @@ class DownloadsBloc extends Bloc<DownloadsEvent, DownloadsState> {
         ),
       );
       final result = await _downloadsService.getDownloadsImages();
-      final state = result.fold(
+      final stateResult = result.fold(
         (MainFailures f) {
           return const DownloadsState(
             downloadsResultList: [],
@@ -33,13 +33,13 @@ class DownloadsBloc extends Bloc<DownloadsEvent, DownloadsState> {
         },
         (DownloadsResp r) {
           return DownloadsState(
-            downloadsResultList: r.results ?? [],
+            downloadsResultList: r.results,
             isLoading: false,
             isError: false,
           );
         },
       );
-      emit(state);
+      emit(stateResult);
     });
   }
 }

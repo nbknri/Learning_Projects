@@ -5,7 +5,12 @@ import 'package:netflix_app/core/constants.dart';
 class TopSearchItemTile extends StatelessWidget {
   final String imgUrl;
   final String title;
-  const TopSearchItemTile({super.key, required this.imgUrl, required this.title});
+
+  const TopSearchItemTile({
+    super.key,
+    required this.imgUrl,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +32,7 @@ class TopSearchItemTile extends StatelessWidget {
         Expanded(
           child: Text(
             title,
+            softWrap: true,
             style: TextStyle(
               color: kWhiteColor,
               fontWeight: FontWeight.bold,

@@ -1,7 +1,7 @@
 import 'package:netflix_app/core/strings.dart';
-import 'package:netflix_app/infrastructure/api_key.dart';
 
 class ApiEndPoints {
-  static const downloads = '$kBaseUrl/trending/all/day?api_key=$apiKey';
-  static const searchIdle = '$kBaseUrl/movie/popular?api_key=$apiKey';
+  static const downloads = '$kBaseUrl/trending/all/day';
+  static const searchIdle = '$kBaseUrl/movie/popular';
+  static const searchMovies = '$kBaseUrl/search/movie';
 }

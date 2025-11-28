@@ -5,11 +5,11 @@ part 'search_resp.g.dart';
 @JsonSerializable()
 class SearchResp {
   int? page;
-  List<SearchResultData>? results;
+  List<SearchResultData> results;
   @JsonKey(name: 'total_pages')
   int? totalPages;
 
-  SearchResp({this.page, this.results, this.totalPages});
+  SearchResp({this.page, this.results = const [], this.totalPages});
 
   factory SearchResp.fromJson(Map<String, dynamic> json) {
     return _$SearchRespFromJson(json);
@@ -18,12 +18,13 @@ class SearchResp {
   Map<String, dynamic> toJson() => _$SearchRespToJson(this);
 }
 
-
 @JsonSerializable()
 class SearchResultData {
   @JsonKey(name: 'backdrop_path')
   String? backdropPath;
   String? title;
+  @JsonKey(name: 'poster_path')
+  String? posterPath;
 
   SearchResultData({this.backdropPath, this.title});
 
@@ -33,4 +34,3 @@ class SearchResultData {
 
   Map<String, dynamic> toJson() => _$SearchResultDataToJson(this);
 }
-

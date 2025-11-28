@@ -8,9 +8,13 @@ part of 'downloads_resp.dart';
 
 DownloadsResp _$DownloadsRespFromJson(Map<String, dynamic> json) =>
     DownloadsResp(
-      results: (json['results'] as List<dynamic>?)
-          ?.map((e) => DownloadsResultData.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      results:
+          (json['results'] as List<dynamic>?)
+              ?.map(
+                (e) => DownloadsResultData.fromJson(e as Map<String, dynamic>),
+              )
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$DownloadsRespToJson(DownloadsResp instance) =>
