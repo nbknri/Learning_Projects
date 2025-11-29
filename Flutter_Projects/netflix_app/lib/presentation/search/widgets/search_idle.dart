@@ -26,9 +26,6 @@ class SearchIdle extends StatelessWidget {
                   : ListView.separated(
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        if (data[index].backdropPath == null) {
-                          index++;
-                        }
                         final dataIndex = data[index];
                         return TopSearchItemTile(
                           imgUrl: '$imageAppendUrl${dataIndex.backdropPath}}',

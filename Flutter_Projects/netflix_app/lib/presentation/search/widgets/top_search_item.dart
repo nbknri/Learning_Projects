@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors.dart';
 import 'package:netflix_app/core/constants.dart';
@@ -17,15 +18,30 @@ class TopSearchItemTile extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     return Row(
       children: [
-        Container(
-          width: screenWidth * 0.35,
-          height: 75,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(2),
-            image: DecorationImage(
-              image: NetworkImage(imgUrl),
-              fit: BoxFit.cover,
+        CachedNetworkImage(
+          imageUrl: imgUrl,
+          imageBuilder: (context, imageProvider) => Container(
+            width: screenWidth * 0.35,
+            height: 75,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              image: DecorationImage(
+                image: NetworkImage(imgUrl),
+                fit: BoxFit.cover,
+              ),
             ),
+          ),
+          placeholder: (context, url) => Container(
+            width: screenWidth * 0.35,
+            height: 75,
+            decoration: errorBoxDecoration,
+            child: Center(child: CircularProgressIndicator(color: kGreyColor)),
+          ),
+          errorWidget: (context, url, error) => Container(
+            width: screenWidth * 0.35,
+            height: 75,
+            decoration: errorBoxDecoration,
+            child: const Center(child: Text('No image!')),
           ),
         ),
         kWidth10,

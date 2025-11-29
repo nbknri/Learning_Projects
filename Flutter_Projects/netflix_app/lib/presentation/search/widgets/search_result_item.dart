@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors.dart';
 import 'package:netflix_app/core/constants.dart';
@@ -8,22 +9,27 @@ class SearchResultItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return imgUrl == '${imageAppendUrl}null'
-        ? Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: kGreyColor.shade800,
-            ),
-            child: Center(child: Text('No image')),
-          )
-        : Container(
-      decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(imgUrl),
-              ),
-            ),
+    return CachedNetworkImage(
+      imageUrl: imgUrl,
+      imageBuilder: (context, imageProvider) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage(imgUrl),
+          ),
+        ),
+      ),
+      placeholder: (context, url) => Container(
+        decoration: errorBoxDecoration,
+        child: const Center(
+          child: CircularProgressIndicator(color: kGreyColor),
+        ),
+      ),
+      errorWidget: (context, url, error) => Container(
+        decoration: errorBoxDecoration,
+        child: Center(child: Text('No image!')),
+      ),
     );
   }
 }

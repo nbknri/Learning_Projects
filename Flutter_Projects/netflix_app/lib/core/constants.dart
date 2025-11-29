@@ -64,4 +64,9 @@ final TextStyle appBarTitleStyle = const TextStyle(
 //BorderRadius
 final BorderRadius kBRadius30 = BorderRadius.circular(30);
 
+final BoxDecoration errorBoxDecoration = BoxDecoration(
+  borderRadius: BorderRadius.circular(2),
+  color: kGreyColor.shade800,
+);
+
 const imageAppendUrl = 'https://image.tmdb.org/t/p/w500';
