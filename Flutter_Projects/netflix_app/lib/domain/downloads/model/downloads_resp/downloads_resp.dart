@@ -19,6 +19,7 @@ class DownloadsResp {
 class DownloadsResultData {
   @JsonKey(name: 'poster_path')
   String? posterPath;
+  String? title;
 
   DownloadsResultData({this.posterPath});
 

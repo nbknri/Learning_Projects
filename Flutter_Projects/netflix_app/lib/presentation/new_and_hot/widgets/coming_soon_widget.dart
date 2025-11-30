@@ -70,6 +70,7 @@ class ComingSoonWidget extends StatelessWidget {
                               iconSize: 25,
                               titleSize: 12,
                               titleColor: kGreyColor,
+                              buttonAction: () {},
                             ),
                             kWidth20,
                             IconWithTextBtn(
@@ -78,6 +79,7 @@ class ComingSoonWidget extends StatelessWidget {
                               iconSize: 25,
                               titleSize: 12,
                               titleColor: kGreyColor,
+                              buttonAction: () {},
                             ),
                           ],
                         ),

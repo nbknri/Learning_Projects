@@ -48,8 +48,7 @@ class CenterSection extends StatelessWidget {
                           ),
                         ),
                         DownloadsImageWidget(
-                          imageUrl:
-                              '$imageAppendUrl${data[0].posterPath}',
+                          imageUrl: '$imageAppendUrl${data[0].posterPath}',
                           imageAngle: 20,
                           imageMargin: const EdgeInsets.only(
                             left: 160,
@@ -58,8 +57,7 @@ class CenterSection extends StatelessWidget {
                           isCenterImage: false,
                         ),
                         DownloadsImageWidget(
-                          imageUrl:
-                              '$imageAppendUrl${data[1].posterPath}',
+                          imageUrl: '$imageAppendUrl${data[1].posterPath}',
                           imageAngle: -20,
                           imageMargin: const EdgeInsets.only(
                             right: 160,
@@ -68,8 +66,7 @@ class CenterSection extends StatelessWidget {
                           isCenterImage: false,
                         ),
                         DownloadsImageWidget(
-                          imageUrl:
-                              '$imageAppendUrl${data[2].posterPath}',
+                          imageUrl: '$imageAppendUrl${data[2].posterPath}',
                           imageAngle: 0,
                           imageMargin: const EdgeInsets.only(top: 24),
                         ),

@@ -24,9 +24,17 @@ class BigImageCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconWithTextBtn(icon: Icons.add, title: 'My List'),
+              IconWithTextBtn(
+                icon: Icons.add,
+                title: 'My List',
+                buttonAction: () {},
+              ),
               PlayButtonWidget(),
-              IconWithTextBtn(icon: Icons.info_outline_rounded, title: 'Info'),
+              IconWithTextBtn(
+                icon: Icons.info_outline_rounded,
+                title: 'Info',
+                buttonAction: () {},
+              ),
             ],
           ),
         ),

@@ -44,6 +44,7 @@ class EveryonesWatchingWidget extends StatelessWidget {
                     iconSize: 30,
                     titleSize: 14,
                     titleColor: kGreyColor,
+                    buttonAction: () {},
                   ),
                   kWidth20,
                   IconWithTextBtn(
@@ -52,6 +53,7 @@ class EveryonesWatchingWidget extends StatelessWidget {
                     iconSize: 30,
                     titleSize: 14,
                     titleColor: kGreyColor,
+                    buttonAction: () {},
                   ),
                   kWidth20,
                   IconWithTextBtn(
@@ -60,6 +62,7 @@ class EveryonesWatchingWidget extends StatelessWidget {
                     iconSize: 30,
                     titleSize: 14,
                     titleColor: kGreyColor,
+                    buttonAction: () {},
                   ),
                 ],
               ),

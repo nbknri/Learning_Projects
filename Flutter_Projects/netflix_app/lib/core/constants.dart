@@ -27,12 +27,6 @@ final String lrgImageUrl =
 final String avatarImage =
     'https://media.themoviedb.org/t/p/w276_and_h350_face/dW5U5yrIIPmMjRThR9KT2xH6nTz.jpg';
 
-// final List imageList = [
-//   'https://media.themoviedb.org/t/p/w440_and_h660_face/fGodXWqJkkkbSebPIlxLSygV8GY.jpg',
-//   'https://media.themoviedb.org/t/p/w440_and_h660_face/np7ZzU2rmUqqIPQ4HtfcC8JLOvS.jpg',
-//   'https://media.themoviedb.org/t/p/w440_and_h660_face/kGLgaDrYWmTAdRFzGP5pBquRnhO.jpg',
-// ];
-
 final String bigImage =
     'https://www.themoviedb.org/t/p/w1280/kdR0jx7i8AmRn3UijWLb9j7osi2.jpg';
 
@@ -47,6 +41,14 @@ final String cmsImage =
 
 final String evnImage =
     'https://media.themoviedb.org/t/p/w710_and_h400_multi_faces/4En5BTOUvUHWH36esCtlXU1Rp4Q.jpg';
+
+final List dummyVideoUrl = [
+  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+];
 
 //TextStyle
 final TextStyle kHomeTopTitleStyle = const TextStyle(

@@ -15,7 +15,14 @@ class VideoWidget extends StatelessWidget {
           height: 200,
           child: Image.network(imgUrl, fit: BoxFit.cover),
         ),
-        Positioned(bottom: 10, right: 10, child: SoundButtonWidget()),
+        Positioned(
+          bottom: 10,
+          right: 10,
+          child: SoundButtonWidget(
+            volumeIcon: Icons.volume_off,
+            buttonAction: () {},
+          ),
+        ),
       ],
     );
   }

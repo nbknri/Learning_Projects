@@ -12,6 +12,8 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:netflix_app/application/downloads/downloads_bloc.dart' as _i664;
+import 'package:netflix_app/application/fast_laugh/fast_laugh_bloc.dart'
+    as _i878;
 import 'package:netflix_app/application/search/search_bloc.dart' as _i771;
 import 'package:netflix_app/domain/downloads/downloads_service.dart' as _i411;
 import 'package:netflix_app/domain/search/search_service.dart' as _i75;
@@ -30,6 +32,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i411.DownloadsService>(() => _i471.DownloadsImpl());
     gh.factory<_i771.SearchBloc>(
       () => _i771.SearchBloc(gh<_i75.SearchService>()),
+    );
+    gh.factory<_i878.FastLaughBloc>(
+      () => _i878.FastLaughBloc(gh<_i411.DownloadsService>()),
     );
     gh.factory<_i664.DownloadsBloc>(
       () => _i664.DownloadsBloc(gh<_i411.DownloadsService>()),

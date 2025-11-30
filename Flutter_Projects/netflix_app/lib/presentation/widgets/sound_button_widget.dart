@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors.dart';
 
 class SoundButtonWidget extends StatelessWidget {
-  const SoundButtonWidget({super.key});
+  final IconData volumeIcon;
+  final void Function() buttonAction;
+  const SoundButtonWidget({
+    super.key,
+    required this.volumeIcon,
+    required this.buttonAction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +17,9 @@ class SoundButtonWidget extends StatelessWidget {
       backgroundColor: Colors.black.withValues(alpha: 0.50),
 
       child: IconButton(
-        onPressed: () {},
+        onPressed: buttonAction,
         padding: EdgeInsets.zero,
-        icon: Icon(Icons.volume_off, color: kWhiteColor, size: 30),
+        icon: Icon(volumeIcon, color: kWhiteColor, size: 30),
       ),
     );
   }

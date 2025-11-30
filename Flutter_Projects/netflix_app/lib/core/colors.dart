@@ -5,3 +5,4 @@ const kWhiteColor = Colors.white;
 const kGreyColor = Colors.grey;
 final buttonColorBlue = Colors.blueAccent[700];
 const kBlackColor = Colors.black;
+const kYellowColor = Colors.yellow;
