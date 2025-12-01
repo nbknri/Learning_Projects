@@ -21,8 +21,10 @@ Map<String, dynamic> _$DownloadsRespToJson(DownloadsResp instance) =>
     <String, dynamic>{'results': instance.results};
 
 DownloadsResultData _$DownloadsResultDataFromJson(Map<String, dynamic> json) =>
-    DownloadsResultData(posterPath: json['poster_path'] as String?)
-      ..title = json['title'] as String?;
+    DownloadsResultData(
+      posterPath: json['poster_path'] as String?,
+      title: json['title'] as String?,
+    );
 
 Map<String, dynamic> _$DownloadsResultDataToJson(
   DownloadsResultData instance,

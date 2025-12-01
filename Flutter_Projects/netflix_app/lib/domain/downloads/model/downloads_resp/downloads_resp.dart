@@ -21,7 +21,7 @@ class DownloadsResultData {
   String? posterPath;
   String? title;
 
-  DownloadsResultData({this.posterPath});
+  DownloadsResultData({this.posterPath, this.title});
 
   factory DownloadsResultData.fromJson(Map<String, dynamic> json) {
     return _$DownloadsResultDataFromJson(json);

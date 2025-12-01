@@ -6,7 +6,20 @@ import 'package:netflix_app/presentation/widgets/icon_with_text_btn.dart';
 import 'package:netflix_app/presentation/widgets/video_widget.dart';
 
 class ComingSoonWidget extends StatelessWidget {
-  const ComingSoonWidget({super.key});
+  final String releaseDate;
+  final String movieTitle;
+  final String imgUrl;
+  final String movieDescription;
+  final String originalTitle;
+
+  const ComingSoonWidget({
+    super.key,
+    required this.releaseDate,
+    required this.movieTitle,
+    required this.imgUrl,
+    required this.movieDescription, 
+    required this.originalTitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +55,14 @@ class ComingSoonWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //image section
-                  VideoWidget(imgUrl: cmsImage),
+                  VideoWidget(imgUrl: imgUrl),
                   // Title section
                   Row(
                     children: [
                       SizedBox(
                         width: size.width - 199,
                         child: Text(
-                          'TALLGIRL 2',
+                          originalTitle,
                           style: TextStyle(
                             color: kWhiteColor,
                             fontWeight: FontWeight.bold,
@@ -86,12 +99,14 @@ class ComingSoonWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text('Coming on Friday', style: TextStyle(fontSize: 16)),
+                  Text(
+                    'Coming on $releaseDate',
+                    style: TextStyle(fontSize: 16),
+                  ),
                   kHight10,
                   TitleWithDescription(
-                    title: 'Tall Girl 2',
-                    description:
-                        'Landing the lead in the school musical is a dream come trust for Jodi, until the pressure sends her confidence - and her relationship - into a tailspin.',
+                    title: movieTitle,
+                    description: movieDescription,
                   ),
                 ],
               ),
