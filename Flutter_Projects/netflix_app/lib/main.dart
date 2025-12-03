@@ -26,7 +26,9 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               getIt<DownloadsBloc>()..add(GetDownloadsImages()),
         ),
-        BlocProvider(create: (context) => getIt<SearchBloc>()),
+        BlocProvider(
+          create: (context) => getIt<SearchBloc>()..add(GetTopSearchImages()),
+        ),
         BlocProvider(
           create: (context) => getIt<FastLaughBloc>()..add(Initialize()),
         ),

@@ -278,7 +278,7 @@ as String,
 /// @nodoc
 mixin _$SearchState {
 
- List<SearchResultData> get searchResultData; List<SearchResultData> get searchIdle; bool get isLoading; bool get isError;
+ List<SearchResultData> get searchResultData; List<SearchResultData> get searchIdle; bool get isLoading; bool get isError; bool get isSearchResult;
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -289,16 +289,16 @@ $SearchStateCopyWith<SearchState> get copyWith => _$SearchStateCopyWithImpl<Sear
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchState&&const DeepCollectionEquality().equals(other.searchResultData, searchResultData)&&const DeepCollectionEquality().equals(other.searchIdle, searchIdle)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchState&&const DeepCollectionEquality().equals(other.searchResultData, searchResultData)&&const DeepCollectionEquality().equals(other.searchIdle, searchIdle)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.isSearchResult, isSearchResult) || other.isSearchResult == isSearchResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(searchResultData),const DeepCollectionEquality().hash(searchIdle),isLoading,isError);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(searchResultData),const DeepCollectionEquality().hash(searchIdle),isLoading,isError,isSearchResult);
 
 @override
 String toString() {
-  return 'SearchState(searchResultData: $searchResultData, searchIdle: $searchIdle, isLoading: $isLoading, isError: $isError)';
+  return 'SearchState(searchResultData: $searchResultData, searchIdle: $searchIdle, isLoading: $isLoading, isError: $isError, isSearchResult: $isSearchResult)';
 }
 
 
@@ -309,7 +309,7 @@ abstract mixin class $SearchStateCopyWith<$Res>  {
   factory $SearchStateCopyWith(SearchState value, $Res Function(SearchState) _then) = _$SearchStateCopyWithImpl;
 @useResult
 $Res call({
- List<SearchResultData> searchResultData, List<SearchResultData> searchIdle, bool isLoading, bool isError
+ List<SearchResultData> searchResultData, List<SearchResultData> searchIdle, bool isLoading, bool isError, bool isSearchResult
 });
 
 
@@ -326,12 +326,13 @@ class _$SearchStateCopyWithImpl<$Res>
 
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? searchResultData = null,Object? searchIdle = null,Object? isLoading = null,Object? isError = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? searchResultData = null,Object? searchIdle = null,Object? isLoading = null,Object? isError = null,Object? isSearchResult = null,}) {
   return _then(_self.copyWith(
 searchResultData: null == searchResultData ? _self.searchResultData : searchResultData // ignore: cast_nullable_to_non_nullable
 as List<SearchResultData>,searchIdle: null == searchIdle ? _self.searchIdle : searchIdle // ignore: cast_nullable_to_non_nullable
 as List<SearchResultData>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable
+as bool,isSearchResult: null == isSearchResult ? _self.isSearchResult : isSearchResult // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -417,10 +418,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<SearchResultData> searchResultData,  List<SearchResultData> searchIdle,  bool isLoading,  bool isError)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<SearchResultData> searchResultData,  List<SearchResultData> searchIdle,  bool isLoading,  bool isError,  bool isSearchResult)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SearchState() when $default != null:
-return $default(_that.searchResultData,_that.searchIdle,_that.isLoading,_that.isError);case _:
+return $default(_that.searchResultData,_that.searchIdle,_that.isLoading,_that.isError,_that.isSearchResult);case _:
   return orElse();
 
 }
@@ -438,10 +439,10 @@ return $default(_that.searchResultData,_that.searchIdle,_that.isLoading,_that.is
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<SearchResultData> searchResultData,  List<SearchResultData> searchIdle,  bool isLoading,  bool isError)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<SearchResultData> searchResultData,  List<SearchResultData> searchIdle,  bool isLoading,  bool isError,  bool isSearchResult)  $default,) {final _that = this;
 switch (_that) {
 case _SearchState():
-return $default(_that.searchResultData,_that.searchIdle,_that.isLoading,_that.isError);case _:
+return $default(_that.searchResultData,_that.searchIdle,_that.isLoading,_that.isError,_that.isSearchResult);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -458,10 +459,10 @@ return $default(_that.searchResultData,_that.searchIdle,_that.isLoading,_that.is
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<SearchResultData> searchResultData,  List<SearchResultData> searchIdle,  bool isLoading,  bool isError)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<SearchResultData> searchResultData,  List<SearchResultData> searchIdle,  bool isLoading,  bool isError,  bool isSearchResult)?  $default,) {final _that = this;
 switch (_that) {
 case _SearchState() when $default != null:
-return $default(_that.searchResultData,_that.searchIdle,_that.isLoading,_that.isError);case _:
+return $default(_that.searchResultData,_that.searchIdle,_that.isLoading,_that.isError,_that.isSearchResult);case _:
   return null;
 
 }
@@ -473,7 +474,7 @@ return $default(_that.searchResultData,_that.searchIdle,_that.isLoading,_that.is
 
 
 class _SearchState implements SearchState {
-  const _SearchState({required final  List<SearchResultData> searchResultData, required final  List<SearchResultData> searchIdle, required this.isLoading, required this.isError}): _searchResultData = searchResultData,_searchIdle = searchIdle;
+  const _SearchState({required final  List<SearchResultData> searchResultData, required final  List<SearchResultData> searchIdle, required this.isLoading, required this.isError, required this.isSearchResult}): _searchResultData = searchResultData,_searchIdle = searchIdle;
   
 
  final  List<SearchResultData> _searchResultData;
@@ -492,6 +493,7 @@ class _SearchState implements SearchState {
 
 @override final  bool isLoading;
 @override final  bool isError;
+@override final  bool isSearchResult;
 
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
@@ -503,16 +505,16 @@ _$SearchStateCopyWith<_SearchState> get copyWith => __$SearchStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchState&&const DeepCollectionEquality().equals(other._searchResultData, _searchResultData)&&const DeepCollectionEquality().equals(other._searchIdle, _searchIdle)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchState&&const DeepCollectionEquality().equals(other._searchResultData, _searchResultData)&&const DeepCollectionEquality().equals(other._searchIdle, _searchIdle)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.isSearchResult, isSearchResult) || other.isSearchResult == isSearchResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_searchResultData),const DeepCollectionEquality().hash(_searchIdle),isLoading,isError);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_searchResultData),const DeepCollectionEquality().hash(_searchIdle),isLoading,isError,isSearchResult);
 
 @override
 String toString() {
-  return 'SearchState(searchResultData: $searchResultData, searchIdle: $searchIdle, isLoading: $isLoading, isError: $isError)';
+  return 'SearchState(searchResultData: $searchResultData, searchIdle: $searchIdle, isLoading: $isLoading, isError: $isError, isSearchResult: $isSearchResult)';
 }
 
 
@@ -523,7 +525,7 @@ abstract mixin class _$SearchStateCopyWith<$Res> implements $SearchStateCopyWith
   factory _$SearchStateCopyWith(_SearchState value, $Res Function(_SearchState) _then) = __$SearchStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<SearchResultData> searchResultData, List<SearchResultData> searchIdle, bool isLoading, bool isError
+ List<SearchResultData> searchResultData, List<SearchResultData> searchIdle, bool isLoading, bool isError, bool isSearchResult
 });
 
 
@@ -540,12 +542,13 @@ class __$SearchStateCopyWithImpl<$Res>
 
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? searchResultData = null,Object? searchIdle = null,Object? isLoading = null,Object? isError = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? searchResultData = null,Object? searchIdle = null,Object? isLoading = null,Object? isError = null,Object? isSearchResult = null,}) {
   return _then(_SearchState(
 searchResultData: null == searchResultData ? _self._searchResultData : searchResultData // ignore: cast_nullable_to_non_nullable
 as List<SearchResultData>,searchIdle: null == searchIdle ? _self._searchIdle : searchIdle // ignore: cast_nullable_to_non_nullable
 as List<SearchResultData>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable
+as bool,isSearchResult: null == isSearchResult ? _self.isSearchResult : isSearchResult // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

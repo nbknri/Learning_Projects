@@ -17,11 +17,12 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<GetTopSearchImages>((event, emit) async {
       if (state.searchIdle.isNotEmpty) {
         emit(
-          SearchState(
+          state.copyWith(
             searchResultData: [],
             searchIdle: state.searchIdle,
             isLoading: false,
             isError: false,
+            isSearchResult: false
           ),
         );
         return;
@@ -30,19 +31,21 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       final result = await _searchService.getTopSearchImages();
       final stateResult = result.fold(
         (MainFailures l) {
-          return SearchState(
+          return state.copyWith(
             searchResultData: [],
             searchIdle: [],
             isLoading: false,
             isError: true,
+            isSearchResult: false,
           );
         },
         (SearchResp r) {
-          return SearchState(
+          return state.copyWith(
             searchResultData: [],
             searchIdle: r.results,
             isLoading: false,
             isError: false,
+            isSearchResult: false,
           );
         },
       );
@@ -51,33 +54,28 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     on<SearchMovies>((event, emit) async {
       emit(
-        const SearchState(
-          searchResultData: [],
-          searchIdle: [],
-          isLoading: true,
-          isError: false,
-        ),
+        state.copyWith(isLoading: true, isError: false, isSearchResult: true),
       );
       final result = await _searchService.searchMovies(
         movieQuery: event.movieQuery,
       );
       final stateResult = result.fold(
         (MainFailures l) {
-          return SearchState(
-            searchResultData: [],
-            searchIdle: [],
+          return state.copyWith(
             isLoading: false,
             isError: true,
+            searchResultData: [],
+            isSearchResult: true,
           );
         },
         (SearchResp r) {
-          return SearchState(
-            searchResultData: r.results,
-            searchIdle: [],
+          return state.copyWith(
             isLoading: false,
             isError: false,
+            searchResultData: r.results,
+            isSearchResult: true,
           );
-        },
+        }
       );
       emit(stateResult);
     });

@@ -7,12 +7,14 @@ abstract class SearchState with _$SearchState {
     required List<SearchResultData> searchIdle,
     required bool isLoading,
     required bool isError,
+    required bool isSearchResult,
   }) = _SearchState;
 
   factory SearchState.initial() => const SearchState(
     searchResultData: [],
     searchIdle: [],
     isLoading: false,
-    isError: false,
+    isError: false, 
+    isSearchResult: false,
   );
 }

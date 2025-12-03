@@ -15,10 +15,6 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<SearchBloc>().add(GetTopSearchImages());
-    });
-    
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -32,15 +28,15 @@ class SearchScreen extends StatelessWidget {
                   backgroundColor: kGreyColor.withValues(alpha: 0.25),
                   prefixIcon: Icon(CupertinoIcons.search, color: kGreyColor),
                   onChanged: (value) {
-                    _debouncer.run(() {
-                      if (value.trim().isNotEmpty) {
-                        BlocProvider.of<SearchBloc>(
-                          context,
-                        ).add(SearchMovies(movieQuery: value));
-                      } else {
-                        context.read<SearchBloc>().add(GetTopSearchImages());
-                      }
-                    });
+                    if (value.trim().isEmpty) {
+                      context.read<SearchBloc>().add(GetTopSearchImages());
+                    } else {
+                      _debouncer.run(
+                        () => context.read<SearchBloc>().add(
+                          SearchMovies(movieQuery: value),
+                        ),
+                      );
+                    }
                   },
                 ),
               ),
@@ -48,9 +44,9 @@ class SearchScreen extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
-                    return (state.searchResultData.isEmpty)
-                        ? const SearchIdle()
-                        : const SearchResult();
+                    return (state.isSearchResult)
+                        ? const SearchResult()
+                        : const SearchIdle();
                   },
                 ),
               ),

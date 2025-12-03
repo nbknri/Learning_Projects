@@ -19,6 +19,8 @@ class SearchResult extends StatelessWidget {
           child: BlocBuilder<SearchBloc, SearchState>(
             builder: (context, state) {
               final data = state.searchResultData;
+              print(data);
+              print('I am called');
               return state.isLoading
                   ? Center(child: CircularProgressIndicator())
                   : state.isError
