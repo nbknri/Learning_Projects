@@ -13,7 +13,7 @@ import 'package:netflix_app/infrastructure/core/api_constants.dart';
 @LazySingleton(as: NewAndHotService)
 class NewAndHotImp implements NewAndHotService {
   @override
-  Future<Either<MainFailures, NewAndHotResp>> newAndHotComingSoonData({
+  Future<Either<MainFailures, NewAndHotResp>> comingSoonData({
     int page = 1,
   }) async {
     try {
@@ -41,4 +41,31 @@ class NewAndHotImp implements NewAndHotService {
       return const Left(MainFailures.clientFailure());
     }
   }
+  
+  @override
+  Future<Either<MainFailures, NewAndHotResp>> everyonesData({
+    int page = 1,
+  }) async {
+    try {
+      final response = await Dio(baseOptions).get(
+        ApiEndPoints.newAndEveryonesWatching,
+        queryParameters: {
+          'page': page,
+          'include_adult': 'false',
+          'with_origin_country': 'IN',
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final result = NewAndHotResp.fromJson(response.data);
+        return Right(result);
+      } else {
+        return const Left(MainFailures.serverFailure());
+      }
+    } catch (e) {
+      log(e.toString());
+      return const Left(MainFailures.clientFailure());
+    }
+  }
+
+
 }

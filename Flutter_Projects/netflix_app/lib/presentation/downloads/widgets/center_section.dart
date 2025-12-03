@@ -11,9 +11,7 @@ class CenterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<DownloadsBloc>(context).add(GetDownloadsImages());
-    });
+    
     return Column(
       children: [
         const Text(

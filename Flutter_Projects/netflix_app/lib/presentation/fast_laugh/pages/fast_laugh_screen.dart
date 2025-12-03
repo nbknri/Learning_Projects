@@ -9,36 +9,36 @@ class FastLaughScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<FastLaughBloc>(context).add(Initialize());
-    });
-
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<FastLaughBloc, FastLaughState>(
-          builder: (context, state) {
-            final imgPath = state.videoList;
-            return state.isLoading
-                ? Center(child: CircularProgressIndicator())
-                : state.isError
-                ? Center(child: Text('Error while getting data'))
-                : state.videoList.isEmpty
-                ? Center(child: Text('Video List is Empty'))
-                : PageView(
-                    scrollDirection: Axis.vertical,
-                    children: List.generate(imgPath.length, (index) {
-                      final imgPathIndex = imgPath[index];
-                      return VideoListItem(
-                        key: Key(index.toString()),
-                        index: index,
-                        avatarImgUrl:
-                            '$imageAppendUrl${imgPathIndex.posterPath}',
-                        movieTitle:
-                            imgPathIndex.title ?? 'Movie name not available',
-                      );
-                    }),
-                  );
-          },
+        child: RefreshIndicator(
+          onRefresh: () async =>
+              context.read<FastLaughBloc>().add(Initialize()),
+          child: BlocBuilder<FastLaughBloc, FastLaughState>(
+            builder: (context, state) {
+              final imgPath = state.videoList;
+              return state.isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : state.isError
+                  ? Center(child: Text('Error while getting data'))
+                  : state.videoList.isEmpty
+                  ? Center(child: Text('Video List is Empty'))
+                  : PageView(
+                      scrollDirection: Axis.vertical,
+                      children: List.generate(imgPath.length, (index) {
+                        final imgPathIndex = imgPath[index];
+                        return VideoListItem(
+                          key: Key(index.toString()),
+                          index: index,
+                          avatarImgUrl:
+                              '$imageAppendUrl${imgPathIndex.posterPath}',
+                          movieTitle:
+                              imgPathIndex.title ?? 'Movie name not available',
+                        );
+                      }),
+                    );
+            },
+          ),
         ),
       ),
     );

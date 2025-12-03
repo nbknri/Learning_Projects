@@ -23,7 +23,7 @@ class SearchResult extends StatelessWidget {
                   ? Center(child: CircularProgressIndicator())
                   : state.isError
                   ? Center(child: Text('Error while getting data'))
-                  : state.searchResultData.isEmpty
+                  : data.isEmpty
                   ? Center(child: Text('Movie is not available'))
                   : GridView.count(
                       shrinkWrap: true,

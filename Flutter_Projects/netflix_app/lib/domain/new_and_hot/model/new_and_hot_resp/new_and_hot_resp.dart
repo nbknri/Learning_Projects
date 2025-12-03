@@ -36,6 +36,12 @@ class NewAndHotResultData {
   @JsonKey(name: 'original_title')
   String? originalTitle;
 
+  // in case of tv series, use name instead of title 
+  String? name;
+  @JsonKey(name: 'original_name')
+  String? originalName;
+
+
   NewAndHotResultData({
     this.backdropPath,
     this.overview,

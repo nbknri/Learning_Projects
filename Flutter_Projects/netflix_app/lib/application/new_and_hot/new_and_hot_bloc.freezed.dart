@@ -55,12 +55,14 @@ extension NewAndHotEventPatterns on NewAndHotEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initialize value)?  initialize,TResult Function( LoadNextPage value)?  loadNextPage,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ComingSoonInitialize value)?  comingSoonInitialize,TResult Function( ComingSoonLoadNextPage value)?  comingSoonLoadNextPage,TResult Function( EveryonesInitialize value)?  everyonesInitialize,TResult Function( EveryonesLoadNextPage value)?  everyonesLoadNextPage,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case Initialize() when initialize != null:
-return initialize(_that);case LoadNextPage() when loadNextPage != null:
-return loadNextPage(_that);case _:
+case ComingSoonInitialize() when comingSoonInitialize != null:
+return comingSoonInitialize(_that);case ComingSoonLoadNextPage() when comingSoonLoadNextPage != null:
+return comingSoonLoadNextPage(_that);case EveryonesInitialize() when everyonesInitialize != null:
+return everyonesInitialize(_that);case EveryonesLoadNextPage() when everyonesLoadNextPage != null:
+return everyonesLoadNextPage(_that);case _:
   return orElse();
 
 }
@@ -78,12 +80,14 @@ return loadNextPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initialize value)  initialize,required TResult Function( LoadNextPage value)  loadNextPage,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ComingSoonInitialize value)  comingSoonInitialize,required TResult Function( ComingSoonLoadNextPage value)  comingSoonLoadNextPage,required TResult Function( EveryonesInitialize value)  everyonesInitialize,required TResult Function( EveryonesLoadNextPage value)  everyonesLoadNextPage,}){
 final _that = this;
 switch (_that) {
-case Initialize():
-return initialize(_that);case LoadNextPage():
-return loadNextPage(_that);case _:
+case ComingSoonInitialize():
+return comingSoonInitialize(_that);case ComingSoonLoadNextPage():
+return comingSoonLoadNextPage(_that);case EveryonesInitialize():
+return everyonesInitialize(_that);case EveryonesLoadNextPage():
+return everyonesLoadNextPage(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -100,12 +104,14 @@ return loadNextPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initialize value)?  initialize,TResult? Function( LoadNextPage value)?  loadNextPage,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ComingSoonInitialize value)?  comingSoonInitialize,TResult? Function( ComingSoonLoadNextPage value)?  comingSoonLoadNextPage,TResult? Function( EveryonesInitialize value)?  everyonesInitialize,TResult? Function( EveryonesLoadNextPage value)?  everyonesLoadNextPage,}){
 final _that = this;
 switch (_that) {
-case Initialize() when initialize != null:
-return initialize(_that);case LoadNextPage() when loadNextPage != null:
-return loadNextPage(_that);case _:
+case ComingSoonInitialize() when comingSoonInitialize != null:
+return comingSoonInitialize(_that);case ComingSoonLoadNextPage() when comingSoonLoadNextPage != null:
+return comingSoonLoadNextPage(_that);case EveryonesInitialize() when everyonesInitialize != null:
+return everyonesInitialize(_that);case EveryonesLoadNextPage() when everyonesLoadNextPage != null:
+return everyonesLoadNextPage(_that);case _:
   return null;
 
 }
@@ -122,11 +128,13 @@ return loadNextPage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initialize,TResult Function()?  loadNextPage,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  comingSoonInitialize,TResult Function()?  comingSoonLoadNextPage,TResult Function()?  everyonesInitialize,TResult Function()?  everyonesLoadNextPage,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case Initialize() when initialize != null:
-return initialize();case LoadNextPage() when loadNextPage != null:
-return loadNextPage();case _:
+case ComingSoonInitialize() when comingSoonInitialize != null:
+return comingSoonInitialize();case ComingSoonLoadNextPage() when comingSoonLoadNextPage != null:
+return comingSoonLoadNextPage();case EveryonesInitialize() when everyonesInitialize != null:
+return everyonesInitialize();case EveryonesLoadNextPage() when everyonesLoadNextPage != null:
+return everyonesLoadNextPage();case _:
   return orElse();
 
 }
@@ -144,11 +152,13 @@ return loadNextPage();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initialize,required TResult Function()  loadNextPage,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  comingSoonInitialize,required TResult Function()  comingSoonLoadNextPage,required TResult Function()  everyonesInitialize,required TResult Function()  everyonesLoadNextPage,}) {final _that = this;
 switch (_that) {
-case Initialize():
-return initialize();case LoadNextPage():
-return loadNextPage();case _:
+case ComingSoonInitialize():
+return comingSoonInitialize();case ComingSoonLoadNextPage():
+return comingSoonLoadNextPage();case EveryonesInitialize():
+return everyonesInitialize();case EveryonesLoadNextPage():
+return everyonesLoadNextPage();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +175,13 @@ return loadNextPage();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initialize,TResult? Function()?  loadNextPage,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  comingSoonInitialize,TResult? Function()?  comingSoonLoadNextPage,TResult? Function()?  everyonesInitialize,TResult? Function()?  everyonesLoadNextPage,}) {final _that = this;
 switch (_that) {
-case Initialize() when initialize != null:
-return initialize();case LoadNextPage() when loadNextPage != null:
-return loadNextPage();case _:
+case ComingSoonInitialize() when comingSoonInitialize != null:
+return comingSoonInitialize();case ComingSoonLoadNextPage() when comingSoonLoadNextPage != null:
+return comingSoonLoadNextPage();case EveryonesInitialize() when everyonesInitialize != null:
+return everyonesInitialize();case EveryonesLoadNextPage() when everyonesLoadNextPage != null:
+return everyonesLoadNextPage();case _:
   return null;
 
 }
@@ -180,8 +192,8 @@ return loadNextPage();case _:
 /// @nodoc
 
 
-class Initialize implements NewAndHotEvent {
-  const Initialize();
+class ComingSoonInitialize implements NewAndHotEvent {
+  const ComingSoonInitialize();
   
 
 
@@ -191,7 +203,7 @@ class Initialize implements NewAndHotEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Initialize);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ComingSoonInitialize);
 }
 
 
@@ -200,7 +212,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NewAndHotEvent.initialize()';
+  return 'NewAndHotEvent.comingSoonInitialize()';
 }
 
 
@@ -212,8 +224,8 @@ String toString() {
 /// @nodoc
 
 
-class LoadNextPage implements NewAndHotEvent {
-  const LoadNextPage();
+class ComingSoonLoadNextPage implements NewAndHotEvent {
+  const ComingSoonLoadNextPage();
   
 
 
@@ -223,7 +235,7 @@ class LoadNextPage implements NewAndHotEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadNextPage);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ComingSoonLoadNextPage);
 }
 
 
@@ -232,7 +244,71 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'NewAndHotEvent.loadNextPage()';
+  return 'NewAndHotEvent.comingSoonLoadNextPage()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class EveryonesInitialize implements NewAndHotEvent {
+  const EveryonesInitialize();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EveryonesInitialize);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NewAndHotEvent.everyonesInitialize()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class EveryonesLoadNextPage implements NewAndHotEvent {
+  const EveryonesLoadNextPage();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EveryonesLoadNextPage);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NewAndHotEvent.everyonesLoadNextPage()';
 }
 
 
@@ -244,7 +320,7 @@ String toString() {
 /// @nodoc
 mixin _$NewAndHotState {
 
- List<NewAndHotResultData> get newAndHotResultList; bool get isLoading; bool get isError; int get totalPages;
+ List<NewAndHotResultData> get comingSoonResultList; List<NewAndHotResultData> get evryonesResultList; bool get isLoading; bool get isError; int get totalPages;
 /// Create a copy of NewAndHotState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -255,16 +331,16 @@ $NewAndHotStateCopyWith<NewAndHotState> get copyWith => _$NewAndHotStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NewAndHotState&&const DeepCollectionEquality().equals(other.newAndHotResultList, newAndHotResultList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NewAndHotState&&const DeepCollectionEquality().equals(other.comingSoonResultList, comingSoonResultList)&&const DeepCollectionEquality().equals(other.evryonesResultList, evryonesResultList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(newAndHotResultList),isLoading,isError,totalPages);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(comingSoonResultList),const DeepCollectionEquality().hash(evryonesResultList),isLoading,isError,totalPages);
 
 @override
 String toString() {
-  return 'NewAndHotState(newAndHotResultList: $newAndHotResultList, isLoading: $isLoading, isError: $isError, totalPages: $totalPages)';
+  return 'NewAndHotState(comingSoonResultList: $comingSoonResultList, evryonesResultList: $evryonesResultList, isLoading: $isLoading, isError: $isError, totalPages: $totalPages)';
 }
 
 
@@ -275,7 +351,7 @@ abstract mixin class $NewAndHotStateCopyWith<$Res>  {
   factory $NewAndHotStateCopyWith(NewAndHotState value, $Res Function(NewAndHotState) _then) = _$NewAndHotStateCopyWithImpl;
 @useResult
 $Res call({
- List<NewAndHotResultData> newAndHotResultList, bool isLoading, bool isError, int totalPages
+ List<NewAndHotResultData> comingSoonResultList, List<NewAndHotResultData> evryonesResultList, bool isLoading, bool isError, int totalPages
 });
 
 
@@ -292,9 +368,10 @@ class _$NewAndHotStateCopyWithImpl<$Res>
 
 /// Create a copy of NewAndHotState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? newAndHotResultList = null,Object? isLoading = null,Object? isError = null,Object? totalPages = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? comingSoonResultList = null,Object? evryonesResultList = null,Object? isLoading = null,Object? isError = null,Object? totalPages = null,}) {
   return _then(_self.copyWith(
-newAndHotResultList: null == newAndHotResultList ? _self.newAndHotResultList : newAndHotResultList // ignore: cast_nullable_to_non_nullable
+comingSoonResultList: null == comingSoonResultList ? _self.comingSoonResultList : comingSoonResultList // ignore: cast_nullable_to_non_nullable
+as List<NewAndHotResultData>,evryonesResultList: null == evryonesResultList ? _self.evryonesResultList : evryonesResultList // ignore: cast_nullable_to_non_nullable
 as List<NewAndHotResultData>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable
 as bool,totalPages: null == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
@@ -383,10 +460,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<NewAndHotResultData> newAndHotResultList,  bool isLoading,  bool isError,  int totalPages)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<NewAndHotResultData> comingSoonResultList,  List<NewAndHotResultData> evryonesResultList,  bool isLoading,  bool isError,  int totalPages)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NewAndHotState() when $default != null:
-return $default(_that.newAndHotResultList,_that.isLoading,_that.isError,_that.totalPages);case _:
+return $default(_that.comingSoonResultList,_that.evryonesResultList,_that.isLoading,_that.isError,_that.totalPages);case _:
   return orElse();
 
 }
@@ -404,10 +481,10 @@ return $default(_that.newAndHotResultList,_that.isLoading,_that.isError,_that.to
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<NewAndHotResultData> newAndHotResultList,  bool isLoading,  bool isError,  int totalPages)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<NewAndHotResultData> comingSoonResultList,  List<NewAndHotResultData> evryonesResultList,  bool isLoading,  bool isError,  int totalPages)  $default,) {final _that = this;
 switch (_that) {
 case _NewAndHotState():
-return $default(_that.newAndHotResultList,_that.isLoading,_that.isError,_that.totalPages);case _:
+return $default(_that.comingSoonResultList,_that.evryonesResultList,_that.isLoading,_that.isError,_that.totalPages);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -424,10 +501,10 @@ return $default(_that.newAndHotResultList,_that.isLoading,_that.isError,_that.to
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<NewAndHotResultData> newAndHotResultList,  bool isLoading,  bool isError,  int totalPages)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<NewAndHotResultData> comingSoonResultList,  List<NewAndHotResultData> evryonesResultList,  bool isLoading,  bool isError,  int totalPages)?  $default,) {final _that = this;
 switch (_that) {
 case _NewAndHotState() when $default != null:
-return $default(_that.newAndHotResultList,_that.isLoading,_that.isError,_that.totalPages);case _:
+return $default(_that.comingSoonResultList,_that.evryonesResultList,_that.isLoading,_that.isError,_that.totalPages);case _:
   return null;
 
 }
@@ -439,14 +516,21 @@ return $default(_that.newAndHotResultList,_that.isLoading,_that.isError,_that.to
 
 
 class _NewAndHotState implements NewAndHotState {
-  const _NewAndHotState({required final  List<NewAndHotResultData> newAndHotResultList, required this.isLoading, required this.isError, required this.totalPages}): _newAndHotResultList = newAndHotResultList;
+  const _NewAndHotState({required final  List<NewAndHotResultData> comingSoonResultList, required final  List<NewAndHotResultData> evryonesResultList, required this.isLoading, required this.isError, required this.totalPages}): _comingSoonResultList = comingSoonResultList,_evryonesResultList = evryonesResultList;
   
 
- final  List<NewAndHotResultData> _newAndHotResultList;
-@override List<NewAndHotResultData> get newAndHotResultList {
-  if (_newAndHotResultList is EqualUnmodifiableListView) return _newAndHotResultList;
+ final  List<NewAndHotResultData> _comingSoonResultList;
+@override List<NewAndHotResultData> get comingSoonResultList {
+  if (_comingSoonResultList is EqualUnmodifiableListView) return _comingSoonResultList;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_newAndHotResultList);
+  return EqualUnmodifiableListView(_comingSoonResultList);
+}
+
+ final  List<NewAndHotResultData> _evryonesResultList;
+@override List<NewAndHotResultData> get evryonesResultList {
+  if (_evryonesResultList is EqualUnmodifiableListView) return _evryonesResultList;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_evryonesResultList);
 }
 
 @override final  bool isLoading;
@@ -463,16 +547,16 @@ _$NewAndHotStateCopyWith<_NewAndHotState> get copyWith => __$NewAndHotStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NewAndHotState&&const DeepCollectionEquality().equals(other._newAndHotResultList, _newAndHotResultList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NewAndHotState&&const DeepCollectionEquality().equals(other._comingSoonResultList, _comingSoonResultList)&&const DeepCollectionEquality().equals(other._evryonesResultList, _evryonesResultList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&(identical(other.totalPages, totalPages) || other.totalPages == totalPages));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_newAndHotResultList),isLoading,isError,totalPages);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_comingSoonResultList),const DeepCollectionEquality().hash(_evryonesResultList),isLoading,isError,totalPages);
 
 @override
 String toString() {
-  return 'NewAndHotState(newAndHotResultList: $newAndHotResultList, isLoading: $isLoading, isError: $isError, totalPages: $totalPages)';
+  return 'NewAndHotState(comingSoonResultList: $comingSoonResultList, evryonesResultList: $evryonesResultList, isLoading: $isLoading, isError: $isError, totalPages: $totalPages)';
 }
 
 
@@ -483,7 +567,7 @@ abstract mixin class _$NewAndHotStateCopyWith<$Res> implements $NewAndHotStateCo
   factory _$NewAndHotStateCopyWith(_NewAndHotState value, $Res Function(_NewAndHotState) _then) = __$NewAndHotStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<NewAndHotResultData> newAndHotResultList, bool isLoading, bool isError, int totalPages
+ List<NewAndHotResultData> comingSoonResultList, List<NewAndHotResultData> evryonesResultList, bool isLoading, bool isError, int totalPages
 });
 
 
@@ -500,9 +584,10 @@ class __$NewAndHotStateCopyWithImpl<$Res>
 
 /// Create a copy of NewAndHotState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? newAndHotResultList = null,Object? isLoading = null,Object? isError = null,Object? totalPages = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? comingSoonResultList = null,Object? evryonesResultList = null,Object? isLoading = null,Object? isError = null,Object? totalPages = null,}) {
   return _then(_NewAndHotState(
-newAndHotResultList: null == newAndHotResultList ? _self._newAndHotResultList : newAndHotResultList // ignore: cast_nullable_to_non_nullable
+comingSoonResultList: null == comingSoonResultList ? _self._comingSoonResultList : comingSoonResultList // ignore: cast_nullable_to_non_nullable
+as List<NewAndHotResultData>,evryonesResultList: null == evryonesResultList ? _self._evryonesResultList : evryonesResultList // ignore: cast_nullable_to_non_nullable
 as List<NewAndHotResultData>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable
 as bool,totalPages: null == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable

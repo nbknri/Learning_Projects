@@ -16,9 +16,9 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<SearchBloc>(context).add(GetTopSearchImages());
+      context.read<SearchBloc>().add(GetTopSearchImages());
     });
-
+    
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -38,9 +38,7 @@ class SearchScreen extends StatelessWidget {
                           context,
                         ).add(SearchMovies(movieQuery: value));
                       } else {
-                        BlocProvider.of<SearchBloc>(
-                          context,
-                        ).add(GetTopSearchImages());
+                        context.read<SearchBloc>().add(GetTopSearchImages());
                       }
                     });
                   },

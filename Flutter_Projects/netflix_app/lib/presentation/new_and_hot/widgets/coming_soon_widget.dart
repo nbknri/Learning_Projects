@@ -11,14 +11,18 @@ class ComingSoonWidget extends StatelessWidget {
   final String imgUrl;
   final String movieDescription;
   final String originalTitle;
+  final String movieMonth;
+  final String movieDate;
 
   const ComingSoonWidget({
     super.key,
     required this.releaseDate,
     required this.movieTitle,
     required this.imgUrl,
-    required this.movieDescription, 
-    required this.originalTitle,
+    required this.movieDescription,
+    required this.originalTitle, 
+    required this.movieMonth,
+    required this.movieDate,
   });
 
   @override
@@ -33,9 +37,9 @@ class ComingSoonWidget extends StatelessWidget {
             width: 40,
             child: Column(
               children: [
-                Text('FEB', style: TextStyle(color: kGreyColor)),
+                Text(movieMonth, style: TextStyle(color: kGreyColor)),
                 Text(
-                  '11',
+                  movieDate,
                   style: TextStyle(
                     color: kWhiteColor,
                     fontWeight: FontWeight.bold,
@@ -63,11 +67,12 @@ class ComingSoonWidget extends StatelessWidget {
                         width: size.width - 199,
                         child: Text(
                           originalTitle,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: kWhiteColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 30,
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),
