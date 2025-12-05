@@ -35,12 +35,13 @@ class NewAndHotResultData {
   String? title;
   @JsonKey(name: 'original_title')
   String? originalTitle;
+  @JsonKey(name: 'poster_path')
+  String? posterPath;
 
-  // in case of tv series, use name instead of title 
+  // in case of tv series, use name instead of title
   String? name;
   @JsonKey(name: 'original_name')
   String? originalName;
-
 
   NewAndHotResultData({
     this.backdropPath,
@@ -48,6 +49,7 @@ class NewAndHotResultData {
     this.releaseDate,
     this.title,
     this.originalTitle,
+    this.posterPath,
   });
 
   factory NewAndHotResultData.fromJson(Map<String, dynamic> json) {

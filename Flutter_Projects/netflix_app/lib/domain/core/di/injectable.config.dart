@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:netflix_app/application/downloads/downloads_bloc.dart' as _i664;
 import 'package:netflix_app/application/fast_laugh/fast_laugh_bloc.dart'
     as _i878;
+import 'package:netflix_app/application/home/home_bloc.dart' as _i778;
 import 'package:netflix_app/application/new_and_hot/new_and_hot_bloc.dart'
     as _i614;
 import 'package:netflix_app/application/search/search_bloc.dart' as _i771;
@@ -45,6 +46,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i664.DownloadsBloc>(
       () => _i664.DownloadsBloc(gh<_i411.DownloadsService>()),
+    );
+    gh.factory<_i778.HomeBloc>(
+      () => _i778.HomeBloc(
+        gh<_i109.NewAndHotService>(),
+        gh<_i411.DownloadsService>(),
+      ),
     );
     gh.factory<_i614.NewAndHotBloc>(
       () => _i614.NewAndHotBloc(gh<_i109.NewAndHotService>()),

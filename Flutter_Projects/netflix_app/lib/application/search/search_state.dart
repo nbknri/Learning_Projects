@@ -7,7 +7,6 @@ abstract class SearchState with _$SearchState {
     required List<SearchResultData> searchIdle,
     required bool isLoading,
     required bool isError,
-    required bool isSearchResult,
   }) = _SearchState;
 
   factory SearchState.initial() => const SearchState(
@@ -15,6 +14,5 @@ abstract class SearchState with _$SearchState {
     searchIdle: [],
     isLoading: false,
     isError: false, 
-    isSearchResult: false,
   );
 }

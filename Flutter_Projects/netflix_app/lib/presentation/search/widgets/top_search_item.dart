@@ -35,7 +35,7 @@ class TopSearchItemTile extends StatelessWidget {
             width: screenWidth * 0.35,
             height: 75,
             decoration: errorBoxDecoration,
-            child: Center(child: CircularProgressIndicator(color: kGreyColor)),
+            child: Center(child: CircularProgressIndicator(strokeWidth: 2.0)),
           ),
           errorWidget: (context, url, error) => Container(
             width: screenWidth * 0.35,

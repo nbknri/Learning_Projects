@@ -22,7 +22,7 @@ class DownloadsBloc extends Bloc<DownloadsEvent, DownloadsState> {
           isError: false,
         ),
       );
-      final result = await _downloadsService.getDownloadsImages();
+      final result = await _downloadsService.getTrendingMovieImages();
       final stateResult = result.fold(
         (MainFailures f) {
           return const DownloadsState(

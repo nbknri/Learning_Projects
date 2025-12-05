@@ -24,7 +24,7 @@ class FastLaughBloc extends Bloc<FastLaughEvent, FastLaughState> {
         ),
       );
       // get trending SearchMovies
-      final result = await downloadsService.getDownloadsImages();
+      final result = await downloadsService.getTrendingMovieImages();
       final stateResult = result.fold(
         (l) => FastLaughState(
           videoList: [],
@@ -43,8 +43,8 @@ class FastLaughBloc extends Bloc<FastLaughEvent, FastLaughState> {
           isMuted: true,
         ),
       );
-      emit(stateResult);
       //send to ui
+      emit(stateResult);
     });
 
     on<LikeVideo>((event, emit) async {

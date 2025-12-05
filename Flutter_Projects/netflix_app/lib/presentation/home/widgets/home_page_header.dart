@@ -16,7 +16,15 @@ class HomePageHeader extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.network(netflixLogo, width: 60, height: 60),
+              Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/logo/logo.png'),
+                  ),
+                ),
+              ),
               Spacer(),
               CastAndAvatarWidget(),
             ],

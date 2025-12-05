@@ -7,10 +7,15 @@ import 'package:netflix_app/presentation/widgets/title_text.dart';
 class ImageListWithTitle extends StatelessWidget {
   final bool isTopTen;
   final String title;
+  final List<String> posterList;
+  final List<String> topTenPosterList;
+
   const ImageListWithTitle({
     super.key,
     required this.title,
     this.isTopTen = false,
+    required this.posterList,
+    this.topTenPosterList = const [],
   });
 
   @override
@@ -25,12 +30,12 @@ class ImageListWithTitle extends StatelessWidget {
             maxHeight: 200,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: 10,
+              itemCount: isTopTen ? 10 : posterList.length,
               separatorBuilder: (ctx, index) =>
                   !isTopTen ? kWidth10 : SizedBox(),
               itemBuilder: (ctx, index) => !isTopTen
-                  ? ImageCard(imageUrl: topTenImage)
-                  : NumberCard(imageUrl: imageUrl, index: index),
+                  ? ImageCard(imageUrl: posterList[index])
+                  : NumberCard(imageUrl: topTenPosterList[index], index: index),
             ),
           ),
         ),

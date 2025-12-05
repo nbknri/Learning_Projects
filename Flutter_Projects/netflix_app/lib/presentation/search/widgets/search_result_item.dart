@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:netflix_app/core/colors.dart';
 import 'package:netflix_app/core/constants.dart';
 
 class SearchResultItem extends StatelessWidget {
@@ -23,7 +22,7 @@ class SearchResultItem extends StatelessWidget {
       placeholder: (context, url) => Container(
         decoration: errorBoxDecoration,
         child: const Center(
-          child: CircularProgressIndicator(color: kGreyColor),
+          child: CircularProgressIndicator(strokeWidth: 2.0),
         ),
       ),
       errorWidget: (context, url, error) => Container(

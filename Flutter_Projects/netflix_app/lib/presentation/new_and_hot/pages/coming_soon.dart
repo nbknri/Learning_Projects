@@ -19,7 +19,7 @@ class ComingSoon extends StatelessWidget {
           builder: (context, state) {
             final resultList = state.comingSoonResultList;
             return state.isLoading || resultList.isEmpty
-                ? Center(child: CircularProgressIndicator())
+                ? Center(child: CircularProgressIndicator(strokeWidth: 2.0))
                 : state.isError
                 ? Center(child: Text('Error while getting data'))
                 : ListView.separated(
@@ -45,7 +45,9 @@ class ComingSoon extends StatelessWidget {
                         'en_US',
                       ).format(dateParsed);
                       return ComingSoonWidget(
-                        imgUrl: '$imageAppendUrl${movie.backdropPath}',
+                        imgUrl: (movie.backdropPath) != null
+                            ? '$imageAppendUrl${movie.backdropPath}'
+                            : '$imageAppendUrl${movie.posterPath}',
                         releaseDate: movie.releaseDate ?? '',
                         movieMonth: formattedDate
                             .split(' ')

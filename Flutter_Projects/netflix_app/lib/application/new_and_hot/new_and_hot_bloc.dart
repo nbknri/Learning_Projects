@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:netflix_app/domain/core/failures/main_failures.dart';
 import 'package:netflix_app/domain/new_and_hot/model/new_and_hot_resp/new_and_hot_resp.dart';
 import 'package:netflix_app/domain/new_and_hot/new_and_hot_service.dart';
@@ -17,11 +18,18 @@ class NewAndHotBloc extends Bloc<NewAndHotEvent, NewAndHotState> {
   bool isFetching = false;
 
   NewAndHotBloc(this._newAndHotService) : super(NewAndHotState.initial()) {
+    final DateTime now = DateTime.now();
+    final DateTime tomorrow = now.add(Duration(days: 1));
+    final String formattedDate = DateFormat('yyyy-MM-dd').format(tomorrow);
+
     //Initial load (Page 1)
     on<ComingSoonInitialize>((event, emit) async {
       currentPage = 1;
       emit(state.copyWith(isLoading: true, comingSoonResultList: []));
-      final result = await _newAndHotService.comingSoonData(page: 1);
+      final result = await _newAndHotService.discoverMovieData(
+        page: 1,
+        primaryReleaseDate: formattedDate,
+      );
       final stateResult = result.fold(
         (MainFailures failure) =>
             state.copyWith(isLoading: false, isError: true),
@@ -41,8 +49,9 @@ class NewAndHotBloc extends Bloc<NewAndHotEvent, NewAndHotState> {
       if (isFetching || currentPage >= totalPages) return;
       isFetching = true;
 
-      final result = await _newAndHotService.comingSoonData(
+      final result = await _newAndHotService.discoverMovieData(
         page: currentPage + 1,
+        primaryReleaseDate: formattedDate,
       );
 
       result.fold((failed) => isFetching = false, (success) {
@@ -60,7 +69,7 @@ class NewAndHotBloc extends Bloc<NewAndHotEvent, NewAndHotState> {
     on<EveryonesInitialize>((event, emit) async {
       currentPage = 1;
       emit(state.copyWith(isLoading: true, evryonesResultList: []));
-      final result = await _newAndHotService.everyonesData(page: 1);
+      final result = await _newAndHotService.discoverTvData(page: 1);
       final stateResult = result.fold(
         (failed) => state.copyWith(isLoading: false, isError: true),
         (success) {
@@ -79,7 +88,7 @@ class NewAndHotBloc extends Bloc<NewAndHotEvent, NewAndHotState> {
       if (isFetching || currentPage >= totalPages) return;
       isFetching = true;
 
-      final result = await _newAndHotService.everyonesData(
+      final result = await _newAndHotService.discoverTvData(
         page: currentPage + 1,
       );
 

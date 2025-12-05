@@ -643,10 +643,10 @@ extension FastLaughStatePatterns on FastLaughState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Initial value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _FastLaughState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Initial() when $default != null:
+case _FastLaughState() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -665,10 +665,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Initial value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _FastLaughState value)  $default,){
 final _that = this;
 switch (_that) {
-case _Initial():
+case _FastLaughState():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -686,10 +686,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Initial value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _FastLaughState value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Initial() when $default != null:
+case _FastLaughState() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -709,7 +709,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<DownloadsResultData> videoList,  bool isLoading,  bool isError,  List<int> likedVideoIds,  List<int> myListVideoIds,  bool isMuted)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Initial() when $default != null:
+case _FastLaughState() when $default != null:
 return $default(_that.videoList,_that.isLoading,_that.isError,_that.likedVideoIds,_that.myListVideoIds,_that.isMuted);case _:
   return orElse();
 
@@ -730,7 +730,7 @@ return $default(_that.videoList,_that.isLoading,_that.isError,_that.likedVideoId
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<DownloadsResultData> videoList,  bool isLoading,  bool isError,  List<int> likedVideoIds,  List<int> myListVideoIds,  bool isMuted)  $default,) {final _that = this;
 switch (_that) {
-case _Initial():
+case _FastLaughState():
 return $default(_that.videoList,_that.isLoading,_that.isError,_that.likedVideoIds,_that.myListVideoIds,_that.isMuted);case _:
   throw StateError('Unexpected subclass');
 
@@ -750,7 +750,7 @@ return $default(_that.videoList,_that.isLoading,_that.isError,_that.likedVideoId
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<DownloadsResultData> videoList,  bool isLoading,  bool isError,  List<int> likedVideoIds,  List<int> myListVideoIds,  bool isMuted)?  $default,) {final _that = this;
 switch (_that) {
-case _Initial() when $default != null:
+case _FastLaughState() when $default != null:
 return $default(_that.videoList,_that.isLoading,_that.isError,_that.likedVideoIds,_that.myListVideoIds,_that.isMuted);case _:
   return null;
 
@@ -762,8 +762,8 @@ return $default(_that.videoList,_that.isLoading,_that.isError,_that.likedVideoId
 /// @nodoc
 
 
-class _Initial implements FastLaughState {
-  const _Initial({required final  List<DownloadsResultData> videoList, required this.isLoading, required this.isError, required final  List<int> likedVideoIds, required final  List<int> myListVideoIds, required this.isMuted}): _videoList = videoList,_likedVideoIds = likedVideoIds,_myListVideoIds = myListVideoIds;
+class _FastLaughState implements FastLaughState {
+  const _FastLaughState({required final  List<DownloadsResultData> videoList, required this.isLoading, required this.isError, required final  List<int> likedVideoIds, required final  List<int> myListVideoIds, required this.isMuted}): _videoList = videoList,_likedVideoIds = likedVideoIds,_myListVideoIds = myListVideoIds;
   
 
  final  List<DownloadsResultData> _videoList;
@@ -795,13 +795,13 @@ class _Initial implements FastLaughState {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$InitialCopyWith<_Initial> get copyWith => __$InitialCopyWithImpl<_Initial>(this, _$identity);
+_$FastLaughStateCopyWith<_FastLaughState> get copyWith => __$FastLaughStateCopyWithImpl<_FastLaughState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial&&const DeepCollectionEquality().equals(other._videoList, _videoList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&const DeepCollectionEquality().equals(other._likedVideoIds, _likedVideoIds)&&const DeepCollectionEquality().equals(other._myListVideoIds, _myListVideoIds)&&(identical(other.isMuted, isMuted) || other.isMuted == isMuted));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FastLaughState&&const DeepCollectionEquality().equals(other._videoList, _videoList)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isError, isError) || other.isError == isError)&&const DeepCollectionEquality().equals(other._likedVideoIds, _likedVideoIds)&&const DeepCollectionEquality().equals(other._myListVideoIds, _myListVideoIds)&&(identical(other.isMuted, isMuted) || other.isMuted == isMuted));
 }
 
 
@@ -817,8 +817,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class _$InitialCopyWith<$Res> implements $FastLaughStateCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) _then) = __$InitialCopyWithImpl;
+abstract mixin class _$FastLaughStateCopyWith<$Res> implements $FastLaughStateCopyWith<$Res> {
+  factory _$FastLaughStateCopyWith(_FastLaughState value, $Res Function(_FastLaughState) _then) = __$FastLaughStateCopyWithImpl;
 @override @useResult
 $Res call({
  List<DownloadsResultData> videoList, bool isLoading, bool isError, List<int> likedVideoIds, List<int> myListVideoIds, bool isMuted
@@ -829,17 +829,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$InitialCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(this._self, this._then);
+class __$FastLaughStateCopyWithImpl<$Res>
+    implements _$FastLaughStateCopyWith<$Res> {
+  __$FastLaughStateCopyWithImpl(this._self, this._then);
 
-  final _Initial _self;
-  final $Res Function(_Initial) _then;
+  final _FastLaughState _self;
+  final $Res Function(_FastLaughState) _then;
 
 /// Create a copy of FastLaughState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? videoList = null,Object? isLoading = null,Object? isError = null,Object? likedVideoIds = null,Object? myListVideoIds = null,Object? isMuted = null,}) {
-  return _then(_Initial(
+  return _then(_FastLaughState(
 videoList: null == videoList ? _self._videoList : videoList // ignore: cast_nullable_to_non_nullable
 as List<DownloadsResultData>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isError: null == isError ? _self.isError : isError // ignore: cast_nullable_to_non_nullable

@@ -9,7 +9,7 @@ abstract class FastLaughState with _$FastLaughState {
     required List<int> likedVideoIds,
     required List<int> myListVideoIds,
     required bool isMuted,
-  }) = _Initial;
+  }) = _FastLaughState;
 
   factory FastLaughState.initial() => const FastLaughState(
     videoList: [],

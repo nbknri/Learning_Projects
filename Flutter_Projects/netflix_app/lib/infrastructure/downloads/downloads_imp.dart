@@ -12,9 +12,9 @@ import 'package:netflix_app/infrastructure/core/api_constants.dart';
 @LazySingleton(as: DownloadsService)
 class DownloadsImpl implements DownloadsService {
   @override
-  Future<Either<MainFailures, DownloadsResp>> getDownloadsImages() async {
+  Future<Either<MainFailures, DownloadsResp>> getTrendingMovieImages() async {
     try {
-      final response = await Dio(baseOptions).get(ApiEndPoints.downloads);
+      final response = await Dio(baseOptions).get(ApiEndPoints.trendingMovies);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = DownloadsResp.fromJson(response.data);
         return Right(result);

@@ -14,7 +14,10 @@ class SearchImp implements SearchService {
   @override
   Future<Either<MainFailures, SearchResp>> getTopSearchImages() async {
     try {
-      final response = await Dio(baseOptions).get(ApiEndPoints.searchIdle);
+      final response = await Dio(baseOptions).get(
+        ApiEndPoints.popularMovies,
+        queryParameters: {'include_adult': 'false'},
+      );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = SearchResp.fromJson(response.data);
         return Right(result);

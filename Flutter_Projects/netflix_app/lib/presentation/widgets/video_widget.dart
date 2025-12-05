@@ -21,7 +21,7 @@ class VideoWidget extends StatelessWidget {
           placeholder: (context, url) => SizedBox(
             width: double.infinity,
             height: 200,
-            child: Center(child: CircularProgressIndicator()),
+            child: Center(child: CircularProgressIndicator(strokeWidth: 2.0)),
           ),
           errorWidget: (context, url, error) => SizedBox(
             width: double.infinity,

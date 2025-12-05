@@ -39,7 +39,9 @@ class EveryonesWatching extends StatelessWidget {
                     }
                     final programData = resultList[index];
                     return EveryonesWatchingWidget(
-                      imgUrl: '$imageAppendUrl${programData.backdropPath}',
+                      imgUrl: (programData.backdropPath) != null
+                          ? '$imageAppendUrl${programData.backdropPath}'
+                          : '$imageAppendUrl${programData.posterPath}',
                       programName: programData.name ?? 'Name not available',
                       programOriginalName:
                           programData.originalName ??

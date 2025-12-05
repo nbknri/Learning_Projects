@@ -12,6 +12,7 @@ class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});
 
   final _debouncer = Debouncer(milliseconds: 1000);
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +26,19 @@ class SearchScreen extends StatelessWidget {
               SizedBox(
                 height: 40,
                 child: CupertinoSearchTextField(
+                  controller: _searchController,
                   backgroundColor: kGreyColor.withValues(alpha: 0.25),
                   prefixIcon: Icon(CupertinoIcons.search, color: kGreyColor),
                   onChanged: (value) {
                     if (value.trim().isEmpty) {
                       context.read<SearchBloc>().add(GetTopSearchImages());
                     } else {
-                      _debouncer.run(
-                        () => context.read<SearchBloc>().add(
+                      _debouncer.run(() {
+                        if (_searchController.text.trim().isEmpty) return;
+                        context.read<SearchBloc>().add(
                           SearchMovies(movieQuery: value),
-                        ),
-                      );
+                        );
+                      });
                     }
                   },
                 ),
@@ -44,9 +47,9 @@ class SearchScreen extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
-                    return (state.isSearchResult)
-                        ? const SearchResult()
-                        : const SearchIdle();
+                    return (_searchController.text.trim().isEmpty)
+                        ? const SearchIdle()
+                        : const SearchResult();
                   },
                 ),
               ),

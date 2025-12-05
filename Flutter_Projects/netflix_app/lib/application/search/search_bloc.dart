@@ -14,6 +14,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final SearchService _searchService;
 
   SearchBloc(this._searchService) : super(SearchState.initial()) {
+    // Search Idle
     on<GetTopSearchImages>((event, emit) async {
       if (state.searchIdle.isNotEmpty) {
         emit(
@@ -22,7 +23,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             searchIdle: state.searchIdle,
             isLoading: false,
             isError: false,
-            isSearchResult: false
           ),
         );
         return;
@@ -36,7 +36,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             searchIdle: [],
             isLoading: false,
             isError: true,
-            isSearchResult: false,
           );
         },
         (SearchResp r) {
@@ -45,16 +44,16 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             searchIdle: r.results,
             isLoading: false,
             isError: false,
-            isSearchResult: false,
           );
         },
       );
       emit(stateResult);
     });
 
+    // Search Movies
     on<SearchMovies>((event, emit) async {
       emit(
-        state.copyWith(isLoading: true, isError: false, isSearchResult: true),
+        state.copyWith(isLoading: true, isError: false, searchResultData: []),
       );
       final result = await _searchService.searchMovies(
         movieQuery: event.movieQuery,
@@ -65,17 +64,19 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             isLoading: false,
             isError: true,
             searchResultData: [],
-            isSearchResult: true,
           );
         },
         (SearchResp r) {
+          final List<SearchResultData> filteredSearchResultData = r.results
+              .where((e) => e.posterPath != null)
+              .map((e) => e)
+              .toList();
           return state.copyWith(
             isLoading: false,
             isError: false,
-            searchResultData: r.results,
-            isSearchResult: true,
+            searchResultData: filteredSearchResultData,
           );
-        }
+        },
       );
       emit(stateResult);
     });

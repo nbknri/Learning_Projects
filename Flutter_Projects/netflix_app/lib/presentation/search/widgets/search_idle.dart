@@ -20,7 +20,7 @@ class SearchIdle extends StatelessWidget {
             builder: (context, state) {
               final data = state.searchIdle;
               return state.isLoading || state.searchIdle.isEmpty
-                  ? Center(child: CircularProgressIndicator())
+                  ? Center(child: CircularProgressIndicator(strokeWidth: 2.0))
                   : state.isError
                   ? Center(child: Text('Error while getting data'))
                   : ListView.separated(

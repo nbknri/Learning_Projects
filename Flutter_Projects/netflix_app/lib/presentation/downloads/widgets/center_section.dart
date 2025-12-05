@@ -33,7 +33,7 @@ class CenterSection extends StatelessWidget {
               width: size.width,
               height: size.width * 0.75,
               child: state.isLoading || state.downloadsResultList.isEmpty
-                  ? const Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator(strokeWidth: 2.0))
                   : state.isError
                   ? Center(child: Text('Error while getting data'))
                   : Stack(

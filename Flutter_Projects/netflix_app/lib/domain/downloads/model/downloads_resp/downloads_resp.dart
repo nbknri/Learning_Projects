@@ -20,6 +20,8 @@ class DownloadsResultData {
   @JsonKey(name: 'poster_path')
   String? posterPath;
   String? title;
+  @JsonKey(name: 'backdrop_path')
+  String? backdropPath;
 
   DownloadsResultData({this.posterPath, this.title});
 

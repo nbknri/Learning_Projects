@@ -35,6 +35,7 @@ NewAndHotResultData _$NewAndHotResultDataFromJson(Map<String, dynamic> json) =>
         releaseDate: json['release_date'] as String?,
         title: json['title'] as String?,
         originalTitle: json['original_title'] as String?,
+        posterPath: json['poster_path'] as String?,
       )
       ..name = json['name'] as String?
       ..originalName = json['original_name'] as String?;
@@ -47,6 +48,7 @@ Map<String, dynamic> _$NewAndHotResultDataToJson(
   'release_date': instance.releaseDate,
   'title': instance.title,
   'original_title': instance.originalTitle,
+  'poster_path': instance.posterPath,
   'name': instance.name,
   'original_name': instance.originalName,
 };

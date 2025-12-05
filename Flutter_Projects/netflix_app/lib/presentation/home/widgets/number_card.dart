@@ -1,4 +1,5 @@
 import 'package:bordered_text/bordered_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_app/core/colors.dart';
 import 'package:netflix_app/core/constants.dart';
@@ -16,20 +17,35 @@ class NumberCard extends StatelessWidget {
         Row(
           children: [
             SizedBox(width: 40),
-            Container(
-              width: screenWidth * 0.30,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                image: DecorationImage(
-                  image: NetworkImage(imageUrl),
-                  fit: BoxFit.cover,
+            CachedNetworkImage(
+              imageUrl: imageUrl,
+              imageBuilder: (context, imageProvider) => Container(
+                width: screenWidth * 0.30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                    image: NetworkImage(imageUrl),
+                    fit: BoxFit.cover,
+                  ),
                 ),
+              ),
+              placeholder: (context, url) => Container(
+                width: screenWidth * 0.30,
+                decoration: errorBoxDecoration,
+                child: const Center(
+                  child: CircularProgressIndicator(strokeWidth: 2.0),
+                ),
+              ),
+              errorWidget: (context, url, error) => Container(
+                width: screenWidth * 0.30,
+                decoration: errorBoxDecoration,
+                child: Center(child: Text('No image!')),
               ),
             ),
           ],
         ),
         Positioned(
-          left: -4,
+          left: 2,
           bottom: -38,
           child: BorderedText(
             strokeWidth: 5.0,
@@ -43,6 +59,7 @@ class NumberCard extends StatelessWidget {
                 decoration: TextDecoration.none,
                 decorationColor: kWhiteColor,
                 fontFamily: numberFontFamily,
+                letterSpacing: -15,
               ),
             ),
           ),

@@ -19,10 +19,8 @@ class SearchResult extends StatelessWidget {
           child: BlocBuilder<SearchBloc, SearchState>(
             builder: (context, state) {
               final data = state.searchResultData;
-              print(data);
-              print('I am called');
               return state.isLoading
-                  ? Center(child: CircularProgressIndicator())
+                  ? Center(child: CircularProgressIndicator(strokeWidth: 2.0))
                   : state.isError
                   ? Center(child: Text('Error while getting data'))
                   : data.isEmpty
@@ -34,9 +32,8 @@ class SearchResult extends StatelessWidget {
                       childAspectRatio: 2 / 3,
                       crossAxisCount: 3,
                       children: List.generate(data.length, (index) {
-                        final dataIndex = data[index];
                         return SearchResultItem(
-                          imgUrl: '$imageAppendUrl${dataIndex.posterPath}',
+                          imgUrl: '$imageAppendUrl${data[index].posterPath}',
                         );
                       }),
                     );

@@ -18,7 +18,7 @@ class FastLaughScreen extends StatelessWidget {
             builder: (context, state) {
               final imgPath = state.videoList;
               return state.isLoading
-                  ? Center(child: CircularProgressIndicator())
+                  ? Center(child: CircularProgressIndicator(strokeWidth: 2.0))
                   : state.isError
                   ? Center(child: Text('Error while getting data'))
                   : state.videoList.isEmpty
