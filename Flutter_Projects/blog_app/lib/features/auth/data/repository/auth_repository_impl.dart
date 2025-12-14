@@ -7,9 +7,22 @@ import 'package:fpdart/fpdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sb;
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDataSource authRemoteDataSource;
+  final AuthRemoteDataSource remoteDataSource;
 
-  const AuthRepositoryImpl(this.authRemoteDataSource);
+  const AuthRepositoryImpl(this.remoteDataSource);
+
+  @override
+  Future<Either<Failure, User>> currentUser() async {
+    try {
+      final user = await remoteDataSource.getCurrentUserData();
+      if (user == null) {
+        return left(Failure('User not logged in!'));
+      }
+      return right(user);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
 
   @override
   Future<Either<Failure, User>> loginWithEmailPassword({
@@ -17,7 +30,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     return _getUser(
-      () async => await authRemoteDataSource.loginWithEmailPassword(
+      () async => await remoteDataSource.loginWithEmailPassword(
         email: email,
         password: password,
       ),
@@ -31,7 +44,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     return _getUser(
-      () async => await authRemoteDataSource.signUpWithEmailPassword(
+      () async => await remoteDataSource.signUpWithEmailPassword(
         name: name,
         email: email,
         password: password,
