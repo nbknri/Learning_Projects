@@ -11,7 +11,7 @@ class BlogCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(context, BlogViewerPage.route()),
+      onTap: () => Navigator.push(context, BlogViewerPage.route(blog)),
       child: Container(
         height: 200,
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
@@ -33,7 +33,11 @@ class BlogCard extends StatelessWidget {
                     children: blog.topics
                         .map(
                           (e) => Padding(
-                            padding: const EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.only(
+                              right: 10,
+                              top: 5,
+                              bottom: 5,
+                            ),
                             child: Chip(label: Text(e)),
                           ),
                         )
