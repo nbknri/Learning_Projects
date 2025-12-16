@@ -8,21 +8,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BlogPage extends StatefulWidget {
+class BlogPage extends StatelessWidget {
   static MaterialPageRoute<dynamic> route() =>
       MaterialPageRoute(builder: (context) => BlogPage());
   const BlogPage({super.key});
-
-  @override
-  State<BlogPage> createState() => _BlogPageState();
-}
-
-class _BlogPageState extends State<BlogPage> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<BlogBloc>().add(BlogFetchAllBlogs());
-  }
 
   @override
   Widget build(BuildContext context) {

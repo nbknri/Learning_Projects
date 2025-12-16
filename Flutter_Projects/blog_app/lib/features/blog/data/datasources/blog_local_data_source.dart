@@ -1,11 +1,13 @@
 import 'package:blog_app/features/blog/data/model/blog_model.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:injectable/injectable.dart';
 
 abstract interface class BlogLocalDataSource {
   void uploadLocalBlogs({required List<BlogModel> blogs});
   List<BlogModel> loadBlogs();
 }
 
+@LazySingleton(as: BlogLocalDataSource)
 class BlogLocalDataSourceImpl implements BlogLocalDataSource {
   final Box box;
 

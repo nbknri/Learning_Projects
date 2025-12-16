@@ -10,8 +10,10 @@ import 'package:blog_app/features/blog/data/model/blog_model.dart';
 import 'package:blog_app/features/blog/domain/entities/blog.dart';
 import 'package:blog_app/features/blog/domain/repositories/blog_repository.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 
+@LazySingleton(as: BlogRepository)
 class BlogRepositoryImp implements BlogRepository {
   final BlogRemoteDataSource blogRemoteDataSource;
   final BlogLocalDataSource blogLocalDataSource;

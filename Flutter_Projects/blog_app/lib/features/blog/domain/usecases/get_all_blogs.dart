@@ -3,7 +3,9 @@ import 'package:blog_app/core/usecase/usecase.dart';
 import 'package:blog_app/features/blog/domain/entities/blog.dart';
 import 'package:blog_app/features/blog/domain/repositories/blog_repository.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class GetAllBlogs implements UserCase<List<Blog>, NoParams> {
   final BlogRepository blogRepository;
 

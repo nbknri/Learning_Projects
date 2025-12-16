@@ -5,7 +5,9 @@ import 'package:blog_app/core/usecase/usecase.dart';
 import 'package:blog_app/features/blog/domain/entities/blog.dart';
 import 'package:blog_app/features/blog/domain/repositories/blog_repository.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class UploadBlog implements UserCase<Blog, UploadBlogParams> {
   final BlogRepository blogRepository;
 

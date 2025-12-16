@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/features/blog/data/model/blog_model.dart';
+import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class BlogRemoteDataSource {
@@ -13,6 +14,7 @@ abstract interface class BlogRemoteDataSource {
   Future<List<BlogModel>> getAllBlogs();
 }
 
+@LazySingleton(as: BlogRemoteDataSource)
 class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
   final SupabaseClient supabaseClient;
 
