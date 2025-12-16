@@ -53,6 +53,11 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
           topics: selectedTopics,
         ),
       );
+    } else {
+      showSnackBar(
+        context,
+        'Please ensure you have selected an image and topics.',
+      );
     }
   }
 
