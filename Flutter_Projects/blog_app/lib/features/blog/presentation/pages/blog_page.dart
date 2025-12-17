@@ -21,7 +21,10 @@ class BlogPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context, AddNewBlogPage.route());
+              Navigator.push(context, AddNewBlogPage.route()).then((_) {
+                if (!context.mounted) return;
+                context.read<BlogBloc>().add(BlogFetchAllBlogs());
+              });
             },
             icon: const Icon(CupertinoIcons.add_circled),
           ),
