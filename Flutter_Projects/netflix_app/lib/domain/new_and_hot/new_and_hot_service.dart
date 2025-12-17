@@ -13,7 +13,5 @@ abstract class NewAndHotService {
   Future<Either<MainFailures, NewAndHotResp>> discoverTvData({
     int page = 1,
     bool isPopular = true,
-    String airDateStart = '',
-    String airDateEnd = '',
   });
 }

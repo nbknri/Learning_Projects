@@ -21,8 +21,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     : super(HomeState.initial()) {
     final DateTime now = DateTime.now();
     final String formattedDateToday = DateFormat('yyyy-MM-dd').format(now);
-    final DateTime yesterDay = now.add(Duration(days: -1));
-    final String formattedDateYesterDay = DateFormat('yyyy-MM-dd').format(yesterDay);
 
     on<GetHomeScreenData>((event, emit) async {
       var uuid = Uuid();
@@ -121,8 +119,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       // TopTen TV
       final topTenTvResult = await _homeServices.discoverTvData(
         isPopular: false,
-        airDateStart: formattedDateYesterDay,
-        airDateEnd: formattedDateToday,
       );
       final topTenTvState = topTenTvResult.fold(
         (failure) =>

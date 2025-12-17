@@ -48,8 +48,6 @@ class NewAndHotImp implements NewAndHotService {
   Future<Either<MainFailures, NewAndHotResp>> discoverTvData({
     int page = 1,
     bool isPopular = true,
-    String airDateStart = '',
-    String airDateEnd = '',
   }) async {
     try {
       final response = await Dio(baseOptions).get(
@@ -59,8 +57,6 @@ class NewAndHotImp implements NewAndHotService {
           'include_adult': 'false',
           'sort_by': isPopular ? 'popularity.desc' : 'vote_count.desc',
           'with_origin_country': 'IN',
-          'air_date.gte': airDateStart,
-          'air_date.lte': airDateEnd,
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
