@@ -17,7 +17,8 @@ class BlogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Blog App'),
+        title: const Text('NBK Blog'),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
@@ -31,34 +32,38 @@ class BlogPage extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: BlocConsumer<BlogBloc, BlogState>(
-          listener: (context, state) {
-            if (state is BlogFailure) {
-              showSnackBar(context, state.error);
-            }
-          },
-          builder: (context, state) {
-            if (state is BlogLoading) {
-              return const Loader();
-            }
-            if (state is BlogDisplaySuccess) {
-              return ListView.builder(
-                itemCount: state.blogs.length,
-                itemBuilder: (context, index) {
-                  final blog = state.blogs[index];
-                  return BlogCard(
-                    blog: blog,
-                    color: index % 3 == 0
-                        ? AppPallet.gradient1
-                        : index % 3 == 1
-                        ? AppPallet.gradient2
-                        : AppPallet.gradient3,
-                  );
-                },
-              );
-            }
-            return const SizedBox();
-          },
+        child: RefreshIndicator(
+          onRefresh: () async =>
+              context.read<BlogBloc>().add(BlogFetchAllBlogs()),
+          child: BlocConsumer<BlogBloc, BlogState>(
+            listener: (context, state) {
+              if (state is BlogFailure) {
+                showSnackBar(context, state.error);
+              }
+            },
+            builder: (context, state) {
+              if (state is BlogLoading) {
+                return const Loader();
+              }
+              if (state is BlogDisplaySuccess) {
+                return ListView.builder(
+                  itemCount: state.blogs.length,
+                  itemBuilder: (context, index) {
+                    final blog = state.blogs[index];
+                    return BlogCard(
+                      blog: blog,
+                      color: index % 3 == 0
+                          ? AppPallet.gradient1
+                          : index % 3 == 1
+                          ? AppPallet.gradient2
+                          : AppPallet.gradient3,
+                    );
+                  },
+                );
+              }
+              return const SizedBox();
+            },
+          ),
         ),
       ),
     );
