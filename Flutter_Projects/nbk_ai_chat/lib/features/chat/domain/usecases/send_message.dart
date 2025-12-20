@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:nbk_ai_chat/features/chat/domain/entities/message.dart';
 import 'package:nbk_ai_chat/features/chat/domain/repositories/chat_repository.dart';
 
+@lazySingleton
 class SendMessage {
   final ChatRepository chatRepository;
 
