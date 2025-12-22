@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbk_ai_chat/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:nbk_ai_chat/features/chat/presentation/widgets/chat_bubble.dart';
-import 'package:nbk_ai_chat/features/chat/presentation/widgets/chat_input_area.dart';
+import 'package:nbk_ai_chat/features/chat/presentation/widgets/chat_input_widget.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
@@ -46,7 +46,11 @@ class ChatPage extends StatelessWidget {
                 return SizedBox.shrink();
               },
             ),
-            ChatInputArea(),
+            ChatInputWidget(
+              onSend: (message) {
+                context.read<ChatBloc>().add(ChatEvent.sendMessage(message));
+              },
+            ),
           ],
         ),
       ),
