@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
+import 'package:task_manager_app/core/theme/app_colors.dart';
 
-/// App മുഴുവൻ ഉപയോഗിക്കുന്ന text styles
+
+
 /// Centralized typography system
 class AppTextStyles {
   // ─────────────────────────────────────────
   // Screen Titles (Login, Projects, Tasks)
   // ─────────────────────────────────────────
   static const TextStyle title = TextStyle(
-    fontSize: 22,
+    fontSize: 30,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
   );
@@ -35,18 +36,26 @@ class AppTextStyles {
   // Secondary / Hint Text
   // ─────────────────────────────────────────
   static const TextStyle caption = TextStyle(
-    fontSize: 12,
+    fontSize: 15,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
   );
 
   // ─────────────────────────────────────────
-  // Button Text
+  //Elevated Button Text
   // ─────────────────────────────────────────
-  static const TextStyle button = TextStyle(
+  static const TextStyle elevatedButton = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textLabel,
+  );
+
+  // ─────────────────────────────────────────
+  //Text Button Text
+  // ─────────────────────────────────────────
+  static const TextStyle textButton = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
-    color: Colors.white,
   );
 
   // Prevent instantiation

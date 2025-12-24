@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
-import 'app_text_styles.dart';
+import 'package:task_manager_app/core/theme/app_colors.dart';
+import 'package:task_manager_app/core/theme/app_text_styles.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
@@ -37,7 +37,15 @@ class AppTheme {
       titleMedium: AppTextStyles.subtitle,
       bodyMedium: AppTextStyles.body,
       bodySmall: AppTextStyles.caption,
-      labelLarge: AppTextStyles.button,
+      labelLarge: AppTextStyles.elevatedButton,
+    ),
+
+    // ─────────────────────────────────────────
+    // Progress Indicator
+    // ─────────────────────────────────────────
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      strokeWidth: 2,
+      color: AppColors.progressIndicator,
     ),
 
     // ─────────────────────────────────────────
@@ -55,8 +63,19 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
-        textStyle: AppTextStyles.button,
+        disabledBackgroundColor: AppColors.primary,
+        textStyle: AppTextStyles.elevatedButton,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+    ),
+
+    // ─────────────────────────────────────────
+    // Text Button Theme
+    // ─────────────────────────────────────────
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: AppColors.textButtonLabel,
+        textStyle: AppTextStyles.textButton,
       ),
     ),
 
@@ -66,9 +85,15 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.surface,
-      border: OutlineInputBorder(
+      suffixIconColor: AppColors.suffixIconColor,
+      activeIndicatorBorder: BorderSide(),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(width: 0.5, color: AppColors.primary),
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(width: 0.1),
       ),
       hintStyle: AppTextStyles.caption,
     ),

@@ -19,6 +19,8 @@ class AppColors {
   static const Color textPrimary = Color(0xFF111827);
   static const Color textSecondary = Color(0xFF6B7280);
   static const Color textDisabled = Color(0xFF9CA3AF);
+  static const Color textLabel = Colors.white;
+  static const Color textButtonLabel = Color(0xFF60A5FA);
 
   // ─────────────────────────────────────────
   // Status Colors
@@ -44,6 +46,8 @@ class AppColors {
   // Utility
   // ─────────────────────────────────────────
   static const Color transparent = Colors.transparent;
+  static const progressIndicator = Colors.white;
+  static const suffixIconColor = Color(0xFF6B7280);
 
   // Prevent instantiation
   const AppColors._();
