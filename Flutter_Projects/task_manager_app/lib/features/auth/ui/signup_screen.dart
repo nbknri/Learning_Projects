@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/core/theme/app_colors.dart';
 import 'package:task_manager_app/core/widgets/app_text_filed.dart';
 import 'package:task_manager_app/core/widgets/primary_button.dart';
 
@@ -106,7 +107,6 @@ class _SignupScreenState extends State<SignupScreen> {
               // Terms & Privacy
               // ─────────────────────────────
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Checkbox(
                     value: _agreedToTerms,
@@ -123,9 +123,19 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: Wrap(
                       children: [
                         Text('I agree to the ', style: textTheme.bodySmall),
-                        Text(' Terms of Service '),
+                        Text(
+                          ' Terms of Service ',
+                          style: textTheme.bodySmall?.copyWith(
+                            color: AppColors.primary,
+                          ),
+                        ),
                         Text('and ', style: textTheme.bodySmall),
-                        Text('Privacy Policy'),
+                        Text(
+                          'Privacy Policy',
+                          style: textTheme.bodySmall?.copyWith(
+                            color: AppColors.primary,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -160,7 +170,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   Padding(
                     padding: EdgeInsetsGeometry.symmetric(horizontal: 12),
                     child: Text('Or continue with'),
-                    ),
+                  ),
                   Expanded(child: Divider()),
                 ],
               ),
@@ -174,12 +184,10 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () {
-                        
-                      }, 
+                      onPressed: () {},
                       icon: const Icon(Icons.g_mobiledata),
                       label: const Text('Google'),
-                      ),
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(

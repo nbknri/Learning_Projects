@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/core/theme/app_colors.dart';
 
-
-
 /// Centralized typography system
 class AppTextStyles {
   // ─────────────────────────────────────────
   // Screen Titles (Login, Projects, Tasks)
   // ─────────────────────────────────────────
   static const TextStyle title = TextStyle(
-    fontSize: 30,
+    fontSize: 26,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textPrimary,
+  );
+
+  // ─────────────────────────────────────────
+  // Card / Sub titles
+  // ─────────────────────────────────────────
+  static const TextStyle subtitle = TextStyle(
+    fontSize: 16,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
   );
 
   // ─────────────────────────────────────────
-  // Section Headings
+  // Section labels (ACCOUNT, SETTINGS)
   // ─────────────────────────────────────────
-  static const TextStyle subtitle = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    color: AppColors.textPrimary,
+  static const TextStyle sectionLabel = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.6,
+    color: AppColors.textSecondary,
   );
 
   // ─────────────────────────────────────────
@@ -29,14 +37,15 @@ class AppTextStyles {
   static const TextStyle body = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    color: AppColors.textPrimary,
+    color: AppColors.textSecondary,
+    height: 1.5,
   );
 
   // ─────────────────────────────────────────
-  // Secondary / Hint Text
+  // Secondary / Hint Text / Caption / meta
   // ─────────────────────────────────────────
   static const TextStyle caption = TextStyle(
-    fontSize: 15,
+    fontSize: 12,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
   );
@@ -47,7 +56,7 @@ class AppTextStyles {
   static const TextStyle elevatedButton = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    color: AppColors.textLabel,
+    color: AppColors.white,
   );
 
   // ─────────────────────────────────────────
@@ -56,6 +65,16 @@ class AppTextStyles {
   static const TextStyle textButton = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
+    color: AppColors.primary,
+  );
+
+  // ─────────────────────────────────────────
+  // Destructive
+  // ─────────────────────────────────────────
+  static const TextStyle danger = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: AppColors.error,
   );
 
   // Prevent instantiation
