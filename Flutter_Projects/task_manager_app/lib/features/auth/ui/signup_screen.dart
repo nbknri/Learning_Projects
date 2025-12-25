@@ -10,10 +10,18 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  // ─────────────────────────────────────────
+  // Controllers (UI responsibility)
+  // ─────────────────────────────────────────
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _passwordVisible = false;
+
+  // ─────────────────────────────────────────
+  // UI state (allowed at UI level)
+  // ─────────────────────────────────────────
+  bool _obscurePassword = true;
+  bool _agreedToTerms = false;
 
   @override
   void dispose() {
@@ -25,44 +33,45 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // ─────────────────────────────
+              // Screen Title
+              // ─────────────────────────────
+              Text('Create an Account', style: textTheme.titleLarge),
+
+              const SizedBox(height: 8),
+
+              Text(
+                'Enter your details to sign up.',
+                style: textTheme.bodyMedium,
+              ),
+
               const SizedBox(height: 32),
 
-              // Screen Title with subtitle section
-              Center(
-                child: Text(
-                  'Create an Account',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-              Center(
-                child: Text(
-                  'Enter your details to sign up.',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ),
-
-              const SizedBox(height: 25),
-
-              // Name field section
+              // ─────────────────────────────
+              // Name Field
+              // ─────────────────────────────
               AppTextFiled(
-                titleText: 'Name',
-                hintText: 'Enter your Name',
+                titleText: 'Full Name',
+                hintText: 'Enter your Full Name',
                 controller: _nameController,
                 suffixIcon: Icons.person,
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 16),
 
-              // Email field section
+              // ─────────────────────────────
+              // Email Field
+              // ─────────────────────────────
               AppTextFiled(
                 titleText: 'Email',
                 hintText: 'name@example.com',
@@ -71,27 +80,63 @@ class _SignupScreenState extends State<SignupScreen> {
                 suffixIcon: Icons.mail,
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 16),
 
-              // Password Field section
+              // ─────────────────────────────
+              // Password Field
+              // ─────────────────────────────
               AppTextFiled(
                 titleText: 'Password',
                 hintText: 'At least 6 characters',
                 controller: _passwordController,
-                isObscureText: !_passwordVisible,
-                suffixIcon: _passwordVisible
-                    ? Icons.visibility
-                    : Icons.visibility_off,
+                isObscureText: _obscurePassword,
+                suffixIcon: _obscurePassword
+                    ? Icons.visibility_off
+                    : Icons.visibility,
                 suffixOnPressed: () {
                   setState(() {
-                    _passwordVisible = !_passwordVisible;
+                    _obscurePassword = !_obscurePassword;
                   });
                 },
               ),
 
-              const SizedBox(height: 35),
+              const SizedBox(height: 16),
 
-              // Action Button section
+              // ─────────────────────────────
+              // Terms & Privacy
+              // ─────────────────────────────
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Checkbox(
+                    value: _agreedToTerms,
+                    onChanged: (value) {
+                      setState(() {
+                        _agreedToTerms = value ?? false;
+                      });
+
+                      debugPrint(_agreedToTerms.toString());
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Wrap(
+                      children: [
+                        Text('I agree to the ', style: textTheme.bodySmall),
+                        Text(' Terms of Service '),
+                        Text('and ', style: textTheme.bodySmall),
+                        Text('Privacy Policy'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 24),
+
+              // ─────────────────────────────
+              // sign Up button
+              // ─────────────────────────────
               PrimaryButton(
                 text: 'Crate Account',
                 onPressed: () {
@@ -106,16 +151,56 @@ class _SignupScreenState extends State<SignupScreen> {
                 isLoading: false,
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 24),
 
-              // Sign Up button section
+              // ───────── Divider ─────────
+              Row(
+                children: [
+                  Expanded(child: Divider()),
+                  Padding(
+                    padding: EdgeInsetsGeometry.symmetric(horizontal: 12),
+                    child: Text('Or continue with'),
+                    ),
+                  Expanded(child: Divider()),
+                ],
+              ),
+
+              const SizedBox(height: 16),
+
+              // ─────────────────────────────
+              // Social Buttons (stub)
+              // ─────────────────────────────
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () {
+                        
+                      }, 
+                      icon: const Icon(Icons.g_mobiledata),
+                      label: const Text('Google'),
+                      ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(Icons.apple),
+                      label: const Text('Apple'),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 24),
+
+              // ─────────────────────────────
+              // Back to Login screen
+              // ─────────────────────────────
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Already have an account?",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
+                  Text("Already have an account?", style: textTheme.bodySmall),
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);

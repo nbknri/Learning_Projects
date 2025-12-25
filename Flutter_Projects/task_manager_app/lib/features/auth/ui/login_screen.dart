@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager_app/core/navigation/app_navigator.dart';
 import 'package:task_manager_app/core/widgets/app_text_filed.dart';
 import 'package:task_manager_app/core/widgets/primary_button.dart';
+import 'package:task_manager_app/features/auth/ui/forgot_password_screen.dart';
 import 'package:task_manager_app/features/auth/ui/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -11,8 +13,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // ─────────────────────────────────────────
+  // Controllers (UI responsibility)
+  // ─────────────────────────────────────────
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  // Password visibility manage
   bool _passwordVisible = false;
 
   @override
@@ -24,6 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -32,25 +41,25 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 32),
+              // ─────────────────────────────
+              // Screen Title
+              // ─────────────────────────────
+              Center(child: Text('Welcome back', style: textTheme.titleLarge)),
 
-              // Screen Title with subtitle section
-              Center(
-                child: Text(
-                  'Welcome back',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
+              const SizedBox(height: 8),
+
               Center(
                 child: Text(
                   'Please enter your details to sign in.',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: textTheme.bodyMedium,
                 ),
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 32),
 
-              // Email field section
+              // ─────────────────────────────
+              // Email Field
+              // ─────────────────────────────
               AppTextFiled(
                 titleText: 'Email',
                 hintText: 'Enter your email address',
@@ -59,9 +68,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 suffixIcon: Icons.mail,
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 16),
 
-              // Password Field section
+              // ─────────────────────────────
+              // Password Field
+              // ─────────────────────────────
               AppTextFiled(
                 titleText: 'Password',
                 hintText: 'Enter your password',
@@ -77,20 +88,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 8),
 
-              // Forget button section
+              // ─────────────────────────────
+              // Forget password section
+              // ─────────────────────────────
               Align(
                 alignment: AlignmentGeometry.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    AppNavigator.push(context, const ForgotPasswordScreen());
+                  },
                   child: const Text('Forget Password?'),
                 ),
               ),
 
-              const SizedBox(height: 15),
+              const SizedBox(height: 24),
 
-              // Action Button section
+              // ─────────────────────────────
+              // login Button
+              // ─────────────────────────────
               PrimaryButton(
                 text: 'Login',
                 onPressed: () {
@@ -103,22 +120,57 @@ class _LoginScreenState extends State<LoginScreen> {
                 isLoading: false,
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 24),
 
-              // Sign Up button section
+              // ───────── Divider ─────────
+              Row(
+                children: [
+                  Expanded(child: Divider()),
+                  Padding(
+                    padding: EdgeInsetsGeometry.symmetric(horizontal: 12),
+                    child: Text('Or continue with'),
+                  ),
+                  Expanded(child: Divider()),
+                ],
+              ),
+
+              const SizedBox(height: 16),
+
+              // ─────────────────────────────
+              // Social Buttons (stub)
+              // ─────────────────────────────
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(Icons.g_mobiledata),
+                      label: const Text('Google'),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(Icons.apple),
+                      label: const Text('Apple'),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 24),
+
+              // ─────────────────────────────
+              // Navigate to SignUp Page
+              // ─────────────────────────────
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Don't have an account?",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
+                  Text("Don't have an account?", style: textTheme.bodySmall),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const SignupScreen()),
-                      );
+                      AppNavigator.push(context, const SignupScreen());
                     },
                     child: const Text('Sign Up'),
                   ),
