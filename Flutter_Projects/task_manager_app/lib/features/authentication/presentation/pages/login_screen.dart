@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:task_manager_app/core/navigation/app_navigator.dart';
 import 'package:task_manager_app/core/widgets/app_text_filed.dart';
 import 'package:task_manager_app/core/widgets/primary_button.dart';
-import 'package:task_manager_app/features/auth/ui/forgot_password_screen.dart';
-import 'package:task_manager_app/features/auth/ui/signup_screen.dart';
+import 'package:task_manager_app/features/authentication/presentation/pages/forgot_password_screen.dart';
+import 'package:task_manager_app/features/authentication/presentation/pages/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
