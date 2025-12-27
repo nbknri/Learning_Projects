@@ -1,10 +1,7 @@
 import 'package:task_manager_app/features/authentication/domain/entities/user_entity.dart';
 
 abstract class AuthRepository {
-  Future<UserEntity> login({
-    required String email,
-    required String password,
-  });
+  Future<UserEntity> login({required String email, required String password});
 
   Future<UserEntity> signup({
     required String name,
@@ -12,5 +9,5 @@ abstract class AuthRepository {
     required String password,
   });
 
-  Future<UserEntity> forgerPassword({required String email});
+  Future<void> forgetPassword({required String email});
 }
