@@ -39,7 +39,9 @@ class _LoginScreenState extends State<LoginScreen> {
       listener: (context, state) {
         state.when(
           initial: () {},
-          loading: () {},
+          loading: () {
+            // Button loader already handles loading
+          },
           success: (user) {
             if (Navigator.canPop(context)) {
               Navigator.pop(context);

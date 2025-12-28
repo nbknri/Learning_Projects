@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "763923921476",
+    "project_id": "task-manager-app-bc596",
+    "storage_bucket": "task-manager-app-bc596.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763923921476:android:9e8b2d0f0151b44b831a11",
+        "android_client_info": {
+          "package_name": "com.nbknri.task_manager_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXgxmknrEKr3Xwo-ThSqAQYLvlgDQSnbk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
