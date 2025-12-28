@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // ─────────────────────────────────────────
-  // Primary Brand (UI matched)
+  // Primary Brand
   // ─────────────────────────────────────────
-  static const Color primary = Color(0xFF1CC6E8); // Main CTA, FAB
-  static const Color primaryDark = Color(0xFF0FA3BF);
-  static const Color primarySoft = Color(0xFFE8F9FD); // Chips, icon bg
+  static const Color primary = Color(0xFF6324EB); // Main CTA, FAB
+  static const Color primaryDark = Color(
+    0xFF4A1BB3,
+  ); // Darker shade for pressed states
+  static const Color primarySoft = Color(
+    0xFFF0EAFC,
+  ); // Very light tint for backgrounds/chips
 
   // ─────────────────────────────────────────
   // Background & Surface
@@ -17,7 +21,7 @@ class AppColors {
   // ─────────────────────────────────────────
   // Text
   // ─────────────────────────────────────────
-  static const Color textPrimary = Color(0xFF1E293B);
+  static const Color textPrimary = Color(0xFF0F172A);
   static const Color textSecondary = Color(0xFF64748B);
   static const Color textHint = Color(0xFF94A3B8);
 
@@ -35,7 +39,7 @@ class AppColors {
   // ─────────────────────────────────────────
   // Borders & Dividers
   // ─────────────────────────────────────────
-  static const Color border = Color(0xFFE5E7EB);
+  static const Color border = Color(0xFFE2E8F0);
   static const Color divider = Color(0xFFF1F5F9);
 
   // ─────────────────────────────────────────

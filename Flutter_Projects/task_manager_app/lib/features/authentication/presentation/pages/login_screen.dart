@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manager_app/core/navigation/app_navigator.dart';
-import 'package:task_manager_app/core/widgets/app_text_filed.dart';
-import 'package:task_manager_app/core/widgets/primary_button.dart';
+import 'package:task_manager_app/features/authentication/presentation/widgets/app_text_filed.dart';
+import 'package:task_manager_app/features/authentication/presentation/widgets/primary_button.dart';
 import 'package:task_manager_app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:task_manager_app/features/authentication/presentation/pages/forgot_password_screen.dart';
 import 'package:task_manager_app/features/authentication/presentation/pages/signup_screen.dart';
@@ -42,13 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
           loading: () {
             // Button loader already handles loading
           },
-          success: (user) {
+          authenticated: (user) {
             if (Navigator.canPop(context)) {
               Navigator.pop(context);
             }
             // TODO: Navigate to Home Screen
             // AppNavigator.pushReplacement(context, const HomeScreen());
           },
+          unauthenticated: (){},
           passwordResetSuccess: () {},
           failure: (message) {
             if (Navigator.canPop(context)) {
@@ -62,163 +63,171 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: Scaffold(
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // ─────────────────────────────
-                // Screen Title
-                // ─────────────────────────────
-                Center(
-                  child: Text('Welcome back', style: textTheme.titleLarge),
-                ),
-
-                const SizedBox(height: 8),
-
-                Center(
-                  child: Text(
-                    'Please enter your details to sign in.',
-                    style: textTheme.bodyMedium,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // ─────────────────────────────
+                  // Screen Title
+                  // ─────────────────────────────
+                  Center(
+                    child: Text('Welcome back', style: textTheme.titleLarge),
                   ),
-                ),
 
-                const SizedBox(height: 32),
+                  const SizedBox(height: 8),
 
-                // ─────────────────────────────
-                // Email Field
-                // ─────────────────────────────
-                AppTextFiled(
-                  titleText: 'Email',
-                  hintText: 'Enter your email address',
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  suffixIcon: Icons.mail,
-                ),
+                  Center(
+                    child: Text(
+                      'Please enter your details to sign in.',
+                      style: textTheme.bodyMedium,
+                    ),
+                  ),
 
-                const SizedBox(height: 16),
+                  const SizedBox(height: 32),
 
-                // ─────────────────────────────
-                // Password Field
-                // ─────────────────────────────
-                AppTextFiled(
-                  titleText: 'Password',
-                  hintText: 'Enter your password',
-                  controller: _passwordController,
-                  isObscureText: !_passwordVisible,
-                  suffixIcon: _passwordVisible
-                      ? Icons.visibility
-                      : Icons.visibility_off,
-                  suffixOnPressed: () {
-                    setState(() {
-                      _passwordVisible = !_passwordVisible;
-                    });
-                  },
-                ),
+                  // ─────────────────────────────
+                  // Email Field
+                  // ─────────────────────────────
+                  AppTextFiled(
+                    titleText: 'Email',
+                    hintText: 'Enter your email address',
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    suffixIcon: Icons.mail,
+                  ),
 
-                const SizedBox(height: 8),
+                  const SizedBox(height: 16),
 
-                // ─────────────────────────────
-                // Forget password section
-                // ─────────────────────────────
-                Align(
-                  alignment: AlignmentGeometry.centerRight,
-                  child: TextButton(
-                    onPressed: () {
-                      AppNavigator.push(context, const ForgotPasswordScreen());
+                  // ─────────────────────────────
+                  // Password Field
+                  // ─────────────────────────────
+                  AppTextFiled(
+                    titleText: 'Password',
+                    hintText: 'Enter your password',
+                    controller: _passwordController,
+                    isObscureText: !_passwordVisible,
+                    suffixIcon: _passwordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    suffixOnPressed: () {
+                      setState(() {
+                        _passwordVisible = !_passwordVisible;
+                      });
                     },
-                    child: const Text('Forget Password?'),
                   ),
-                ),
 
-                const SizedBox(height: 24),
+                  const SizedBox(height: 8),
 
-                // ─────────────────────────────
-                // login Button
-                // ─────────────────────────────
-                BlocBuilder<AuthBloc, AuthState>(
-                  builder: (context, state) {
-                    return PrimaryButton(
-                      text: 'Login',
+                  // ─────────────────────────────
+                  // Forget password section
+                  // ─────────────────────────────
+                  Align(
+                    alignment: AlignmentGeometry.centerRight,
+                    child: TextButton(
                       onPressed: () {
-                        final email = _emailController.text.trim();
-                        final password = _passwordController.text.trim();
-                        if (email.isEmpty || password.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Please fill all fields')),
-                          );
-                          return;
-                        }
-                        context.read<AuthBloc>().add(
-                          AuthEvent.login(email: email, password: password),
+                        AppNavigator.push(
+                          context,
+                          const ForgotPasswordScreen(),
                         );
                       },
-                      isLoading: state.maybeWhen(
-                        loading: () => true,
-                        orElse: () => false,
+                      child: const Text('Forget Password?'),
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // ─────────────────────────────
+                  // login Button
+                  // ─────────────────────────────
+                  BlocBuilder<AuthBloc, AuthState>(
+                    builder: (context, state) {
+                      return PrimaryButton(
+                        text: 'Login',
+                        onPressed: () {
+                          final email = _emailController.text.trim();
+                          final password = _passwordController.text.trim();
+                          if (email.isEmpty || password.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Please fill all fields')),
+                            );
+                            return;
+                          }
+                          context.read<AuthBloc>().add(
+                            AuthEvent.login(email: email, password: password),
+                          );
+                        },
+                        isLoading: state.maybeWhen(
+                          loading: () => true,
+                          orElse: () => false,
+                        ),
+                      );
+                    },
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // ───────── Divider ─────────
+                  Row(
+                    children: [
+                      Expanded(child: Divider()),
+                      Padding(
+                        padding: EdgeInsetsGeometry.symmetric(horizontal: 12),
+                        child: Text('Or continue with'),
                       ),
-                    );
-                  },
-                ),
+                      Expanded(child: Divider()),
+                    ],
+                  ),
 
-                const SizedBox(height: 24),
+                  const SizedBox(height: 16),
 
-                // ───────── Divider ─────────
-                Row(
-                  children: [
-                    Expanded(child: Divider()),
-                    Padding(
-                      padding: EdgeInsetsGeometry.symmetric(horizontal: 12),
-                      child: Text('Or continue with'),
-                    ),
-                    Expanded(child: Divider()),
-                  ],
-                ),
-
-                const SizedBox(height: 16),
-
-                // ─────────────────────────────
-                // Social Buttons (stub)
-                // ─────────────────────────────
-                Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(Icons.g_mobiledata),
-                        label: const Text('Google'),
+                  // ─────────────────────────────
+                  // Social Buttons (stub)
+                  // ─────────────────────────────
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.g_mobiledata),
+                          label: const Text('Google'),
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: OutlinedButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(Icons.apple),
-                        label: const Text('Apple'),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.apple),
+                          label: const Text('Apple'),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
 
-                const SizedBox(height: 24),
+                  const SizedBox(height: 24),
 
-                // ─────────────────────────────
-                // Navigate to SignUp Page
-                // ─────────────────────────────
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Don't have an account?", style: textTheme.bodySmall),
-                    TextButton(
-                      onPressed: () {
-                        AppNavigator.push(context, const SignupScreen());
-                      },
-                      child: const Text('Create Account'),
-                    ),
-                  ],
-                ),
-              ],
+                  // ─────────────────────────────
+                  // Navigate to SignUp Page
+                  // ─────────────────────────────
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have an account?",
+                        style: textTheme.bodySmall,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          AppNavigator.push(context, const SignupScreen());
+                        },
+                        child: const Text('Create Account'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

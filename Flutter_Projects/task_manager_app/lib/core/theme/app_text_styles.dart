@@ -4,12 +4,13 @@ import 'package:task_manager_app/core/theme/app_colors.dart';
 /// Centralized typography system
 class AppTextStyles {
   // ─────────────────────────────────────────
-  // Screen Titles (Login, Projects, Tasks)
+  // Large Headers ("Welcome Back")
   // ─────────────────────────────────────────
   static const TextStyle title = TextStyle(
-    fontSize: 26,
-    fontWeight: FontWeight.w700,
+    fontSize: 28,
+    fontWeight: FontWeight.w800,
     color: AppColors.textPrimary,
+    letterSpacing: -0.5,
   );
 
   // ─────────────────────────────────────────
@@ -45,13 +46,14 @@ class AppTextStyles {
   // Secondary / Hint Text / Caption / meta
   // ─────────────────────────────────────────
   static const TextStyle caption = TextStyle(
-    fontSize: 12,
+    fontSize: 15,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
+    height: 1.4,
   );
 
   // ─────────────────────────────────────────
-  //Elevated Button Text
+  // Elevated Button Text
   // ─────────────────────────────────────────
   static const TextStyle elevatedButton = TextStyle(
     fontSize: 16,
@@ -59,8 +61,15 @@ class AppTextStyles {
     color: AppColors.white,
   );
 
+  // Social Button Text (Google/Apple)
+  static const TextStyle socialButtonText = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textPrimary,
+  );
+
   // ─────────────────────────────────────────
-  //Text Button Text
+  // Text Button Text
   // ─────────────────────────────────────────
   static const TextStyle textButton = TextStyle(
     fontSize: 14,

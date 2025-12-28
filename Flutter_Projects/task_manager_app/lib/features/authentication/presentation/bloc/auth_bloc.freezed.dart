@@ -14,67 +14,36 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthEvent implements DiagnosticableTreeMixin {
 
- String get email;
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$AuthEventCopyWith<AuthEvent> get copyWith => _$AuthEventCopyWithImpl<AuthEvent>(this as AuthEvent, _$identity);
+
 
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'AuthEvent'))
-    ..add(DiagnosticsProperty('email', email));
+    ;
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthEvent&&(identical(other.email, email) || other.email == email));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthEvent);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'AuthEvent(email: $email)';
+  return 'AuthEvent()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $AuthEventCopyWith<$Res>  {
-  factory $AuthEventCopyWith(AuthEvent value, $Res Function(AuthEvent) _then) = _$AuthEventCopyWithImpl;
-@useResult
-$Res call({
- String email
-});
-
-
-
-
-}
-/// @nodoc
-class _$AuthEventCopyWithImpl<$Res>
-    implements $AuthEventCopyWith<$Res> {
-  _$AuthEventCopyWithImpl(this._self, this._then);
-
-  final AuthEvent _self;
-  final $Res Function(AuthEvent) _then;
-
-/// Create a copy of AuthEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,}) {
-  return _then(_self.copyWith(
-email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
+class $AuthEventCopyWith<$Res>  {
+$AuthEventCopyWith(AuthEvent _, $Res Function(AuthEvent) __);
 }
 
 
@@ -92,13 +61,14 @@ extension AuthEventPatterns on AuthEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Login value)?  login,TResult Function( _Signup value)?  signup,TResult Function( _ForgetPassword value)?  forgetPassword,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Login value)?  login,TResult Function( _Signup value)?  signup,TResult Function( _ForgetPassword value)?  forgetPassword,TResult Function( _Logout value)?  logout,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Login() when login != null:
 return login(_that);case _Signup() when signup != null:
 return signup(_that);case _ForgetPassword() when forgetPassword != null:
-return forgetPassword(_that);case _:
+return forgetPassword(_that);case _Logout() when logout != null:
+return logout(_that);case _:
   return orElse();
 
 }
@@ -116,13 +86,14 @@ return forgetPassword(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Login value)  login,required TResult Function( _Signup value)  signup,required TResult Function( _ForgetPassword value)  forgetPassword,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Login value)  login,required TResult Function( _Signup value)  signup,required TResult Function( _ForgetPassword value)  forgetPassword,required TResult Function( _Logout value)  logout,}){
 final _that = this;
 switch (_that) {
 case _Login():
 return login(_that);case _Signup():
 return signup(_that);case _ForgetPassword():
-return forgetPassword(_that);case _:
+return forgetPassword(_that);case _Logout():
+return logout(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -139,13 +110,14 @@ return forgetPassword(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Login value)?  login,TResult? Function( _Signup value)?  signup,TResult? Function( _ForgetPassword value)?  forgetPassword,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Login value)?  login,TResult? Function( _Signup value)?  signup,TResult? Function( _ForgetPassword value)?  forgetPassword,TResult? Function( _Logout value)?  logout,}){
 final _that = this;
 switch (_that) {
 case _Login() when login != null:
 return login(_that);case _Signup() when signup != null:
 return signup(_that);case _ForgetPassword() when forgetPassword != null:
-return forgetPassword(_that);case _:
+return forgetPassword(_that);case _Logout() when logout != null:
+return logout(_that);case _:
   return null;
 
 }
@@ -162,12 +134,13 @@ return forgetPassword(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  login,TResult Function( String name,  String email,  String password)?  signup,TResult Function( String email)?  forgetPassword,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  login,TResult Function( String name,  String email,  String password)?  signup,TResult Function( String email)?  forgetPassword,TResult Function()?  logout,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Login() when login != null:
 return login(_that.email,_that.password);case _Signup() when signup != null:
 return signup(_that.name,_that.email,_that.password);case _ForgetPassword() when forgetPassword != null:
-return forgetPassword(_that.email);case _:
+return forgetPassword(_that.email);case _Logout() when logout != null:
+return logout();case _:
   return orElse();
 
 }
@@ -185,12 +158,13 @@ return forgetPassword(_that.email);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  login,required TResult Function( String name,  String email,  String password)  signup,required TResult Function( String email)  forgetPassword,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  login,required TResult Function( String name,  String email,  String password)  signup,required TResult Function( String email)  forgetPassword,required TResult Function()  logout,}) {final _that = this;
 switch (_that) {
 case _Login():
 return login(_that.email,_that.password);case _Signup():
 return signup(_that.name,_that.email,_that.password);case _ForgetPassword():
-return forgetPassword(_that.email);case _:
+return forgetPassword(_that.email);case _Logout():
+return logout();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -207,12 +181,13 @@ return forgetPassword(_that.email);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  login,TResult? Function( String name,  String email,  String password)?  signup,TResult? Function( String email)?  forgetPassword,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  login,TResult? Function( String name,  String email,  String password)?  signup,TResult? Function( String email)?  forgetPassword,TResult? Function()?  logout,}) {final _that = this;
 switch (_that) {
 case _Login() when login != null:
 return login(_that.email,_that.password);case _Signup() when signup != null:
 return signup(_that.name,_that.email,_that.password);case _ForgetPassword() when forgetPassword != null:
-return forgetPassword(_that.email);case _:
+return forgetPassword(_that.email);case _Logout() when logout != null:
+return logout();case _:
   return null;
 
 }
@@ -227,12 +202,12 @@ class _Login with DiagnosticableTreeMixin implements AuthEvent {
   const _Login({required this.email, required this.password});
   
 
-@override final  String email;
+ final  String email;
  final  String password;
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$LoginCopyWith<_Login> get copyWith => __$LoginCopyWithImpl<_Login>(this, _$identity);
 
@@ -264,7 +239,7 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 /// @nodoc
 abstract mixin class _$LoginCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
   factory _$LoginCopyWith(_Login value, $Res Function(_Login) _then) = __$LoginCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  String email, String password
 });
@@ -283,7 +258,7 @@ class __$LoginCopyWithImpl<$Res>
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
   return _then(_Login(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
@@ -302,12 +277,12 @@ class _Signup with DiagnosticableTreeMixin implements AuthEvent {
   
 
  final  String name;
-@override final  String email;
+ final  String email;
  final  String password;
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$SignupCopyWith<_Signup> get copyWith => __$SignupCopyWithImpl<_Signup>(this, _$identity);
 
@@ -339,7 +314,7 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 /// @nodoc
 abstract mixin class _$SignupCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
   factory _$SignupCopyWith(_Signup value, $Res Function(_Signup) _then) = __$SignupCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  String name, String email, String password
 });
@@ -358,7 +333,7 @@ class __$SignupCopyWithImpl<$Res>
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? email = null,Object? password = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? name = null,Object? email = null,Object? password = null,}) {
   return _then(_Signup(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
@@ -377,11 +352,11 @@ class _ForgetPassword with DiagnosticableTreeMixin implements AuthEvent {
   const _ForgetPassword({required this.email});
   
 
-@override final  String email;
+ final  String email;
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 _$ForgetPasswordCopyWith<_ForgetPassword> get copyWith => __$ForgetPasswordCopyWithImpl<_ForgetPassword>(this, _$identity);
 
@@ -413,7 +388,7 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 /// @nodoc
 abstract mixin class _$ForgetPasswordCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
   factory _$ForgetPasswordCopyWith(_ForgetPassword value, $Res Function(_ForgetPassword) _then) = __$ForgetPasswordCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  String email
 });
@@ -432,7 +407,7 @@ class __$ForgetPasswordCopyWithImpl<$Res>
 
 /// Create a copy of AuthEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? email = null,}) {
   return _then(_ForgetPassword(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,
@@ -441,6 +416,44 @@ as String,
 
 
 }
+
+/// @nodoc
+
+
+class _Logout with DiagnosticableTreeMixin implements AuthEvent {
+  const _Logout();
+  
+
+
+
+
+
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'AuthEvent.logout'))
+    ;
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Logout);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'AuthEvent.logout()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 mixin _$AuthState implements DiagnosticableTreeMixin {
@@ -492,13 +505,14 @@ extension AuthStatePatterns on AuthState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Success value)?  success,TResult Function( _PasswordResetSuccess value)?  passwordResetSuccess,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Authenticated value)?  authenticated,TResult Function( _UnAuthenticated value)?  unauthenticated,TResult Function( _PasswordResetSuccess value)?  passwordResetSuccess,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Loading() when loading != null:
-return loading(_that);case _Success() when success != null:
-return success(_that);case _PasswordResetSuccess() when passwordResetSuccess != null:
+return loading(_that);case _Authenticated() when authenticated != null:
+return authenticated(_that);case _UnAuthenticated() when unauthenticated != null:
+return unauthenticated(_that);case _PasswordResetSuccess() when passwordResetSuccess != null:
 return passwordResetSuccess(_that);case _Failure() when failure != null:
 return failure(_that);case _:
   return orElse();
@@ -518,13 +532,14 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Success value)  success,required TResult Function( _PasswordResetSuccess value)  passwordResetSuccess,required TResult Function( _Failure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Authenticated value)  authenticated,required TResult Function( _UnAuthenticated value)  unauthenticated,required TResult Function( _PasswordResetSuccess value)  passwordResetSuccess,required TResult Function( _Failure value)  failure,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case _Loading():
-return loading(_that);case _Success():
-return success(_that);case _PasswordResetSuccess():
+return loading(_that);case _Authenticated():
+return authenticated(_that);case _UnAuthenticated():
+return unauthenticated(_that);case _PasswordResetSuccess():
 return passwordResetSuccess(_that);case _Failure():
 return failure(_that);case _:
   throw StateError('Unexpected subclass');
@@ -543,13 +558,14 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Success value)?  success,TResult? Function( _PasswordResetSuccess value)?  passwordResetSuccess,TResult? Function( _Failure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Authenticated value)?  authenticated,TResult? Function( _UnAuthenticated value)?  unauthenticated,TResult? Function( _PasswordResetSuccess value)?  passwordResetSuccess,TResult? Function( _Failure value)?  failure,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Loading() when loading != null:
-return loading(_that);case _Success() when success != null:
-return success(_that);case _PasswordResetSuccess() when passwordResetSuccess != null:
+return loading(_that);case _Authenticated() when authenticated != null:
+return authenticated(_that);case _UnAuthenticated() when unauthenticated != null:
+return unauthenticated(_that);case _PasswordResetSuccess() when passwordResetSuccess != null:
 return passwordResetSuccess(_that);case _Failure() when failure != null:
 return failure(_that);case _:
   return null;
@@ -568,12 +584,13 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserEntity user)?  success,TResult Function()?  passwordResetSuccess,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( UserEntity user)?  authenticated,TResult Function()?  unauthenticated,TResult Function()?  passwordResetSuccess,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
-return loading();case _Success() when success != null:
-return success(_that.user);case _PasswordResetSuccess() when passwordResetSuccess != null:
+return loading();case _Authenticated() when authenticated != null:
+return authenticated(_that.user);case _UnAuthenticated() when unauthenticated != null:
+return unauthenticated();case _PasswordResetSuccess() when passwordResetSuccess != null:
 return passwordResetSuccess();case _Failure() when failure != null:
 return failure(_that.message);case _:
   return orElse();
@@ -593,12 +610,13 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserEntity user)  success,required TResult Function()  passwordResetSuccess,required TResult Function( String message)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( UserEntity user)  authenticated,required TResult Function()  unauthenticated,required TResult Function()  passwordResetSuccess,required TResult Function( String message)  failure,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
-return loading();case _Success():
-return success(_that.user);case _PasswordResetSuccess():
+return loading();case _Authenticated():
+return authenticated(_that.user);case _UnAuthenticated():
+return unauthenticated();case _PasswordResetSuccess():
 return passwordResetSuccess();case _Failure():
 return failure(_that.message);case _:
   throw StateError('Unexpected subclass');
@@ -617,12 +635,13 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserEntity user)?  success,TResult? Function()?  passwordResetSuccess,TResult? Function( String message)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( UserEntity user)?  authenticated,TResult? Function()?  unauthenticated,TResult? Function()?  passwordResetSuccess,TResult? Function( String message)?  failure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
-return loading();case _Success() when success != null:
-return success(_that.user);case _PasswordResetSuccess() when passwordResetSuccess != null:
+return loading();case _Authenticated() when authenticated != null:
+return authenticated(_that.user);case _UnAuthenticated() when unauthenticated != null:
+return unauthenticated();case _PasswordResetSuccess() when passwordResetSuccess != null:
 return passwordResetSuccess();case _Failure() when failure != null:
 return failure(_that.message);case _:
   return null;
@@ -711,8 +730,8 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 /// @nodoc
 
 
-class _Success with DiagnosticableTreeMixin implements AuthState {
-  const _Success(this.user);
+class _Authenticated with DiagnosticableTreeMixin implements AuthState {
+  const _Authenticated(this.user);
   
 
  final  UserEntity user;
@@ -721,19 +740,19 @@ class _Success with DiagnosticableTreeMixin implements AuthState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SuccessCopyWith<_Success> get copyWith => __$SuccessCopyWithImpl<_Success>(this, _$identity);
+_$AuthenticatedCopyWith<_Authenticated> get copyWith => __$AuthenticatedCopyWithImpl<_Authenticated>(this, _$identity);
 
 
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
-    ..add(DiagnosticsProperty('type', 'AuthState.success'))
+    ..add(DiagnosticsProperty('type', 'AuthState.authenticated'))
     ..add(DiagnosticsProperty('user', user));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&(identical(other.user, user) || other.user == user));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Authenticated&&(identical(other.user, user) || other.user == user));
 }
 
 
@@ -742,15 +761,15 @@ int get hashCode => Object.hash(runtimeType,user);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'AuthState.success(user: $user)';
+  return 'AuthState.authenticated(user: $user)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SuccessCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
+abstract mixin class _$AuthenticatedCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
+  factory _$AuthenticatedCopyWith(_Authenticated value, $Res Function(_Authenticated) _then) = __$AuthenticatedCopyWithImpl;
 @useResult
 $Res call({
  UserEntity user
@@ -761,17 +780,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$SuccessCopyWithImpl<$Res>
-    implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(this._self, this._then);
+class __$AuthenticatedCopyWithImpl<$Res>
+    implements _$AuthenticatedCopyWith<$Res> {
+  __$AuthenticatedCopyWithImpl(this._self, this._then);
 
-  final _Success _self;
-  final $Res Function(_Success) _then;
+  final _Authenticated _self;
+  final $Res Function(_Authenticated) _then;
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? user = null,}) {
-  return _then(_Success(
+  return _then(_Authenticated(
 null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as UserEntity,
   ));
@@ -779,6 +798,44 @@ as UserEntity,
 
 
 }
+
+/// @nodoc
+
+
+class _UnAuthenticated with DiagnosticableTreeMixin implements AuthState {
+  const _UnAuthenticated();
+  
+
+
+
+
+
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'AuthState.unauthenticated'))
+    ;
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UnAuthenticated);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'AuthState.unauthenticated()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 

@@ -5,6 +5,7 @@ import 'package:task_manager_app/features/authentication/data/repositories/auth_
 import 'package:task_manager_app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:task_manager_app/features/authentication/domain/usecases/forget_password.dart';
 import 'package:task_manager_app/features/authentication/domain/usecases/login_user.dart';
+import 'package:task_manager_app/features/authentication/domain/usecases/logout_user.dart';
 import 'package:task_manager_app/features/authentication/domain/usecases/signup_user.dart';
 import 'package:task_manager_app/features/authentication/presentation/bloc/auth_bloc.dart';
 
@@ -28,6 +29,7 @@ Future<void> setupServiceLocator() async {
   getIt.registerLazySingleton(() => LoginUser(getIt()));
   getIt.registerLazySingleton(() => SignupUser(getIt()));
   getIt.registerLazySingleton(() => ForgetPassword(getIt()));
+  getIt.registerLazySingleton(() => LogoutUser(getIt()));
 
   //Bloc
   getIt.registerFactory(
@@ -35,6 +37,7 @@ Future<void> setupServiceLocator() async {
       loginUser: getIt(),
       signupUser: getIt(),
       forgetPassword: getIt(),
+      logoutUser: getIt(),
     ),
   );
 }

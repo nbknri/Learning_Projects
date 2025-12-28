@@ -15,4 +15,6 @@ abstract class AuthEvent with _$AuthEvent {
 
   const factory AuthEvent.forgetPassword({required String email}) =
       _ForgetPassword;
+
+  const factory AuthEvent.logout() = _Logout;
 }

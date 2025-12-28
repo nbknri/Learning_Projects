@@ -10,4 +10,5 @@ abstract class AuthRepository {
   });
 
   Future<void> forgetPassword({required String email});
+  Future<void> logout();
 }

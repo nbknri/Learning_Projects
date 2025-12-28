@@ -76,9 +76,22 @@ class AppTheme {
         foregroundColor: AppColors.white,
         disabledBackgroundColor: AppColors.primary,
         textStyle: AppTextStyles.elevatedButton,
-        minimumSize: const Size(double.infinity, 52),
+        minimumSize: const Size(double.infinity, 56),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         elevation: 0,
+      ),
+    ),
+
+    // ─────────────────────────────────────────
+    // Outlined Button Theme
+    // ─────────────────────────────────────────
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: AppColors.textPrimary,
+        side: const BorderSide(color: AppColors.border),
+        textStyle: AppTextStyles.socialButtonText,
+        maximumSize: const Size(double.infinity, 56),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
     ),
 
@@ -110,7 +123,7 @@ class AppTheme {
 
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(color: AppColors.primary, width: 1.2),
+        borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
       ),
 
       errorBorder: OutlineInputBorder(
@@ -157,6 +170,16 @@ class AppTheme {
         }
         return AppColors.transparent; // ✔ unchecked bg
       }),
+    ),
+
+    // SnackBar (Offline Bar)
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: AppColors.primary,
+      contentTextStyle: AppTextStyles.subtitle.copyWith(
+        color: AppColors.white,
+      ),
+      behavior: SnackBarBehavior.fixed,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
   );
 

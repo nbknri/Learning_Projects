@@ -42,4 +42,9 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> forgetPassword({required String email}) async {
     await _firebaseAuthService.forgetPassword(email: email);
   }
+
+  @override
+  Future<void> logout() async {
+    await _firebaseAuthService.logout();
+  }
 }
