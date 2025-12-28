@@ -88,6 +88,7 @@ class AppTheme {
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.textPrimary,
+        backgroundColor: AppColors.surface,
         side: const BorderSide(color: AppColors.border),
         textStyle: AppTextStyles.socialButtonText,
         maximumSize: const Size(double.infinity, 56),
@@ -152,6 +153,7 @@ class AppTheme {
     dividerTheme: const DividerThemeData(
       color: AppColors.divider,
       thickness: 1,
+      space: 32,
     ),
 
     // ───────────────────────────────
@@ -160,7 +162,7 @@ class AppTheme {
     checkboxTheme: CheckboxThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
 
-      side: const BorderSide(color: AppColors.border, width: 1.5),
+      side: const BorderSide(color: AppColors.border, width: 2),
 
       checkColor: WidgetStateProperty.all(AppColors.white),
 
@@ -168,7 +170,7 @@ class AppTheme {
         if (states.contains(WidgetState.selected)) {
           return AppColors.primary; // ✔ checked color
         }
-        return AppColors.transparent; // ✔ unchecked bg
+        return AppColors.surface; // ✔ unchecked bg
       }),
     ),
 

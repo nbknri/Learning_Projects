@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'package:task_manager_app/features/authentication/data/datasources/firebase_auth_service.dart';
 import 'package:task_manager_app/features/authentication/data/model/user_model.dart';
 import 'package:task_manager_app/features/authentication/domain/entities/user_entity.dart';
 import 'package:task_manager_app/features/authentication/domain/repositories/auth_repository.dart';
 
+@LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuthService _firebaseAuthService;
 

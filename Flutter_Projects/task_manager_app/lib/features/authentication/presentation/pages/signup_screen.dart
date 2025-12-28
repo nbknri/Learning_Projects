@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manager_app/core/theme/app_colors.dart';
+import 'package:task_manager_app/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:task_manager_app/features/authentication/presentation/widgets/app_text_filed.dart';
 import 'package:task_manager_app/features/authentication/presentation/widgets/primary_button.dart';
-import 'package:task_manager_app/features/authentication/presentation/bloc/auth_bloc.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -139,7 +139,6 @@ class _SignupScreenState extends State<SignupScreen> {
                             _agreedToTerms = value ?? false;
                           });
 
-                          debugPrint(_agreedToTerms.toString());
                         },
                       ),
                       Expanded(

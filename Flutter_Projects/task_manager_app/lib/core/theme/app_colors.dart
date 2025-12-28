@@ -40,7 +40,7 @@ class AppColors {
   // Borders & Dividers
   // ─────────────────────────────────────────
   static const Color border = Color(0xFFE2E8F0);
-  static const Color divider = Color(0xFFF1F5F9);
+  static const Color divider = Color(0xFFE2E8F0);
 
   // ─────────────────────────────────────────
   // Disabled / Utility

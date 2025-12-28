@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:task_manager_app/features/authentication/domain/entities/user_entity.dart';
 import 'package:task_manager_app/features/authentication/domain/usecases/forget_password.dart';
@@ -11,6 +12,7 @@ part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
+@injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUser loginUser;
   final SignupUser signupUser;
