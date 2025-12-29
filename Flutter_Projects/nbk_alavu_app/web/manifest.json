@@ -1,6 +1,6 @@
 {
-    "name": "nbk_alavu_app",
-    "short_name": "nbk_alavu_app",
+    "name": "NBK Alavu App",
+    "short_name": "NBK Alavu",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
