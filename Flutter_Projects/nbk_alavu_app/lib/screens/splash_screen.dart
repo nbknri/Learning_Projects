@@ -1,0 +1,56 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:nbk_alavu_app/screens/land_calculator_screen.dart';
+
+class SplashScreen extends StatefulWidget {
+  final VoidCallback onThemeChanged;
+  final bool isDarkMode;
+
+  const SplashScreen({
+    super.key,
+    required this.onThemeChanged,
+    required this.isDarkMode,
+  });
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(const Duration(seconds: 1), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => LandCalculatorScreen(
+            onThemeChanged: widget.onThemeChanged,
+            isDarkMode: widget.isDarkMode,
+          ),
+        ),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Logo or Icon could go here
+            Image.asset(
+              "assets/images/logo.png",
+              width: 150,
+            ),
+            const SizedBox(height: 10),
+            const CircularProgressIndicator(),
+          ],
+        ),
+      ),
+    );
+  }
+}

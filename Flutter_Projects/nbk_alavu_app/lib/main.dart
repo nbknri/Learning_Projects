@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nbk_alavu_app/core/theme/app_theme.dart';
-import 'package:nbk_alavu_app/screens/land_calculator_screen.dart';
+import 'package:nbk_alavu_app/screens/splash_screen.dart';
 
 
 void main() {
@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: _themeMode,
-      home: LandCalculatorScreen(
+      home: SplashScreen(
         onThemeChanged: _toggleTheme,
         isDarkMode: _themeMode == ThemeMode.dark,
       ),
