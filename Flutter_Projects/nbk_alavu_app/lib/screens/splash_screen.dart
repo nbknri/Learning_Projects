@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 1), () {
+    Timer(const Duration(milliseconds: 500), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => LandCalculatorScreen(
@@ -46,8 +46,6 @@ class _SplashScreenState extends State<SplashScreen> {
               "assets/images/logo.png",
               width: 150,
             ),
-            const SizedBox(height: 10),
-            const CircularProgressIndicator(),
           ],
         ),
       ),
