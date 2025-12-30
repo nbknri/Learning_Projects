@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nbk_alavu_app/land_calculator_screen.dart';
+import 'package:nbk_alavu_app/core/theme/app_theme.dart';
+import 'package:nbk_alavu_app/screens/land_calculator_screen.dart';
 
 
 void main() {
@@ -27,25 +28,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Land Calculator",
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.light),
-        useMaterial3: true,
-        snackBarTheme: const SnackBarThemeData(
-          backgroundColor: Colors.deepPurple,
-          contentTextStyle: TextStyle(color: Colors.white),
-          behavior: SnackBarBehavior.floating,
-        ),
-      ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.dark),
-        useMaterial3: true,
-        snackBarTheme: SnackBarThemeData(
-          backgroundColor: Colors.deepPurple.shade200,
-          contentTextStyle: const TextStyle(color: Colors.black),
-          behavior: SnackBarBehavior.floating,
-        ),
-      ),
+      title: "NBK Alavu App",
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       themeMode: _themeMode,
       home: LandCalculatorScreen(
         onThemeChanged: _toggleTheme,
