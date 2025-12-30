@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nbk_alavu_app/core/widgets/app_text_field.dart';
 import 'package:nbk_alavu_app/core/widgets/elevated_icon_button.dart';
-import 'package:nbk_alavu_app/core/widgets/app_text_filed.dart';
 
 class InputSection extends StatelessWidget {
   final TextEditingController sideAController;
@@ -51,21 +51,21 @@ class InputSection extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: AppTextFiled(
+                  child: AppTextField(
                     controller: sideAController,
                     label: "Side A",
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: AppTextFiled(
+                  child: AppTextField(
                     controller: sideBController,
                     label: "Side B",
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: AppTextFiled(
+                  child: AppTextField(
                     controller: sideCController,
                     label: "Side C",
                   ),

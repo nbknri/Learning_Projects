@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nbk_alavu_app/core/controllers/land_calculator_controller.dart';
-import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
-import 'package:nbk_alavu_app/core/widgets/added_triangles_list.dart';
-import 'package:nbk_alavu_app/core/widgets/input_section.dart';
-import 'package:nbk_alavu_app/core/widgets/result_section.dart';
+import 'package:nbk_alavu_app/screens/widgets/added_triangles_list.dart';
+import 'package:nbk_alavu_app/screens/widgets/input_section.dart';
+import 'package:nbk_alavu_app/screens/widgets/result_section.dart';
 
 class LandCalculatorScreen extends StatefulWidget {
   final VoidCallback onThemeChanged;
@@ -70,7 +69,7 @@ class _LandCalculatorScreenState extends State<LandCalculatorScreen> {
       appBar: AppBar(
         title: const Text(
           "NBK Alavu App", 
-          style: AppTextStyle.appBarTitle,
+          style: TextStyle(fontWeight: FontWeight.bold),
           ),
         centerTitle: true,
         actions: [
@@ -80,37 +79,39 @@ class _LandCalculatorScreenState extends State<LandCalculatorScreen> {
           ),
         ],
       ),
-      body: ListenableBuilder(
-        listenable: _controller,
-        builder: (context, child) {
-          return Column(
-            children: [
-              // --- Input Section ---
-              InputSection(
-                sideAController: _sideAController,
-                sideBController: _sideBController,
-                sideCController: _sideCController,
-                selectedUnit: _controller.selectedUnit,
-                onUnitChanged: (val) {
-                  if (val != null) _controller.setUnit(val);
-                },
-                addTriangleFunction: _addTriangle,
-                clearTextFieldFunction: _clearTextField,
-              ),
-
-              // --- List of Added Triangles ---
-              Expanded(
-                child: AddedTrianglesList(
-                  triangles: _controller.triangles,
-                  deleteTriangle: _controller.deleteTriangle,
+      body: SafeArea(
+        child: ListenableBuilder(
+          listenable: _controller,
+          builder: (context, child) {
+            return Column(
+              children: [
+                // --- Input Section ---
+                InputSection(
+                  sideAController: _sideAController,
+                  sideBController: _sideBController,
+                  sideCController: _sideCController,
+                  selectedUnit: _controller.selectedUnit,
+                  onUnitChanged: (val) {
+                    if (val != null) _controller.setUnit(val);
+                  },
+                  addTriangleFunction: _addTriangle,
+                  clearTextFieldFunction: _clearTextField,
                 ),
-              ),
 
-              // --- Total Result Section ---
-              ResultSection(formattedResult: _controller.formattedResult),
-            ],
-          );
-        },
+                // --- List of Added Triangles ---
+                Expanded(
+                  child: AddedTrianglesList(
+                    triangles: _controller.triangles,
+                    deleteTriangle: _controller.deleteTriangle,
+                  ),
+                ),
+
+                // --- Total Result Section ---
+                ResultSection(formattedResult: _controller.formattedResult),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

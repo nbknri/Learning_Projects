@@ -73,6 +73,6 @@ class LandCalculatorController extends ChangeNotifier {
 
     return "Cents: ${cents.toStringAsFixed(3)}\n"
         "Ares: ${ares.toStringAsFixed(3)}\n"
-        "Square Meter: ${totalAreaSqM.toStringAsFixed(3)}";
+        "Sq. Meter: ${totalAreaSqM.toStringAsFixed(3)}";
   }
 }

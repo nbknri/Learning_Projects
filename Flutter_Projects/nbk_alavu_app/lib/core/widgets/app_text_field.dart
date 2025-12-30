@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AppTextFiled extends StatelessWidget {
+class AppTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
 
-  const AppTextFiled({super.key, required this.controller, required this.label});
+  const AppTextField({super.key, required this.controller, required this.label});
 
   @override
   Widget build(BuildContext context) {
