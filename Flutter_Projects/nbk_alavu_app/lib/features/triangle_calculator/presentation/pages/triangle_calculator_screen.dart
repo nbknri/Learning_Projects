@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:nbk_alavu_app/features/land_calculator/presentation/manager/land_calculator_controller.dart';
-import 'package:nbk_alavu_app/features/land_calculator/presentation/widgets/added_triangles_list.dart';
-import 'package:nbk_alavu_app/features/land_calculator/presentation/widgets/input_section.dart';
-import 'package:nbk_alavu_app/features/land_calculator/presentation/widgets/result_section.dart';
+import 'package:nbk_alavu_app/features/triangle_calculator/presentation/manager/triangle_calculator_controller.dart';
+import 'package:nbk_alavu_app/features/triangle_calculator/presentation/widgets/added_triangles_list.dart';
+import 'package:nbk_alavu_app/features/triangle_calculator/presentation/widgets/input_section.dart';
+import 'package:nbk_alavu_app/features/triangle_calculator/presentation/widgets/result_section.dart';
 
-class LandCalculatorScreen extends StatefulWidget {
+class TriangleCalculatorScreen extends StatefulWidget {
   final VoidCallback onThemeChanged;
 
-  const LandCalculatorScreen({super.key, required this.onThemeChanged});
+  const TriangleCalculatorScreen({super.key, required this.onThemeChanged});
 
   @override
-  State<LandCalculatorScreen> createState() => _LandCalculatorScreenState();
+  State<TriangleCalculatorScreen> createState() => _TriangleCalculatorScreenState();
 }
 
-class _LandCalculatorScreenState extends State<LandCalculatorScreen> {
+class _TriangleCalculatorScreenState extends State<TriangleCalculatorScreen> {
   // Controller
-  final LandCalculatorController _controller = LandCalculatorController();
+  final TriangleCalculatorController _controller = TriangleCalculatorController();
 
   // Text Controllers
   final TextEditingController _sideAController = TextEditingController();

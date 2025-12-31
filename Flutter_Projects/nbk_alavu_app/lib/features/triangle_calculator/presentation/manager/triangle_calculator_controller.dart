@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:nbk_alavu_app/core/utils/format_utils.dart';
-import 'package:nbk_alavu_app/features/land_calculator/domain/entities/triangle_model.dart';
+import 'package:nbk_alavu_app/features/triangle_calculator/domain/entities/triangle_model.dart';
 
-class LandCalculatorController extends ChangeNotifier {
+class TriangleCalculatorController extends ChangeNotifier {
   List<TriangleModel> triangles = [];
   String selectedUnit = 'Meters'; // Default Unit
   double totalAreaSqM = 0.0;

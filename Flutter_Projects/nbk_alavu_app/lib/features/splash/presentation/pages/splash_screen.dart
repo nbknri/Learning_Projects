@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nbk_alavu_app/features/land_calculator/presentation/pages/land_calculator_screen.dart';
+import 'package:nbk_alavu_app/features/triangle_calculator/presentation/pages/triangle_calculator_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onThemeChanged;
@@ -21,7 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(milliseconds: 500), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => LandCalculatorScreen(
+          builder: (context) =>
+              TriangleCalculatorScreen(
             onThemeChanged: widget.onThemeChanged,
           ),
         ),
