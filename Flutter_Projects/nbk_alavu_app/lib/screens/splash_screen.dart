@@ -5,12 +5,9 @@ import 'package:nbk_alavu_app/screens/land_calculator_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onThemeChanged;
-  final bool isDarkMode;
-
   const SplashScreen({
     super.key,
     required this.onThemeChanged,
-    required this.isDarkMode,
   });
 
   @override
@@ -26,7 +23,6 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(
           builder: (context) => LandCalculatorScreen(
             onThemeChanged: widget.onThemeChanged,
-            isDarkMode: widget.isDarkMode,
           ),
         ),
       );
