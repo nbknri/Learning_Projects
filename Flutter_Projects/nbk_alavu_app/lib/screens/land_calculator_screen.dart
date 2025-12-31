@@ -44,6 +44,7 @@ class _LandCalculatorScreenState extends State<LandCalculatorScreen> {
     );
 
     if (error != null) {
+      FocusManager.instance.primaryFocus?.unfocus();
       _showSnackBar(error);
     } else {
       // Clear inputs on success
