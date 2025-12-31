@@ -4,9 +4,6 @@ class AppColor {
   //───────────────────────────────────
   // Primary Palette
   //───────────────────────────────────
-  //───────────────────────────────────
-  // Primary Palette
-  //───────────────────────────────────
   // User Requested: Dark Purple, Purple, Lavender
   static const Color darkPurple = Color(0xFF4527A0); // Deep Purple 800
   static const Color purple = Colors.deepPurple; // Standard Deep Purple

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class AppTextStyle {
   const AppTextStyle._();
 
-
-
   //───────────────────────────────────
   // Component Styles
   //───────────────────────────────────

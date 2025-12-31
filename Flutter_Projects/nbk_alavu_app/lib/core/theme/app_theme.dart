@@ -170,7 +170,7 @@ class AppTheme {
     // SnackBar Theme
     snackBarTheme: SnackBarThemeData(
       backgroundColor: AppColor.snackBarDark,
-      contentTextStyle: AppTextStyle.snackBarContent(AppColor.textDarkPrimary),
+      contentTextStyle: AppTextStyle.snackBarContent(AppColor.textLightPrimary),
       behavior: SnackBarBehavior.floating,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
