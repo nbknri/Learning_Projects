@@ -4,6 +4,9 @@ import 'package:nbk_alavu_app/features/triangle_calculator/domain/entities/trian
 
 part 'triangle_calculator_state.freezed.dart';
 
+
+enum TriangleCalculatorStatus { initial, success, failure }
+
 @freezed
 abstract class TriangleCalculatorState with _$TriangleCalculatorState {
   const TriangleCalculatorState._();
@@ -12,6 +15,7 @@ abstract class TriangleCalculatorState with _$TriangleCalculatorState {
     @Default([]) List<TriangleModel> triangles,
     @Default('Meters') String selectedUnit,
     @Default(0.0) double totalAreaSqM,
+    @Default(TriangleCalculatorStatus.initial) TriangleCalculatorStatus status,
     String? errorMessage,
   }) = _TriangleCalculatorState;
 

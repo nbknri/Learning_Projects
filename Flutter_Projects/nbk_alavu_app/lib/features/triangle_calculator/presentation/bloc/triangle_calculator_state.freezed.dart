@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TriangleCalculatorState {
 
- List<TriangleModel> get triangles; String get selectedUnit; double get totalAreaSqM; String? get errorMessage;
+ List<TriangleModel> get triangles; String get selectedUnit; double get totalAreaSqM; TriangleCalculatorStatus get status; String? get errorMessage;
 /// Create a copy of TriangleCalculatorState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $TriangleCalculatorStateCopyWith<TriangleCalculatorState> get copyWith => _$Tria
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TriangleCalculatorState&&const DeepCollectionEquality().equals(other.triangles, triangles)&&(identical(other.selectedUnit, selectedUnit) || other.selectedUnit == selectedUnit)&&(identical(other.totalAreaSqM, totalAreaSqM) || other.totalAreaSqM == totalAreaSqM)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TriangleCalculatorState&&const DeepCollectionEquality().equals(other.triangles, triangles)&&(identical(other.selectedUnit, selectedUnit) || other.selectedUnit == selectedUnit)&&(identical(other.totalAreaSqM, totalAreaSqM) || other.totalAreaSqM == totalAreaSqM)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(triangles),selectedUnit,totalAreaSqM,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(triangles),selectedUnit,totalAreaSqM,status,errorMessage);
 
 @override
 String toString() {
-  return 'TriangleCalculatorState(triangles: $triangles, selectedUnit: $selectedUnit, totalAreaSqM: $totalAreaSqM, errorMessage: $errorMessage)';
+  return 'TriangleCalculatorState(triangles: $triangles, selectedUnit: $selectedUnit, totalAreaSqM: $totalAreaSqM, status: $status, errorMessage: $errorMessage)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $TriangleCalculatorStateCopyWith<$Res>  {
   factory $TriangleCalculatorStateCopyWith(TriangleCalculatorState value, $Res Function(TriangleCalculatorState) _then) = _$TriangleCalculatorStateCopyWithImpl;
 @useResult
 $Res call({
- List<TriangleModel> triangles, String selectedUnit, double totalAreaSqM, String? errorMessage
+ List<TriangleModel> triangles, String selectedUnit, double totalAreaSqM, TriangleCalculatorStatus status, String? errorMessage
 });
 
 
@@ -62,12 +62,13 @@ class _$TriangleCalculatorStateCopyWithImpl<$Res>
 
 /// Create a copy of TriangleCalculatorState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? triangles = null,Object? selectedUnit = null,Object? totalAreaSqM = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? triangles = null,Object? selectedUnit = null,Object? totalAreaSqM = null,Object? status = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 triangles: null == triangles ? _self.triangles : triangles // ignore: cast_nullable_to_non_nullable
 as List<TriangleModel>,selectedUnit: null == selectedUnit ? _self.selectedUnit : selectedUnit // ignore: cast_nullable_to_non_nullable
 as String,totalAreaSqM: null == totalAreaSqM ? _self.totalAreaSqM : totalAreaSqM // ignore: cast_nullable_to_non_nullable
-as double,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as double,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as TriangleCalculatorStatus,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<TriangleModel> triangles,  String selectedUnit,  double totalAreaSqM,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<TriangleModel> triangles,  String selectedUnit,  double totalAreaSqM,  TriangleCalculatorStatus status,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TriangleCalculatorState() when $default != null:
-return $default(_that.triangles,_that.selectedUnit,_that.totalAreaSqM,_that.errorMessage);case _:
+return $default(_that.triangles,_that.selectedUnit,_that.totalAreaSqM,_that.status,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.triangles,_that.selectedUnit,_that.totalAreaSqM,_that.erro
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<TriangleModel> triangles,  String selectedUnit,  double totalAreaSqM,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<TriangleModel> triangles,  String selectedUnit,  double totalAreaSqM,  TriangleCalculatorStatus status,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _TriangleCalculatorState():
-return $default(_that.triangles,_that.selectedUnit,_that.totalAreaSqM,_that.errorMessage);case _:
+return $default(_that.triangles,_that.selectedUnit,_that.totalAreaSqM,_that.status,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +195,10 @@ return $default(_that.triangles,_that.selectedUnit,_that.totalAreaSqM,_that.erro
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<TriangleModel> triangles,  String selectedUnit,  double totalAreaSqM,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<TriangleModel> triangles,  String selectedUnit,  double totalAreaSqM,  TriangleCalculatorStatus status,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _TriangleCalculatorState() when $default != null:
-return $default(_that.triangles,_that.selectedUnit,_that.totalAreaSqM,_that.errorMessage);case _:
+return $default(_that.triangles,_that.selectedUnit,_that.totalAreaSqM,_that.status,_that.errorMessage);case _:
   return null;
 
 }
@@ -209,7 +210,7 @@ return $default(_that.triangles,_that.selectedUnit,_that.totalAreaSqM,_that.erro
 
 
 class _TriangleCalculatorState extends TriangleCalculatorState {
-  const _TriangleCalculatorState({final  List<TriangleModel> triangles = const [], this.selectedUnit = 'Meters', this.totalAreaSqM = 0.0, this.errorMessage}): _triangles = triangles,super._();
+  const _TriangleCalculatorState({final  List<TriangleModel> triangles = const [], this.selectedUnit = 'Meters', this.totalAreaSqM = 0.0, this.status = TriangleCalculatorStatus.initial, this.errorMessage}): _triangles = triangles,super._();
   
 
  final  List<TriangleModel> _triangles;
@@ -221,6 +222,7 @@ class _TriangleCalculatorState extends TriangleCalculatorState {
 
 @override@JsonKey() final  String selectedUnit;
 @override@JsonKey() final  double totalAreaSqM;
+@override@JsonKey() final  TriangleCalculatorStatus status;
 @override final  String? errorMessage;
 
 /// Create a copy of TriangleCalculatorState
@@ -233,16 +235,16 @@ _$TriangleCalculatorStateCopyWith<_TriangleCalculatorState> get copyWith => __$T
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TriangleCalculatorState&&const DeepCollectionEquality().equals(other._triangles, _triangles)&&(identical(other.selectedUnit, selectedUnit) || other.selectedUnit == selectedUnit)&&(identical(other.totalAreaSqM, totalAreaSqM) || other.totalAreaSqM == totalAreaSqM)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TriangleCalculatorState&&const DeepCollectionEquality().equals(other._triangles, _triangles)&&(identical(other.selectedUnit, selectedUnit) || other.selectedUnit == selectedUnit)&&(identical(other.totalAreaSqM, totalAreaSqM) || other.totalAreaSqM == totalAreaSqM)&&(identical(other.status, status) || other.status == status)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_triangles),selectedUnit,totalAreaSqM,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_triangles),selectedUnit,totalAreaSqM,status,errorMessage);
 
 @override
 String toString() {
-  return 'TriangleCalculatorState(triangles: $triangles, selectedUnit: $selectedUnit, totalAreaSqM: $totalAreaSqM, errorMessage: $errorMessage)';
+  return 'TriangleCalculatorState(triangles: $triangles, selectedUnit: $selectedUnit, totalAreaSqM: $totalAreaSqM, status: $status, errorMessage: $errorMessage)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$TriangleCalculatorStateCopyWith<$Res> implements $Triangl
   factory _$TriangleCalculatorStateCopyWith(_TriangleCalculatorState value, $Res Function(_TriangleCalculatorState) _then) = __$TriangleCalculatorStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<TriangleModel> triangles, String selectedUnit, double totalAreaSqM, String? errorMessage
+ List<TriangleModel> triangles, String selectedUnit, double totalAreaSqM, TriangleCalculatorStatus status, String? errorMessage
 });
 
 
@@ -270,12 +272,13 @@ class __$TriangleCalculatorStateCopyWithImpl<$Res>
 
 /// Create a copy of TriangleCalculatorState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? triangles = null,Object? selectedUnit = null,Object? totalAreaSqM = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? triangles = null,Object? selectedUnit = null,Object? totalAreaSqM = null,Object? status = null,Object? errorMessage = freezed,}) {
   return _then(_TriangleCalculatorState(
 triangles: null == triangles ? _self._triangles : triangles // ignore: cast_nullable_to_non_nullable
 as List<TriangleModel>,selectedUnit: null == selectedUnit ? _self.selectedUnit : selectedUnit // ignore: cast_nullable_to_non_nullable
 as String,totalAreaSqM: null == totalAreaSqM ? _self.totalAreaSqM : totalAreaSqM // ignore: cast_nullable_to_non_nullable
-as double,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as double,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as TriangleCalculatorStatus,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

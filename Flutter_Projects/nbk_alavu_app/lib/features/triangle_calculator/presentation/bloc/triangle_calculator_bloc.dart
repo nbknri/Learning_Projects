@@ -17,14 +17,24 @@ class TriangleCalculatorBloc extends Bloc<TriangleCalculatorEvent, TriangleCalcu
 
   void _onAddTriangle(AddTriangle event, Emitter<TriangleCalculatorState> emit) {
     // Clear previous error
-    emit(state.copyWith(errorMessage: null));
+    emit(
+      state.copyWith(
+        errorMessage: null,
+        status: TriangleCalculatorStatus.initial,
+      ),
+    );
 
     double? a = double.tryParse(event.sideA);
     double? b = double.tryParse(event.sideB);
     double? c = double.tryParse(event.sideC);
 
     if (a == null || b == null || c == null) {
-      emit(state.copyWith(errorMessage: "ദയവായി എല്ലാ അളവുകളും കൃത്യമായി നൽകുക."));
+      emit(
+        state.copyWith(
+          status: TriangleCalculatorStatus.failure,
+          errorMessage: "ദയവായി എല്ലാ അളവുകളും കൃത്യമായി നൽകുക.",
+        ),
+      );
       return;
     }
 
@@ -33,7 +43,12 @@ class TriangleCalculatorBloc extends Bloc<TriangleCalculatorEvent, TriangleCalcu
     double cM = state.selectedUnit == 'Feet' ? c * 0.3048 : c;
 
     if (aM + bM <= cM || aM + cM <= bM || bM + cM <= aM) {
-      emit(state.copyWith(errorMessage: "ഈ അളവുകൾ വെച്ച് ഒരു ത്രികോണം നിർമ്മിക്കാൻ കഴിയില്ല."));
+      emit(
+        state.copyWith(
+          status: TriangleCalculatorStatus.failure,
+          errorMessage: "ഈ അളവുകൾ വെച്ച് ഒരു ത്രികോണം നിർമ്മിക്കാൻ കഴിയില്ല.",
+        ),
+      );
       return;
     }
 
@@ -53,6 +68,7 @@ class TriangleCalculatorBloc extends Bloc<TriangleCalculatorEvent, TriangleCalcu
     emit(state.copyWith(
       triangles: updatedTriangles,
       totalAreaSqM: totalArea,
+        status: TriangleCalculatorStatus.success,
       errorMessage: null, // Success clears error
     ));
   }
@@ -65,6 +81,7 @@ class TriangleCalculatorBloc extends Bloc<TriangleCalculatorEvent, TriangleCalcu
       triangles: updatedTriangles,
       totalAreaSqM: totalArea,
       errorMessage: null,
+        status: TriangleCalculatorStatus.initial,
     ));
   }
 
@@ -73,6 +90,7 @@ class TriangleCalculatorBloc extends Bloc<TriangleCalculatorEvent, TriangleCalcu
       triangles: [],
       totalAreaSqM: 0.0,
       errorMessage: null,
+        status: TriangleCalculatorStatus.initial,
     ));
   }
 
@@ -80,6 +98,7 @@ class TriangleCalculatorBloc extends Bloc<TriangleCalculatorEvent, TriangleCalcu
     emit(state.copyWith(
       selectedUnit: event.unit,
       errorMessage: null,
+        status: TriangleCalculatorStatus.initial, // Reset status
     ));
   }
 

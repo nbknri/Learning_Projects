@@ -118,17 +118,12 @@ class _TriangleCalculatorScreenState extends State<TriangleCalculatorScreen> {
           body: SafeArea(
             child: BlocConsumer<TriangleCalculatorBloc, TriangleCalculatorState>(
               listener: (context, state) {
-                if (state.errorMessage != null) {
+                    if (state.status == TriangleCalculatorStatus.failure &&
+                        state.errorMessage != null) {
                   _showSnackBar(context, state.errorMessage!);
-                } else {
-                  // Start of a workaround: only clear if successful add action just happened?
-                  // Actually, simpler to just clear on button press if valid, but keeping logic
-                  // here: if no error, we assume success. BUT we only want to clear on ADD success.
-                  // For now, let's just clear manually in UI or listen to changes.
-                  // Refinement: Ideally strict State management handles this.
-                  // Let's rely on checking if triangle count increased or make a specific effect.
-                  // For simplicity in this step, I'll clear fields here if error is null AND inputs were not empty.
-                  // A better way is to fire a separate SideEffect.
+                    } else if (state.status ==
+                        TriangleCalculatorStatus.success) {
+                      _clearTextField();
                 }
               },
               builder: (context, state) {
@@ -148,16 +143,7 @@ class _TriangleCalculatorScreenState extends State<TriangleCalculatorScreen> {
                         }
                       },
                       addTriangleFunction: () {
-                        _addTriangle(context);
-                        // Optimistic clear or wait for listener?
-                        // Let's just clear here if no obvious error logic locally,
-                        // but since error comes from Bloc, we should wait.
-                        // Actually, the original code cleared ON SUCCESS.
-                        // I'll add a dirty fix: check validity inside _addTriangle or listen to state change.
-                        // Let's implement a clean listener approach:
-                        // If current state has NO error and we just tried to add...
-                        // Reverting to simple UI clear for now, triggering AFTER add event.
-                        _clearTextField();
+                            _addTriangle(context);
                       },
                       clearTextFieldFunction: _clearTextField,
                     ),
