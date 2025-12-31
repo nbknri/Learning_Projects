@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nbk_alavu_app/core/controllers/land_calculator_controller.dart';
-import 'package:nbk_alavu_app/screens/widgets/added_triangles_list.dart';
-import 'package:nbk_alavu_app/screens/widgets/input_section.dart';
-import 'package:nbk_alavu_app/screens/widgets/result_section.dart';
+import 'package:nbk_alavu_app/features/land_calculator/presentation/manager/land_calculator_controller.dart';
+import 'package:nbk_alavu_app/features/land_calculator/presentation/widgets/added_triangles_list.dart';
+import 'package:nbk_alavu_app/features/land_calculator/presentation/widgets/input_section.dart';
+import 'package:nbk_alavu_app/features/land_calculator/presentation/widgets/result_section.dart';
 
 class LandCalculatorScreen extends StatefulWidget {
   final VoidCallback onThemeChanged;
 
-
-  const LandCalculatorScreen({
-    super.key,
-    required this.onThemeChanged,
-  });
+  const LandCalculatorScreen({super.key, required this.onThemeChanged});
 
   @override
   State<LandCalculatorScreen> createState() => _LandCalculatorScreenState();
@@ -78,6 +74,38 @@ class _LandCalculatorScreenState extends State<LandCalculatorScreen> {
           centerTitle: true,
           actions: [
             IconButton(
+              onPressed: () {
+                if (_controller.triangles.isNotEmpty) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text("Clear All?"),
+                      content: const Text(
+                        "Are you sure you want to delete all triangles?",
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text("Cancel"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            _controller.clearAll();
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            "Delete",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+              icon: const Icon(Icons.delete_sweep),
+            ),
+            IconButton(
               onPressed: widget.onThemeChanged,
               icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
             ),
@@ -111,7 +139,11 @@ class _LandCalculatorScreenState extends State<LandCalculatorScreen> {
                   ),
 
                   // --- Total Result Section ---
-                  ResultSection(formattedResult: _controller.formattedResult),
+                  _controller.triangles.isNotEmpty
+                      ? ResultSection(
+                          formattedResult: _controller.formattedResult,
+                        )
+                      : SizedBox.shrink(),
                 ],
               );
             },

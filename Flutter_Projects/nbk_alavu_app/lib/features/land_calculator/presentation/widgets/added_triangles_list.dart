@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nbk_alavu_app/core/model/triangle_model.dart';
 import 'package:nbk_alavu_app/core/theme/app_color.dart';
+import 'package:nbk_alavu_app/core/utils/format_utils.dart';
+import 'package:nbk_alavu_app/features/land_calculator/domain/entities/triangle_model.dart';
 
 class AddedTrianglesList extends StatelessWidget {
   final List<TriangleModel> triangles;
@@ -18,7 +19,7 @@ class AddedTrianglesList extends StatelessWidget {
           leading: CircleAvatar(child: Text("${index + 1}")),
           title: Text("Sides: ${t.sideA}, ${t.sideB}, ${t.sideC}"),
           subtitle: Text(
-            "Area: ${t.areaInSqMeter.toStringAsFixed(3)} Sq.m",
+            "Area: ${FormatUtils.formatArea(t.areaInSqMeter)} Sq.m",
           ),
           trailing: IconButton(
             icon: const Icon(Icons.delete, color: AppColor.deleteButton),

@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:nbk_alavu_app/core/model/triangle_model.dart';
+import 'package:nbk_alavu_app/core/utils/format_utils.dart';
+import 'package:nbk_alavu_app/features/land_calculator/domain/entities/triangle_model.dart';
 
 class LandCalculatorController extends ChangeNotifier {
   List<TriangleModel> triangles = [];
@@ -61,6 +62,12 @@ class LandCalculatorController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void clearAll() {
+    triangles.clear();
+    _calculateTotal();
+    notifyListeners();
+  }
+
   void setUnit(String newUnit) {
     selectedUnit = newUnit;
     notifyListeners();
@@ -71,8 +78,8 @@ class LandCalculatorController extends ChangeNotifier {
     double cents = totalAreaSqM / 40.4686; // 1 Cent = ~40.47 Sq meter
     double ares = totalAreaSqM / 100; // 1 Are = 100 Sq meter
 
-    return "Cents: ${cents.toStringAsFixed(3)}\n"
-        "Ares: ${ares.toStringAsFixed(3)}\n"
-        "Sq. Meter: ${totalAreaSqM.toStringAsFixed(3)}";
+    return "Cents: ${FormatUtils.formatArea(cents)}\n"
+        "Ares: ${FormatUtils.formatArea(ares)}\n"
+        "Sq. Meter: ${FormatUtils.formatArea(totalAreaSqM)}";
   }
 }

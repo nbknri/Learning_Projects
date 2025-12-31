@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nbk_alavu_app/screens/land_calculator_screen.dart';
+import 'package:nbk_alavu_app/features/land_calculator/presentation/pages/land_calculator_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onThemeChanged;

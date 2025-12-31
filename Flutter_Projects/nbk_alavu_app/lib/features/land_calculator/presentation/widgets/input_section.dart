@@ -54,6 +54,7 @@ class InputSection extends StatelessWidget {
                   child: AppTextField(
                     controller: sideAController,
                     label: "Side A",
+                    textInputAction: TextInputAction.next,
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -61,6 +62,7 @@ class InputSection extends StatelessWidget {
                   child: AppTextField(
                     controller: sideBController,
                     label: "Side B",
+                    textInputAction: TextInputAction.next,
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -68,6 +70,7 @@ class InputSection extends StatelessWidget {
                   child: AppTextField(
                     controller: sideCController,
                     label: "Side C",
+                    textInputAction: TextInputAction.done,
                   ),
                 ),
               ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nbk_alavu_app/core/theme/app_theme.dart';
-import 'package:nbk_alavu_app/screens/splash_screen.dart';
+import 'package:nbk_alavu_app/features/splash/presentation/pages/splash_screen.dart';
 
 
 void main() {
