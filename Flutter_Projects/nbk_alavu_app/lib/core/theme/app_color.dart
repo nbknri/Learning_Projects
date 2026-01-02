@@ -1,49 +1,49 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
-  //───────────────────────────────────
-  // Primary Palette
-  //───────────────────────────────────
-  // User Requested: Dark Purple, Purple, Lavender
-  static const Color darkPurple = Color(0xFF4527A0); // Deep Purple 800
-  static const Color purple = Colors.deepPurple; // Standard Deep Purple
-  static const Color lavender = Color(0xFFE6E6FA); // Standard Lavender
-
-  static const Color primary = purple;
-  static const Color primaryContainer = lavender;
-  static const Color secondary = darkPurple;
-  static const Color darkContrastPurple = Color(
-    0xFF230F46,
-  ); // User requested for result value 
-
-  //───────────────────────────────────
-  // Light Theme Colors
-  //───────────────────────────────────
-  static const Color backgroundLight = Color(0xFFF5F5FA); // Smooth off-white
-  static const Color surfaceLight = Colors.white;
-  static const Color textLightPrimary = Color(0xFF1E1E1E);
-  static const Color textLightSecondary = Color(0xFF757575);
-  static const Color borderLight = Color(0xFFE0E0E0);
-  static const Color snackBarLight = Color(0xFF323232);
-
-  //───────────────────────────────────
-  // Dark Theme Colors
-  //───────────────────────────────────
-  static const Color backgroundDark = Color(0xFF0F111A); // Deep rich dark
-  static const Color surfaceDark = Color(0xFF1E202B); // Slightly lighter
-  static const Color textDarkPrimary = Color(0xFFF5F5F5);
-  static const Color textDarkSecondary = Color(0xFFB0B0B0);
-  static const Color borderDark = Color(0xFF2E303D);
-  static const Color snackBarDark = Color(0xFFE0E0E0);
-
-  //───────────────────────────────────
-  // Functional Colors
-  //───────────────────────────────────
-  static const Color error = Color(0xFFE53935);
-  static const Color success = Color(0xFF43A047);
-  static const Color warning = Color(0xFFFB8C00);
+  // ========================================
+  // Professional Civil Engineering Theme
+  // ========================================
   
-  static const Color deleteButton = Color(0xFFFF5252);
+  // Primary Brand Colors
+  static const Color primary = Color(
+    0xFF1565C0,
+  ); // Royal Blue - Professional, trustworthy
+  static const Color accent = Color(
+    0xFFFF6F00,
+  ); // Safety Orange - High visibility, engineering standard
+  static const Color secondary = Color(0xFF0D47A1); // Darker Blue for depth
   
+  // Light Mode Colors
+  static const Color backgroundLight = Color(0xFFFFFFFF); // Clean white
+  static const Color surfaceLight = Color(
+    0xFFFAFAFA,
+  ); // Subtle off-white for cards
+  static const Color primaryContainer = Color(
+    0xFFE3F2FD,
+  ); // Light blue container
+  static const Color textLightPrimary = Color(
+    0xFF212121,
+  ); // Near black for readability
+  static const Color textLightSecondary = Color(0xFF757575); // Medium gray
+  static const Color borderLight = Color(0xFFE0E0E0); // Light gray borders
+  static const Color snackBarLight = Color(0xFF424242);
+
+  // Dark Mode Colors
+  static const Color backgroundDark = Color(0xFF121212); // Dark navy
+  static const Color surfaceDark = Color(
+    0xFF1E1E1E,
+  ); // Slightly lighter surface
+  static const Color textDarkPrimary = Color(0xFFE0E0E0); // Light gray text
+  static const Color textDarkSecondary = Color(0xFFB0B0B0); // Medium gray text
+  static const Color borderDark = Color(0xFF424242); // Dark gray borders
+  static const Color snackBarDark = Color(0xFF2D2D2D);
+
+  // Semantic Colors
+  static const Color error = Color(0xFFD32F2F);
+  static const Color success = Color(0xFF388E3C);
+  static const Color warning = Color(0xFFF57C00);
+  static const Color deleteButton = Color(0xFFE53935);
+
   const AppColor._();
 }

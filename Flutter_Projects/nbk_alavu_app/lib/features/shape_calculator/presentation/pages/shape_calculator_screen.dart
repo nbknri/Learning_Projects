@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbk_alavu_app/core/di/injection.dart';
+import 'package:nbk_alavu_app/core/theme/app_color.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_event.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_state.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/added_shapes_list.dart';
-import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/result_section.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/dashboard_header.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/shape_input_section.dart';
 
 class ShapeCalculatorScreen extends StatefulWidget {
@@ -35,9 +36,15 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
         child: Scaffold(
           resizeToAvoidBottomInset: false, // Prevent overflow when keyboard opens; Input stays fixed at top.
           appBar: AppBar(
+            backgroundColor: AppColor.primary, // Royal Blue to match dashboard
+            elevation: 0, // No shadow for seamless blend
+            foregroundColor: Colors.white, // White text and icons
             title: const Text(
               "NBK Alavu App",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
             centerTitle: true,
             actions: [
@@ -51,7 +58,7 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                           builder: (dialogContext) => AlertDialog(
                             title: const Text("Clear All?"),
                             content: const Text(
-                              "Are you sure you want to delete all computations?",
+                              "Are you sure you want to delete all added measurements?",
                             ),
                             actions: [
                               TextButton(
@@ -75,13 +82,16 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                         );
                       }
                     },
-                    icon: const Icon(Icons.delete_sweep),
+                    icon: const Icon(Icons.delete_sweep, color: Colors.white),
                   );
                 },
               ),
               IconButton(
                 onPressed: widget.onThemeChanged,
-                icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
+                icon: Icon(
+                  isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),
@@ -96,28 +106,65 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
               builder: (context, state) {
                 return Column(
                   children: [
+                    // --- Dashboard Header (Fixed) ---
+                    if (state.shapes.isNotEmpty)
+                      DashboardHeader(totalAreaSqM: state.totalAreaSqM),
+                    
                     // --- Shape Type Selector (Fixed) ---
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SegmentedButton<ShapeType>(
-                        segments: const [
-                          ButtonSegment(value: ShapeType.triangle, label: Text('\nTriangle'), icon: Icon(Icons.change_history)),
-                          ButtonSegment(value: ShapeType.rectangle, label: Text('Rect'), icon: Icon(Icons.crop_landscape)),
-                          ButtonSegment(value: ShapeType.square, label: Text('Square'), icon: Icon(Icons.crop_square)),
-                          ButtonSegment(value: ShapeType.circle, label: Text('Circle'), icon: Icon(Icons.circle_outlined)),
-                          ButtonSegment(value: ShapeType.irregularQuadrilateral, label: Text('Land'), icon: Icon(Icons.terrain)),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      child: Row(
+                        children: [
+                          _buildShapeChip(
+                            context: context,
+                            shapeType: ShapeType.triangle,
+                            label: 'Triangle',
+                            icon: Icons.change_history,
+                            isSelected:
+                                state.selectedShapeType == ShapeType.triangle,
+                          ),
+                          const SizedBox(width: 8),
+                          _buildShapeChip(
+                            context: context,
+                            shapeType: ShapeType.rectangle,
+                            label: 'Rectangle',
+                            icon: Icons.crop_landscape,
+                            isSelected:
+                                state.selectedShapeType == ShapeType.rectangle,
+                          ),
+                          const SizedBox(width: 8),
+                          _buildShapeChip(
+                            context: context,
+                            shapeType: ShapeType.square,
+                            label: 'Square',
+                            icon: Icons.crop_square,
+                            isSelected:
+                                state.selectedShapeType == ShapeType.square,
+                          ),
+                          const SizedBox(width: 8),
+                          _buildShapeChip(
+                            context: context,
+                            shapeType: ShapeType.circle,
+                            label: 'Circle',
+                            icon: Icons.circle_outlined,
+                            isSelected:
+                                state.selectedShapeType == ShapeType.circle,
+                          ),
+                          const SizedBox(width: 8),
+                          _buildShapeChip(
+                            context: context,
+                            shapeType: ShapeType.irregularQuadrilateral,
+                            label: 'Land Plot',
+                            icon: Icons.terrain,
+                            isSelected:
+                                state.selectedShapeType ==
+                                ShapeType.irregularQuadrilateral,
+                          ),
                         ],
-                        selected: {state.selectedShapeType},
-                        onSelectionChanged: (Set<ShapeType> newSelection) {
-                          context.read<ShapeCalculatorBloc>().add(
-                                ShapeCalculatorEvent.selectShapeType(newSelection.first),
-                              );
-                        },
-                        showSelectedIcon: false,
-                        style: ButtonStyle(
-                           visualDensity: VisualDensity.compact,
-                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        ),
                       ),
                     ),
                     
@@ -164,12 +211,6 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                         },
                       ),
                     ),
-
-                    // --- Total Result Section (Fixed Button) ---
-                    state.shapes.isNotEmpty
-                        ? ResultSection(
-                            formattedResult: state.formattedResult)
-                        : const SizedBox.shrink(),
                   ],
                 );
               },
@@ -177,6 +218,40 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildShapeChip({
+    required BuildContext context,
+    required ShapeType shapeType,
+    required String label,
+    required IconData icon,
+    required bool isSelected,
+  }) {
+    return ChoiceChip(
+      label: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 18, color: isSelected ? Colors.white : null),
+          const SizedBox(width: 6),
+          Text(label),
+        ],
+      ),
+      selected: isSelected,
+      onSelected: (selected) {
+        if (selected) {
+          context.read<ShapeCalculatorBloc>().add(
+            ShapeCalculatorEvent.selectShapeType(shapeType),
+          );
+        }
+      },
+      selectedColor: AppColor.accent, // Safety Orange
+      labelStyle: TextStyle(
+        color: isSelected ? Colors.white : null,
+        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      showCheckmark: false,
     );
   }
 }

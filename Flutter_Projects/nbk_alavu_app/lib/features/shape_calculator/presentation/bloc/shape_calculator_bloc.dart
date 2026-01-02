@@ -25,10 +25,10 @@ class ShapeCalculatorBloc extends Bloc<ShapeCalculatorEvent, ShapeCalculatorStat
     // Or simpler: Just ensure unit is valid.
 
     String newUnit = state.selectedUnit;
-    const String adharamUnit = '6 Feet';
+    const String sixFeetUnit = '6 Feet';
 
     if (event.type != ShapeType.rectangle &&
-        state.selectedUnit == adharamUnit) {
+        state.selectedUnit == sixFeetUnit) {
       newUnit = 'Meters';
     }
 
@@ -85,7 +85,7 @@ class ShapeCalculatorBloc extends Bloc<ShapeCalculatorEvent, ShapeCalculatorStat
     
     double parseOriginal(String key) {
        final val = double.tryParse(inputs[key] ?? '');
-       if (val == null) throw Exception("ദയവായി എല്ലാ അളവുകളും കൃത്യമായി നൽകുക.");
+       if (val == null) throw Exception("Please fill in all dimensions correctly.");
        return val;
     }
 
@@ -101,7 +101,9 @@ class ShapeCalculatorBloc extends Bloc<ShapeCalculatorEvent, ShapeCalculatorStat
         final cM = unit == 'Feet' ? c * 0.3048 : c;
 
         if (aM + bM <= cM || aM + cM <= bM || bM + cM <= aM) {
-          throw Exception("ഈ അളവുകൾ വെച്ച് ഒരു ത്രികോണം നിർമ്മിക്കാൻ കഴിയില്ല.");
+          throw Exception(
+            "Cannot form a triangle with these sides. Check your inputs.",
+          );
         }
 
         double s = (aM + bM + cM) / 2;

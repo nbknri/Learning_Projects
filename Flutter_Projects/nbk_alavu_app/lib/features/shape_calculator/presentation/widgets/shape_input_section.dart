@@ -142,55 +142,87 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
         child: Column(
           children: [
             // Unit Selector
-            Row(
-               mainAxisAlignment: MainAxisAlignment.center,
-               children: [
-                 const Text("Unit: ", style: TextStyle( fontSize: 16)),
-                 DropdownButton<String>(
-                   value: widget.selectedUnit,
-                  items:
-                      (widget.selectedShapeType == ShapeType.rectangle
-                              ? ['Meters', '6 Feet', 'Feet']
-                              : ['Meters', 'Feet'])
-                          .map((String value) {
-                     return DropdownMenuItem<String>(
-                       value: value,
-                       child: Text(value),
-                     );
-                   }).toList(),
-                   onChanged: widget.onUnitChanged,
-                 ),
-               ],
+            Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                margin: const EdgeInsets.only(right: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outline.withValues(alpha: 0.5),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Unit: ",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.7),
+                      ),
+                    ),
+                    DropdownButton<String>(
+                      value: widget.selectedUnit,
+                      items:
+                          (widget.selectedShapeType == ShapeType.rectangle
+                                  ? ['Meters', '6 Feet', 'Feet']
+                                  : ['Meters', 'Feet'])
+                              .map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              })
+                              .toList(),
+                      onChanged: widget.onUnitChanged,
+                      underline: const SizedBox(),
+                      isDense: true,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             const SizedBox(height: 10),
             
             // Dynamic Inputs
             ..._buildInputs(),
             
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
             
-            // Buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: _submit,
-                  icon: const Icon(Icons.add),
-                  label: const Text("Add"),
-                ),
-                ElevatedButton.icon( 
-                  onPressed: () {
-                    widget.onClear(); 
-                    _clearInputs();
-                  },
-                  icon: const Icon(Icons.clear_all),
-                  label: const Text("Clear"),
-                  style: ElevatedButton.styleFrom( 
-                     backgroundColor: Colors.redAccent,
-                     foregroundColor: Colors.white,
+            // Add Button - Full Width
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: _submit,
+                icon: const Icon(Icons.add_circle_outline, size: 24),
+                label: const Text(
+                  "ADD MEASUREMENT",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.5,
                   ),
                 ),
-              ],
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+              ),
             ),
           ],
         ),
@@ -260,7 +292,7 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
   Widget _buildTextField(TextEditingController controller, String label, TextInputAction textInputAction) {
     return TextField(
       controller: controller,
-      keyboardType: TextInputType.datetime, // Often has numbers + symbols
+      keyboardType: TextInputType.datetime,
       textInputAction: textInputAction,
       onSubmitted: (_) {
         if (textInputAction == TextInputAction.done) {
@@ -268,8 +300,7 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
         }
       },
       inputFormatters: [
-        // Allow digits, dots, spaces, plus signs
-        FilteringTextInputFormatter.allow(RegExp(r'[0-9\.\+\s]')),
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9\.+\s]')),
       ],
       decoration: InputDecoration(
         labelText: label,
