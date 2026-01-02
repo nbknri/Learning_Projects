@@ -18,8 +18,23 @@ class ShapeCalculatorBloc extends Bloc<ShapeCalculatorEvent, ShapeCalculatorStat
   }
 
   void _onSelectShapeType(SelectShapeType event, Emitter<ShapeCalculatorState> emit) {
+    // If switching FROM Rectangle (where '6 Feet' might be selected) TO another shape,
+    // we need to reset the unit if it is '6 Feet', because '6 Feet' is not valid for others.
+    // However, event.type is the NEW shape type.
+    // If the NEW shape is NOT Rectangle, and the current selectedUnit is '6 Feet', reset to 'Meters'.
+    // Or simpler: Just ensure unit is valid.
+
+    String newUnit = state.selectedUnit;
+    const String adharamUnit = '6 Feet';
+
+    if (event.type != ShapeType.rectangle &&
+        state.selectedUnit == adharamUnit) {
+      newUnit = 'Meters';
+    }
+
     emit(state.copyWith(
       selectedShapeType: event.type,
+        selectedUnit: newUnit,
       status: ShapeCalculatorStatus.initial,
       errorMessage: null,
     ));
@@ -98,8 +113,17 @@ class ShapeCalculatorBloc extends Bloc<ShapeCalculatorEvent, ShapeCalculatorStat
         final l = parseOriginal('length');
         final w = parseOriginal('width');
         
-        final lM = unit == 'Feet' ? l * 0.3048 : l;
-        final wM = unit == 'Feet' ? w * 0.3048 : w;
+        double lM = l;
+        double wM = w;
+
+        if (unit == 'Feet') {
+          lM = l * 0.3048;
+          wM = w * 0.3048;
+        } else if (unit == '6 Feet') {
+          // 1 Unit = 6 Feet = 1.8288 Meters
+          lM = l * 1.8288;
+          wM = w * 1.8288;
+        }
         
         return Rectangle(length: l, width: w, overrideArea: lM * wM);
 

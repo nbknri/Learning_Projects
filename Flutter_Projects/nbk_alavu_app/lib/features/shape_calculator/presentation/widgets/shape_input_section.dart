@@ -75,10 +75,6 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
   String _evaluate(String input) {
     if (input.isEmpty) return "";
     try {
-      // Allow user to use +, -, *, /
-      // Simple parse: split by operators. For now, strictly supporting summation as requested "20 + 0.85"
-      // If we want full eval, we can proper parse.
-      // Let's implement Summation for now as it's the primary use case for "segments".
       if (input.contains('+')) {
          final parts = input.split('+');
          double sum = 0;
@@ -152,7 +148,11 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
                  const Text("Unit: ", style: TextStyle( fontSize: 16)),
                  DropdownButton<String>(
                    value: widget.selectedUnit,
-                   items: ['Meters', 'Feet'].map((String value) {
+                  items:
+                      (widget.selectedShapeType == ShapeType.rectangle
+                              ? ['Meters', '6 Feet', 'Feet']
+                              : ['Meters', 'Feet'])
+                          .map((String value) {
                      return DropdownMenuItem<String>(
                        value: value,
                        child: Text(value),
@@ -260,17 +260,6 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
   Widget _buildTextField(TextEditingController controller, String label, TextInputAction textInputAction) {
     return TextField(
       controller: controller,
-      // Change Keyboard Type to allow explicit "+" or expression characters?
-      // TextInputType.numberWithOptions(decimal: true) usually allows digits and dots.
-      // For "+", we might need TextInputType.datetime or TextInputType.text if .number is strict on some keyboards.
-      // But typically we want the number pad. 
-      // User requested "20.45 + 0.85". 
-      // If we relax the regex, we still need the keyboard to show '+'.
-      // On iOS number pad has no +. On Android it might.
-      // Safe bet: TextInputType.phone or text? Or just loose regex.
-      // Let's try TextInputType.datetime which often has punctuation, or just visiblePassword/text.
-      // But for calculator, we really want numbers.
-      // Let's stick to number but allow + in helper.
       keyboardType: TextInputType.datetime, // Often has numbers + symbols
       textInputAction: textInputAction,
       onSubmitted: (_) {

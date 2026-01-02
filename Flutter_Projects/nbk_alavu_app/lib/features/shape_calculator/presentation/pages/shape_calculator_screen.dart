@@ -92,14 +92,6 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                     state.errorMessage != null) {
                   _showSnackBar(context, state.errorMessage!);
                 }
-                // Success clearing is handled by standard flow or specific manual clear if needed. 
-                // Currently ShapeInputSection doesn't clear on success automatically unless forced.
-                // We can use a key or just accept that inputs stay for "adding next similar item". 
-                // Actually, for a calculator, often you want to clear. 
-                // But for "add multiple", maybe keeping previous value is helpful?
-                // Let's assume user wants to clear mostly. 
-                // But without a key reference to InputSection, we can't clear it easily.
-                // For now, let's leave it as is.
               },
               builder: (context, state) {
                 return Column(
@@ -109,7 +101,7 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: SegmentedButton<ShapeType>(
                         segments: const [
-                          ButtonSegment(value: ShapeType.triangle, label: Text('Triangle'), icon: Icon(Icons.change_history)),
+                          ButtonSegment(value: ShapeType.triangle, label: Text('\nTriangle'), icon: Icon(Icons.change_history)),
                           ButtonSegment(value: ShapeType.rectangle, label: Text('Rect'), icon: Icon(Icons.crop_landscape)),
                           ButtonSegment(value: ShapeType.square, label: Text('Square'), icon: Icon(Icons.crop_square)),
                           ButtonSegment(value: ShapeType.circle, label: Text('Circle'), icon: Icon(Icons.circle_outlined)),

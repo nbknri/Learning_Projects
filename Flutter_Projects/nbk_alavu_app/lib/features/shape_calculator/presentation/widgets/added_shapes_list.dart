@@ -31,9 +31,9 @@ class AddedShapesList extends StatelessWidget {
 
         return ListTile(
           leading: CircleAvatar(
-            child: Text("${index + 1}"),
             backgroundColor: AppColor.secondary.withValues(alpha: 0.2), 
             foregroundColor: AppColor.secondary,
+            child: Text("${index + 1}"),
           ),
           title: Text("${shape.type.displayName} ($dimensionsText)"),
           subtitle: Text(
