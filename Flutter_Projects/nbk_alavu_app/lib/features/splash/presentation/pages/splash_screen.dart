@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nbk_alavu_app/features/triangle_calculator/presentation/pages/triangle_calculator_screen.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/pages/shape_calculator_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onThemeChanged;
@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) =>
-              TriangleCalculatorScreen(
+              ShapeCalculatorScreen(
             onThemeChanged: widget.onThemeChanged,
           ),
         ),
