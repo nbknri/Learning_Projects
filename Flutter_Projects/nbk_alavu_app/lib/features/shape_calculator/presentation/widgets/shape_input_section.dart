@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
+import 'package:nbk_alavu_app/core/theme/app_theme.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart'; // For ShapeType
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_state.dart';
@@ -150,27 +152,13 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
                   horizontal: 12,
                   vertical: 4,
                 ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.outline.withValues(alpha: 0.5),
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+                decoration: Theme.of(context).unitContainerDecoration(context),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       "Unit: ",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
+                      style: Theme.of(context).unitLabelStyle,
                     ),
                     DropdownButton<String>(
                       value: widget.selectedUnit,
@@ -188,11 +176,7 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
                       onChanged: widget.onUnitChanged,
                       underline: const SizedBox(),
                       isDense: true,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                      style: Theme.of(context).unitDropdownStyle,
                     ),
                   ],
                 ),
@@ -211,13 +195,9 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
               child: ElevatedButton.icon(
                 onPressed: _submit,
                 icon: const Icon(Icons.add_circle_outline, size: 24),
-                label: const Text(
+                label: Text(
                   "ADD MEASUREMENT",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                  ),
+                  style: Theme.of(context).addButtonTextStyle,
                 ),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),

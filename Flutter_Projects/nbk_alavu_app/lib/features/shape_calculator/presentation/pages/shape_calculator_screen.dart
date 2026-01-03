@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbk_alavu_app/core/di/injection.dart';
 import 'package:nbk_alavu_app/core/theme/app_color.dart';
+import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_event.dart';
@@ -36,17 +37,10 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
         child: Scaffold(
           resizeToAvoidBottomInset: false, // Prevent overflow when keyboard opens; Input stays fixed at top.
           appBar: AppBar(
-            backgroundColor: AppColor.primary, // Royal Blue to match dashboard
-            elevation: 0, // No shadow for seamless blend
-            foregroundColor: Colors.white, // White text and icons
-            title: const Text(
+            title: Text(
               "NBK Alavu App",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+              style: Theme.of(context).appBarTitleStyle,
             ),
-            centerTitle: true,
             actions: [
               BlocBuilder<ShapeCalculatorBloc, ShapeCalculatorState>(
                 builder: (context, state) {
@@ -72,9 +66,9 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                                   );
                                   Navigator.pop(dialogContext);
                                 },
-                                child: const Text(
+                                child: Text(
                                   "Delete",
-                                  style: TextStyle(color: Colors.red),
+                                  style: Theme.of(context).errorTextStyle,
                                 ),
                               ),
                             ],
@@ -82,7 +76,7 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                         );
                       }
                     },
-                    icon: const Icon(Icons.delete_sweep, color: Colors.white),
+                    icon: const Icon(Icons.delete_sweep, color: AppColor.white),
                   );
                 },
               ),
@@ -90,7 +84,7 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                 onPressed: widget.onThemeChanged,
                 icon: Icon(
                   isDarkMode ? Icons.light_mode : Icons.dark_mode,
-                  color: Colors.white,
+                  color: AppColor.white,
                 ),
               ),
             ],
@@ -192,11 +186,17 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                     const Divider(),
                     
                     if (state.shapes.isNotEmpty)
-                         const Padding(
-                           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                            child: Align(
                              alignment: Alignment.centerLeft,
-                             child: Text("Added Shapes:", style: TextStyle(fontWeight: FontWeight.bold))
+                          child: Text(
+                            "Added Shapes:",
+                            style: Theme.of(context).sectionHeaderStyle,
+                          )
                            ),
                          ),
 
@@ -232,7 +232,7 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
       label: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18, color: isSelected ? Colors.white : null),
+          Icon(icon, size: 18, color: isSelected ? AppColor.white : null),
           const SizedBox(width: 6),
           Text(label),
         ],
@@ -246,10 +246,7 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
         }
       },
       selectedColor: AppColor.accent, // Safety Orange
-      labelStyle: TextStyle(
-        color: isSelected ? Colors.white : null,
-        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-      ),
+      labelStyle: Theme.of(context).choiceChipLabelStyle(isSelected),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       showCheckmark: false,
     );

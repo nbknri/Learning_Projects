@@ -16,7 +16,7 @@ class AppTheme {
       seedColor: AppColor.primary,
       brightness: Brightness.light,
       primary: AppColor.primary,
-      onPrimary: Colors.white,
+      onPrimary: AppColor.white,
       primaryContainer: AppColor.primaryContainer,
       onPrimaryContainer: AppColor.textLightPrimary,
       secondary: AppColor.secondary,
@@ -27,29 +27,31 @@ class AppTheme {
 
     // AppBar Theme
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColor.primary,
+      foregroundColor: AppColor.white,
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: true,
-      iconTheme: const IconThemeData(color: AppColor.textLightPrimary),
-      titleTextStyle: AppTextStyle.appBarTitle(AppColor.textLightPrimary),
+      iconTheme: const IconThemeData(color: AppColor.white),
+      titleTextStyle: AppTextStyle.appBarTitle(AppColor.white),
     ),
 
     // Card Theme
     cardTheme: CardThemeData(
       color: AppColor.surfaceLight,
-      elevation: 0,
+      elevation: 2,
+      shadowColor: AppColor.primary.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         side: const BorderSide(color: AppColor.borderLight, width: 1),
       ),
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.only(bottom: 8),
     ),
 
     // Input Decoration Theme
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: Colors.white,
+      fillColor: AppColor.white,
       contentPadding: const EdgeInsets.all(16),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
@@ -71,20 +73,20 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColor.accent, // Safety Orange
-        foregroundColor: Colors.white,
+        foregroundColor: AppColor.white,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 2, // Slight elevation for depth
         shadowColor: AppColor.accent.withValues(alpha: 0.3),
-        textStyle: AppTextStyle.buttonText(Colors.white),
+        textStyle: AppTextStyle.buttonText(AppColor.white),
       ),
     ),
 
     // SnackBar Theme - Error Alert Style
     snackBarTheme: SnackBarThemeData(
-      backgroundColor: Colors.red.shade700, // Dark red for errors
+      backgroundColor: AppColor.redError, // Dark red for errors
       contentTextStyle: const TextStyle(
-        color: Colors.white,
+        color: AppColor.white,
         fontWeight: FontWeight.bold,
         fontSize: 14,
       ),
@@ -117,23 +119,25 @@ class AppTheme {
 
     // AppBar Theme
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColor.primary,
+      foregroundColor: AppColor.white,
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: true,
-      iconTheme: const IconThemeData(color: AppColor.textDarkPrimary),
-      titleTextStyle: AppTextStyle.appBarTitle(AppColor.textDarkPrimary),
+      iconTheme: const IconThemeData(color: AppColor.white),
+      titleTextStyle: AppTextStyle.appBarTitle(AppColor.white),
     ),
 
     // Card Theme
     cardTheme: CardThemeData(
       color: AppColor.surfaceDark,
-      elevation: 0,
+      elevation: 2,
+      shadowColor: AppColor.primary.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         side: const BorderSide(color: AppColor.borderDark, width: 1),
       ),
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.only(bottom: 8),
     ),
 
     // Input Decoration Theme
@@ -184,4 +188,58 @@ class AppTheme {
   );
 
   const AppTheme._();
+}
+
+//───────────────────────────────────────────────────────
+// Theme Extensions for Decorations
+//───────────────────────────────────────────────────────
+
+/// Dashboard Decoration Styles Extension
+extension DashboardDecorations on ThemeData {
+  BoxDecoration get dashboardHeaderDecoration => BoxDecoration(
+    color: AppColor.primary,
+    borderRadius: const BorderRadius.only(
+      bottomLeft: Radius.circular(24),
+      bottomRight: Radius.circular(24),
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: AppColor.primary.withValues(alpha: 0.3),
+        blurRadius: 12,
+        offset: const Offset(0, 4),
+      ),
+    ],
+  );
+
+  BoxDecoration get dashboardMetricCardDecoration => BoxDecoration(
+    color: AppColor.white.withValues(alpha: 0.2),
+    borderRadius: BorderRadius.circular(16),
+    border: Border.all(color: AppColor.white.withValues(alpha: 0.3), width: 1),
+  );
+
+  BoxDecoration get dashboardSecondaryDecoration => BoxDecoration(
+    color: AppColor.white.withValues(alpha: 0.15),
+    borderRadius: BorderRadius.circular(12),
+  );
+}
+
+/// Input Section Decoration Styles Extension
+extension InputSectionDecorations on ThemeData {
+  BoxDecoration unitContainerDecoration(BuildContext context) {
+    return BoxDecoration(
+      border: Border.all(
+        color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.5),
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(12),
+    );
+  }
+}
+
+/// Shape Card Decoration Styles Extension
+extension ShapeCardDecorations on ThemeData {
+  BoxDecoration get shapeCardIconDecoration => BoxDecoration(
+    color: AppColor.primary.withValues(alpha: 0.1),
+    borderRadius: BorderRadius.circular(8),
+  );
 }

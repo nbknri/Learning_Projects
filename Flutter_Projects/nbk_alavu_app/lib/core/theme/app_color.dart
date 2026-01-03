@@ -45,5 +45,11 @@ class AppColor {
   static const Color warning = Color(0xFFF57C00);
   static const Color deleteButton = Color(0xFFE53935);
 
+  // Common Colors
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color red = Color(0xFFFF0000);
+  static const Color redError = Color(0xFFB71C1C); // Red shade 900
+  static const Color transparent = Color(0x00000000);
+
   const AppColor._();
 }

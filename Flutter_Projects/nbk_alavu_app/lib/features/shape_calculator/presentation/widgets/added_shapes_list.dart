@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nbk_alavu_app/core/theme/app_color.dart';
+import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
+import 'package:nbk_alavu_app/core/theme/app_theme.dart';
 import 'package:nbk_alavu_app/core/utils/format_utils.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart';
 
@@ -46,12 +48,6 @@ class AddedShapesList extends StatelessWidget {
             .join(", ");
 
         return Card(
-          margin: const EdgeInsets.only(bottom: 8),
-          elevation: 2,
-          shadowColor: AppColor.primary.withValues(alpha: 0.1),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
           child: ListTile(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 12,
@@ -59,10 +55,7 @@ class AddedShapesList extends StatelessWidget {
             ),
             leading: Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: AppColor.primary.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(8),
-              ),
+              decoration: Theme.of(context).shapeCardIconDecoration,
               child: Icon(
                 _getShapeIcon(shape.type),
                 color: AppColor.primary,
@@ -71,7 +64,7 @@ class AddedShapesList extends StatelessWidget {
             ),
             title: Text(
               shape.type.displayName,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+              style: Theme.of(context).shapeCardTitle,
             ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,21 +72,12 @@ class AddedShapesList extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   dimensionsText,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
+                  style: Theme.of(context).shapeCardDimensions(context),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   "Area: ${FormatUtils.formatArea(shape.areaInSqMeter)} Sq.m",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColor.accent,
-                  ),
+                  style: Theme.of(context).shapeCardArea,
                 ),
               ],
             ),
