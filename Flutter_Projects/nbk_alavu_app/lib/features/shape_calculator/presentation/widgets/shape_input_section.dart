@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nbk_alavu_app/core/constants/app_strings.dart';
 import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
 import 'package:nbk_alavu_app/core/theme/app_theme.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart'; // For ShapeType
@@ -196,7 +197,7 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
                 onPressed: _submit,
                 icon: const Icon(Icons.add_circle_outline, size: 24),
                 label: Text(
-                  "ADD MEASUREMENT",
+                  AppStrings.addMeasurement,
                   style: Theme.of(context).addButtonTextStyle,
                 ),
                 style: ElevatedButton.styleFrom(

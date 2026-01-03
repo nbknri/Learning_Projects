@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nbk_alavu_app/core/constants/app_constants.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/pages/shape_calculator_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(milliseconds: 500), () {
+    Timer(AppConstants.splashDuration, () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) =>
@@ -38,10 +39,9 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo or Icon could go here
             Image.asset(
               "assets/images/logo.png",
-              width: 150,
+              width: AppConstants.logoWidth,
             ),
           ],
         ),
