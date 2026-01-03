@@ -4,6 +4,7 @@ import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
 import 'package:nbk_alavu_app/core/theme/app_theme.dart';
 import 'package:nbk_alavu_app/core/utils/format_utils.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/extensions/shape_type_extension.dart';
 
 class AddedShapesList extends StatelessWidget {
   final List<Shape> shapes;

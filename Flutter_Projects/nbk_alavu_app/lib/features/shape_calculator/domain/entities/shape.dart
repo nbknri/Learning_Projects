@@ -1,26 +1,13 @@
 
+
 enum ShapeType {
   triangle,
   rectangle,
   square,
   circle,
   irregularQuadrilateral;
-
-  String get displayName {
-    switch (this) {
-      case ShapeType.triangle:
-        return 'Triangle';
-      case ShapeType.rectangle:
-        return 'Rectangle';
-      case ShapeType.square:
-        return 'Square';
-      case ShapeType.circle:
-        return 'Circle';
-      case ShapeType.irregularQuadrilateral:
-        return 'Land Plot';
-    }
-  }
 }
+
 
 abstract class Shape {
   final String id;

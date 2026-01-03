@@ -24,7 +24,20 @@ class ShapeCalculatorScreen extends StatefulWidget {
 }
 
 class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
+  String? _lastShownError;
+  DateTime? _lastErrorTime;
+
   void _showSnackBar(BuildContext context, String msg) {
+    // Prevent showing the same error within 2 seconds
+    final now = DateTime.now();
+    if (_lastShownError == msg &&
+        _lastErrorTime != null &&
+        now.difference(_lastErrorTime!) < const Duration(seconds: 2)) {
+      return; // Skip showing duplicate error
+    }
+
+    _lastShownError = msg;
+    _lastErrorTime = now;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
