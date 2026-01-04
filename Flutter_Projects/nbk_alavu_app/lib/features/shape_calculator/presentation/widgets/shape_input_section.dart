@@ -350,6 +350,8 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
               text.startsWith('/') ||
               text.startsWith('00') ||
               text.contains(RegExp(r'[^0-9]\.')) ||
+              // Block 0/, 0.0/, 0.00/ etc (zero followed by /)
+              text.contains(RegExp(r'(^|\/)0(\.0*)?\/')) ||
                // Block 0+, 0.0+, 0.00+ etc (zero followed by +)
               text.contains(RegExp(r'(^|\+)0(\.0*)?\+'))) {
             return oldValue;
