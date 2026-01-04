@@ -273,7 +273,7 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
   Widget _buildTextField(TextEditingController controller, String label, TextInputAction textInputAction) {
     return TextField(
       controller: controller,
-      keyboardType: TextInputType.datetime,
+      keyboardType: TextInputType.phone,
       textInputAction: textInputAction,
       onSubmitted: (_) {
         if (textInputAction == TextInputAction.done) {
@@ -282,6 +282,30 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
       },
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'[0-9\.+\s]')),
+        TextInputFormatter.withFunction((oldValue, newValue) {
+          final text = newValue.text;
+          // Block invalid sequences and positions
+          if (text.contains('++') ||
+              text.contains('.+') ||
+              text.contains('+00') ||
+              text.contains(' ') ||
+              text.startsWith('.') ||
+              text.startsWith('+') ||
+              text.startsWith('00') ||
+              text.contains(RegExp(r'[^0-9]\.')) ||
+               // Block 0+, 0.0+, 0.00+ etc (zero followed by +)
+              text.contains(RegExp(r'(^|\+)0(\.0*)?\+'))) {
+            return oldValue;
+          }
+          // specific check: ensure no segment (split by +) has more than one dot
+          final parts = text.split('+');
+          for (final part in parts) {
+             if (part.split('.').length > 2) {
+               return oldValue;
+             }
+          }
+          return newValue;
+        }),
       ],
       decoration: InputDecoration(
         labelText: label,
