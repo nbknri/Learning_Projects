@@ -337,6 +337,9 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
               text.contains('//') ||
               text.contains('+00') ||
               text.contains('+/') ||
+              text.contains('./') ||
+              text.contains('. ') ||
+              text.contains(' .') ||
               text.contains('/+') ||
               text.contains(' /') ||
               text.contains('/ ') ||
