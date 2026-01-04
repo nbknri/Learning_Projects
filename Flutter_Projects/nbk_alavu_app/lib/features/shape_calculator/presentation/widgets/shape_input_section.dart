@@ -163,10 +163,7 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
                     ),
                     DropdownButton<String>(
                       value: widget.selectedUnit,
-                      items:
-                          (widget.selectedShapeType == ShapeType.rectangle
-                                  ? ['Meters', '6 Feet', 'Feet']
-                                  : ['Meters', 'Feet'])
+                      items: ['Meters', 'Feet', '6 Feet']
                               .map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,

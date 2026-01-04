@@ -33,18 +33,8 @@ class ShapeCalculatorBloc
     SelectShapeType event,
     Emitter<ShapeCalculatorState> emit,
   ) {
-    String newUnit = state.selectedUnit;
-    const String sixFeetUnit = '6 Feet';
-
-    // Reset unit to Meters if switching from Rectangle with 6 Feet
-    if (event.type != ShapeType.rectangle &&
-        state.selectedUnit == sixFeetUnit) {
-      newUnit = 'Meters';
-    }
-
     emit(state.copyWith(
-      selectedShapeType: event.type,
-        selectedUnit: newUnit,
+        selectedShapeType: event.type,
       status: ShapeCalculatorStatus.initial,
       errorMessage: null,
     ));
