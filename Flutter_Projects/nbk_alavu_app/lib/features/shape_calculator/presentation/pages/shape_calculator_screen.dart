@@ -79,10 +79,21 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
           }
         },
         builder: (context, state) {
+          // Detect if keyboard is open
+          final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+          final isKeyboardOpen = keyboardHeight > 0;
+
+          // Check if screen is small (height < 600)
+          final screenHeight = MediaQuery.of(context).size.height;
+          final isSmallScreen = screenHeight < 600;
+
+          // Hide dashboard only on small screens when keyboard is open
+          final shouldHideDashboard = isSmallScreen && isKeyboardOpen;
+          
           return Column(
             children: [
-              // Dashboard Header
-              if (state.shapes.isNotEmpty)
+              // Dashboard Header - hide on small screens when keyboard is open
+              if (state.shapes.isNotEmpty && !shouldHideDashboard)
                 DashboardHeader(totalAreaSqM: state.totalAreaSqM),
 
               // Shape Type Selector
