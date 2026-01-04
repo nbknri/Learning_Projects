@@ -1,5 +1,7 @@
 import 'dart:math';
+
 import 'package:uuid/uuid.dart';
+
 import 'shape.dart';
 
 class Triangle extends Shape {
@@ -13,8 +15,9 @@ class Triangle extends Shape {
     required this.sideB,
     required this.sideC,
     required this.area,
+    required String unit,
     String? id,
-  }) : super(id: id ?? const Uuid().v4(), type: ShapeType.triangle);
+  }) : super(id: id ?? const Uuid().v4(), type: ShapeType.triangle, unit: unit);
 
   @override
   double get areaInSqMeter => area;
@@ -42,9 +45,15 @@ class Rectangle extends Shape {
   Rectangle({
     required this.length,
     required this.width,
+    required String unit,
     String? id,
     double? overrideArea,
-  }) : _areaOverride = overrideArea, super(id: id ?? const Uuid().v4(), type: ShapeType.rectangle);
+  }) : _areaOverride = overrideArea,
+       super(
+         id: id ?? const Uuid().v4(),
+         type: ShapeType.rectangle,
+         unit: unit,
+       );
 
   @override
   double get areaInSqMeter => _areaOverride ?? (length * width);
@@ -68,9 +77,11 @@ class Square extends Shape {
 
   Square({
     required this.side,
+    required String unit,
     String? id,
     double? overrideArea,
-  }) : _areaOverride = overrideArea, super(id: id ?? const Uuid().v4(), type: ShapeType.square);
+  }) : _areaOverride = overrideArea,
+       super(id: id ?? const Uuid().v4(), type: ShapeType.square, unit: unit);
 
   @override
   double get areaInSqMeter => _areaOverride ?? (side * side);
@@ -92,9 +103,11 @@ class Circle extends Shape {
 
   Circle({
     required this.radius,
+    required String unit,
     String? id,
     double? overrideArea,
-  }) : _areaOverride = overrideArea, super(id: id ?? const Uuid().v4(), type: ShapeType.circle);
+  }) : _areaOverride = overrideArea,
+       super(id: id ?? const Uuid().v4(), type: ShapeType.circle, unit: unit);
 
   @override
   double get areaInSqMeter => _areaOverride ?? (pi * radius * radius);
@@ -125,8 +138,13 @@ class IrregularQuadrilateral extends Shape {
     required this.sideD, // West
     this.diagonal,
     required this.area,
+    required String unit,
     String? id,
-  }) : super(id: id ?? const Uuid().v4(), type: ShapeType.irregularQuadrilateral);
+  }) : super(
+         id: id ?? const Uuid().v4(),
+         type: ShapeType.irregularQuadrilateral,
+         unit: unit,
+       );
 
   @override
   double get areaInSqMeter => area;

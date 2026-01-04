@@ -12,8 +12,9 @@ enum ShapeType {
 abstract class Shape {
   final String id;
   final ShapeType type;
+  final String unit;
 
-  Shape({required this.id, required this.type});
+  Shape({required this.id, required this.type, required this.unit});
 
   double get areaInSqMeter;
   Map<String, double> get dimensions;

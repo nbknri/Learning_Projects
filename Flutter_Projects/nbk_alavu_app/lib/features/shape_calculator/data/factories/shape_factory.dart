@@ -47,7 +47,7 @@ class ShapeFactory {
     final s = (aM + bM + cM) / 2;
     final area = sqrt(s * (s - aM) * (s - bM) * (s - cM));
 
-    return Triangle(sideA: a, sideB: b, sideC: c, area: area);
+    return Triangle(sideA: a, sideB: b, sideC: c, area: area, unit: unit);
   }
 
   Shape _createRectangle(Map<String, double> dimensions, String unit) {
@@ -57,21 +57,21 @@ class ShapeFactory {
     final lM = UnitConverter.toMeters(l, unit);
     final wM = UnitConverter.toMeters(w, unit);
 
-    return Rectangle(length: l, width: w, overrideArea: lM * wM);
+    return Rectangle(length: l, width: w, overrideArea: lM * wM, unit: unit);
   }
 
   Shape _createSquare(Map<String, double> dimensions, String unit) {
     final side = dimensions['side']!;
     final sideM = UnitConverter.toMeters(side, unit);
 
-    return Square(side: side, overrideArea: sideM * sideM);
+    return Square(side: side, overrideArea: sideM * sideM, unit: unit);
   }
 
   Shape _createCircle(Map<String, double> dimensions, String unit) {
     final r = dimensions['radius']!;
     final rM = UnitConverter.toMeters(r, unit);
 
-    return Circle(radius: r, overrideArea: pi * rM * rM);
+    return Circle(radius: r, overrideArea: pi * rM * rM, unit: unit);
   }
 
   Shape _createIrregularQuadrilateral(
@@ -97,6 +97,7 @@ class ShapeFactory {
       sideC: south,
       sideD: west,
       area: area,
+      unit: unit,
     );
   }
 }

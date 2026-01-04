@@ -64,7 +64,7 @@ class AddedShapesList extends StatelessWidget {
               ),
             ),
             title: Text(
-              shape.type.displayName,
+              "${shape.type.displayName} (In ${shape.unit})",
               style: Theme.of(context).shapeCardTitle,
             ),
             subtitle: Column(
