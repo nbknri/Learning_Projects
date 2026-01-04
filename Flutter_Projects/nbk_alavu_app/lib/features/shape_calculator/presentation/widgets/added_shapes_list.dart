@@ -6,7 +6,7 @@ import 'package:nbk_alavu_app/core/utils/format_utils.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/extensions/shape_type_extension.dart';
 
-class AddedShapesList extends StatelessWidget {
+class AddedShapesList extends StatefulWidget {
   final List<Shape> shapes;
   final Function(int index) deleteShape;
   final bool shrinkWrap;
@@ -19,6 +19,46 @@ class AddedShapesList extends StatelessWidget {
     this.shrinkWrap = false,
     this.physics,
   });
+
+  @override
+  State<AddedShapesList> createState() => _AddedShapesListState();
+}
+
+class _AddedShapesListState extends State<AddedShapesList> {
+  final ScrollController _scrollController = ScrollController();
+  int _previousLength = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _previousLength = widget.shapes.length;
+  }
+
+  @override
+  void didUpdateWidget(AddedShapesList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Scroll to bottom when a new shape is added
+    if (widget.shapes.length > _previousLength) {
+      _previousLength = widget.shapes.length;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (_scrollController.hasClients) {
+          _scrollController.animateTo(
+            _scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+          );
+        }
+      });
+    } else {
+      _previousLength = widget.shapes.length;
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   IconData _getShapeIcon(ShapeType type) {
     switch (type) {
@@ -38,12 +78,13 @@ class AddedShapesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      shrinkWrap: shrinkWrap,
-      physics: physics,
+      controller: _scrollController,
+      shrinkWrap: widget.shrinkWrap,
+      physics: widget.physics,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      itemCount: shapes.length,
+      itemCount: widget.shapes.length,
       itemBuilder: (context, index) {
-        final shape = shapes[index];
+        final shape = widget.shapes[index];
         final dimensionsText = shape.formattedDimensions.entries
             .map((e) => "${e.key}: ${e.value}")
             .join(", ");
@@ -64,7 +105,7 @@ class AddedShapesList extends StatelessWidget {
               ),
             ),
             title: Text(
-              "${shape.type.displayName} (In ${shape.unit})",
+              "${index + 1}. ${shape.type.displayName} (In ${shape.unit})",
               style: Theme.of(context).shapeCardTitle,
             ),
             subtitle: Column(
@@ -85,7 +126,7 @@ class AddedShapesList extends StatelessWidget {
             trailing: IconButton(
               icon: const Icon(Icons.delete_outline),
               color: AppColor.deleteButton,
-              onPressed: () => deleteShape(index),
+              onPressed: () => widget.deleteShape(index),
               tooltip: 'Delete',
             ),
           ),

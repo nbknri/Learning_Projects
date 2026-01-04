@@ -18,6 +18,15 @@ class DashboardHeader extends StatelessWidget {
    // Calculate Cents and Ares from square meters
     final cents = totalAreaSqM / 40.4686;
     final ares = totalAreaSqM / 100;
+    
+    // Smart unit conversion
+    // If Cents >= 100, show Acres (100 cents = 1 acre)
+    final bool showAcres = cents >= 100;
+    final double acreValue = cents / 100;
+
+    // If Ares >= 100, show Hectares (100 ares = 1 hectare)
+    final bool showHectares = ares >= 100;
+    final double hectareValue = ares / 100;
 
     return Container(
       width: double.infinity,
@@ -36,23 +45,25 @@ class DashboardHeader extends StatelessWidget {
           // Main Values Row
           Row(
             children: [
-              // Cents Value
+              // Cents/Acres Value
               Expanded(
                 child: _buildMetricCard(
                   context: context,
-                  label: 'Cents',
-                  value: FormatUtils.formatArea(cents),
+                  label: showAcres ? 'Acres' : 'Cents',
+                  value: FormatUtils.formatArea(showAcres ? acreValue : cents),
                   isDarkMode: isDarkMode,
                 ),
               ),
               const SizedBox(width: 12),
               
-              // Ares Value
+              // Ares/Hectares Value
               Expanded(
                 child: _buildMetricCard(
                   context: context,
-                  label: 'Ares',
-                  value: FormatUtils.formatArea(ares),
+                  label: showHectares ? 'Hectares' : 'Ares',
+                  value: FormatUtils.formatArea(
+                    showHectares ? hectareValue : ares,
+                  ),
                   isDarkMode: isDarkMode,
                 ),
               ),
