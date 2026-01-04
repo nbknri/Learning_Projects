@@ -73,7 +73,45 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
     _radiusController.clear();
   }
   
-  // Basic math parser to handle "20 + 0.5"
+  // Parse mixed fractions like "25 1/2" -> 25.5
+  double _parseMixedFraction(String input) {
+    final trimmed = input.trim();
+    if (trimmed.isEmpty) return 0;
+
+    // Check if it contains a fraction
+    if (trimmed.contains('/')) {
+      final parts = trimmed.split(' ');
+
+      if (parts.length == 2) {
+        // Mixed fraction: "25 1/2"
+        final whole = double.tryParse(parts[0]) ?? 0;
+        final fractionParts = parts[1].split('/');
+        if (fractionParts.length == 2) {
+          final numerator = double.tryParse(fractionParts[0]) ?? 0;
+          final denominator = double.tryParse(fractionParts[1]) ?? 1;
+          if (denominator != 0) {
+            return whole + (numerator / denominator);
+          }
+        }
+        return whole;
+      } else if (parts.length == 1) {
+        // Simple fraction: "1/2"
+        final fractionParts = parts[0].split('/');
+        if (fractionParts.length == 2) {
+          final numerator = double.tryParse(fractionParts[0]) ?? 0;
+          final denominator = double.tryParse(fractionParts[1]) ?? 1;
+          if (denominator != 0) {
+            return numerator / denominator;
+          }
+        }
+      }
+    }
+
+    // No fraction, parse as regular number
+    return double.tryParse(trimmed) ?? 0;
+  }
+
+  // Basic math parser to handle "20 + 0.5" and mixed fractions "25 1/2 + 15 3/4"
   // Returns string representation of result or original string if fail
   String _evaluate(String input) {
     if (input.isEmpty) return "";
@@ -82,12 +120,14 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
          final parts = input.split('+');
          double sum = 0;
          for (var p in parts) {
-           sum += double.tryParse(p.trim()) ?? 0;
+          sum += _parseMixedFraction(p);
          }
          if (sum == 0 && parts.every((p) => p.trim().isEmpty)) return "";
          return sum.toString();
       }
-      return input; 
+      // Single value (could be mixed fraction)
+      final result = _parseMixedFraction(input);
+      return result == 0 && input.trim().isEmpty ? "" : result.toString();
     } catch (e) {
       return input;
     }
@@ -124,7 +164,17 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
          inputs['sideD'] = resolve(_sideDController); // West
          break;
      }
-     widget.onAddShape(inputs);
+     
+     // Check if all values are 0 or empty
+     final hasNonZeroValue = inputs.values.any((value) {
+       final numValue = double.tryParse(value) ?? 0;
+       return numValue != 0;
+     });
+     
+     // Only submit if there's at least one non-zero value
+     if (hasNonZeroValue) {
+       widget.onAddShape(inputs);
+     }
   }
   
   void clearFields() {
@@ -278,15 +328,23 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
         }
       },
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'[0-9\.+]')),
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9\.+/\s]')),
         TextInputFormatter.withFunction((oldValue, newValue) {
           final text = newValue.text;
           // Block invalid sequences and positions
           if (text.contains('++') ||
               text.contains('.+') ||
+              text.contains('//') ||
               text.contains('+00') ||
+              text.contains('+/') ||
+              text.contains('/+') ||
+              text.contains(' /') ||
+              text.contains('/ ') ||
+              text.contains('  ') ||
+              text.startsWith(' ') ||
               text.startsWith('.') ||
               text.startsWith('+') ||
+              text.startsWith('/') ||
               text.startsWith('00') ||
               text.contains(RegExp(r'[^0-9]\.')) ||
                // Block 0+, 0.0+, 0.00+ etc (zero followed by +)
