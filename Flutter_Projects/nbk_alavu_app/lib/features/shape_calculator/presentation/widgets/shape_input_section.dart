@@ -281,14 +281,13 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
         }
       },
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'[0-9\.+\s]')),
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9\.+]')),
         TextInputFormatter.withFunction((oldValue, newValue) {
           final text = newValue.text;
           // Block invalid sequences and positions
           if (text.contains('++') ||
               text.contains('.+') ||
               text.contains('+00') ||
-              text.contains(' ') ||
               text.startsWith('.') ||
               text.startsWith('+') ||
               text.startsWith('00') ||
