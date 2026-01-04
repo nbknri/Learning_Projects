@@ -92,16 +92,16 @@ class _AddedShapesListState extends State<AddedShapesList> {
         return Card(
           child: ListTile(
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 4,
+              horizontal: 10,
+              vertical: 2,
             ),
             leading: Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(6),
               decoration: Theme.of(context).shapeCardIconDecoration,
               child: Icon(
                 _getShapeIcon(shape.type),
                 color: AppColor.primary,
-                size: 20,
+                size: 18,
               ),
             ),
             title: Text(
@@ -111,12 +111,12 @@ class _AddedShapesListState extends State<AddedShapesList> {
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 4),
+                const SizedBox(height: 2),
                 Text(
                   dimensionsText,
                   style: Theme.of(context).shapeCardDimensions(context),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 2),
                 Text(
                   "Area: ${FormatUtils.formatArea(shape.areaInSqMeter)} Sq.m",
                   style: Theme.of(context).shapeCardArea,
