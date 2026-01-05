@@ -110,6 +110,38 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
     // No fraction, parse as regular number
     return double.tryParse(trimmed) ?? 0;
   }
+  
+  // Validate input pattern - reject invalid space patterns
+  // Valid: "10+20", "10 + 20", "10 1/2", "10 1/2 + 20 3/4"
+  // Invalid: "10 200", "1 2 3", "1 234" (multiple numbers with spaces, no operator/fraction)
+  bool _isValidInput(String input) {
+    if (input.trim().isEmpty) return true;
+
+    // Split by + to check each segment
+    final segments = input.split('+');
+
+    for (final segment in segments) {
+      final trimmed = segment.trim();
+      if (trimmed.isEmpty) continue;
+
+      // Check if segment contains spaces
+      if (trimmed.contains(' ')) {
+        // Valid case 1: Mixed fraction "25 1/2"
+        final parts = trimmed.split(' ');
+
+        if (parts.length == 2 && parts[1].contains('/')) {
+          // This is a mixed fraction, valid
+          continue;
+        }
+
+        // Invalid case: Multiple numbers with spaces but no fraction
+        // e.g., "10 200", "1 2 3", "1 234"
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   // Basic math parser to handle "20 + 0.5" and mixed fractions "25 1/2 + 15 3/4"
   // Returns string representation of result or original string if fail
@@ -137,6 +169,32 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
      FocusManager.instance.primaryFocus?.unfocus();
 
      Map<String, String> inputs = {};
+     
+    // First, validate all inputs
+    final controllers = [
+      _sideAController,
+      _sideBController,
+      _sideCController,
+      _sideDController,
+      _lengthController,
+      _widthController,
+      _sideController,
+      _radiusController,
+    ];
+
+    for (final controller in controllers) {
+      if (controller.text.isNotEmpty && !_isValidInput(controller.text)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Invalid input format. Please enter single values or use + for addition',
+            ),
+            duration: Duration(seconds: 2),
+          ),
+        );
+        return;
+      }
+    }
      
      // Evaluate math expressions before sending
      String resolve(TextEditingController c) => _evaluate(c.text);
