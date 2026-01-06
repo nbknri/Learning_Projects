@@ -26,4 +26,10 @@ class AppStrings {
   static const String deleteTooltip = 'Delete';
   static const String clearAllTooltip = 'Clear All';
   static const String toggleThemeTooltip = 'Toggle Theme';
+
+  // Snackbar Messages
+  static const String invalidInputFormat =
+      'Invalid input format. Please enter single values or use + for addition';
+  static String copiedMessage(String label, String value) =>
+      '$label copied: $value';
 }

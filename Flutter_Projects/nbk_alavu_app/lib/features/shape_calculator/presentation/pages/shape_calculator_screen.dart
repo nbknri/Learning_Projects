@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbk_alavu_app/core/constants/app_strings.dart';
 import 'package:nbk_alavu_app/core/di/injection.dart';
 import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
-import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_event.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_state.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/added_shapes_header.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/added_shapes_list.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/clear_all_button.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/dashboard_header.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/shape_input_section.dart';
-import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/shape_type_chip.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/shape_type_selector.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/theme_toggle_button.dart';
 
 class ShapeCalculatorScreen extends StatefulWidget {
@@ -97,7 +97,7 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                 DashboardHeader(totalAreaSqM: state.totalAreaSqM),
 
               // Shape Type Selector
-              _buildShapeTypeSelector(state),
+              ShapeTypeSelector(state: state),
 
               // Input Section - Inline to preserve context
               ShapeInputSection(
@@ -123,7 +123,7 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
               const Divider(),
 
               // Added Shapes Header
-              if (state.shapes.isNotEmpty) _buildAddedShapesHeader(),
+              if (state.shapes.isNotEmpty) const AddedShapesHeader(),
 
               // List of Added Shapes
               Expanded(
@@ -139,65 +139,6 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
             ],
           );
         },
-      ),
-    );
-  }
-
-  Widget _buildShapeTypeSelector(ShapeCalculatorState state) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        children: [
-          ShapeTypeChip(
-            shapeType: ShapeType.triangle,
-            label: AppStrings.triangle,
-            icon: Icons.change_history,
-            isSelected: state.selectedShapeType == ShapeType.triangle,
-          ),
-          const SizedBox(width: 8),
-          ShapeTypeChip(
-            shapeType: ShapeType.rectangle,
-            label: AppStrings.rectangle,
-            icon: Icons.crop_landscape,
-            isSelected: state.selectedShapeType == ShapeType.rectangle,
-          ),
-          const SizedBox(width: 8),
-          ShapeTypeChip(
-            shapeType: ShapeType.square,
-            label: AppStrings.square,
-            icon: Icons.crop_square,
-            isSelected: state.selectedShapeType == ShapeType.square,
-          ),
-          const SizedBox(width: 8),
-          ShapeTypeChip(
-            shapeType: ShapeType.circle,
-            label: AppStrings.circle,
-            icon: Icons.circle_outlined,
-            isSelected: state.selectedShapeType == ShapeType.circle,
-          ),
-          const SizedBox(width: 8),
-          ShapeTypeChip(
-            shapeType: ShapeType.irregularQuadrilateral,
-            label: AppStrings.landPlot,
-            icon: Icons.terrain,
-            isSelected:
-                state.selectedShapeType == ShapeType.irregularQuadrilateral,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAddedShapesHeader() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          AppStrings.addedShapes,
-          style: Theme.of(context).sectionHeaderStyle,
-        ),
       ),
     );
   }

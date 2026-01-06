@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:nbk_alavu_app/core/theme/app_color.dart';
 import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
 import 'package:nbk_alavu_app/core/theme/app_theme.dart';
 import 'package:nbk_alavu_app/core/utils/format_utils.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/conversion_row.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/metric_card.dart';
 
 class DashboardHeader extends StatefulWidget {
   final double totalAreaSqM;
@@ -64,24 +64,22 @@ class _DashboardHeaderState extends State<DashboardHeader> {
               children: [
                 // Cents/Acres Value
                 Expanded(
-                  child: _buildMetricCard(
-                    context: context,
+                  child: MetricCard(
                     label: showAcres ? 'Acres' : 'Cents',
-                    value: FormatUtils.formatArea(showAcres ? acreValue : cents),
-                    isDarkMode: isDarkMode,
+                    value: FormatUtils.formatArea(
+                      showAcres ? acreValue : cents,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),
                 
                 // Ares/Hectares Value
                 Expanded(
-                  child: _buildMetricCard(
-                    context: context,
+                  child: MetricCard(
                     label: showHectares ? 'Hectares' : 'Ares',
                     value: FormatUtils.formatArea(
                       showHectares ? hectareValue : ares,
                     ),
-                    isDarkMode: isDarkMode,
                   ),
                 ),
               ],
@@ -95,8 +93,7 @@ class _DashboardHeaderState extends State<DashboardHeader> {
               decoration: Theme.of(context).dashboardSecondaryDecoration,
               child: Column(
                 children: [
-                  _buildConversionRow(
-                    context: context,
+                  ConversionRow(
                     label: 'Sq. Meter',
                     value: FormatUtils.formatArea(widget.totalAreaSqM),
                   ),
@@ -106,40 +103,35 @@ class _DashboardHeaderState extends State<DashboardHeader> {
                     const SizedBox(height: 6),
                     const Divider(height: 1),
                     const SizedBox(height: 6),
-                    _buildConversionRow(
-                      context: context,
+                    ConversionRow(
                       label: 'Sq. Feet',
                       value: FormatUtils.formatArea(widget.totalAreaSqM * 10.7639),
                     ),
                     const SizedBox(height: 6),
                     const Divider(height: 1),
                     const SizedBox(height: 6),
-                    _buildConversionRow(
-                      context: context,
+                    ConversionRow(
                       label: 'Cents',
                       value: FormatUtils.formatArea(cents),
                     ),
                     const SizedBox(height: 6),
                     const Divider(height: 1),
                     const SizedBox(height: 6),
-                    _buildConversionRow(
-                      context: context,
+                    ConversionRow(
                       label: 'Acres',
                       value: FormatUtils.formatArea(acreValue),
                     ),
                     const SizedBox(height: 6),
                     const Divider(height: 1),
                     const SizedBox(height: 6),
-                    _buildConversionRow(
-                      context: context,
+                    ConversionRow(
                       label: 'Ares',
                       value: FormatUtils.formatArea(ares),
                     ),
                     const SizedBox(height: 6),
                     const Divider(height: 1),
                     const SizedBox(height: 6),
-                    _buildConversionRow(
-                      context: context,
+                    ConversionRow(
                       label: 'Hectares',
                       value: FormatUtils.formatArea(hectareValue),
                     ),
@@ -170,70 +162,6 @@ class _DashboardHeaderState extends State<DashboardHeader> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildMetricCard({
-    required BuildContext context,
-    required String label,
-    required String value,
-    required bool isDarkMode,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: Theme.of(context).dashboardMetricCardDecoration,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(label, style: Theme.of(context).dashboardMetricLabel),
-              InkWell(
-                onTap: () async {
-                  await Clipboard.setData(ClipboardData(text: value));
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('$label copied: $value'),
-                        duration: const Duration(seconds: 1,),
-                        backgroundColor: AppColor.backgroundDark,
-                      ),
-                    );
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(4),
-                  child: Icon(
-                    Icons.copy,
-                    size: 14,
-                    color: Theme.of(context).primaryColorLight,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 2),
-          Text(
-            value,
-            style: Theme.of(context).dashboardMetricValue,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildConversionRow({
-    required BuildContext context,
-    required String label,
-    required String value,
-  }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(label, style: Theme.of(context).dashboardSecondaryLabel),
-        Text(value, style: Theme.of(context).dashboardSecondaryValue),
-      ],
     );
   }
 }

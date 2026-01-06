@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:nbk_alavu_app/core/constants/shape_keys.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/data/services/unit_converter.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shapes_impl.dart';
@@ -27,9 +28,9 @@ class ShapeFactory {
   }
 
   Shape _createTriangle(Map<String, double> dimensions, String unit) {
-    final a = dimensions['sideA']!;
-    final b = dimensions['sideB']!;
-    final c = dimensions['sideC']!;
+    final a = dimensions[ShapeKeys.sideA]!;
+    final b = dimensions[ShapeKeys.sideB]!;
+    final c = dimensions[ShapeKeys.sideC]!;
 
     // Convert to meters for calculation
     final aM = UnitConverter.toMeters(a, unit);
@@ -51,8 +52,8 @@ class ShapeFactory {
   }
 
   Shape _createRectangle(Map<String, double> dimensions, String unit) {
-    final l = dimensions['length']!;
-    final w = dimensions['width']!;
+    final l = dimensions[ShapeKeys.length]!;
+    final w = dimensions[ShapeKeys.width]!;
 
     final lM = UnitConverter.toMeters(l, unit);
     final wM = UnitConverter.toMeters(w, unit);
@@ -61,14 +62,14 @@ class ShapeFactory {
   }
 
   Shape _createSquare(Map<String, double> dimensions, String unit) {
-    final side = dimensions['side']!;
+    final side = dimensions[ShapeKeys.side]!;
     final sideM = UnitConverter.toMeters(side, unit);
 
     return Square(side: side, overrideArea: sideM * sideM, unit: unit);
   }
 
   Shape _createCircle(Map<String, double> dimensions, String unit) {
-    final r = dimensions['radius']!;
+    final r = dimensions[ShapeKeys.radius]!;
     final rM = UnitConverter.toMeters(r, unit);
 
     return Circle(radius: r, overrideArea: pi * rM * rM, unit: unit);
@@ -78,10 +79,10 @@ class ShapeFactory {
     Map<String, double> dimensions,
     String unit,
   ) {
-    final north = dimensions['sideA']!;
-    final east = dimensions['sideB']!;
-    final south = dimensions['sideC']!;
-    final west = dimensions['sideD']!;
+    final north = dimensions[ShapeKeys.sideA]!;
+    final east = dimensions[ShapeKeys.sideB]!;
+    final south = dimensions[ShapeKeys.sideC]!;
+    final west = dimensions[ShapeKeys.sideD]!;
 
     final nM = UnitConverter.toMeters(north, unit);
     final eM = UnitConverter.toMeters(east, unit);
