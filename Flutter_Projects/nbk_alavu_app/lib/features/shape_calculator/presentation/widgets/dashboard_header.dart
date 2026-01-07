@@ -22,7 +22,6 @@ class _DashboardHeaderState extends State<DashboardHeader> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     
    // Calculate Cents and Ares from square meters
     final cents = widget.totalAreaSqM / 40.4686;
