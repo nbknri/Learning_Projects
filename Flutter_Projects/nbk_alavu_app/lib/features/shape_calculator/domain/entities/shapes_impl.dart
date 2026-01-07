@@ -15,9 +15,9 @@ class Triangle extends Shape {
     required this.sideB,
     required this.sideC,
     required this.area,
-    required String unit,
+    required super.unit,
     String? id,
-  }) : super(id: id ?? const Uuid().v4(), type: ShapeType.triangle, unit: unit);
+  }) : super(id: id ?? const Uuid().v4(), type: ShapeType.triangle);
 
   @override
   double get areaInSqMeter => area;
@@ -45,14 +45,13 @@ class Rectangle extends Shape {
   Rectangle({
     required this.length,
     required this.width,
-    required String unit,
+    required super.unit,
     String? id,
     double? overrideArea,
   }) : _areaOverride = overrideArea,
        super(
          id: id ?? const Uuid().v4(),
          type: ShapeType.rectangle,
-         unit: unit,
        );
 
   @override
@@ -77,11 +76,11 @@ class Square extends Shape {
 
   Square({
     required this.side,
-    required String unit,
+    required super.unit,
     String? id,
     double? overrideArea,
   }) : _areaOverride = overrideArea,
-       super(id: id ?? const Uuid().v4(), type: ShapeType.square, unit: unit);
+       super(id: id ?? const Uuid().v4(), type: ShapeType.square);
 
   @override
   double get areaInSqMeter => _areaOverride ?? (side * side);
@@ -103,11 +102,11 @@ class Circle extends Shape {
 
   Circle({
     required this.radius,
-    required String unit,
+    required super.unit,
     String? id,
     double? overrideArea,
   }) : _areaOverride = overrideArea,
-       super(id: id ?? const Uuid().v4(), type: ShapeType.circle, unit: unit);
+       super(id: id ?? const Uuid().v4(), type: ShapeType.circle);
 
   @override
   double get areaInSqMeter => _areaOverride ?? (pi * radius * radius);
@@ -138,12 +137,11 @@ class IrregularQuadrilateral extends Shape {
     required this.sideD, // West
     this.diagonal,
     required this.area,
-    required String unit,
+    required super.unit,
     String? id,
   }) : super(
          id: id ?? const Uuid().v4(),
          type: ShapeType.irregularQuadrilateral,
-         unit: unit,
        );
 
   @override
