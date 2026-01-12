@@ -5,6 +5,7 @@ import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/calculat
 import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/clear_all_shapes.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/delete_shape.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/insert_shape.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/update_shape.dart';
 
 /// Dependency injection module for domain layer use cases
 @module
@@ -26,4 +27,7 @@ abstract class DomainModule {
   CalculateTotalAreaUseCase calculateTotalAreaUseCase(
           ShapeRepository repository) =>
       CalculateTotalAreaUseCase(repository);
+
+  @lazySingleton
+  UpdateShapeUseCase get updateShapeUseCase => UpdateShapeUseCase();
 }

@@ -30,6 +30,8 @@ import '../../features/shape_calculator/domain/usecases/delete_shape.dart'
     as _i527;
 import '../../features/shape_calculator/domain/usecases/insert_shape.dart'
     as _i859;
+import '../../features/shape_calculator/domain/usecases/update_shape.dart'
+    as _i129;
 import '../../features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart'
     as _i1072;
 
@@ -52,6 +54,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1000.ClearAllShapesUseCase>(
       () => domainModule.clearAllShapesUseCase,
     );
+    gh.lazySingleton<_i129.UpdateShapeUseCase>(
+      () => domainModule.updateShapeUseCase,
+    );
     gh.lazySingleton<_i850.ShapeRepository>(
       () => _i52.ShapeRepositoryImpl(gh<_i40.ShapeFactory>()),
     );
@@ -68,6 +73,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i859.InsertShapeUseCase>(),
         gh<_i1000.ClearAllShapesUseCase>(),
         gh<_i424.CalculateTotalAreaUseCase>(),
+        gh<_i129.UpdateShapeUseCase>(),
       ),
     );
     return this;

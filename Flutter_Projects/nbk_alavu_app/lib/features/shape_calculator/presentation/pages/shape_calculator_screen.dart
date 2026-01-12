@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbk_alavu_app/core/constants/app_strings.dart';
 import 'package:nbk_alavu_app/core/di/injection.dart';
 import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_event.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_state.dart';
@@ -17,24 +18,69 @@ import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/sha
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/shape_type_selector.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/theme_toggle_button.dart';
 
-class ShapeCalculatorScreen extends StatefulWidget {
+class ShapeCalculatorScreen extends StatelessWidget {
   final VoidCallback onThemeChanged;
 
   const ShapeCalculatorScreen({super.key, required this.onThemeChanged});
 
   @override
-  State<ShapeCalculatorScreen> createState() => _ShapeCalculatorScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<ShapeCalculatorBloc>(),
+      child: ShapeCalculatorView(onThemeChanged: onThemeChanged),
+    );
+  }
 }
 
-class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
+class ShapeCalculatorView extends StatefulWidget {
+  final VoidCallback onThemeChanged;
+
+  const ShapeCalculatorView({super.key, required this.onThemeChanged});
+
+  @override
+  State<ShapeCalculatorView> createState() => _ShapeCalculatorViewState();
+}
+
+class _ShapeCalculatorViewState extends State<ShapeCalculatorView> {
   String? _lastShownError;
   DateTime? _lastErrorTime;
   Timer? _snackBarTimer;
+  int? _editingIndex;
+  Shape? _pendingEditShape;
+  final GlobalKey<ShapeInputSectionState> _inputSectionKey = GlobalKey();
 
   @override
   void dispose() {
     _snackBarTimer?.cancel();
     super.dispose();
+  }
+
+  void _handleEdit(int index, Shape shape) {
+    setState(() {
+      _editingIndex = index;
+    });
+
+    final currentType = context
+        .read<ShapeCalculatorBloc>()
+        .state
+        .selectedShapeType;
+
+    context.read<ShapeCalculatorBloc>().add(
+      ShapeCalculatorEvent.setUnit(shape.unit),
+    );
+
+    if (currentType == shape.type) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _inputSectionKey.currentState?.populateFields(shape);
+      });
+    } else {
+      setState(() {
+        _pendingEditShape = shape;
+      });
+      context.read<ShapeCalculatorBloc>().add(
+        ShapeCalculatorEvent.selectShapeType(shape.type),
+      );
+    }
   }
 
   void _showSnackBar(BuildContext context, String msg) {
@@ -53,15 +99,12 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<ShapeCalculatorBloc>(),
-      child: GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: _buildAppBar(),
-          body: _buildBody(),
-        ),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: _buildAppBar(),
+        body: _buildBody(),
       ),
     );
   }
@@ -86,6 +129,24 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
           if (state.status == ShapeCalculatorStatus.failure &&
               state.errorMessage != null) {
             _showSnackBar(context, state.errorMessage!);
+          } else if (state.status == ShapeCalculatorStatus.success) {
+            if (_editingIndex != null) {
+              setState(() {
+                _editingIndex = null;
+              });
+            }
+          }
+
+          // Handle pending edit shape population after type switch
+          if (_pendingEditShape != null &&
+              state.selectedShapeType == _pendingEditShape!.type) {
+            final shapeToPopulate = _pendingEditShape!;
+            setState(() {
+              _pendingEditShape = null;
+            });
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _inputSectionKey.currentState?.populateFields(shapeToPopulate);
+            });
           }
         },
         builder: (context, state) {
@@ -99,7 +160,7 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
 
           // Hide dashboard only on small screens when keyboard is open
           final shouldHideDashboard = isSmallScreen && isKeyboardOpen;
-          
+
           return Column(
             children: [
               // Dashboard Header - hide on small screens when keyboard is open
@@ -111,6 +172,8 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
 
               // Input Section - Inline to preserve context
               ShapeInputSection(
+                key: _inputSectionKey,
+                isEditing: _editingIndex != null,
                 selectedShapeType: state.selectedShapeType,
                 selectedUnit: state.selectedUnit,
                 onUnitChanged: (val) {
@@ -121,11 +184,25 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                   }
                 },
                 onAddShape: (inputs) {
-                  context.read<ShapeCalculatorBloc>().add(
-                    ShapeCalculatorEvent.addShape(inputs: inputs),
-                  );
+                  if (_editingIndex != null) {
+                    context.read<ShapeCalculatorBloc>().add(
+                      ShapeCalculatorEvent.updateShape(
+                        index: _editingIndex!,
+                        inputs: inputs,
+                        type: state.selectedShapeType,
+                        unit: state.selectedUnit,
+                      ),
+                    );
+                  } else {
+                    context.read<ShapeCalculatorBloc>().add(
+                      ShapeCalculatorEvent.addShape(inputs: inputs),
+                    );
+                  }
                 },
                 onClear: () {
+                  setState(() {
+                    _editingIndex = null;
+                  });
                   FocusManager.instance.primaryFocus?.unfocus();
                 },
               ),
@@ -139,6 +216,7 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
               Expanded(
                 child: AddedShapesList(
                   shapes: state.shapes,
+                  onEdit: _handleEdit,
                   deleteShape: (index) {
                     context.read<ShapeCalculatorBloc>().add(
                       ShapeCalculatorEvent.deleteShape(index),
@@ -147,12 +225,12 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                   onDeleteWithUndo: (index, shape) {
                     // Cancel any existing timer
                     _snackBarTimer?.cancel();
-                    
+
                     // Delete the shape first
                     context.read<ShapeCalculatorBloc>().add(
                       ShapeCalculatorEvent.deleteShape(index),
                     );
-                    
+
                     // Show SnackBar
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -172,12 +250,14 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                             );
                           },
                         ),
-                        duration: const Duration(days: 365), // Set very long duration
+                        duration: const Duration(
+                          days: 365,
+                        ), // Set very long duration
                         behavior: SnackBarBehavior.floating,
                         margin: const EdgeInsets.all(8),
                       ),
                     );
-                    
+
                     // Manually dismiss after 3 seconds
                     _snackBarTimer = Timer(const Duration(seconds: 3), () {
                       if (mounted) {

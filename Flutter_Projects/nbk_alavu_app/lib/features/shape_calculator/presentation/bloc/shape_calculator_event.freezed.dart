@@ -55,13 +55,14 @@ extension ShapeCalculatorEventPatterns on ShapeCalculatorEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( AddShape value)?  addShape,TResult Function( DeleteShape value)?  deleteShape,TResult Function( InsertShape value)?  insertShape,TResult Function( ClearAll value)?  clearAll,TResult Function( SetUnit value)?  setUnit,TResult Function( SelectShapeType value)?  selectShapeType,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( AddShape value)?  addShape,TResult Function( DeleteShape value)?  deleteShape,TResult Function( InsertShape value)?  insertShape,TResult Function( UpdateShape value)?  updateShape,TResult Function( ClearAll value)?  clearAll,TResult Function( SetUnit value)?  setUnit,TResult Function( SelectShapeType value)?  selectShapeType,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case AddShape() when addShape != null:
 return addShape(_that);case DeleteShape() when deleteShape != null:
 return deleteShape(_that);case InsertShape() when insertShape != null:
-return insertShape(_that);case ClearAll() when clearAll != null:
+return insertShape(_that);case UpdateShape() when updateShape != null:
+return updateShape(_that);case ClearAll() when clearAll != null:
 return clearAll(_that);case SetUnit() when setUnit != null:
 return setUnit(_that);case SelectShapeType() when selectShapeType != null:
 return selectShapeType(_that);case _:
@@ -82,13 +83,14 @@ return selectShapeType(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( AddShape value)  addShape,required TResult Function( DeleteShape value)  deleteShape,required TResult Function( InsertShape value)  insertShape,required TResult Function( ClearAll value)  clearAll,required TResult Function( SetUnit value)  setUnit,required TResult Function( SelectShapeType value)  selectShapeType,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( AddShape value)  addShape,required TResult Function( DeleteShape value)  deleteShape,required TResult Function( InsertShape value)  insertShape,required TResult Function( UpdateShape value)  updateShape,required TResult Function( ClearAll value)  clearAll,required TResult Function( SetUnit value)  setUnit,required TResult Function( SelectShapeType value)  selectShapeType,}){
 final _that = this;
 switch (_that) {
 case AddShape():
 return addShape(_that);case DeleteShape():
 return deleteShape(_that);case InsertShape():
-return insertShape(_that);case ClearAll():
+return insertShape(_that);case UpdateShape():
+return updateShape(_that);case ClearAll():
 return clearAll(_that);case SetUnit():
 return setUnit(_that);case SelectShapeType():
 return selectShapeType(_that);case _:
@@ -108,13 +110,14 @@ return selectShapeType(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( AddShape value)?  addShape,TResult? Function( DeleteShape value)?  deleteShape,TResult? Function( InsertShape value)?  insertShape,TResult? Function( ClearAll value)?  clearAll,TResult? Function( SetUnit value)?  setUnit,TResult? Function( SelectShapeType value)?  selectShapeType,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( AddShape value)?  addShape,TResult? Function( DeleteShape value)?  deleteShape,TResult? Function( InsertShape value)?  insertShape,TResult? Function( UpdateShape value)?  updateShape,TResult? Function( ClearAll value)?  clearAll,TResult? Function( SetUnit value)?  setUnit,TResult? Function( SelectShapeType value)?  selectShapeType,}){
 final _that = this;
 switch (_that) {
 case AddShape() when addShape != null:
 return addShape(_that);case DeleteShape() when deleteShape != null:
 return deleteShape(_that);case InsertShape() when insertShape != null:
-return insertShape(_that);case ClearAll() when clearAll != null:
+return insertShape(_that);case UpdateShape() when updateShape != null:
+return updateShape(_that);case ClearAll() when clearAll != null:
 return clearAll(_that);case SetUnit() when setUnit != null:
 return setUnit(_that);case SelectShapeType() when selectShapeType != null:
 return selectShapeType(_that);case _:
@@ -134,12 +137,13 @@ return selectShapeType(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Map<String, String> inputs)?  addShape,TResult Function( int index)?  deleteShape,TResult Function( int index,  Shape shape)?  insertShape,TResult Function()?  clearAll,TResult Function( String unit)?  setUnit,TResult Function( ShapeType type)?  selectShapeType,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Map<String, String> inputs)?  addShape,TResult Function( int index)?  deleteShape,TResult Function( int index,  Shape shape)?  insertShape,TResult Function( int index,  Map<String, String> inputs,  ShapeType type,  String unit)?  updateShape,TResult Function()?  clearAll,TResult Function( String unit)?  setUnit,TResult Function( ShapeType type)?  selectShapeType,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case AddShape() when addShape != null:
 return addShape(_that.inputs);case DeleteShape() when deleteShape != null:
 return deleteShape(_that.index);case InsertShape() when insertShape != null:
-return insertShape(_that.index,_that.shape);case ClearAll() when clearAll != null:
+return insertShape(_that.index,_that.shape);case UpdateShape() when updateShape != null:
+return updateShape(_that.index,_that.inputs,_that.type,_that.unit);case ClearAll() when clearAll != null:
 return clearAll();case SetUnit() when setUnit != null:
 return setUnit(_that.unit);case SelectShapeType() when selectShapeType != null:
 return selectShapeType(_that.type);case _:
@@ -160,12 +164,13 @@ return selectShapeType(_that.type);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Map<String, String> inputs)  addShape,required TResult Function( int index)  deleteShape,required TResult Function( int index,  Shape shape)  insertShape,required TResult Function()  clearAll,required TResult Function( String unit)  setUnit,required TResult Function( ShapeType type)  selectShapeType,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Map<String, String> inputs)  addShape,required TResult Function( int index)  deleteShape,required TResult Function( int index,  Shape shape)  insertShape,required TResult Function( int index,  Map<String, String> inputs,  ShapeType type,  String unit)  updateShape,required TResult Function()  clearAll,required TResult Function( String unit)  setUnit,required TResult Function( ShapeType type)  selectShapeType,}) {final _that = this;
 switch (_that) {
 case AddShape():
 return addShape(_that.inputs);case DeleteShape():
 return deleteShape(_that.index);case InsertShape():
-return insertShape(_that.index,_that.shape);case ClearAll():
+return insertShape(_that.index,_that.shape);case UpdateShape():
+return updateShape(_that.index,_that.inputs,_that.type,_that.unit);case ClearAll():
 return clearAll();case SetUnit():
 return setUnit(_that.unit);case SelectShapeType():
 return selectShapeType(_that.type);case _:
@@ -185,12 +190,13 @@ return selectShapeType(_that.type);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Map<String, String> inputs)?  addShape,TResult? Function( int index)?  deleteShape,TResult? Function( int index,  Shape shape)?  insertShape,TResult? Function()?  clearAll,TResult? Function( String unit)?  setUnit,TResult? Function( ShapeType type)?  selectShapeType,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Map<String, String> inputs)?  addShape,TResult? Function( int index)?  deleteShape,TResult? Function( int index,  Shape shape)?  insertShape,TResult? Function( int index,  Map<String, String> inputs,  ShapeType type,  String unit)?  updateShape,TResult? Function()?  clearAll,TResult? Function( String unit)?  setUnit,TResult? Function( ShapeType type)?  selectShapeType,}) {final _that = this;
 switch (_that) {
 case AddShape() when addShape != null:
 return addShape(_that.inputs);case DeleteShape() when deleteShape != null:
 return deleteShape(_that.index);case InsertShape() when insertShape != null:
-return insertShape(_that.index,_that.shape);case ClearAll() when clearAll != null:
+return insertShape(_that.index,_that.shape);case UpdateShape() when updateShape != null:
+return updateShape(_that.index,_that.inputs,_that.type,_that.unit);case ClearAll() when clearAll != null:
 return clearAll();case SetUnit() when setUnit != null:
 return setUnit(_that.unit);case SelectShapeType() when selectShapeType != null:
 return selectShapeType(_that.type);case _:
@@ -401,6 +407,84 @@ class _$InsertShapeCopyWithImpl<$Res>
 index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
 as int,shape: null == shape ? _self.shape : shape // ignore: cast_nullable_to_non_nullable
 as Shape,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class UpdateShape implements ShapeCalculatorEvent {
+  const UpdateShape({required this.index, required final  Map<String, String> inputs, required this.type, required this.unit}): _inputs = inputs;
+  
+
+ final  int index;
+ final  Map<String, String> _inputs;
+ Map<String, String> get inputs {
+  if (_inputs is EqualUnmodifiableMapView) return _inputs;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_inputs);
+}
+
+ final  ShapeType type;
+ final  String unit;
+
+/// Create a copy of ShapeCalculatorEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateShapeCopyWith<UpdateShape> get copyWith => _$UpdateShapeCopyWithImpl<UpdateShape>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateShape&&(identical(other.index, index) || other.index == index)&&const DeepCollectionEquality().equals(other._inputs, _inputs)&&(identical(other.type, type) || other.type == type)&&(identical(other.unit, unit) || other.unit == unit));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,index,const DeepCollectionEquality().hash(_inputs),type,unit);
+
+@override
+String toString() {
+  return 'ShapeCalculatorEvent.updateShape(index: $index, inputs: $inputs, type: $type, unit: $unit)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdateShapeCopyWith<$Res> implements $ShapeCalculatorEventCopyWith<$Res> {
+  factory $UpdateShapeCopyWith(UpdateShape value, $Res Function(UpdateShape) _then) = _$UpdateShapeCopyWithImpl;
+@useResult
+$Res call({
+ int index, Map<String, String> inputs, ShapeType type, String unit
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateShapeCopyWithImpl<$Res>
+    implements $UpdateShapeCopyWith<$Res> {
+  _$UpdateShapeCopyWithImpl(this._self, this._then);
+
+  final UpdateShape _self;
+  final $Res Function(UpdateShape) _then;
+
+/// Create a copy of ShapeCalculatorEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? index = null,Object? inputs = null,Object? type = null,Object? unit = null,}) {
+  return _then(UpdateShape(
+index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,inputs: null == inputs ? _self._inputs : inputs // ignore: cast_nullable_to_non_nullable
+as Map<String, String>,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as ShapeType,unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

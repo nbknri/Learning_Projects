@@ -13,6 +13,7 @@ class AddedShapesList extends StatefulWidget {
   final List<Shape> shapes;
   final Function(int index) deleteShape;
   final Function(int index, Shape shape)? onDeleteWithUndo;
+  final Function(int index, Shape shape)? onEdit;
   final bool shrinkWrap;
   final ScrollPhysics? physics;
 
@@ -21,6 +22,7 @@ class AddedShapesList extends StatefulWidget {
     required this.shapes,
     required this.deleteShape,
     this.onDeleteWithUndo,
+    this.onEdit,
     this.shrinkWrap = false,
     this.physics,
   });
@@ -174,11 +176,23 @@ class _AddedShapesListState extends State<AddedShapesList> {
                 ),
               ],
             ),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete_outline),
-              color: AppColor.deleteButton,
-              onPressed: () => _handleDelete(context, index, shape),
-              tooltip: 'Delete',
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (widget.onEdit != null)
+                  IconButton(
+                    icon: const Icon(Icons.edit_outlined),
+                    color: AppColor.primary,
+                    onPressed: () => widget.onEdit!(index, shape),
+                    tooltip: 'Edit',
+                  ),
+                IconButton(
+                  icon: const Icon(Icons.delete_outline),
+                  color: AppColor.deleteButton,
+                  onPressed: () => _handleDelete(context, index, shape),
+                  tooltip: 'Delete',
+                ),
+              ],
             ),
           ),
         );

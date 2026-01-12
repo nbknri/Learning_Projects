@@ -16,6 +16,7 @@ class ShapeInputSection extends StatefulWidget {
   final Function(String?) onUnitChanged;
   final Function(Map<String, String>) onAddShape;
   final VoidCallback onClear;
+  final bool isEditing;
 
   const ShapeInputSection({
     super.key,
@@ -24,13 +25,14 @@ class ShapeInputSection extends StatefulWidget {
     required this.onUnitChanged,
     required this.onAddShape,
     required this.onClear,
+    this.isEditing = false,
   });
 
   @override
-  State<ShapeInputSection> createState() => _ShapeInputSectionState();
+  State<ShapeInputSection> createState() => ShapeInputSectionState();
 }
 
-class _ShapeInputSectionState extends State<ShapeInputSection> {
+class ShapeInputSectionState extends State<ShapeInputSection> {
   final _sideAController = TextEditingController(); // Triangle / Side A (North)
   final _sideBController = TextEditingController(); // Triangle / Side B (East)
   final _sideCController = TextEditingController(); // Triangle / Side C (South)
@@ -65,7 +67,7 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
   }
 
   void _clearInputs() {
-     _sideAController.clear();
+    _sideAController.clear();
     _sideBController.clear();
     _sideCController.clear();
     _sideDController.clear();
@@ -73,6 +75,37 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
     _widthController.clear();
     _sideController.clear();
     _radiusController.clear();
+  }
+
+  void populateFields(Shape shape) {
+    // Clear first to be safe
+    _clearInputs();
+
+    final dimensions = shape.dimensions;
+
+    switch (shape.type) {
+      case ShapeType.triangle:
+        _sideAController.text = dimensions[ShapeKeys.sideA]?.toString() ?? '';
+        _sideBController.text = dimensions[ShapeKeys.sideB]?.toString() ?? '';
+        _sideCController.text = dimensions[ShapeKeys.sideC]?.toString() ?? '';
+        break;
+      case ShapeType.rectangle:
+        _lengthController.text = dimensions[ShapeKeys.length]?.toString() ?? '';
+        _widthController.text = dimensions[ShapeKeys.width]?.toString() ?? '';
+        break;
+      case ShapeType.square:
+        _sideController.text = dimensions[ShapeKeys.side]?.toString() ?? '';
+        break;
+      case ShapeType.circle:
+        _radiusController.text = dimensions[ShapeKeys.radius]?.toString() ?? '';
+        break;
+      case ShapeType.irregularQuadrilateral:
+        _sideAController.text = dimensions[ShapeKeys.sideA]?.toString() ?? '';
+        _sideBController.text = dimensions[ShapeKeys.sideB]?.toString() ?? '';
+        _sideCController.text = dimensions[ShapeKeys.sideC]?.toString() ?? '';
+        _sideDController.text = dimensions[ShapeKeys.sideD]?.toString() ?? '';
+        break;
+    }
   }
 
   void _submit() {
@@ -204,20 +237,42 @@ class _ShapeInputSectionState extends State<ShapeInputSection> {
             
             const SizedBox(height: 16),
             
-            // Add Button - Full Width
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: _submit,
-                icon: const Icon(Icons.add_circle_outline, size: 24),
-                label: Text(
-                  AppStrings.addMeasurement,
-                  style: Theme.of(context).addButtonTextStyle,
+            // Action Buttons
+            Row(
+              children: [
+                if (widget.isEditing) ...[
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: widget.onClear,
+                      icon: const Icon(Icons.close),
+                      label: const Text('Cancel'),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        side: BorderSide(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                ],
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: _submit,
+                    icon: Icon(
+                      widget.isEditing
+                          ? Icons.update
+                          : Icons.add_circle_outline,
+                      size: 24,
+                    ),
+                    label: Text(
+                      widget.isEditing ? 'Update' : AppStrings.addMeasurement,
+                      style: Theme.of(context).addButtonTextStyle,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                  ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-              ),
+              ],
             ),
           ],
         ),

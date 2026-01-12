@@ -6,6 +6,7 @@ import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/calculat
 import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/clear_all_shapes.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/delete_shape.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/insert_shape.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/update_shape.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_event.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_state.dart';
 
@@ -17,6 +18,7 @@ class ShapeCalculatorBloc
   final InsertShapeUseCase _insertShapeUseCase;
   final ClearAllShapesUseCase _clearAllShapesUseCase;
   final CalculateTotalAreaUseCase _calculateTotalAreaUseCase;
+  final UpdateShapeUseCase _updateShapeUseCase;
 
   ShapeCalculatorBloc(
     this._addShapeUseCase,
@@ -24,10 +26,12 @@ class ShapeCalculatorBloc
     this._insertShapeUseCase,
     this._clearAllShapesUseCase,
     this._calculateTotalAreaUseCase,
+    this._updateShapeUseCase,
   ) : super(const ShapeCalculatorState()) {
     on<AddShape>(_onAddShape);
     on<DeleteShape>(_onDeleteShape);
     on<InsertShape>(_onInsertShape);
+    on<UpdateShape>(_onUpdateShape);
     on<ClearAll>(_onClearAll);
     on<SetUnit>(_onSetUnit);
     on<SelectShapeType>(_onSelectShapeType);
@@ -72,6 +76,44 @@ class ShapeCalculatorBloc
         status: ShapeCalculatorStatus.failure,
         errorMessage: e.toString().replaceAll('Exception: ', ''),
       ));
+    }
+  }
+
+  void _onUpdateShape(UpdateShape event, Emitter<ShapeCalculatorState> emit) {
+    emit(
+      state.copyWith(errorMessage: null, status: ShapeCalculatorStatus.initial),
+    );
+
+    try {
+      final newShape = _addShapeUseCase(
+        type: event.type,
+        inputs: event.inputs,
+        unit: event.unit,
+      );
+
+      final updatedShapes = _updateShapeUseCase(
+        state.shapes,
+        event.index,
+        newShape,
+      );
+
+      final totalArea = _calculateTotalAreaUseCase(updatedShapes);
+
+      emit(
+        state.copyWith(
+          status: ShapeCalculatorStatus.success,
+          shapes: updatedShapes,
+          totalAreaSqM: totalArea,
+          errorMessage: null,
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: ShapeCalculatorStatus.failure,
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 
