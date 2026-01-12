@@ -32,6 +32,10 @@ class AppTextStyle {
     return TextStyle(color: color);
   }
 
+  static TextStyle snackBarText() {
+    return const TextStyle(color: Colors.white, fontSize: 14);
+  }
+
   //───────────────────────────────────
   // Result Styles
   //───────────────────────────────────

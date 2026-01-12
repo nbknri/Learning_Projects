@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbk_alavu_app/core/theme/app_color.dart';
 import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
 import 'package:nbk_alavu_app/core/theme/app_theme.dart';
 import 'package:nbk_alavu_app/core/utils/format_utils.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_event.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/extensions/shape_type_extension.dart';
 
 class AddedShapesList extends StatefulWidget {
   final List<Shape> shapes;
   final Function(int index) deleteShape;
+  final Function(int index, Shape shape)? onDeleteWithUndo;
   final bool shrinkWrap;
   final ScrollPhysics? physics;
 
@@ -16,6 +20,7 @@ class AddedShapesList extends StatefulWidget {
     super.key,
     required this.shapes,
     required this.deleteShape,
+    this.onDeleteWithUndo,
     this.shrinkWrap = false,
     this.physics,
   });
@@ -75,6 +80,52 @@ class _AddedShapesListState extends State<AddedShapesList> {
     }
   }
 
+  void _handleDelete(BuildContext context, int index, Shape shape) {
+    // If onDeleteWithUndo callback is provided, use it (better context management)
+    if (widget.onDeleteWithUndo != null) {
+      widget.onDeleteWithUndo!(index, shape);
+      return;
+    }
+
+    // Fallback: Old implementation with SnackBar in widget
+    final deletedShape = shape;
+    final deletedIndex = index;
+
+    widget.deleteShape(index);
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Deleted ${shape.type.displayName}',
+          style: AppTextStyle.snackBarText(),
+        ),
+        action: SnackBarAction(
+          label: 'UNDO',
+          textColor: AppColor.primary.withValues(alpha: 0.9),
+          onPressed: () {
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              context.read<ShapeCalculatorBloc>().add(
+                ShapeCalculatorEvent.insertShape(
+                  index: deletedIndex,
+                  shape: deletedShape,
+                ),
+              );
+            }
+          },
+        ),
+        duration: const Duration(seconds: 3),
+        behavior: SnackBarBehavior.floating,
+        dismissDirection: DismissDirection.down,
+        showCloseIcon: false,
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? AppColor.snackBarBackgroundDark
+            : AppColor.snackBarBackgroundLight,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -126,7 +177,7 @@ class _AddedShapesListState extends State<AddedShapesList> {
             trailing: IconButton(
               icon: const Icon(Icons.delete_outline),
               color: AppColor.deleteButton,
-              onPressed: () => widget.deleteShape(index),
+              onPressed: () => _handleDelete(context, index, shape),
               tooltip: 'Delete',
             ),
           ),

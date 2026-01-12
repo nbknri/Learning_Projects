@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbk_alavu_app/core/constants/app_strings.dart';
@@ -6,6 +8,7 @@ import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_event.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_state.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/extensions/shape_type_extension.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/added_shapes_header.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/added_shapes_list.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/clear_all_button.dart';
@@ -26,6 +29,13 @@ class ShapeCalculatorScreen extends StatefulWidget {
 class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
   String? _lastShownError;
   DateTime? _lastErrorTime;
+  Timer? _snackBarTimer;
+
+  @override
+  void dispose() {
+    _snackBarTimer?.cancel();
+    super.dispose();
+  }
 
   void _showSnackBar(BuildContext context, String msg) {
     // Prevent showing the same error within 2 seconds
@@ -79,6 +89,8 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
           }
         },
         builder: (context, state) {
+          print('DEBUG: Builder called, shapes count: ${state.shapes.length}');
+          
           // Detect if keyboard is open
           final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
           final isKeyboardOpen = keyboardHeight > 0;
@@ -133,6 +145,49 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                     context.read<ShapeCalculatorBloc>().add(
                       ShapeCalculatorEvent.deleteShape(index),
                     );
+                  },
+                  onDeleteWithUndo: (index, shape) {
+                    print('DEBUG: Delete button pressed for ${shape.type.displayName}');
+                    
+                    // Cancel any existing timer
+                    _snackBarTimer?.cancel();
+                    
+                    // Delete the shape first
+                    context.read<ShapeCalculatorBloc>().add(
+                      ShapeCalculatorEvent.deleteShape(index),
+                    );
+                    
+                    // Show SnackBar
+                    print('DEBUG: Showing SnackBar with manual timer');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Deleted ${shape.type.displayName}'),
+                        action: SnackBarAction(
+                          label: 'UNDO',
+                          onPressed: () {
+                            print('DEBUG: UNDO pressed');
+                            _snackBarTimer?.cancel();
+                            context.read<ShapeCalculatorBloc>().add(
+                              ShapeCalculatorEvent.insertShape(
+                                index: index,
+                                shape: shape,
+                              ),
+                            );
+                          },
+                        ),
+                        duration: const Duration(days: 365), // Set very long duration
+                        behavior: SnackBarBehavior.floating,
+                        margin: const EdgeInsets.all(8),
+                      ),
+                    );
+                    
+                    // Manually dismiss after 3 seconds
+                    _snackBarTimer = Timer(const Duration(seconds: 3), () {
+                      print('DEBUG: Timer fired - hiding SnackBar');
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      }
+                    });
                   },
                 ),
               ),

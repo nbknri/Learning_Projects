@@ -28,6 +28,9 @@ class AppColor {
   static const Color textLightSecondary = Color(0xFF757575); // Medium gray
   static const Color borderLight = Color(0xFFE0E0E0); // Light gray borders
   static const Color snackBarLight = Color(0xFF424242);
+  static const Color snackBarBackgroundLight = Color(
+    0xFF424242,
+  ); // Grey 800 for light theme
 
   // Dark Mode Colors
   static const Color backgroundDark = Color(0xFF121212); // Dark navy
@@ -38,6 +41,9 @@ class AppColor {
   static const Color textDarkSecondary = Color(0xFFB0B0B0); // Medium gray text
   static const Color borderDark = Color(0xFF424242); // Dark gray borders
   static const Color snackBarDark = Color(0xFF2D2D2D);
+  static const Color snackBarBackgroundDark = Color(
+    0xFF303030,
+  ); // Grey 850 for dark theme
 
   // Semantic Colors
   static const Color error = Color(0xFFD32F2F);

@@ -10,6 +10,10 @@ class ShapeCalculatorEvent with _$ShapeCalculatorEvent {
   }) = AddShape;
   
   const factory ShapeCalculatorEvent.deleteShape(int index) = DeleteShape;
+  const factory ShapeCalculatorEvent.insertShape({
+    required int index,
+    required Shape shape,
+  }) = InsertShape;
   const factory ShapeCalculatorEvent.clearAll() = ClearAll;
   const factory ShapeCalculatorEvent.setUnit(String unit) = SetUnit;
   const factory ShapeCalculatorEvent.selectShapeType(ShapeType type) = SelectShapeType;
