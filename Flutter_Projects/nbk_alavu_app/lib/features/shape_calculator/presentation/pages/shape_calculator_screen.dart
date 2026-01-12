@@ -89,8 +89,6 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
           }
         },
         builder: (context, state) {
-          print('DEBUG: Builder called, shapes count: ${state.shapes.length}');
-          
           // Detect if keyboard is open
           final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
           final isKeyboardOpen = keyboardHeight > 0;
@@ -147,8 +145,6 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                     );
                   },
                   onDeleteWithUndo: (index, shape) {
-                    print('DEBUG: Delete button pressed for ${shape.type.displayName}');
-                    
                     // Cancel any existing timer
                     _snackBarTimer?.cancel();
                     
@@ -158,14 +154,15 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                     );
                     
                     // Show SnackBar
-                    print('DEBUG: Showing SnackBar with manual timer');
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Deleted ${shape.type.displayName}'),
+                        content: Text(
+                          'Deleted ${shape.type.displayName}',
+                          style: AppTextStyle.snackBarText(),
+                        ),
                         action: SnackBarAction(
                           label: 'UNDO',
                           onPressed: () {
-                            print('DEBUG: UNDO pressed');
                             _snackBarTimer?.cancel();
                             context.read<ShapeCalculatorBloc>().add(
                               ShapeCalculatorEvent.insertShape(
@@ -183,7 +180,6 @@ class _ShapeCalculatorScreenState extends State<ShapeCalculatorScreen> {
                     
                     // Manually dismiss after 3 seconds
                     _snackBarTimer = Timer(const Duration(seconds: 3), () {
-                      print('DEBUG: Timer fired - hiding SnackBar');
                       if (mounted) {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       }
