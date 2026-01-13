@@ -36,7 +36,10 @@ class MetricCard extends StatelessWidget {
                       SnackBar(
                         content: Text(AppStrings.copiedMessage(label, value)),
                         duration: const Duration(seconds: 1),
-                        backgroundColor: AppColor.backgroundDark,
+                        backgroundColor:
+                            Theme.of(context).brightness == Brightness.dark
+                            ? AppColor.snackBarBackgroundDark
+                            : AppColor.snackBarBackgroundLight,
                       ),
                     );
                   }

@@ -129,6 +129,7 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
         const Divider(),
 
         // Results List
+        // Results List or Empty State
         if (_currentValue != null)
           Expanded(
             child: ListView.builder(
@@ -143,9 +144,14 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
                   _fromUnit,
                   targetUnit,
                 );
-                resultText = converted.toStringAsFixed(4);
+                
+                // Format decimal: remove trailing zeros
+                resultText = converted.toStringAsFixed(5);
                 if (resultText.contains('.')) {
-                  resultText = double.parse(resultText).toString();
+                  resultText = resultText.replaceAll(RegExp(r'0*$'), '');
+                  if (resultText.endsWith('.')) {
+                    resultText = resultText.substring(0, resultText.length - 1);
+                  }
                 }
 
                 return ConversionResultCard(
@@ -155,6 +161,28 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
                   isSelected: targetUnit == _fromUnit,
                 );
               },
+            ),
+          )
+        else
+          Expanded(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.touch_app_outlined,
+                    size: 64,
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    "Please enter a value to convert",
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
       ],
