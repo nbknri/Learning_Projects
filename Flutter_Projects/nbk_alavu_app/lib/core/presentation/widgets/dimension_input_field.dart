@@ -22,7 +22,7 @@ class DimensionInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      keyboardType: TextInputType.phone,
+      keyboardType: TextInputType.visiblePassword,
       textInputAction: textInputAction,
       onSubmitted: (_) {
         if (textInputAction == TextInputAction.done && onSubmitted != null) {

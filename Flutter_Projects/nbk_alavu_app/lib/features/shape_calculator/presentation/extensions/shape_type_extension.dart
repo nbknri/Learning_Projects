@@ -16,7 +16,7 @@ extension ShapeTypeDisplay on ShapeType {
       case ShapeType.circle:
         return AppStrings.circle;
       case ShapeType.irregularQuadrilateral:
-        return AppStrings.landPlot;
+        return AppStrings.irregularPlot;
     }
   }
 

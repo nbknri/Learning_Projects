@@ -20,7 +20,7 @@ class AppStrings {
   static const String rectangle = 'Rectangle';
   static const String square = 'Square';
   static const String circle = 'Circle';
-  static const String landPlot = 'Land Plot';
+  static const String irregularPlot = '4-Sided Plot';
 
   // Tooltips
   static const String deleteTooltip = 'Delete';
@@ -32,6 +32,8 @@ class AppStrings {
       'Invalid input format. Please enter single values or use + for addition';
   static const String emptyInputError = 'Please enter all dimensions';
   static const String zeroInputError = 'Dimensions cannot be zero';
+  static const String landPlotAccuracyWarning =
+      'Note: Calculation using only 4 sides is not 100% accurate. This provides an approximate area only.';
 
   static String copiedMessage(String label, String value) =>
       '$label copied: $value';

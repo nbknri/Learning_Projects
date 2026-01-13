@@ -36,7 +36,7 @@ class ShapeTypeSelector extends StatelessWidget {
           const SizedBox(width: 8),
           ShapeTypeChip(
             shapeType: ShapeType.irregularQuadrilateral,
-            label: AppStrings.landPlot,
+            label: AppStrings.irregularPlot,
             icon: Icons.terrain,
             isSelected:
                 state.selectedShapeType == ShapeType.irregularQuadrilateral,
