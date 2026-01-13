@@ -35,6 +35,14 @@ class ShapeTypeSelector extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           ShapeTypeChip(
+            shapeType: ShapeType.irregularQuadrilateral,
+            label: AppStrings.landPlot,
+            icon: Icons.terrain,
+            isSelected:
+                state.selectedShapeType == ShapeType.irregularQuadrilateral,
+          ),
+          const SizedBox(width: 8),
+          ShapeTypeChip(
             shapeType: ShapeType.square,
             label: AppStrings.square,
             icon: Icons.crop_square,
@@ -47,14 +55,7 @@ class ShapeTypeSelector extends StatelessWidget {
             icon: Icons.circle_outlined,
             isSelected: state.selectedShapeType == ShapeType.circle,
           ),
-          const SizedBox(width: 8),
-          ShapeTypeChip(
-            shapeType: ShapeType.irregularQuadrilateral,
-            label: AppStrings.landPlot,
-            icon: Icons.terrain,
-            isSelected:
-                state.selectedShapeType == ShapeType.irregularQuadrilateral,
-          ),
+          
         ],
       ),
     );

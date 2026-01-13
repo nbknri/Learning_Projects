@@ -59,6 +59,7 @@ class _ShapeCalculatorViewState extends State<ShapeCalculatorView> {
     setState(() {
       _editingIndex = index;
     });
+    FocusManager.instance.primaryFocus?.unfocus();
 
     final currentType = context
         .read<ShapeCalculatorBloc>()
@@ -117,7 +118,12 @@ class _ShapeCalculatorViewState extends State<ShapeCalculatorView> {
       ),
       actions: [
         const ClearAllButton(),
-        ThemeToggleButton(onPressed: widget.onThemeChanged),
+        ThemeToggleButton(
+          onPressed: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+            widget.onThemeChanged();
+          },
+        ),
       ],
     );
   }
@@ -177,6 +183,7 @@ class _ShapeCalculatorViewState extends State<ShapeCalculatorView> {
                 selectedShapeType: state.selectedShapeType,
                 selectedUnit: state.selectedUnit,
                 onUnitChanged: (val) {
+                  FocusManager.instance.primaryFocus?.unfocus();
                   if (val != null) {
                     context.read<ShapeCalculatorBloc>().add(
                       ShapeCalculatorEvent.setUnit(val),
@@ -218,13 +225,24 @@ class _ShapeCalculatorViewState extends State<ShapeCalculatorView> {
                   shapes: state.shapes,
                   onEdit: _handleEdit,
                   deleteShape: (index) {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     context.read<ShapeCalculatorBloc>().add(
                       ShapeCalculatorEvent.deleteShape(index),
                     );
                   },
                   onDeleteWithUndo: (index, shape) {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     // Cancel any existing timer
                     _snackBarTimer?.cancel();
+                    
+                    // Reset edit mode if active
+                    if (_editingIndex != null) {
+                      setState(() {
+                        _editingIndex = null;
+                        _pendingEditShape = null;
+                      });
+                      _inputSectionKey.currentState?.clearFields();
+                    }
 
                     // Delete the shape first
                     context.read<ShapeCalculatorBloc>().add(

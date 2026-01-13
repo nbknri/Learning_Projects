@@ -34,6 +34,7 @@ class ShapeTypeChip extends StatelessWidget {
       ),
       selected: isSelected,
       onSelected: (selected) {
+        FocusManager.instance.primaryFocus?.unfocus();
         if (selected) {
           context.read<ShapeCalculatorBloc>().add(
                 ShapeCalculatorEvent.selectShapeType(shapeType),

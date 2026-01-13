@@ -83,27 +83,36 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
 
     final dimensions = shape.dimensions;
 
+    String format(double? value) {
+      if (value == null) return '';
+      // If integer value, remove decimal
+      if (value == value.truncate()) {
+        return value.truncate().toString();
+      }
+      return value.toString();
+    }
+
     switch (shape.type) {
       case ShapeType.triangle:
-        _sideAController.text = dimensions[ShapeKeys.sideA]?.toString() ?? '';
-        _sideBController.text = dimensions[ShapeKeys.sideB]?.toString() ?? '';
-        _sideCController.text = dimensions[ShapeKeys.sideC]?.toString() ?? '';
+        _sideAController.text = format(dimensions[ShapeKeys.sideA]);
+        _sideBController.text = format(dimensions[ShapeKeys.sideB]);
+        _sideCController.text = format(dimensions[ShapeKeys.sideC]);
         break;
       case ShapeType.rectangle:
-        _lengthController.text = dimensions[ShapeKeys.length]?.toString() ?? '';
-        _widthController.text = dimensions[ShapeKeys.width]?.toString() ?? '';
+        _lengthController.text = format(dimensions[ShapeKeys.length]);
+        _widthController.text = format(dimensions[ShapeKeys.width]);
         break;
       case ShapeType.square:
-        _sideController.text = dimensions[ShapeKeys.side]?.toString() ?? '';
+        _sideController.text = format(dimensions[ShapeKeys.side]);
         break;
       case ShapeType.circle:
-        _radiusController.text = dimensions[ShapeKeys.radius]?.toString() ?? '';
+        _radiusController.text = format(dimensions[ShapeKeys.radius]);
         break;
       case ShapeType.irregularQuadrilateral:
-        _sideAController.text = dimensions[ShapeKeys.sideA]?.toString() ?? '';
-        _sideBController.text = dimensions[ShapeKeys.sideB]?.toString() ?? '';
-        _sideCController.text = dimensions[ShapeKeys.sideC]?.toString() ?? '';
-        _sideDController.text = dimensions[ShapeKeys.sideD]?.toString() ?? '';
+        _sideAController.text = format(dimensions[ShapeKeys.sideA]);
+        _sideBController.text = format(dimensions[ShapeKeys.sideB]);
+        _sideCController.text = format(dimensions[ShapeKeys.sideC]);
+        _sideDController.text = format(dimensions[ShapeKeys.sideD]);
         break;
     }
   }
@@ -243,7 +252,10 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
                 if (widget.isEditing) ...[
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: widget.onClear,
+                      onPressed: () {
+                        _clearInputs(); // Clear fields specifically
+                        widget.onClear(); // Notify parent to reset state
+                      },
                       icon: const Icon(Icons.close),
                       label: const Text('Cancel'),
                       style: OutlinedButton.styleFrom(

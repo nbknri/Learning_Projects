@@ -16,7 +16,10 @@ class ClearAllButton extends StatelessWidget {
       builder: (context, state) {
         return IconButton(
           onPressed: state.shapes.isNotEmpty
-              ? () => _showClearAllDialog(context)
+              ? () {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  _showClearAllDialog(context);
+                }
               : null,
           icon: const Icon(Icons.delete_sweep, color: AppColor.white),
           tooltip: AppStrings.clearAllTooltip,
