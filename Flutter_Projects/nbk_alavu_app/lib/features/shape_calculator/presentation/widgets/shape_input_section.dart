@@ -4,11 +4,12 @@ import 'package:nbk_alavu_app/core/constants/app_strings.dart';
 import 'package:nbk_alavu_app/core/constants/shape_keys.dart';
 import 'package:nbk_alavu_app/core/presentation/widgets/dimension_input_field.dart';
 import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
-import 'package:nbk_alavu_app/core/theme/app_theme.dart';
 import 'package:nbk_alavu_app/core/utils/input_parser.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart'; // For ShapeType
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_state.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/input_row.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/shape_unit_selector.dart';
 
 class ShapeInputSection extends StatefulWidget {
   final ShapeType selectedShapeType;
@@ -244,40 +245,13 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
         child: Column(
           children: [
             // Unit Selector
-            Align(
-              alignment: Alignment.centerRight,
-              child: Container(
-                margin: const EdgeInsets.only(right: 4),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 4,
-                ),
-                decoration: Theme.of(context).unitContainerDecoration(context),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "Unit: ",
-                      style: Theme.of(context).unitLabelStyle,
-                    ),
-                    DropdownButton<String>(
-                      value: widget.selectedUnit,
-                      items: ['Meters', 'Feet', '6 Feet']
-                              .map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              })
-                              .toList(),
-                      onChanged: widget.onUnitChanged,
-                      underline: const SizedBox(),
-                      isDense: true,
-                      style: Theme.of(context).unitDropdownStyle,
-                    ),
-                  ],
-                ),
-              ),
+            ShapeUnitSelector(
+              selectedUnit: widget.selectedUnit,
+              onUnitChanged: (value) {
+                if (value != null) {
+                  widget.onUnitChanged(value);
+                }
+              },
             ),
             const SizedBox(height: 10),
             
@@ -332,23 +306,13 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
     );
   }
 
-  List<Widget> _buildInputs() {
-    Widget buildRow(List<Widget> children) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: children.map((e) => Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-            child: e,
-          ),
-        )).toList(),
-      );
-    }
 
+  List<Widget> _buildInputs() {
     switch (widget.selectedShapeType) {
       case ShapeType.triangle:
         return [
-          buildRow([
+          InputRow(
+            children: [
             DimensionInputField(
               controller: _sideAController,
               label: "Side A",
@@ -371,7 +335,8 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
         ];
       case ShapeType.rectangle:
         return [
-          buildRow([
+          InputRow(
+            children: [
             DimensionInputField(
               controller: _lengthController,
               label: "Length",
@@ -413,7 +378,8 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
         ];
       case ShapeType.irregularQuadrilateral:
         return [
-          buildRow([
+          InputRow(
+            children: [
             DimensionInputField(
               controller: _sideAController,
               label: "North",
@@ -428,7 +394,8 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
             ),
           ]),
           const SizedBox(height: 10),
-          buildRow([
+          InputRow(
+            children: [
             DimensionInputField(
               controller: _sideCController,
               label: "South",
