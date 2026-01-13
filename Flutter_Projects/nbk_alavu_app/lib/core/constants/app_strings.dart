@@ -22,6 +22,24 @@ class AppStrings {
   static const String circle = 'Circle';
   static const String irregularPlot = '4-Sided Plot';
 
+  // Unit Types
+  static const String meters = 'Meters';
+  static const String kilometers = 'Kilometers';
+  static const String centimeters = 'Centimeters';
+  static const String millimeters = 'Millimeters';
+  static const String feet = 'Feet';
+  static const String inches = 'Inches';
+  static const String yards = 'Yards';
+
+  // Area Units
+  static const String cents = 'Cents';
+  static const String acre = 'Acre';
+  static const String are = 'Are';
+  static const String hectare = 'Hectare';
+  static const String sqFeet = 'Sq. Feet';
+  static const String sqMeter = 'Sq. Meter';
+  static const String guntha = 'Guntha';
+
   // Tooltips
   static const String deleteTooltip = 'Delete';
   static const String clearAllTooltip = 'Clear All';

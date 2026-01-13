@@ -1,11 +1,13 @@
+import 'package:nbk_alavu_app/core/constants/app_strings.dart';
+
 enum UnitType {
-  meters('Meters', 'm'),
-  kilometers('Kilometers', 'km'),
-  centimeters('Centimeters', 'cm'),
-  millimeters('Millimeters', 'mm'),
-  feet('Feet', 'ft'),
-  inches('Inches', 'in'),
-  yards('Yards', 'yd');
+  meters(AppStrings.meters, 'm'),
+  kilometers(AppStrings.kilometers, 'km'),
+  centimeters(AppStrings.centimeters, 'cm'),
+  millimeters(AppStrings.millimeters, 'mm'),
+  feet(AppStrings.feet, 'ft'),
+  inches(AppStrings.inches, 'in'),
+  yards(AppStrings.yards, 'yd');
 
   final String displayName;
   final String symbol;

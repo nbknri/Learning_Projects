@@ -1,11 +1,13 @@
+import 'package:nbk_alavu_app/core/constants/app_strings.dart';
+
 enum AreaUnit {
-  cents('Cents', 'cents'),
-  acre('Acre', 'ac'),
-  are('Are', 'are'),
-  hectare('Hectare', 'ha'),
-  sqFeet('Sq. Feet', 'ft²'),
-  sqMeter('Sq. Meter', 'm²'),
-  guntha('Guntha', 'guntha');
+  cents(AppStrings.cents, 'cents'),
+  acre(AppStrings.acre, 'ac'),
+  are(AppStrings.are, 'are'),
+  hectare(AppStrings.hectare, 'ha'),
+  sqFeet(AppStrings.sqFeet, 'ft²'),
+  sqMeter(AppStrings.sqMeter, 'm²'),
+  guntha(AppStrings.guntha, 'guntha');
 
   final String displayName;
   final String symbol;
