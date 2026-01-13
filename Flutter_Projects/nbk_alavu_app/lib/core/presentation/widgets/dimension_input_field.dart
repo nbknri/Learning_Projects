@@ -7,6 +7,7 @@ class DimensionInputField extends StatelessWidget {
   final String label;
   final TextInputAction textInputAction;
   final VoidCallback? onSubmitted;
+  final Widget? suffixIcon;
 
   const DimensionInputField({
     super.key,
@@ -14,6 +15,7 @@ class DimensionInputField extends StatelessWidget {
     required this.label,
     required this.textInputAction,
     this.onSubmitted,
+    this.suffixIcon,
   });
 
   @override
@@ -70,6 +72,7 @@ class DimensionInputField extends StatelessWidget {
         labelText: label,
         border: const OutlineInputBorder(),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        suffixIcon: suffixIcon,
       ),
     );
   }

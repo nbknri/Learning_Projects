@@ -36,6 +36,20 @@ class AppTheme {
       titleTextStyle: AppTextStyle.appBarTitle(AppColor.white),
     ),
 
+    // Tab Bar Theme
+    // Tab Bar Theme
+    tabBarTheme: TabBarThemeData(
+      labelColor: AppColor.accent, // Match Shape Calculator selected color
+      unselectedLabelColor: AppColor.white.withValues(alpha: 0.7),
+      indicatorColor: AppColor.accent, // Match Shape Calculator selected color
+      indicatorSize: TabBarIndicatorSize.tab,
+      labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+      unselectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 16,
+      ),
+    ),
+
     // Card Theme
     cardTheme: CardThemeData(
       color: AppColor.surfaceLight,
@@ -126,6 +140,20 @@ class AppTheme {
       centerTitle: true,
       iconTheme: const IconThemeData(color: AppColor.white),
       titleTextStyle: AppTextStyle.appBarTitle(AppColor.white),
+    ),
+
+    // Tab Bar Theme
+    // Tab Bar Theme
+    tabBarTheme: TabBarThemeData(
+      labelColor: AppColor.accent, // Match Shape Calculator selected color
+      unselectedLabelColor: AppColor.white.withValues(alpha: 0.7),
+      indicatorColor: AppColor.accent, // Match Shape Calculator selected color
+      indicatorSize: TabBarIndicatorSize.tab,
+      labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+      unselectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 16,
+      ),
     ),
 
     // Card Theme

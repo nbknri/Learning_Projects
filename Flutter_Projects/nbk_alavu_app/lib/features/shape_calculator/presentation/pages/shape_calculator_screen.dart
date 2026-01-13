@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbk_alavu_app/core/constants/app_strings.dart';
 import 'package:nbk_alavu_app/core/di/injection.dart';
+import 'package:nbk_alavu_app/core/presentation/widgets/app_drawer.dart';
 import 'package:nbk_alavu_app/core/theme/app_text_style.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/das
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/shape_input_section.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/shape_type_selector.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/theme_toggle_button.dart';
+import 'package:nbk_alavu_app/features/unit_converter/presentation/pages/unit_converter_screen.dart';
 
 class ShapeCalculatorScreen extends StatelessWidget {
   final VoidCallback onThemeChanged;
@@ -105,10 +107,28 @@ class _ShapeCalculatorViewState extends State<ShapeCalculatorView> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: _buildAppBar(),
+        drawer: AppDrawer(
+          currentRoute: AppRoute.shapeCalculator,
+          onNavigateToCalculator: () {
+            Navigator.pop(context);
+          },
+          onNavigateToConverter: () async {
+            // Pop the drawer first
+            Navigator.pop(context);
+            // Navigate to Unit Converter
+            await Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) =>
+                    UnitConverterScreen(onThemeChanged: widget.onThemeChanged),
+              ),
+            );
+          },
+        ),
         body: _buildBody(),
       ),
     );
   }
+
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
