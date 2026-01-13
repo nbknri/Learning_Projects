@@ -30,6 +30,9 @@ class AppStrings {
   // Snackbar Messages
   static const String invalidInputFormat =
       'Invalid input format. Please enter single values or use + for addition';
+  static const String emptyInputError = 'Please enter all dimensions';
+  static const String zeroInputError = 'Dimensions cannot be zero';
+
   static String copiedMessage(String label, String value) =>
       '$label copied: $value';
 }

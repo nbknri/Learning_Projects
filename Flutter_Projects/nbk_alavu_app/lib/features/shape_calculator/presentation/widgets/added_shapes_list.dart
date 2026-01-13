@@ -8,6 +8,7 @@ import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.da
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_event.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/extensions/shape_type_extension.dart';
+import 'package:nbk_alavu_app/features/shape_calculator/presentation/widgets/shape_details_dialog.dart';
 
 class AddedShapesList extends StatefulWidget {
   final List<Shape> shapes;
@@ -143,56 +144,68 @@ class _AddedShapesListState extends State<AddedShapesList> {
             .join(", ");
 
         return Card(
-          child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 2,
-            ),
-            leading: Container(
-              padding: const EdgeInsets.all(6),
-              decoration: Theme.of(context).shapeCardIconDecoration,
-              child: Icon(
-                _getShapeIcon(shape.type),
-                color: AppColor.primary,
-                size: 18,
+          child: InkWell(
+            onDoubleTap: () {
+              FocusManager.instance.primaryFocus?.unfocus();
+              showDialog(
+                context: context,
+                builder: (context) => ShapeDetailsDialog(shape: shape),
+              );
+            },
+            borderRadius: BorderRadius.circular(
+              12,
+            ), // Match Card shape if possible, usually Card has 4-12
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 2,
               ),
-            ),
-            title: Text(
-              "${index + 1}. ${shape.type.displayName} (In ${shape.unit})",
-              style: Theme.of(context).shapeCardTitle,
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 2),
-                Text(
-                  dimensionsText,
-                  style: Theme.of(context).shapeCardDimensions(context),
+              leading: Container(
+                padding: const EdgeInsets.all(6),
+                decoration: Theme.of(context).shapeCardIconDecoration,
+                child: Icon(
+                  _getShapeIcon(shape.type),
+                  color: AppColor.primary,
+                  size: 18,
                 ),
-                const SizedBox(height: 2),
-                Text(
-                  "Area: ${FormatUtils.formatArea(shape.areaInSqMeter)} Sq.m",
-                  style: Theme.of(context).shapeCardArea,
-                ),
-              ],
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (widget.onEdit != null)
-                  IconButton(
-                    icon: const Icon(Icons.edit_outlined),
-                    color: AppColor.primary,
-                    onPressed: () => widget.onEdit!(index, shape),
-                    tooltip: 'Edit',
+              ),
+              title: Text(
+                "${index + 1}. ${shape.type.displayName} (In ${shape.unit})",
+                style: Theme.of(context).shapeCardTitle,
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 2),
+                  Text(
+                    dimensionsText,
+                    style: Theme.of(context).shapeCardDimensions(context),
                   ),
-                IconButton(
-                  icon: const Icon(Icons.delete_outline),
-                  color: AppColor.deleteButton,
-                  onPressed: () => _handleDelete(context, index, shape),
-                  tooltip: 'Delete',
-                ),
-              ],
+                  const SizedBox(height: 2),
+                  Text(
+                    "Area: ${FormatUtils.formatArea(shape.areaInSqMeter)} Sq.m",
+                    style: Theme.of(context).shapeCardArea,
+                  ),
+                ],
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (widget.onEdit != null)
+                    IconButton(
+                      icon: const Icon(Icons.edit_outlined),
+                      color: AppColor.primary,
+                      onPressed: () => widget.onEdit!(index, shape),
+                      tooltip: 'Edit',
+                    ),
+                  IconButton(
+                    icon: const Icon(Icons.delete_outline),
+                    color: AppColor.deleteButton,
+                    onPressed: () => _handleDelete(context, index, shape),
+                    tooltip: 'Delete',
+                  ),
+                ],
+              ),
             ),
           ),
         );

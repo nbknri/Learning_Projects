@@ -36,6 +36,8 @@ class AppTextStyle {
     return const TextStyle(color: Colors.white, fontSize: 14);
   }
 
+  static TextStyle get bodyBold => const TextStyle(fontWeight: FontWeight.bold);
+
   //───────────────────────────────────
   // Result Styles
   //───────────────────────────────────

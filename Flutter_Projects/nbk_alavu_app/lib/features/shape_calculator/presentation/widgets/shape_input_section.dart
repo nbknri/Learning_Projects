@@ -122,21 +122,52 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
 
      Map<String, String> inputs = {};
      
-    // First, validate all inputs
-    final controllers = [
-      _sideAController,
-      _sideBController,
-      _sideCController,
-      _sideDController,
-      _lengthController,
-      _widthController,
-      _sideController,
-      _radiusController,
-    ];
+    // Define required controllers for each shape type
+    List<TextEditingController> requiredControllers = [];
+    switch (widget.selectedShapeType) {
+      case ShapeType.triangle:
+        requiredControllers = [
+          _sideAController,
+          _sideBController,
+          _sideCController,
+        ];
+        break;
+      case ShapeType.rectangle:
+        requiredControllers = [_lengthController, _widthController];
+        break;
+      case ShapeType.square:
+        requiredControllers = [_sideController];
+        break;
+      case ShapeType.circle:
+        requiredControllers = [_radiusController];
+        break;
+      case ShapeType.irregularQuadrilateral:
+        requiredControllers = [
+          _sideAController,
+          _sideBController,
+          _sideCController,
+          _sideDController,
+        ];
+        break;
+    }
 
-    for (final controller in controllers) {
-      if (controller.text.isNotEmpty &&
-          !InputParser.isValidInput(controller.text)) {
+    // Check if any required field is empty
+    for (final controller in requiredControllers) {
+      if (controller.text.trim().isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(AppStrings.emptyInputError),
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        return;
+      }
+    }
+
+    // Validate input format
+    for (final controller in requiredControllers) {
+      if (!InputParser.isValidInput(controller.text)) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(AppStrings.invalidInputFormat),
@@ -173,17 +204,26 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
         inputs[ShapeKeys.sideD] = resolve(_sideDController); // West
          break;
      }
-     
-     // Check if all values are 0 or empty
-     final hasNonZeroValue = inputs.values.any((value) {
+
+    // Strict check: No value can be 0
+    final hasZeroValue = inputs.values.any((value) {
        final numValue = double.tryParse(value) ?? 0;
-       return numValue != 0;
+      return numValue == 0;
      });
+
+    if (hasZeroValue) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(AppStrings.zeroInputError),
+          duration: Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
      
-     // Only submit if there's at least one non-zero value
-     if (hasNonZeroValue) {
-       widget.onAddShape(inputs);
-     }
+    // Validated: Not empty, Valid Format, Not Zero.
+    widget.onAddShape(inputs);
   }
   
   void clearFields() {
