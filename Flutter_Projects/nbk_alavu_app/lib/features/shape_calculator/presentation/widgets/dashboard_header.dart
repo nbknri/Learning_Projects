@@ -47,7 +47,7 @@ class _DashboardHeaderState extends State<DashboardHeader> {
       child: Container(
         width: double.infinity,
         decoration: Theme.of(context).dashboardHeaderDecoration,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        padding: const EdgeInsets.only(left: 24, right: 24, bottom: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -88,7 +88,7 @@ class _DashboardHeaderState extends State<DashboardHeader> {
             
             // All Unit Conversions
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 10),
               decoration: Theme.of(context).dashboardSecondaryDecoration,
               child: Column(
                 children: [
@@ -99,37 +99,37 @@ class _DashboardHeaderState extends State<DashboardHeader> {
                   
                   // Other conversions (conditionally shown)
                   if (_isExpanded) ...[
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     const Divider(height: 1),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     ConversionRow(
                       label: 'Sq. Feet',
                       value: FormatUtils.formatArea(widget.totalAreaSqM * 10.7639),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     const Divider(height: 1),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     ConversionRow(
                       label: 'Cents',
                       value: FormatUtils.formatArea(cents),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     const Divider(height: 1),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     ConversionRow(
                       label: 'Acres',
                       value: FormatUtils.formatArea(acreValue),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     const Divider(height: 1),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     ConversionRow(
                       label: 'Ares',
                       value: FormatUtils.formatArea(ares),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     const Divider(height: 1),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 5),
                     ConversionRow(
                       label: 'Hectares',
                       value: FormatUtils.formatArea(hectareValue),
@@ -138,7 +138,8 @@ class _DashboardHeaderState extends State<DashboardHeader> {
                   
                   // Expand/Collapse Button at the bottom
                   SizedBox(
-                    height: 12,
+                    height: 20,
+                    width: double.infinity,
                     child: IconButton(
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),

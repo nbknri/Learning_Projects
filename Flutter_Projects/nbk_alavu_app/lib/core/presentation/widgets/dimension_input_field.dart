@@ -58,10 +58,13 @@ class DimensionInputField extends StatelessWidget {
               text.contains(RegExp(r'(^|\+)0(\.0*)?\+'))) {
             return oldValue;
           }
-          // specific check: ensure no segment (split by +) has more than one dot
+          // specific check: ensure no segment (split by +) has more than one dot or slash
           final parts = text.split('+');
           for (final part in parts) {
             if (part.split('.').length > 2) {
+              return oldValue;
+            }
+            if (part.split('/').length > 2) {
               return oldValue;
             }
           }
