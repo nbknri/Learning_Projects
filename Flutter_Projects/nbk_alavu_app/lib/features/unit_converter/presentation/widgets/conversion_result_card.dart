@@ -36,7 +36,9 @@ class ConversionResultCard extends StatelessWidget {
           : colorScheme.surface,
       margin: const EdgeInsets.only(bottom: 8),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        dense: true,
+        visualDensity: VisualDensity.compact,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
         title: Text(
           resultText,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(

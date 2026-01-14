@@ -146,7 +146,7 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
                 );
                 
                 // Format decimal: remove trailing zeros
-                resultText = converted.toStringAsFixed(5);
+                resultText = converted.toStringAsFixed(4);
                 if (resultText.contains('.')) {
                   resultText = resultText.replaceAll(RegExp(r'0*$'), '');
                   if (resultText.endsWith('.')) {
