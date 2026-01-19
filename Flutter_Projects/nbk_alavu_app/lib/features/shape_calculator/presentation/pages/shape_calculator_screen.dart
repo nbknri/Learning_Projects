@@ -31,7 +31,7 @@ class ShapeCalculatorView extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         appBar: ShapeCalculatorAppBar(onThemeChanged: onThemeChanged),
         drawer: AppDrawer(
           currentRoute: AppRoute.shapeCalculator,

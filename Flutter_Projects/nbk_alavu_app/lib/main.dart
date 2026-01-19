@@ -15,7 +15,7 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
-
+  
 class _MyAppState extends State<MyApp> {
   // Initially use system or light/dark. Let's start with light as default or follow system.
   ThemeMode _themeMode = ThemeMode.light; 

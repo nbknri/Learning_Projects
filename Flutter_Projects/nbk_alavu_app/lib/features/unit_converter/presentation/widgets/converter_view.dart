@@ -81,111 +81,242 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Input Section
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isLandscape =
+            constraints.maxWidth > 600 ||
+            MediaQuery.of(context).orientation == Orientation.landscape;
+
+        if (isLandscape) {
+          // Landscape Layout (Split View)
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // From Unit Selector (Right Aligned)
-              UnitSelector<T>(
-                selectedUnit: _fromUnit,
-                units: widget.units,
-                getDisplayName: widget.getDisplayName,
-                onChanged: (T? newValue) {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  if (newValue != null) {
-                    setState(() {
-                      _fromUnit = newValue;
-                      _onInputChanged();
-                    });
-                  }
-                },
-              ),
-
-              DimensionInputField(
-                controller: _inputController,
-                label: "Value",
-                textInputAction: TextInputAction.done,
-                onSubmitted: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                },
-                suffixIcon: _inputController.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.close),
-                        onPressed: () {
-                          _inputController.clear();
-                          // Listener will handle state update
+              // Left Pane: Input Section
+              Expanded(
+                flex: 4,
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      UnitSelector<T>(
+                        selectedUnit: _fromUnit,
+                        units: widget.units,
+                        getDisplayName: widget.getDisplayName,
+                        onChanged: (T? newValue) {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          if (newValue != null) {
+                            setState(() {
+                              _fromUnit = newValue;
+                              _onInputChanged();
+                            });
+                          }
                         },
-                      )
-                    : null,
-              ),
-            ],
-          ),
-        ),
-
-        const Divider(),
-
-        // Results List
-        // Results List or Empty State
-        if (_currentValue != null)
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              itemCount: widget.units.length,
-              itemBuilder: (context, index) {
-                final targetUnit = widget.units[index];
-
-                String resultText = "-";
-                final converted = widget.convert(
-                  _currentValue!,
-                  _fromUnit,
-                  targetUnit,
-                );
-                
-                // Format decimal: remove trailing zeros
-                resultText = converted.toStringAsFixed(4);
-                if (resultText.contains('.')) {
-                  resultText = resultText.replaceAll(RegExp(r'0*$'), '');
-                  if (resultText.endsWith('.')) {
-                    resultText = resultText.substring(0, resultText.length - 1);
-                  }
-                }
-
-                return ConversionResultCard(
-                  resultText: resultText,
-                  unitDisplayName: widget.getDisplayName(targetUnit),
-                  unitSymbol: widget.getSymbol(targetUnit),
-                  isSelected: targetUnit == _fromUnit,
-                );
-              },
-            ),
-          )
-        else
-          Expanded(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.touch_app_outlined,
-                    size: 64,
-                    color: Theme.of(context).colorScheme.outline,
+                      ),
+                      DimensionInputField(
+                        controller: _inputController,
+                        label: "Value",
+                        textInputAction: TextInputAction.done,
+                        onSubmitted: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                        },
+                        suffixIcon: _inputController.text.isNotEmpty
+                            ? IconButton(
+                                icon: const Icon(Icons.close),
+                                onPressed: () {
+                                  _inputController.clear();
+                                },
+                              )
+                            : null,
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    "Please enter a value to convert",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.outline,
+                ),
+              ),
+              const VerticalDivider(width: 1),
+              // Right Pane: Results List
+              if (_currentValue != null)
+                Expanded(
+                  flex: 6,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    itemCount: widget.units.length,
+                    itemBuilder: (context, index) {
+                      final targetUnit = widget.units[index];
+                      String resultText = "-";
+                      final converted = widget.convert(
+                        _currentValue!,
+                        _fromUnit,
+                        targetUnit,
+                      );
+
+                      resultText = converted.toStringAsFixed(4);
+                      if (resultText.contains('.')) {
+                        resultText = resultText.replaceAll(RegExp(r'0*$'), '');
+                        if (resultText.endsWith('.')) {
+                          resultText = resultText.substring(
+                            0,
+                            resultText.length - 1,
+                          );
+                        }
+                      }
+
+                      return ConversionResultCard(
+                        resultText: resultText,
+                        unitDisplayName: widget.getDisplayName(targetUnit),
+                        unitSymbol: widget.getSymbol(targetUnit),
+                        isSelected: targetUnit == _fromUnit,
+                      );
+                    },
+                  ),
+                )
+              else
+                Expanded(
+                  flex: 6,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.touch_app_outlined,
+                          size: 64,
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          "Please enter a value to convert",
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.outline,
+                              ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
+            ],
+          );
+        } else {
+          // Portrait Layout
+          return Column(
+            children: [
+              // Input Section
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    // From Unit Selector (Right Aligned)
+                    UnitSelector<T>(
+                      selectedUnit: _fromUnit,
+                      units: widget.units,
+                      getDisplayName: widget.getDisplayName,
+                      onChanged: (T? newValue) {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        if (newValue != null) {
+                          setState(() {
+                            _fromUnit = newValue;
+                            _onInputChanged();
+                          });
+                        }
+                      },
+                    ),
+
+                    DimensionInputField(
+                      controller: _inputController,
+                      label: "Value",
+                      textInputAction: TextInputAction.done,
+                      onSubmitted: () {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      },
+                      suffixIcon: _inputController.text.isNotEmpty
+                          ? IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+                                _inputController.clear();
+                                // Listener will handle state update
+                              },
+                            )
+                          : null,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
-      ],
+
+              const Divider(),
+
+              // Results List
+              // Results List or Empty State
+              if (_currentValue != null)
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    itemCount: widget.units.length,
+                    itemBuilder: (context, index) {
+                      final targetUnit = widget.units[index];
+
+                      String resultText = "-";
+                      final converted = widget.convert(
+                        _currentValue!,
+                        _fromUnit,
+                        targetUnit,
+                      );
+
+                      // Format decimal: remove trailing zeros
+                      resultText = converted.toStringAsFixed(4);
+                      if (resultText.contains('.')) {
+                        resultText = resultText.replaceAll(RegExp(r'0*$'), '');
+                        if (resultText.endsWith('.')) {
+                          resultText = resultText.substring(
+                            0,
+                            resultText.length - 1,
+                          );
+                        }
+                      }
+
+                      return ConversionResultCard(
+                        resultText: resultText,
+                        unitDisplayName: widget.getDisplayName(targetUnit),
+                        unitSymbol: widget.getSymbol(targetUnit),
+                        isSelected: targetUnit == _fromUnit,
+                      );
+                    },
+                  ),
+                )
+              else
+                Expanded(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.touch_app_outlined,
+                          size: 64,
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          "Please enter a value to convert",
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.outline,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          );
+        }
+      },
     );
   }
 }

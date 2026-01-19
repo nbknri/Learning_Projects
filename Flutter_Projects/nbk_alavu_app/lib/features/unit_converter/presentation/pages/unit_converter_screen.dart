@@ -26,7 +26,7 @@ class _UnitConverterScreenState extends State<UnitConverterScreen> {
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           appBar: AppBar(
             title: Text(
               "Unit Converter",
