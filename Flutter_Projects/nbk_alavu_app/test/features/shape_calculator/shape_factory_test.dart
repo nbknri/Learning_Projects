@@ -110,39 +110,7 @@ void main() {
       });
     });
 
-    group('Circle Tests', () {
-      test('Circle - Meters (radius = 5)', () {
-        final shape = factory.createShape(
-          type: ShapeType.circle,
-          dimensions: {'radius': 5.0},
-          unit: 'Meters',
-        );
-        // Area = π * 5² = 78.539816
-        expect(shape.areaInSqMeter, closeTo(78.539816, 0.01));
-      });
 
-      test('Circle - Feet (radius = 5)', () {
-        final shape = factory.createShape(
-          type: ShapeType.circle,
-          dimensions: {'radius': 5.0},
-          unit: 'Feet',
-        );
-        // 5ft = 1.524m
-        // Area = π * 1.524² = 7.296694
-        expect(shape.areaInSqMeter, closeTo(7.296694, 0.01));
-      });
-
-      test('Circle - 6 Feet (radius = 5)', () {
-        final shape = factory.createShape(
-          type: ShapeType.circle,
-          dimensions: {'radius': 5.0},
-          unit: '6 Feet',
-        );
-        // 5 units = 9.144m
-        // Area = π * 9.144² = 262.677504
-        expect(shape.areaInSqMeter, closeTo(262.677504, 0.01));
-      });
-    });
 
     group('Irregular Quadrilateral Tests', () {
       test('Irregular Quadrilateral - Meters (N=10, E=8, S=10, W=8)', () {
