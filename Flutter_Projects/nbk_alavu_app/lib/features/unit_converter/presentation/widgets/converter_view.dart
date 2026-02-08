@@ -10,6 +10,8 @@ class ConverterView<T> extends StatefulWidget {
   final String Function(T) getSymbol;
   final double Function(double, T, T) convert;
   final T initialUnit;
+  final double? initialValue;
+  final Function(double? value, T unit)? onValuesChanged;
 
   const ConverterView({
     super.key,
@@ -18,6 +20,8 @@ class ConverterView<T> extends StatefulWidget {
     required this.getSymbol,
     required this.convert,
     required this.initialUnit,
+    this.initialValue,
+    this.onValuesChanged,
   });
 
   @override
@@ -33,6 +37,15 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
   void initState() {
     super.initState();
     _fromUnit = widget.initialUnit;
+    if (widget.initialValue != null) {
+      _currentValue = widget.initialValue;
+      // Format initial value similarly to how we format results (remove trailing zeros)
+      String text = widget.initialValue.toString();
+      if (text.endsWith('.0')) {
+        text = text.substring(0, text.length - 2);
+      }
+      _inputController.text = text;
+    }
     _inputController.addListener(_onInputChanged);
   }
 
@@ -48,6 +61,7 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
       setState(() {
         _currentValue = null;
       });
+      widget.onValuesChanged?.call(null, _fromUnit);
       return;
     }
 
@@ -55,6 +69,7 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
       setState(() {
         _currentValue = null;
       });
+      widget.onValuesChanged?.call(null, _fromUnit);
       return;
     }
 
@@ -63,6 +78,7 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
       setState(() {
         _currentValue = null;
       });
+      widget.onValuesChanged?.call(null, _fromUnit);
       return;
     }
 
@@ -71,12 +87,14 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
       setState(() {
         _currentValue = null;
       });
+      widget.onValuesChanged?.call(null, _fromUnit);
       return;
     }
 
     setState(() {
       _currentValue = value;
     });
+    widget.onValuesChanged?.call(value, _fromUnit);
   }
 
   @override
@@ -144,7 +162,7 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
             if (newValue != null) {
               setState(() {
                 _fromUnit = newValue;
-                _onInputChanged();
+                _onInputChanged(); // Adding unit change re-triggers value notification
               });
             }
           },
@@ -226,7 +244,8 @@ class _ConverterViewState<T> extends State<ConverterView<T>> {
         );
       },
     );
+
   }
-  }
+}
 
 

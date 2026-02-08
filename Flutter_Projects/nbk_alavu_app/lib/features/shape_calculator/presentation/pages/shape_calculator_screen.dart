@@ -14,8 +14,8 @@ class ShapeCalculatorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<ShapeCalculatorBloc>(),
+    return BlocProvider.value(
+      value: getIt<ShapeCalculatorBloc>(),
       child: ShapeCalculatorView(onThemeChanged: onThemeChanged),
     );
   }

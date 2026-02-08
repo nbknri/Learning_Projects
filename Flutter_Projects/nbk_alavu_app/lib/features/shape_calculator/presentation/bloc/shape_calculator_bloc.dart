@@ -10,7 +10,7 @@ import 'package:nbk_alavu_app/features/shape_calculator/domain/usecases/update_s
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_event.dart';
 import 'package:nbk_alavu_app/features/shape_calculator/presentation/bloc/shape_calculator_state.dart';
 
-@injectable
+@lazySingleton
 class ShapeCalculatorBloc
     extends Bloc<ShapeCalculatorEvent, ShapeCalculatorState> {
   final AddShapeUseCase _addShapeUseCase;

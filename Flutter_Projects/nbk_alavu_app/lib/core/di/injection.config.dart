@@ -34,6 +34,8 @@ import '../../features/shape_calculator/domain/usecases/update_shape.dart'
     as _i129;
 import '../../features/shape_calculator/presentation/bloc/shape_calculator_bloc.dart'
     as _i1072;
+import '../../features/unit_converter/presentation/bloc/unit_converter_bloc.dart'
+    as _i281;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -57,6 +59,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i129.UpdateShapeUseCase>(
       () => domainModule.updateShapeUseCase,
     );
+    gh.lazySingleton<_i281.UnitConverterBloc>(() => _i281.UnitConverterBloc());
     gh.lazySingleton<_i850.ShapeRepository>(
       () => _i52.ShapeRepositoryImpl(gh<_i40.ShapeFactory>()),
     );
@@ -66,7 +69,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i424.CalculateTotalAreaUseCase>(
       () => domainModule.calculateTotalAreaUseCase(gh<_i850.ShapeRepository>()),
     );
-    gh.factory<_i1072.ShapeCalculatorBloc>(
+    gh.lazySingleton<_i1072.ShapeCalculatorBloc>(
       () => _i1072.ShapeCalculatorBloc(
         gh<_i132.AddShapeUseCase>(),
         gh<_i527.DeleteShapeUseCase>(),

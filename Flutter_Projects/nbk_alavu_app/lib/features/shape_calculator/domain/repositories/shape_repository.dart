@@ -4,7 +4,7 @@ import 'package:nbk_alavu_app/features/shape_calculator/domain/entities/shape.da
 /// Following Clean Architecture, this is defined in domain layer
 abstract class ShapeRepository {
   /// Creates a shape based on type, dimensions, and unit
-  /// Returns Either<Failure, Shape> for proper error handling
+  /// Returns Either< Failure, Shape > for proper error handling
   Shape createShape({
     required ShapeType type,
     required Map<String, double> dimensions,
