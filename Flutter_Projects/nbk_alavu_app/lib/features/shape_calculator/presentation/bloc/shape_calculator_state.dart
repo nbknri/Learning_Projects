@@ -17,6 +17,8 @@ abstract class ShapeCalculatorState with _$ShapeCalculatorState {
     @Default(0.0) double totalAreaSqM,
     @Default(ShapeCalculatorStatus.initial) ShapeCalculatorStatus status,
     String? errorMessage,
+    int? editingIndex,
+    Shape? pendingEditShape,
   }) = _ShapeCalculatorState;
 
   String get formattedResult {

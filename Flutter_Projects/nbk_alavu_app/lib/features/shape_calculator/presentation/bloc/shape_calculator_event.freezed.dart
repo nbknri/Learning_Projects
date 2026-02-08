@@ -55,7 +55,7 @@ extension ShapeCalculatorEventPatterns on ShapeCalculatorEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( AddShape value)?  addShape,TResult Function( DeleteShape value)?  deleteShape,TResult Function( InsertShape value)?  insertShape,TResult Function( UpdateShape value)?  updateShape,TResult Function( ClearAll value)?  clearAll,TResult Function( SetUnit value)?  setUnit,TResult Function( SelectShapeType value)?  selectShapeType,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( AddShape value)?  addShape,TResult Function( DeleteShape value)?  deleteShape,TResult Function( InsertShape value)?  insertShape,TResult Function( UpdateShape value)?  updateShape,TResult Function( ClearAll value)?  clearAll,TResult Function( SetUnit value)?  setUnit,TResult Function( SelectShapeType value)?  selectShapeType,TResult Function( StartEdit value)?  startEdit,TResult Function( CancelEdit value)?  cancelEdit,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case AddShape() when addShape != null:
@@ -65,7 +65,9 @@ return insertShape(_that);case UpdateShape() when updateShape != null:
 return updateShape(_that);case ClearAll() when clearAll != null:
 return clearAll(_that);case SetUnit() when setUnit != null:
 return setUnit(_that);case SelectShapeType() when selectShapeType != null:
-return selectShapeType(_that);case _:
+return selectShapeType(_that);case StartEdit() when startEdit != null:
+return startEdit(_that);case CancelEdit() when cancelEdit != null:
+return cancelEdit(_that);case _:
   return orElse();
 
 }
@@ -83,7 +85,7 @@ return selectShapeType(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( AddShape value)  addShape,required TResult Function( DeleteShape value)  deleteShape,required TResult Function( InsertShape value)  insertShape,required TResult Function( UpdateShape value)  updateShape,required TResult Function( ClearAll value)  clearAll,required TResult Function( SetUnit value)  setUnit,required TResult Function( SelectShapeType value)  selectShapeType,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( AddShape value)  addShape,required TResult Function( DeleteShape value)  deleteShape,required TResult Function( InsertShape value)  insertShape,required TResult Function( UpdateShape value)  updateShape,required TResult Function( ClearAll value)  clearAll,required TResult Function( SetUnit value)  setUnit,required TResult Function( SelectShapeType value)  selectShapeType,required TResult Function( StartEdit value)  startEdit,required TResult Function( CancelEdit value)  cancelEdit,}){
 final _that = this;
 switch (_that) {
 case AddShape():
@@ -93,7 +95,9 @@ return insertShape(_that);case UpdateShape():
 return updateShape(_that);case ClearAll():
 return clearAll(_that);case SetUnit():
 return setUnit(_that);case SelectShapeType():
-return selectShapeType(_that);case _:
+return selectShapeType(_that);case StartEdit():
+return startEdit(_that);case CancelEdit():
+return cancelEdit(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -110,7 +114,7 @@ return selectShapeType(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( AddShape value)?  addShape,TResult? Function( DeleteShape value)?  deleteShape,TResult? Function( InsertShape value)?  insertShape,TResult? Function( UpdateShape value)?  updateShape,TResult? Function( ClearAll value)?  clearAll,TResult? Function( SetUnit value)?  setUnit,TResult? Function( SelectShapeType value)?  selectShapeType,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( AddShape value)?  addShape,TResult? Function( DeleteShape value)?  deleteShape,TResult? Function( InsertShape value)?  insertShape,TResult? Function( UpdateShape value)?  updateShape,TResult? Function( ClearAll value)?  clearAll,TResult? Function( SetUnit value)?  setUnit,TResult? Function( SelectShapeType value)?  selectShapeType,TResult? Function( StartEdit value)?  startEdit,TResult? Function( CancelEdit value)?  cancelEdit,}){
 final _that = this;
 switch (_that) {
 case AddShape() when addShape != null:
@@ -120,7 +124,9 @@ return insertShape(_that);case UpdateShape() when updateShape != null:
 return updateShape(_that);case ClearAll() when clearAll != null:
 return clearAll(_that);case SetUnit() when setUnit != null:
 return setUnit(_that);case SelectShapeType() when selectShapeType != null:
-return selectShapeType(_that);case _:
+return selectShapeType(_that);case StartEdit() when startEdit != null:
+return startEdit(_that);case CancelEdit() when cancelEdit != null:
+return cancelEdit(_that);case _:
   return null;
 
 }
@@ -137,7 +143,7 @@ return selectShapeType(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Map<String, String> inputs)?  addShape,TResult Function( int index)?  deleteShape,TResult Function( int index,  Shape shape)?  insertShape,TResult Function( int index,  Map<String, String> inputs,  ShapeType type,  String unit)?  updateShape,TResult Function()?  clearAll,TResult Function( String unit)?  setUnit,TResult Function( ShapeType type)?  selectShapeType,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Map<String, String> inputs)?  addShape,TResult Function( int index)?  deleteShape,TResult Function( int index,  Shape shape)?  insertShape,TResult Function( int index,  Map<String, String> inputs,  ShapeType type,  String unit)?  updateShape,TResult Function()?  clearAll,TResult Function( String unit)?  setUnit,TResult Function( ShapeType type)?  selectShapeType,TResult Function( int index,  Shape shape)?  startEdit,TResult Function()?  cancelEdit,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case AddShape() when addShape != null:
 return addShape(_that.inputs);case DeleteShape() when deleteShape != null:
@@ -146,7 +152,9 @@ return insertShape(_that.index,_that.shape);case UpdateShape() when updateShape 
 return updateShape(_that.index,_that.inputs,_that.type,_that.unit);case ClearAll() when clearAll != null:
 return clearAll();case SetUnit() when setUnit != null:
 return setUnit(_that.unit);case SelectShapeType() when selectShapeType != null:
-return selectShapeType(_that.type);case _:
+return selectShapeType(_that.type);case StartEdit() when startEdit != null:
+return startEdit(_that.index,_that.shape);case CancelEdit() when cancelEdit != null:
+return cancelEdit();case _:
   return orElse();
 
 }
@@ -164,7 +172,7 @@ return selectShapeType(_that.type);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Map<String, String> inputs)  addShape,required TResult Function( int index)  deleteShape,required TResult Function( int index,  Shape shape)  insertShape,required TResult Function( int index,  Map<String, String> inputs,  ShapeType type,  String unit)  updateShape,required TResult Function()  clearAll,required TResult Function( String unit)  setUnit,required TResult Function( ShapeType type)  selectShapeType,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Map<String, String> inputs)  addShape,required TResult Function( int index)  deleteShape,required TResult Function( int index,  Shape shape)  insertShape,required TResult Function( int index,  Map<String, String> inputs,  ShapeType type,  String unit)  updateShape,required TResult Function()  clearAll,required TResult Function( String unit)  setUnit,required TResult Function( ShapeType type)  selectShapeType,required TResult Function( int index,  Shape shape)  startEdit,required TResult Function()  cancelEdit,}) {final _that = this;
 switch (_that) {
 case AddShape():
 return addShape(_that.inputs);case DeleteShape():
@@ -173,7 +181,9 @@ return insertShape(_that.index,_that.shape);case UpdateShape():
 return updateShape(_that.index,_that.inputs,_that.type,_that.unit);case ClearAll():
 return clearAll();case SetUnit():
 return setUnit(_that.unit);case SelectShapeType():
-return selectShapeType(_that.type);case _:
+return selectShapeType(_that.type);case StartEdit():
+return startEdit(_that.index,_that.shape);case CancelEdit():
+return cancelEdit();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -190,7 +200,7 @@ return selectShapeType(_that.type);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Map<String, String> inputs)?  addShape,TResult? Function( int index)?  deleteShape,TResult? Function( int index,  Shape shape)?  insertShape,TResult? Function( int index,  Map<String, String> inputs,  ShapeType type,  String unit)?  updateShape,TResult? Function()?  clearAll,TResult? Function( String unit)?  setUnit,TResult? Function( ShapeType type)?  selectShapeType,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Map<String, String> inputs)?  addShape,TResult? Function( int index)?  deleteShape,TResult? Function( int index,  Shape shape)?  insertShape,TResult? Function( int index,  Map<String, String> inputs,  ShapeType type,  String unit)?  updateShape,TResult? Function()?  clearAll,TResult? Function( String unit)?  setUnit,TResult? Function( ShapeType type)?  selectShapeType,TResult? Function( int index,  Shape shape)?  startEdit,TResult? Function()?  cancelEdit,}) {final _that = this;
 switch (_that) {
 case AddShape() when addShape != null:
 return addShape(_that.inputs);case DeleteShape() when deleteShape != null:
@@ -199,7 +209,9 @@ return insertShape(_that.index,_that.shape);case UpdateShape() when updateShape 
 return updateShape(_that.index,_that.inputs,_that.type,_that.unit);case ClearAll() when clearAll != null:
 return clearAll();case SetUnit() when setUnit != null:
 return setUnit(_that.unit);case SelectShapeType() when selectShapeType != null:
-return selectShapeType(_that.type);case _:
+return selectShapeType(_that.type);case StartEdit() when startEdit != null:
+return startEdit(_that.index,_that.shape);case CancelEdit() when cancelEdit != null:
+return cancelEdit();case _:
   return null;
 
 }
@@ -654,5 +666,105 @@ as ShapeType,
 
 
 }
+
+/// @nodoc
+
+
+class StartEdit implements ShapeCalculatorEvent {
+  const StartEdit({required this.index, required this.shape});
+  
+
+ final  int index;
+ final  Shape shape;
+
+/// Create a copy of ShapeCalculatorEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$StartEditCopyWith<StartEdit> get copyWith => _$StartEditCopyWithImpl<StartEdit>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StartEdit&&(identical(other.index, index) || other.index == index)&&(identical(other.shape, shape) || other.shape == shape));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,index,shape);
+
+@override
+String toString() {
+  return 'ShapeCalculatorEvent.startEdit(index: $index, shape: $shape)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $StartEditCopyWith<$Res> implements $ShapeCalculatorEventCopyWith<$Res> {
+  factory $StartEditCopyWith(StartEdit value, $Res Function(StartEdit) _then) = _$StartEditCopyWithImpl;
+@useResult
+$Res call({
+ int index, Shape shape
+});
+
+
+
+
+}
+/// @nodoc
+class _$StartEditCopyWithImpl<$Res>
+    implements $StartEditCopyWith<$Res> {
+  _$StartEditCopyWithImpl(this._self, this._then);
+
+  final StartEdit _self;
+  final $Res Function(StartEdit) _then;
+
+/// Create a copy of ShapeCalculatorEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? index = null,Object? shape = null,}) {
+  return _then(StartEdit(
+index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int,shape: null == shape ? _self.shape : shape // ignore: cast_nullable_to_non_nullable
+as Shape,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class CancelEdit implements ShapeCalculatorEvent {
+  const CancelEdit();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CancelEdit);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ShapeCalculatorEvent.cancelEdit()';
+}
+
+
+}
+
+
+
 
 // dart format on

@@ -68,20 +68,7 @@ class _AddedShapesListState extends State<AddedShapesList> {
     super.dispose();
   }
 
-  IconData _getShapeIcon(ShapeType type) {
-    switch (type) {
-      case ShapeType.triangle:
-        return Icons.change_history;
-      case ShapeType.rectangle:
-        return Icons.crop_landscape;
-      case ShapeType.square:
-        return Icons.crop_square;
-      case ShapeType.circle:
-        return Icons.circle_outlined;
-      case ShapeType.irregularQuadrilateral:
-        return Icons.terrain;
-    }
-  }
+
 
   void _handleDelete(BuildContext context, int index, Shape shape) {
     // If onDeleteWithUndo callback is provided, use it (better context management)
@@ -164,7 +151,7 @@ class _AddedShapesListState extends State<AddedShapesList> {
                 padding: const EdgeInsets.all(6),
                 decoration: Theme.of(context).shapeCardIconDecoration,
                 child: Icon(
-                  _getShapeIcon(shape.type),
+                  shape.type.icon,
                   color: AppColor.primary,
                   size: 18,
                 ),

@@ -45,7 +45,7 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
   
   final _sideController = TextEditingController(); // Square
   
-  final _radiusController = TextEditingController(); // Circle
+
 
   @override
   void dispose() {
@@ -56,7 +56,7 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
     _lengthController.dispose();
     _widthController.dispose();
     _sideController.dispose();
-    _radiusController.dispose();
+
     super.dispose();
   }
   
@@ -76,7 +76,7 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
     _lengthController.clear();
     _widthController.clear();
     _sideController.clear();
-    _radiusController.clear();
+
   }
 
   void populateFields(Shape shape) {
@@ -107,9 +107,7 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
       case ShapeType.square:
         _sideController.text = format(dimensions[ShapeKeys.side]);
         break;
-      case ShapeType.circle:
-        _radiusController.text = format(dimensions[ShapeKeys.radius]);
-        break;
+
       case ShapeType.irregularQuadrilateral:
         _sideAController.text = format(dimensions[ShapeKeys.sideA]);
         _sideBController.text = format(dimensions[ShapeKeys.sideB]);
@@ -140,9 +138,7 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
       case ShapeType.square:
         requiredControllers = [_sideController];
         break;
-      case ShapeType.circle:
-        requiredControllers = [_radiusController];
-        break;
+
       case ShapeType.irregularQuadrilateral:
         requiredControllers = [
           _sideAController,
@@ -196,9 +192,7 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
        case ShapeType.square:
         inputs[ShapeKeys.side] = resolve(_sideController);
          break;
-       case ShapeType.circle:
-        inputs[ShapeKeys.radius] = resolve(_radiusController);
-         break;
+
        case ShapeType.irregularQuadrilateral:
         inputs[ShapeKeys.sideA] = resolve(_sideAController); // North
         inputs[ShapeKeys.sideB] = resolve(_sideBController); // East
@@ -365,18 +359,7 @@ class ShapeInputSectionState extends State<ShapeInputSection> {
             ),
            ),
         ];
-      case ShapeType.circle:
-        return [
-           Padding(
-             padding: const EdgeInsets.symmetric(horizontal: 4.0), 
-            child: DimensionInputField(
-              controller: _radiusController,
-              label: "Radius",
-              textInputAction: TextInputAction.done,
-              onSubmitted: _submit,
-            ),
-           ),
-        ];
+
       case ShapeType.irregularQuadrilateral:
         return [
           InputRow(

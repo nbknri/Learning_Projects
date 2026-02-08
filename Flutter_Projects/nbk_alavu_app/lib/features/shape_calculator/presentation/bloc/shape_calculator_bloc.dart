@@ -33,8 +33,34 @@ class ShapeCalculatorBloc
     on<InsertShape>(_onInsertShape);
     on<UpdateShape>(_onUpdateShape);
     on<ClearAll>(_onClearAll);
+    on<StartEdit>(_onStartEdit);
+    on<CancelEdit>(_onCancelEdit);
     on<SetUnit>(_onSetUnit);
     on<SelectShapeType>(_onSelectShapeType);
+  }
+
+  void _onStartEdit(StartEdit event, Emitter<ShapeCalculatorState> emit) {
+    emit(
+      state.copyWith(
+        editingIndex: event.index,
+        selectedUnit: event.shape.unit,
+        selectedShapeType: event.shape.type,
+        pendingEditShape: event.shape,
+        status: ShapeCalculatorStatus.initial,
+        errorMessage: null,
+      ),
+    );
+  }
+
+  void _onCancelEdit(CancelEdit event, Emitter<ShapeCalculatorState> emit) {
+    emit(
+      state.copyWith(
+        editingIndex: null,
+        pendingEditShape: null,
+        status: ShapeCalculatorStatus.initial,
+        errorMessage: null,
+      ),
+    );
   }
 
   void _onSelectShapeType(
@@ -105,6 +131,8 @@ class ShapeCalculatorBloc
           shapes: updatedShapes,
           totalAreaSqM: totalArea,
           errorMessage: null,
+          editingIndex: null,
+          pendingEditShape: null,
         ),
       );
     } catch (e) {
@@ -132,6 +160,8 @@ class ShapeCalculatorBloc
           totalAreaSqM: totalArea,
           errorMessage: null,
           status: ShapeCalculatorStatus.initial,
+          editingIndex: null, // Clear edit state on delete
+          pendingEditShape: null,
         ),
       );
     } catch (e) {
@@ -181,6 +211,8 @@ class ShapeCalculatorBloc
       totalAreaSqM: 0.0,
       errorMessage: null,
       status: ShapeCalculatorStatus.initial,
+        editingIndex: null,
+        pendingEditShape: null,
     ));
   }
 

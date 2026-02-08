@@ -25,8 +25,6 @@ class _ShapeCalculatorBodyState extends State<ShapeCalculatorBody> {
   String? _lastShownError;
   DateTime? _lastErrorTime;
   Timer? _snackBarTimer;
-  int? _editingIndex;
-  Shape? _pendingEditShape;
   final GlobalKey<ShapeInputSectionState> _inputSectionKey = GlobalKey();
 
   @override
@@ -36,32 +34,11 @@ class _ShapeCalculatorBodyState extends State<ShapeCalculatorBody> {
   }
 
   void _handleEdit(int index, Shape shape) {
-    setState(() {
-      _editingIndex = index;
-    });
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final currentType = context
-        .read<ShapeCalculatorBloc>()
-        .state
-        .selectedShapeType;
-
     context.read<ShapeCalculatorBloc>().add(
-      ShapeCalculatorEvent.setUnit(shape.unit),
+      ShapeCalculatorEvent.startEdit(index: index, shape: shape),
     );
-
-    if (currentType == shape.type) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _inputSectionKey.currentState?.populateFields(shape);
-      });
-    } else {
-      setState(() {
-        _pendingEditShape = shape;
-      });
-      context.read<ShapeCalculatorBloc>().add(
-        ShapeCalculatorEvent.selectShapeType(shape.type),
-      );
-    }
   }
 
   void _showSnackBar(BuildContext context, String msg) {
@@ -86,21 +63,11 @@ class _ShapeCalculatorBodyState extends State<ShapeCalculatorBody> {
           if (state.status == ShapeCalculatorStatus.failure &&
               state.errorMessage != null) {
             _showSnackBar(context, state.errorMessage!);
-          } else if (state.status == ShapeCalculatorStatus.success) {
-            if (_editingIndex != null) {
-              setState(() {
-                _editingIndex = null;
-              });
-            }
           }
 
-          // Handle pending edit shape population after type switch
-          if (_pendingEditShape != null &&
-              state.selectedShapeType == _pendingEditShape!.type) {
-            final shapeToPopulate = _pendingEditShape!;
-            setState(() {
-              _pendingEditShape = null;
-            });
+          // Handle pending edit shape population
+          if (state.pendingEditShape != null) {
+            final shapeToPopulate = state.pendingEditShape!;
             WidgetsBinding.instance.addPostFrameCallback((_) {
               _inputSectionKey.currentState?.populateFields(shapeToPopulate);
             });
@@ -122,126 +89,14 @@ class _ShapeCalculatorBodyState extends State<ShapeCalculatorBody> {
                     Expanded(
                       flex: 4, // 40% width
                       child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            if (state.shapes.isNotEmpty)
-                              DashboardHeader(totalAreaSqM: state.totalAreaSqM),
-                            ShapeTypeSelector(state: state),
-                            ShapeInputSection(
-                              key: _inputSectionKey,
-                              isEditing: _editingIndex != null,
-                              selectedShapeType: state.selectedShapeType,
-                              selectedUnit: state.selectedUnit,
-                              onUnitChanged: (val) {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                if (val != null) {
-                                  context.read<ShapeCalculatorBloc>().add(
-                                    ShapeCalculatorEvent.setUnit(val),
-                                  );
-                                }
-                              },
-                              onAddShape: (inputs) {
-                                if (_editingIndex != null) {
-                                  context.read<ShapeCalculatorBloc>().add(
-                                    ShapeCalculatorEvent.updateShape(
-                                      index: _editingIndex!,
-                                      inputs: inputs,
-                                      type: state.selectedShapeType,
-                                      unit: state.selectedUnit,
-                                    ),
-                                  );
-                                } else {
-                                  context.read<ShapeCalculatorBloc>().add(
-                                    ShapeCalculatorEvent.addShape(
-                                      inputs: inputs,
-                                    ),
-                                  );
-                                }
-                              },
-                              onClear: () {
-                                setState(() {
-                                  _editingIndex = null;
-                                });
-                                FocusManager.instance.primaryFocus?.unfocus();
-                              },
-                            ),
-                          ],
-                        ),
+                        child: _buildInputContent(state),
                       ),
                     ),
                     const VerticalDivider(width: 1),
                     // Right Pane: List
                     Expanded(
                       flex: 6, // 60% width
-                      child: Column(
-                        children: [
-                          if (state.shapes.isNotEmpty)
-                            const AddedShapesHeader(),
-                          Expanded(
-                            child: AddedShapesList(
-                              shapes: state.shapes,
-                              onEdit: _handleEdit,
-                              deleteShape: (index) {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                context.read<ShapeCalculatorBloc>().add(
-                                  ShapeCalculatorEvent.deleteShape(index),
-                                );
-                              },
-                              onDeleteWithUndo: (index, shape) {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                _snackBarTimer?.cancel();
-
-                                if (_editingIndex != null) {
-                                  setState(() {
-                                    _editingIndex = null;
-                                    _pendingEditShape = null;
-                                  });
-                                  _inputSectionKey.currentState?.clearFields();
-                                }
-
-                                context.read<ShapeCalculatorBloc>().add(
-                                  ShapeCalculatorEvent.deleteShape(index),
-                                );
-
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Deleted ${shape.type.displayName}',
-                                      style: AppTextStyle.snackBarText(),
-                                    ),
-                                    action: SnackBarAction(
-                                      label: 'UNDO',
-                                      onPressed: () {
-                                        _snackBarTimer?.cancel();
-                                        context.read<ShapeCalculatorBloc>().add(
-                                          ShapeCalculatorEvent.insertShape(
-                                            index: index,
-                                            shape: shape,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    duration: const Duration(days: 365),
-                                    behavior: SnackBarBehavior.floating,
-                                    margin: const EdgeInsets.all(8),
-                                  ),
-                                );
-
-                                _snackBarTimer = Timer(
-                                  const Duration(seconds: 3),
-                                  () {
-                                    if (mounted) {
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).hideCurrentSnackBar();
-                                    }
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: _buildShapesListContent(state),
                     ),
                   ],
                 );
@@ -260,127 +115,15 @@ class _ShapeCalculatorBodyState extends State<ShapeCalculatorBody> {
 
                 return Column(
                   children: [
-                    // Dashboard Header - hide on small screens when keyboard is open
-                    if (state.shapes.isNotEmpty && !shouldHideDashboard)
-                      DashboardHeader(totalAreaSqM: state.totalAreaSqM),
-
-                    // Shape Type Selector
-                    ShapeTypeSelector(state: state),
-
-                    // Input Section - Inline to preserve context
-                    ShapeInputSection(
-                      key: _inputSectionKey,
-                      isEditing: _editingIndex != null,
-                      selectedShapeType: state.selectedShapeType,
-                      selectedUnit: state.selectedUnit,
-                      onUnitChanged: (val) {
-                        FocusManager.instance.primaryFocus?.unfocus();
-                        if (val != null) {
-                          context.read<ShapeCalculatorBloc>().add(
-                            ShapeCalculatorEvent.setUnit(val),
-                          );
-                        }
-                      },
-                      onAddShape: (inputs) {
-                        if (_editingIndex != null) {
-                          context.read<ShapeCalculatorBloc>().add(
-                            ShapeCalculatorEvent.updateShape(
-                              index: _editingIndex!,
-                              inputs: inputs,
-                              type: state.selectedShapeType,
-                              unit: state.selectedUnit,
-                            ),
-                          );
-                        } else {
-                          context.read<ShapeCalculatorBloc>().add(
-                            ShapeCalculatorEvent.addShape(inputs: inputs),
-                          );
-                        }
-                      },
-                      onClear: () {
-                        setState(() {
-                          _editingIndex = null;
-                        });
-                        FocusManager.instance.primaryFocus?.unfocus();
-                      },
+                    _buildInputContent(
+                      state,
+                      hideDashboard: shouldHideDashboard,
                     ),
 
                     const Divider(),
 
-                    // Added Shapes Header
-                    if (state.shapes.isNotEmpty) const AddedShapesHeader(),
-
                     // List of Added Shapes
-                    Expanded(
-                      child: AddedShapesList(
-                        shapes: state.shapes,
-                        onEdit: _handleEdit,
-                        deleteShape: (index) {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          context.read<ShapeCalculatorBloc>().add(
-                            ShapeCalculatorEvent.deleteShape(index),
-                          );
-                        },
-                        onDeleteWithUndo: (index, shape) {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          // Cancel any existing timer
-                          _snackBarTimer?.cancel();
-
-                          // Reset edit mode if active
-                          if (_editingIndex != null) {
-                            setState(() {
-                              _editingIndex = null;
-                              _pendingEditShape = null;
-                            });
-                            _inputSectionKey.currentState?.clearFields();
-                          }
-
-                          // Delete the shape first
-                          context.read<ShapeCalculatorBloc>().add(
-                            ShapeCalculatorEvent.deleteShape(index),
-                          );
-
-                          // Show SnackBar
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Deleted ${shape.type.displayName}',
-                                style: AppTextStyle.snackBarText(),
-                              ),
-                              action: SnackBarAction(
-                                label: 'UNDO',
-                                onPressed: () {
-                                  _snackBarTimer?.cancel();
-                                  context.read<ShapeCalculatorBloc>().add(
-                                    ShapeCalculatorEvent.insertShape(
-                                      index: index,
-                                      shape: shape,
-                                    ),
-                                  );
-                                },
-                              ),
-                              duration: const Duration(days: 365,
-                              ),
-                              // Set very long duration
-                              behavior: SnackBarBehavior.floating,
-                              margin: const EdgeInsets.all(8),
-                            ),
-                          );
-
-                          // Manually dismiss after 3 seconds
-                          _snackBarTimer = Timer(
-                            const Duration(seconds: 3),
-                            () {
-                              if (mounted) {
-                                ScaffoldMessenger.of(
-                                  context,
-                                ).hideCurrentSnackBar();
-                              }
-                            },
-                          );
-                        },
-                      ),
-                    ),
+                    Expanded(child: _buildShapesListContent(state)),
                   ],
                 );
               }
@@ -388,6 +131,119 @@ class _ShapeCalculatorBodyState extends State<ShapeCalculatorBody> {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildInputContent(
+    ShapeCalculatorState state, {
+    bool hideDashboard = false,
+  }) {
+    return Column(
+      children: [
+        if (state.shapes.isNotEmpty && !hideDashboard)
+          DashboardHeader(totalAreaSqM: state.totalAreaSqM),
+        ShapeTypeSelector(state: state),
+        ShapeInputSection(
+          key: _inputSectionKey,
+          isEditing: state.editingIndex != null,
+          selectedShapeType: state.selectedShapeType,
+          selectedUnit: state.selectedUnit,
+          onUnitChanged: (val) {
+            FocusManager.instance.primaryFocus?.unfocus();
+            if (val != null) {
+              context.read<ShapeCalculatorBloc>().add(
+                ShapeCalculatorEvent.setUnit(val),
+              );
+            }
+          },
+          onAddShape: (inputs) {
+            if (state.editingIndex != null) {
+              context.read<ShapeCalculatorBloc>().add(
+                ShapeCalculatorEvent.updateShape(
+                  index: state.editingIndex!,
+                  inputs: inputs,
+                  type: state.selectedShapeType,
+                  unit: state.selectedUnit,
+                ),
+              );
+            } else {
+              context.read<ShapeCalculatorBloc>().add(
+                ShapeCalculatorEvent.addShape(inputs: inputs),
+              );
+            }
+          },
+          onClear: () {
+            context.read<ShapeCalculatorBloc>().add(
+              const ShapeCalculatorEvent.cancelEdit(),
+            );
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildShapesListContent(ShapeCalculatorState state) {
+    return Column(
+      children: [
+        if (state.shapes.isNotEmpty) const AddedShapesHeader(),
+        Expanded(
+          child: AddedShapesList(
+            shapes: state.shapes,
+            onEdit: _handleEdit,
+            deleteShape: (index) {
+              FocusManager.instance.primaryFocus?.unfocus();
+              context.read<ShapeCalculatorBloc>().add(
+                ShapeCalculatorEvent.deleteShape(index),
+              );
+            },
+            onDeleteWithUndo: (index, shape) {
+              FocusManager.instance.primaryFocus?.unfocus();
+              _snackBarTimer?.cancel();
+
+              if (state.editingIndex != null) {
+                // Clear the input fields if an item is deleted while editing
+                // The BLoC handles clearing the editing state
+                _inputSectionKey.currentState?.clearFields();
+              }
+
+              context.read<ShapeCalculatorBloc>().add(
+                ShapeCalculatorEvent.deleteShape(index),
+              );
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Deleted ${shape.type.displayName}',
+                    style: AppTextStyle.snackBarText(),
+                  ),
+                  action: SnackBarAction(
+                    label: 'UNDO',
+                    onPressed: () {
+                      _snackBarTimer?.cancel();
+                      context.read<ShapeCalculatorBloc>().add(
+                        ShapeCalculatorEvent.insertShape(
+                          index: index,
+                          shape: shape,
+                        ),
+                      );
+                    },
+                  ),
+                  duration: const Duration(days: 365),
+                  behavior: SnackBarBehavior.floating,
+                  margin: const EdgeInsets.all(8),
+                ),
+              );
+
+              _snackBarTimer = Timer(const Duration(seconds: 3), () {
+                if (mounted) {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                }
+              });
+            },
+          ),
+        ),
+      ],
     );
   }
 }

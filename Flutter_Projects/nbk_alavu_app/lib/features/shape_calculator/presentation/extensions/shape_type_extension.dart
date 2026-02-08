@@ -13,8 +13,7 @@ extension ShapeTypeDisplay on ShapeType {
         return AppStrings.rectangle;
       case ShapeType.square:
         return AppStrings.square;
-      case ShapeType.circle:
-        return AppStrings.circle;
+
       case ShapeType.irregularQuadrilateral:
         return AppStrings.irregularPlot;
     }
@@ -28,8 +27,7 @@ extension ShapeTypeDisplay on ShapeType {
         return Icons.crop_landscape;
       case ShapeType.square:
         return Icons.crop_square;
-      case ShapeType.circle:
-        return Icons.circle_outlined;
+
       case ShapeType.irregularQuadrilateral:
         return Icons.terrain;
     }

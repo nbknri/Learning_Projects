@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:uuid/uuid.dart';
 
 import 'shape.dart';
@@ -96,31 +94,7 @@ class Square extends Shape {
   };
 }
 
-class Circle extends Shape {
-  final double radius;
-  final double? _areaOverride;
 
-  Circle({
-    required this.radius,
-    required super.unit,
-    String? id,
-    double? overrideArea,
-  }) : _areaOverride = overrideArea,
-       super(id: id ?? const Uuid().v4(), type: ShapeType.circle);
-
-  @override
-  double get areaInSqMeter => _areaOverride ?? (pi * radius * radius);
-
-  @override
-  Map<String, double> get dimensions => {
-        'radius': radius,
-      };
-
-  @override
-  Map<String, String> get formattedDimensions => {
-    'Radius': radius.toStringAsFixed(2),
-  };
-}
 
 class IrregularQuadrilateral extends Shape {
   final double sideA;

@@ -30,6 +30,7 @@ class ShapeDetailsDialog extends StatelessWidget {
 
     return Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -40,18 +41,24 @@ class ShapeDetailsDialog extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   Row(
-                    children: [
-                      Icon(Icons.info_outline, color: AppColor.primary),
-                      const SizedBox(width: 8),
-                      Text(
-                        shape.type.displayName,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: AppColor.primary,
-                            ),
-                      ),
-                    ],
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Icon(Icons.info_outline, color: AppColor.primary),
+                        const SizedBox(width: 8),
+                        Flexible(
+                          child: Text(
+                            shape.type.displayName,
+                            style: Theme.of(context).textTheme.titleLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColor.primary,
+                                ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   IconButton(
                     icon: const Icon(Icons.close),
@@ -63,10 +70,7 @@ class ShapeDetailsDialog extends StatelessWidget {
               const SizedBox(height: 10),
 
               // Dimensions
-              Text(
-                "Dimensions:",
-                style: AppTextStyle.bodyBold,
-              ),
+              Text("Dimensions:", style: AppTextStyle.bodyBold),
               const SizedBox(height: 4),
               ...shape.formattedDimensions.entries.map(
                 (e) => Padding(
@@ -77,10 +81,7 @@ class ShapeDetailsDialog extends StatelessWidget {
               const SizedBox(height: 16),
 
               // Area Conversions
-              Text(
-                "Area Conversions:",
-                style: AppTextStyle.bodyBold,
-              ),
+              Text("Area Conversions:", style: AppTextStyle.bodyBold),
               const SizedBox(height: 8),
               _buildConversionRow("Square Meter", areaSqM),
               _buildConversionRow("Square Feet", areaSqFt),
@@ -90,6 +91,7 @@ class ShapeDetailsDialog extends StatelessWidget {
               _buildConversionRow("Hectares", areaHectares),
             ],
           ),
+        ),
         ));
   }
 

@@ -25,4 +25,11 @@ class ShapeCalculatorEvent with _$ShapeCalculatorEvent {
   const factory ShapeCalculatorEvent.clearAll() = ClearAll;
   const factory ShapeCalculatorEvent.setUnit(String unit) = SetUnit;
   const factory ShapeCalculatorEvent.selectShapeType(ShapeType type) = SelectShapeType;
+  
+  const factory ShapeCalculatorEvent.startEdit({
+    required int index,
+    required Shape shape,
+  }) = StartEdit;
+
+  const factory ShapeCalculatorEvent.cancelEdit() = CancelEdit;
 }

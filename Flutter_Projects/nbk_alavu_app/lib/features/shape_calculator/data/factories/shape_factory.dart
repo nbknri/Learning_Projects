@@ -20,8 +20,7 @@ class ShapeFactory {
         return _createRectangle(dimensions, unit);
       case ShapeType.square:
         return _createSquare(dimensions, unit);
-      case ShapeType.circle:
-        return _createCircle(dimensions, unit);
+
       case ShapeType.irregularQuadrilateral:
         return _createIrregularQuadrilateral(dimensions, unit);
     }
@@ -68,12 +67,7 @@ class ShapeFactory {
     return Square(side: side, overrideArea: sideM * sideM, unit: unit);
   }
 
-  Shape _createCircle(Map<String, double> dimensions, String unit) {
-    final r = dimensions[ShapeKeys.radius]!;
-    final rM = UnitConverter.toMeters(r, unit);
 
-    return Circle(radius: r, overrideArea: pi * rM * rM, unit: unit);
-  }
 
   Shape _createIrregularQuadrilateral(
     Map<String, double> dimensions,

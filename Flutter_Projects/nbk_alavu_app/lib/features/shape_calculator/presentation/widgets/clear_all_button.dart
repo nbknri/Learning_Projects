@@ -14,13 +14,26 @@ class ClearAllButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ShapeCalculatorBloc, ShapeCalculatorState>(
       builder: (context, state) {
+        if (state.shapes.isEmpty) {
+          return const SizedBox.shrink();
+        }
         return IconButton(
-          onPressed: state.shapes.isNotEmpty
-              ? () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  _showClearAllDialog(context);
-                }
-              : null,
+          onPressed: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+            if (state.editingIndex != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    'Cannot clear all while updating. Please finish or cancel editing.',
+                  ),
+                  behavior: SnackBarBehavior.floating,
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            } else {
+              _showClearAllDialog(context);
+            }
+          },
           icon: const Icon(Icons.delete_sweep, color: AppColor.white),
           tooltip: AppStrings.clearAllTooltip,
         );

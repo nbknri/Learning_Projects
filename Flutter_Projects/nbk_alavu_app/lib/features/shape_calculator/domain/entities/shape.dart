@@ -4,7 +4,6 @@ enum ShapeType {
   triangle,
   rectangle,
   square,
-  circle,
   irregularQuadrilateral;
 }
 

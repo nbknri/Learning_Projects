@@ -19,7 +19,7 @@ class AppStrings {
   static const String triangle = 'Triangle';
   static const String rectangle = 'Rectangle';
   static const String square = 'Square';
-  static const String circle = 'Circle';
+
   static const String irregularPlot = '4-Sided Plot';
 
   // Unit Types

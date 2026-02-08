@@ -48,13 +48,6 @@ class ShapeTypeSelector extends StatelessWidget {
             icon: Icons.crop_square,
             isSelected: state.selectedShapeType == ShapeType.square,
           ),
-          const SizedBox(width: 8),
-          ShapeTypeChip(
-            shapeType: ShapeType.circle,
-            label: AppStrings.circle,
-            icon: Icons.circle_outlined,
-            isSelected: state.selectedShapeType == ShapeType.circle,
-          ),
           
         ],
       ),
