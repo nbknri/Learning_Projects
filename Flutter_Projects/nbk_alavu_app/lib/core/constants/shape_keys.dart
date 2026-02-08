@@ -25,6 +25,5 @@ class ShapeKeys {
   /// Key for side (used in Square)
   static const String side = 'side';
 
-  /// Key for radius (used in Circle)
-  static const String radius = 'radius';
+
 }

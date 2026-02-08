@@ -191,12 +191,7 @@ class _ShapeCalculatorBodyState extends State<ShapeCalculatorBody> {
           child: AddedShapesList(
             shapes: state.shapes,
             onEdit: _handleEdit,
-            deleteShape: (index) {
-              FocusManager.instance.primaryFocus?.unfocus();
-              context.read<ShapeCalculatorBloc>().add(
-                ShapeCalculatorEvent.deleteShape(index),
-              );
-            },
+
             onDeleteWithUndo: (index, shape) {
               FocusManager.instance.primaryFocus?.unfocus();
               _snackBarTimer?.cancel();
