@@ -127,7 +127,7 @@ class IrregularQuadrilateral extends Shape {
         'sideB': sideB,
         'sideC': sideC,
         'sideD': sideD,
-        if (diagonal != null) 'diagonal': diagonal!,
+        'diagonal': ?diagonal,
       };
 
   @override
