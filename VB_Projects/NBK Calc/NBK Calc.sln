@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.4.11620.152 stable
+VisualStudioVersion = 18.4.11620.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NBK Calc", "NBK Calc\NBK Calc.vbproj", "{2AE285BA-E3BC-4F1C-93AD-2EF3475515C4}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NBKCalSetup", "NBKCalSetup\NBKCalSetup.vdproj", "{5716A06C-1D9D-48F5-AA87-2103B2B19C1E}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NBK_Calc_Setup", "NBK_Calc_Setup\NBK_Calc_Setup.vdproj", "{76A917B7-7DC4-835D-8F17-20D78A3C9B94}"
 EndProject
@@ -25,12 +23,6 @@ Global
 		{2AE285BA-E3BC-4F1C-93AD-2EF3475515C4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2AE285BA-E3BC-4F1C-93AD-2EF3475515C4}.Release|x86.ActiveCfg = Release|Any CPU
 		{2AE285BA-E3BC-4F1C-93AD-2EF3475515C4}.Release|x86.Build.0 = Release|Any CPU
-		{5716A06C-1D9D-48F5-AA87-2103B2B19C1E}.Debug|Any CPU.ActiveCfg = Debug
-		{5716A06C-1D9D-48F5-AA87-2103B2B19C1E}.Debug|x86.ActiveCfg = Debug
-		{5716A06C-1D9D-48F5-AA87-2103B2B19C1E}.Debug|x86.Build.0 = Debug
-		{5716A06C-1D9D-48F5-AA87-2103B2B19C1E}.Release|Any CPU.ActiveCfg = Release
-		{5716A06C-1D9D-48F5-AA87-2103B2B19C1E}.Release|x86.ActiveCfg = Release
-		{5716A06C-1D9D-48F5-AA87-2103B2B19C1E}.Release|x86.Build.0 = Release
 		{76A917B7-7DC4-835D-8F17-20D78A3C9B94}.Debug|Any CPU.ActiveCfg = Debug
 		{76A917B7-7DC4-835D-8F17-20D78A3C9B94}.Debug|x86.ActiveCfg = Debug
 		{76A917B7-7DC4-835D-8F17-20D78A3C9B94}.Release|Any CPU.ActiveCfg = Release
